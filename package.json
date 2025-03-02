@@ -1,0 +1,19 @@
+{
+  "name": "healthoptics",
+  "version": "1.0.0",
+  "description": "\"# HealthOptics-Web-Site\"",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon Backend/server.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.11.0",
+    "nodemon": "^3.1.9"
+  }
+}
