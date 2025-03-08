@@ -17,6 +17,9 @@ nav{
     width: 150px;
 
 }
+.logo-after{
+    width: 110px;
+}
 nav ul li{
     display: inline-block;
     list-style: none;
