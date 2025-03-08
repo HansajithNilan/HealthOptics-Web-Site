@@ -5,6 +5,7 @@ import Introduction from '../systemintro/introduction.jsx'
 import Programs from '../healthprograms/programs.jsx'
 import About from '../About/about.jsx'
 import Footer from '../../../components/Footer/footer.jsx'
+import Contact from '../contact/contact.jsx'
 
 function Homepage() {
   return (
@@ -16,7 +17,9 @@ function Homepage() {
         <Programs/>
         <Introduction title="About us" subtitle="Choose Your Matching Spectacls"/>
         <About/>
+        <Contact/>
         <Footer/>
+
         </div>
     </div>
   )
