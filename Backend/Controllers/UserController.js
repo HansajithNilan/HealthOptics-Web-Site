@@ -3,6 +3,7 @@ import User  from '../models/UserModel.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv'
+import { ensureAuthenticated } from '../middlewares/ensureAuth.js';
 
 
 
@@ -67,3 +68,44 @@ export const userlogin = async(req,res,)=>{
         return res.status(500).json({message:error.message})
     }
 }
+
+
+export const getAllusers = async (req,res)=>{
+
+    try{
+
+
+        const users = await UserModel.find()
+
+        if(!users){
+            return res.status(422).json({message:"Users not Founds!"})
+        }
+
+        return res.status(200).json(users)
+
+
+    }catch(error){
+        return res.status(500).json({message:error.message})
+    }
+
+}
+
+export const getCurrentUser = async(req,res)=>{
+
+    try{
+        const user = await UserModel.findOne({_id:req.user.id})
+
+        return res.status(200).json({
+            id:user._id,
+            name:user.name,
+            email:user.email
+        })
+
+
+    }catch(error){
+return res.status(500).json({message:error.message})
+    }
+
+}
+
+
