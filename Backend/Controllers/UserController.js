@@ -108,4 +108,10 @@ return res.status(500).json({message:error.message})
 
 }
 
+export const adminlogin = async(req,res)=>{
 
+   return res.status(200).json({message:"Only admin can Access this route"})
+
+    
+
+}
