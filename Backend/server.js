@@ -2,15 +2,23 @@ import express from 'express'
 import dotenv from 'dotenv'
 import { connect } from 'mongoose';
 import { connectDB } from './config/db.js';
+import cors from "cors"
+
+
+import userRoutes from './Routes/UserRoute.js'
 
 const app = express ();
+app.use(express.json());
+
+app.use(cors());
+
 dotenv.config();
 
 
-app.get('/',(req,res)=>{
-    res.send("nilan")
-})
 
+
+
+app.use('/api/auth/',userRoutes)
 
 console.log(process.env.MONGO_URL)
 

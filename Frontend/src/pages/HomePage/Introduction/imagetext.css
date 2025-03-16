@@ -1,0 +1,19 @@
+.intro{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(rgba(190, 190, 190, 0.7),rgba(184, 183, 186, 0.7)),url('../../../assets//Intro_image1.jpg');
+    background-size: cover;
+    background-position: center;
+    color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.introtext{
+    text-align: center;
+    max-width:800px ;
+}
+.introtext h1{
+    font-size: 60px;
+    font-weight: 600px;
+}
