@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import "../styles/PatientDetailsForm.css";
+import "./PatientDetailsForm.css";
+
 import axios from 'axios';
 
 import { Link, useParams } from 'react-router-dom';

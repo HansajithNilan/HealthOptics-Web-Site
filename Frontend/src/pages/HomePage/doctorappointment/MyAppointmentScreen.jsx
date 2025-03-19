@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { Link, useParams } from 'react-router-dom';
-import "../styles/Myappointment.css";
+import "./Myappointment.css";
+
 import { useReactToPrint} from "react-to-print";
 
 

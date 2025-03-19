@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import eye from '../images/eye.png';
-import eye1 from '../images/eye1.jpg';
-import styles from '../styles/Ophthalmologists.css';
-import Loader from '../components/Loader';
+
+import "./Ophthalmologists.css";
+
+import Loader from "/src/components/Loader";
+
+
 import Rating from 'react-rating-stars-component';
 
 export default function OphthalmologistsScreen() {

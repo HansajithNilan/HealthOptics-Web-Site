@@ -3,7 +3,7 @@ import axios from 'axios';
 import Loader from '../components/Loader';
 import { Link, useParams } from 'react-router-dom';
 import Rating from 'react-rating-stars-component';
-import styles from '../styles/Doctor.css';
+import './Doctor.css';
 import StripeCheckout from "react-stripe-checkout";
 import Swal from 'sweetalert2';
 
