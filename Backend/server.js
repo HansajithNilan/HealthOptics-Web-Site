@@ -6,7 +6,12 @@ import cors from "cors"
 
 
 import userRoutes from './Routes/UserRoute.js'
+
+import Doctor from './Routes/DoctorRoute.js'; // Correct path
+
+
 import SpecReservationRoute from './Routes/SpecReservationRoute.js'
+
 
 const app = express ();
 app.use(express.json());
