@@ -5,7 +5,6 @@ import express from "express";
 // Create the router first
 const router = express.Router();
 
-
 router.route("/adddoctor").post(async (req, res) => {
   const {
     firstname,
