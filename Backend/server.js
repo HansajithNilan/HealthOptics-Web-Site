@@ -6,8 +6,11 @@ import cors from "cors"
 
 
 import userRoutes from './Routes/UserRoute.js'
+
 import Doctor from './Routes/DoctorRoute.js'; // Correct path
 
+
+import SpecReservationRoute from './Routes/SpecReservationRoute.js'
 
 
 const app = express ();
@@ -22,8 +25,9 @@ dotenv.config();
 
 
 app.use('/api/auth/',userRoutes)
+app.use('/api/auth/reservation',SpecReservationRoute)
 
-console.log(process.env.MONGO_URL)
+//console.log(process.env.MONGO_URL)
 
 app.listen(5000,()=>{
     connectDB()
