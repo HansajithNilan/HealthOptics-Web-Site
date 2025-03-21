@@ -51,4 +51,14 @@ const DoctorAppointmentSchema = new Schema({
 });
 
 const DoctorAppointment = mongoose.model('doctorappointments', DoctorAppointmentSchema);
+<<<<<<< Updated upstream
+=======
+
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 export default DoctorAppointment;

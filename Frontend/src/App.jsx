@@ -10,6 +10,7 @@ import UserRegisterPage from "./pages/UserRegisterPage/UserRegister.jsx";
 
 import AddDoctorAppointmentDetails from "./pages/HomePage/doctorappointment/AddDoctorAppointmentDetails.jsx";
 import AddPatientDetails from "./pages/HomePage/doctorappointment/PatientDetailsForm.jsx";
+import OphthalmologistsScreen from "./pages/HomePage/doctorappointment/OphthalmologistsScreen.jsx";
 
 
 
@@ -24,6 +25,7 @@ function App() {
         
         <Route path="/addappointment" element={<AddDoctorAppointmentDetails />} />
         <Route path="/addpatient" element={<AddPatientDetails />} />
+        <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
         
 
    
