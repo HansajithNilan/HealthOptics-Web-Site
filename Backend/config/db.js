@@ -7,6 +7,7 @@ export const connectDB = async () => {
     try {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         const conn  = await mongoose.connect(process.env.MONGO_URL)
         console.log(`MongoDB Connected: `);
         
@@ -14,11 +15,16 @@ export const connectDB = async () => {
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
         const conn = await mongoose.connect(process.env.MONGO_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

@@ -9,6 +9,7 @@ const app = express();
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import userRoutes from './Routes/UserRoute.js'
 
 import Doctor from './Routes/DoctorRoute.js'; // Correct path
@@ -22,6 +23,9 @@ app.use(express.json());
 
 app.use(cors());
 
+=======
+// Load environment variables
+>>>>>>> Stashed changes
 =======
 // Load environment variables
 >>>>>>> Stashed changes
@@ -44,6 +48,7 @@ import DoctorRoute from './Routes/DoctorRoute.js';
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 app.use('/api/auth/',userRoutes)
 app.use('/api/auth/reservation',SpecReservationRoute)
 
@@ -53,6 +58,11 @@ app.listen(5000,()=>{
     connectDB()
     console.log("Server Started at http://localhost:5000")
 });
+=======
+// Use routes
+app.use('/api/user', userRouter);
+app.use('/api/doctor', DoctorRoute);
+>>>>>>> Stashed changes
 =======
 // Use routes
 app.use('/api/user', userRouter);
