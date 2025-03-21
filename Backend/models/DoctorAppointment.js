@@ -51,5 +51,4 @@ const DoctorAppointmentSchema = new Schema({
 });
 
 const DoctorAppointment = mongoose.model('doctorappointments', DoctorAppointmentSchema);
-
-module.exports = DoctorAppointment;
+export default DoctorAppointment;
