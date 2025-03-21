@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const DoctorAppointmentSchema = new Schema({
@@ -51,5 +51,4 @@ const DoctorAppointmentSchema = new Schema({
 });
 
 const DoctorAppointment = mongoose.model('doctorappointments', DoctorAppointmentSchema);
-
-module.exports = DoctorAppointment;
+export default DoctorAppointment;
