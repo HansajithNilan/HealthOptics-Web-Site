@@ -6,15 +6,21 @@ dotenv.config(); // Load environment variables
 export const connectDB = async () => {
     try {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         const conn  = await mongoose.connect(process.env.MONGO_URL)
         console.log(`MongoDB Connected: `);
         
     } catch (error) {
 =======
+=======
+>>>>>>> Stashed changes
         const conn = await mongoose.connect(process.env.MONGO_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
         console.log(`MongoDB Connected: ${conn.connection.host}`);
