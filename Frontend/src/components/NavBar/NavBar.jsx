@@ -23,10 +23,12 @@ function NavBar() {
             <li>About Us</li>
             <li>Services</li>
             <li>Feedbacks</li>
-            <Link to="/login">
+            
             <button className='signin-btn'>SignIn</button>
-            </Link>
+            
+            <Link to="/Register">
             <button className='sigup-btn'>SignUp</button>
+            </Link>
         </ul>
         
        
