@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import logo from  "../../../public/website_logo.png"
 import './NavBar.css'
-import { Link, ScrollLink } from 'react-scroll';
+import { Link } from 'react-router-dom'
 
 function NavBar() {
   const [sticky,setSticky] = useState(false)
@@ -23,7 +23,9 @@ function NavBar() {
             <li>About Us</li>
             <li>Services</li>
             <li>Feedbacks</li>
+            <Link to="/login">
             <button className='signin-btn'>SignIn</button>
+            </Link>
             <button className='sigup-btn'>SignUp</button>
         </ul>
         
