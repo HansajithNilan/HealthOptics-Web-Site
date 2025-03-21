@@ -1,8 +1,7 @@
 .da-form-group{
     margin-bottom: 15px;
     padding: 10% 25%;
-    background-image: linear-gradient(to right, rgb(172, 168, 168) , yellow);
-}
+    
 
 .da-control-label{
     display: block;
@@ -11,7 +10,7 @@
 
 .da-form-control {
     display: block;
-    width: 100%;
+    width: 70%;
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
