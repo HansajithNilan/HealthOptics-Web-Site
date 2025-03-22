@@ -7,8 +7,8 @@ import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import AddDoctorAppointmentDetails from "./pages/HomePage/doctorappointment/AddDoctorAppointmentDetails.jsx";
 import AddPatientDetails from "./pages/HomePage/doctorappointment/PatientDetailsForm.jsx";
 
-import Dashboard from "./pages/AdminPage/Dashboard.jsx";
-import SpectacleManage from "./pages/AdminPage/SpectacleManage.jsx";
+import Dashboard from "./pages/AdminPage/Dashboard/Dashboard.jsx";
+import SpectacleManage from "./pages/AdminPage/SpectacleManagement/SpectacleManage.jsx";
 
 
 function App() {
