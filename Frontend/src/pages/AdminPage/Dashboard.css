@@ -1,0 +1,10 @@
+.dashboard-container {
+    display: flex;
+    background-color: #e3b85c;
+}
+  
+  .dashboard-content {
+    margin-left: 270px; /* Adjust according to sidebar width */
+    padding: 30px;
+    font-size: 1.2rem;
+  }

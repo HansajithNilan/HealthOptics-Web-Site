@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SideBar from '../../components/SideBar/SideBar';  // import Sidebar component
+import "./Dashboard.css";
 
 const Dashboard = () => {
   return (
@@ -14,3 +15,4 @@ const Dashboard = () => {
 }
 
 export default Dashboard;
+
