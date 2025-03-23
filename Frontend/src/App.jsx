@@ -8,10 +8,13 @@ import UserRegisterPage from "./pages/UserRegisterPage/UserRegister.jsx";
 
 
 
+
 import AddDoctorAppointmentDetails from "./pages/HomePage/doctorappointment/AddDoctorAppointmentDetails.jsx";
 import AddPatientDetails from "./pages/HomePage/doctorappointment/PatientDetailsForm.jsx";
 import DoctorProfileFrom from "./pages/DoctorManagement/DoctorProfileFrom.jsx";
 import DoctorProfileTable from "./pages/DoctorManagement/DoctorProfileTable.jsx";
+import DoctorProfilepage from "./pages/DoctorManagement/DoctorProfilepage.jsx";
+
 import OphthalmologistsScreen from "./pages/HomePage/doctorappointment/OphthalmologistsScreen.jsx";
 
 
@@ -31,6 +34,7 @@ function App() {
 
         <Route path="/doctorprofile" element={<DoctorProfileFrom />} />
         <Route path="/doctorprofiletable" element={<DoctorProfileTable />} />
+        <Route path="/doctorprofilepage/" element={<DoctorProfilepage />} />
         
 
        
