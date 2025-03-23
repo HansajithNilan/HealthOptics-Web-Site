@@ -12,6 +12,8 @@ import Doctor from './Routes/DoctorRoute.js'; // Correct path
 
 import SpecReservationRoute from './Routes/SpecReservationRoute.js'
 
+import SpectacleRoute from "./Routes/SpectacleRoute.js";
+
 
 const app = express ();
 app.use(express.json());
@@ -27,6 +29,7 @@ dotenv.config();
 
 app.use('/api/auth/',userRoutes)
 app.use('/api/auth/reservation',SpecReservationRoute)
+app.use("/api/spectacle", SpectacleRoute);
 
 //console.log(process.env.MONGO_URL)
 

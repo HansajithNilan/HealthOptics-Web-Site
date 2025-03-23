@@ -16,6 +16,9 @@ import OphthalmologistsScreen from "./pages/HomePage/doctorappointment/Ophthalmo
 
 
 
+import Dashboard from "./pages/AdminPage/Dashboard/Dashboard.jsx";
+import SpectacleManage from "./pages/AdminPage/SpectacleManagement/SpectacleManage.jsx";
+
 
 function App() {
   return (
@@ -29,6 +32,7 @@ function App() {
         <Route path="/addappointment" element={<AddDoctorAppointmentDetails />} />
         <Route path="/addpatient" element={<AddPatientDetails />} />
 
+
         <Route path="/doctorprofile" element={<DoctorProfileFrom />} />
         <Route path="/doctorprofiletable" element={<DoctorProfileTable />} />
         
@@ -39,7 +43,10 @@ function App() {
 
         
 
+
    
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/spectacles" element={<SpectacleManage />} />
 
       </Routes>
     </BrowserRouter>
