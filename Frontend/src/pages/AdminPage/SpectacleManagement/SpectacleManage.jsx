@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import DashboardLayout from "../../../components/DashboardLayout/DashboardLayout.jsx";
 import "./SpectacleManage.css";
-import { jsPDF } from "jspdf";
-import "jspdf-autotable"; // This should be correctly importing the autotable plugin
+import jsPDF from "jspdf";
 
 const SpectacleManage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -80,7 +79,7 @@ const SpectacleManage = () => {
     const [minPrice, maxPrice] = String(price).split("-").map(Number);
     return (
       (item.model.toLowerCase().includes(search.toLowerCase()) ||
-      item.frameShape.toLowerCase().includes(search.toLowerCase())) &&
+        item.frameShape.toLowerCase().includes(search.toLowerCase())) &&
       (type === "" || item.type === type) &&
       (gender === "" || item.gender === gender) &&
       (price === "" ||
@@ -88,14 +87,26 @@ const SpectacleManage = () => {
     );
   });
 
-  
-// PDF
+  // PDF
   const generatePDF = () => {
     console.log("Generating PDF..."); // Debugging line
     const doc = new jsPDF();
+
+    doc.setFontSize(16);
+    doc.text("Spectacle Report", 10, 10);
+
+    let yPos = 20; // Start position for table
+
+    // Table headers
     const tableColumn = ["Model", "Type", "Gender", "Frame Shape", "Price"];
-    const tableRows = [];
-  
+    doc.setFontSize(12);
+    tableColumn.forEach((col, index) => {
+      doc.text(col, 10 + index * 40, yPos);
+    });
+
+    yPos += 10; // Move to next line
+
+    // Table rows
     filteredSpectacles.forEach((item) => {
       const itemData = [
         item.model,
@@ -104,14 +115,14 @@ const SpectacleManage = () => {
         item.frameShape,
         `Rs. ${item.price}`,
       ];
-      tableRows.push(itemData);
+
+      itemData.forEach((data, index) => {
+        doc.text(String(data), 10 + index * 40, yPos);
+      });
+
+      yPos += 10; // Move to next row
     });
-  
-    doc.autoTable({
-      head: [tableColumn],
-      body: tableRows,
-    });
-  
+
     doc.save("filtered_spectacles.pdf");
   };
 
@@ -129,11 +140,12 @@ const SpectacleManage = () => {
     <DashboardLayout title="Spectacle Management">
       <div className="spectacle-container">
         <div className="spec-section">
-        <button onClick={generatePDF}>Generate PDF</button>
-          <button>Add Spectacle</button>
+          <button onClick={generatePDF} className="report-btn">
+            Generate Report
+          </button>
+          <button className="add-btn">Add Spectacle</button>
         </div>
         <div className="filter-section">
-          
           <input
             type="text"
             placeholder="Search Model or Brand"
@@ -141,8 +153,7 @@ const SpectacleManage = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
 
-
-<select value={type} onChange={(e) => setType(e.target.value)}>
+          <select value={type} onChange={(e) => setType(e.target.value)}>
             <option value="">All Types</option>
             <option value="Eyeglasses">Eyeglasses</option>
             <option value="Sunglasses">Sunglasses</option>
@@ -162,9 +173,6 @@ const SpectacleManage = () => {
             <option value="15000-20000">Rs. 15,000 - Rs. 20,000</option>
             <option value="20000">Above Rs. 20,000</option>
           </select>
-
-          
-        
         </div>
 
         <table className="spectacle-table">
@@ -197,7 +205,10 @@ const SpectacleManage = () => {
                 {/* Format price */}
                 <td>{spectacle.stock}</td>
                 <td>
-                  <button onClick={() => handleShowMore(spectacle)}>
+                  <button
+                    onClick={() => handleShowMore(spectacle)}
+                    className="more-btn"
+                  >
                     More
                   </button>
                 </td>
