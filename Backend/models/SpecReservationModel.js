@@ -9,31 +9,49 @@ const spectReserveSchema = new mongoose.Schema({
     type: Number,
     require: true,
   },
-  address:{
+  address: {
+    type: String,
+    require: true,
+  },
+  email: {
+    type: String,
+    require: true,
+  },
+  
+frametype:{
     type:String,
     require:true,
-
+},
+  brand: {
+    type: String,
+    require: true,
   },
-
-  frametype:{ //fullrim , halfrim ,rimless
-    type:String,
-    require:true
+  frameshape: {
+    type: String,
+    require: true,
   },
-  framematerial:{//metal plastic ,titanium,acetate
-    type:String,
-    require:true
-
+  hingetype: {
+    type: String,
+    require: true,
   },
-  lenstype:{ //Single Vision ,Bifocal,Progressive,Blue Light Blocking,Anti-Reflective
-    type:String,
-    require:true
+  framematerial: {
+    type: String,
+    require: true,
   },
-  quantity:{
-    type:Number,
-    require:true
-  }
+  
+  framesize: {
+    type: String,
+    require: true,
+  },
+  imageurlcolor:{
+    type: String,
+    require: true,
+  },
 
 });
 
-const specReserveModel = mongoose.model('spectacleReservations',spectReserveSchema)
-export default specReserveModel;  
+const specReserveModel = mongoose.model(
+  "spectacleReservations",
+  spectReserveSchema
+);
+export default specReserveModel;

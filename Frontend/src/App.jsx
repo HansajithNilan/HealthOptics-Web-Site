@@ -5,7 +5,7 @@ import "./App.css";
 import Homepage from "./pages/HomePage/Hompage/Homepage.jsx";
 
 import UserRegisterPage from "./pages/UserRegisterPage/UserRegister.jsx";
-
+import SpectaclesReservation from "./pages/SpectaclesReservationPage/Reservation.jsx";
 
 
 import AddDoctorAppointmentDetails from "./pages/HomePage/doctorappointment/AddDoctorAppointmentDetails.jsx";
@@ -27,7 +27,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
 
         <Route path="/Register" element={<UserRegisterPage />} />
-
+        <Route path="/reservespectacles" element={<SpectaclesReservation />} />
         
         <Route path="/addappointment" element={<AddDoctorAppointmentDetails />} />
         <Route path="/addpatient" element={<AddPatientDetails />} />
