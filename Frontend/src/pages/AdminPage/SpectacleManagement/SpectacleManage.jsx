@@ -17,7 +17,7 @@ const SpectacleManage = () => {
     setSelectedSpectacle(null);
   };
 
-  // Search filters
+  // Search and filters
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
   const [gender, setGender] = useState("");
@@ -74,12 +74,12 @@ const SpectacleManage = () => {
     },
   ];
 
-  // Handle filter
+  // Handle Search and filter
   const filteredSpectacles = spectacles.filter((item) => {
     const [minPrice, maxPrice] = String(price).split("-").map(Number);
     return (
       (item.model.toLowerCase().includes(search.toLowerCase()) ||
-        item.frameShape.toLowerCase().includes(search.toLowerCase())) &&
+        item.brand.toLowerCase().includes(search.toLowerCase())) &&
       (type === "" || item.type === type) &&
       (gender === "" || item.gender === gender) &&
       (price === "" ||
@@ -87,7 +87,7 @@ const SpectacleManage = () => {
     );
   });
 
-  // PDF
+  // PDF Generate
   const generatePDF = () => {
     console.log("Generating PDF..."); // Debugging line
     const doc = new jsPDF();
@@ -123,7 +123,7 @@ const SpectacleManage = () => {
       yPos += 10; // Move to next row
     });
 
-    doc.save("filtered_spectacles.pdf");
+    doc.save("Stock_Report.pdf");
   };
 
   const handleEdit = (id) => {
