@@ -3,9 +3,9 @@ import specReserveModel from "../models/SpecReservationModel.js";
 export const createReservation = async(req,res)=>{
 try {
 
-    const {name,phonenumber,address,frametype,framematerial,lenstype,quantity} = req.body
+    const {name,phonenumber,address,email,frametype,framematerial,lenstype,quantity} = req.body
 
-    if(!name|| !phonenumber ||!address ||!frametype || !framematerial||!lenstype||!quantity){
+    if(!name|| !phonenumber ||!address ||!frametype || !email|| !framematerial||!lenstype||!quantity){
         res.status(422).json({message:`Please fill all fields`})
     }
 
@@ -15,6 +15,7 @@ try {
         name,
         phonenumber,
         address,
+        email,
         frametype,
         framematerial,
         lenstype,

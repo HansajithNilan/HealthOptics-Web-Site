@@ -1,0 +1,102 @@
+.spectales-reservation-page {
+  margin: 0 20px;
+  padding: 0;
+}
+
+.spectacles-section {
+  margin: 130px auto;
+  width: 80%;
+}
+.reserve-main-section {
+  display: flex;
+  padding: 40px 10px;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     */
+  margin: 30px 10px;
+}
+.reserve-main-section {
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.spectacles-section h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+.Image-section {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+.Image-section img {
+  width: 400px;
+  height: 500px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.reserve-section {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  padding: 20px;
+}
+
+.reserve-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+ 
+}
+.reserve-form label {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+.name-mobnumber {
+  display: flex;
+justify-content: space-between;
+  margin-bottom: 25px;
+}
+.name-mobnumber label {
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+.name-mobnumber input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+ 
+  width: 200px;
+  height: 25px;
+  outline: none;
+}
+.reserve-form h1{
+
+    margin-bottom: 30px;
+
+}
+.spectacle-frame-type-meterial {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.spectacle-frame-type-meterial label {
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+
+.spectacle-frame-type-meterial select,
+.spectacle-frame-type-meterial input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px;
+  height: 40px;
+  outline: none;
+  box-sizing: border-box; 
+}
