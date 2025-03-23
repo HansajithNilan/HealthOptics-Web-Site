@@ -21,6 +21,7 @@ import OphthalmologistsScreen from "./pages/HomePage/doctorappointment/Ophthalmo
 
 import Dashboard from "./pages/AdminPage/Dashboard/Dashboard.jsx";
 import SpectacleManage from "./pages/AdminPage/SpectacleManagement/SpectacleManage.jsx";
+import Spectacle from "./pages/HomePage/Spectacle/Spectacles.jsx";
 
 
 function App() {
@@ -46,11 +47,10 @@ function App() {
         <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
 
         
-
-
    
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/spectacles" element={<SpectacleManage />} />
+        <Route path="/spectacles" element={<Spectacle/>}/>
 
       </Routes>
     </BrowserRouter>
