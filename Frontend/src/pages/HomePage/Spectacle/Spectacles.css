@@ -1,0 +1,97 @@
+.spectacle-grid-container{
+    /* background-color: red; */
+    width: 75%;
+    margin:150px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.spectacle-grid {
+    display: grid;
+    width:100%;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    padding: 16px;
+    /* background: yellow; */
+    margin:10px auto;
+
+}
+
+/* Card styling for each spectacle */
+.spectacle-card {
+    border: 1px solid #e5e7eb; /* Light gray border */
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.spectacle-card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Image styling */
+.spectacle-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Spectacle details */
+.spectacle-details {
+    margin-top: 16px;
+}
+
+.spectacle-model {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.spectacle-brand {
+    color: #4b5563; /* Gray for text */
+}
+
+.spectacle-price {
+    color: #3b82f6; /* Blue for price */
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-top: 8px;
+}
+
+/* Rating stars */
+.spectacle-rating {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.star {
+    color: #fbbf24; /* Yellow color for full/half stars */
+}
+
+.empty {
+    color: #d1d5db; /* Gray color for empty stars */
+}
+
+/* Shop Now button */
+.shop-now-btn {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: #2563eb; /* Blue background */
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 8px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.shop-now-btn:hover {
+    background-color: #1d4ed8; /* Darker blue on hover */
+}
