@@ -60,6 +60,13 @@
 
 /* Spectacle Table */
 
+.table-container {
+  max-height: 300px; /* Adjust as needed */
+  overflow-y: auto;
+  display: block;
+  background-color: #218838;
+}
+
 .spectacle-table {
   width: 100%;
   border-collapse: collapse;
@@ -67,6 +74,10 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* .spectacle-table thead{
+  position: fixed;
+} */
 
 .spectacle-table th,
 .spectacle-table td {
@@ -98,6 +109,10 @@ button:hover {
   background-color: #0056b3;
 }
 
+tbody{
+  overflow-y: auto;
+}
+
 tbody > tr > td:last-child {
   padding: 12px;
 }
@@ -124,7 +139,7 @@ tbody > tr > td:last-child .actions-wrapper {
 
 /* Modal styles */
 .modal-overlay {
-  position: fixed;
+  position: fixed; 
   top: 0;
   left: 0;
   right: 0;

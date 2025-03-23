@@ -72,6 +72,54 @@ const SpectacleManage = () => {
       rating: 5.0,
       stock: 8,
     },
+    {
+      id: 4,
+      model: "Classic 444",
+      type: "Eyeglasses",
+      brand: "RayBan",
+      gender: "Unisex",
+      frameShape: "Round",
+      frameMaterial: "Metal",
+      frameType: "Full Rim",
+      hingeType: "Spring Hinge",
+      description: "Stylish and comfortable eyeglasses",
+      frameSize: ["Small", "Medium", "Large"],
+      price: 12000,
+      rating: 4.5,
+      stock: 10,
+    },
+    {
+      id: 5,
+      model: "Classic 444",
+      type: "Eyeglasses",
+      brand: "RayBan",
+      gender: "Unisex",
+      frameShape: "Round",
+      frameMaterial: "Metal",
+      frameType: "Full Rim",
+      hingeType: "Spring Hinge",
+      description: "Stylish and comfortable eyeglasses",
+      frameSize: ["Small", "Medium", "Large"],
+      price: 12000,
+      rating: 4.5,
+      stock: 10,
+    },
+    {
+      id: 6,
+      model: "Classic 444",
+      type: "Eyeglasses",
+      brand: "RayBan",
+      gender: "Unisex",
+      frameShape: "Round",
+      frameMaterial: "Metal",
+      frameType: "Full Rim",
+      hingeType: "Spring Hinge",
+      description: "Stylish and comfortable eyeglasses",
+      frameSize: ["Small", "Medium", "Large"],
+      price: 12000,
+      rating: 4.5,
+      stock: 10,
+    },
   ];
 
   // Handle Search and filter
@@ -89,7 +137,7 @@ const SpectacleManage = () => {
 
   // PDF Generate
   const generatePDF = () => {
-    console.log("Generating PDF..."); // Debugging line
+    console.log("Generating PDF");
     const doc = new jsPDF();
 
     doc.setFontSize(16);
@@ -175,6 +223,7 @@ const SpectacleManage = () => {
           </select>
         </div>
 
+        <div className="table-container">
         <table className="spectacle-table">
           <thead>
             <tr>
@@ -232,6 +281,7 @@ const SpectacleManage = () => {
             ))}
           </tbody>
         </table>
+        </div>
 
         {/* Modal for Show More */}
         {showModal && selectedSpectacle && (

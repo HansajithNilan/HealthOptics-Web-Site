@@ -26,6 +26,7 @@ dotenv.config();
 
 
 
+
 app.use('/api/auth/',userRoutes)
 app.use('/api/auth/reservation',SpecReservationRoute)
 app.use("/api/spectacle", SpectacleRoute);
@@ -34,6 +35,6 @@ app.use("/api/spectacle", SpectacleRoute);
 
 app.listen(5000,()=>{
     connectDB()
+    console.log(process.env.MONGO_URL);
     console.log("Server Started at http://localhost:5000")
 });
-

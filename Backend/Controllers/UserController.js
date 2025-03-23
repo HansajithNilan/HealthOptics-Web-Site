@@ -3,16 +3,18 @@ import User  from '../models/UserModel.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv'
+dotenv.config();
 import { ensureAuthenticated } from '../middlewares/ensureAuth.js';
 import { useParams } from 'react-router-dom';
+import transporter from '../config/nodemailer.js';
 
 
 
 export const createUsers = async(req,res )=>{
     try{
-        const {name, email,password,role} = req.body;
+        const {name,email,password,role} = req.body;
 
-        if(!name|| !email || !password ) {
+        if(!name|| !email || !password||!role ) {
             return res.status(422).json({message : 'Please fill in all fields (name,email,password)'})
         }
         if(await User.findOne({email})){
@@ -27,6 +29,22 @@ export const createUsers = async(req,res )=>{
             password:hashPassword,
             role,
         })
+
+
+        const mailoptions = {
+            from: process.env.SENDER_EMAIL,
+            to: email,
+            subject: "Welcome to HealthOptics Web Site!",
+            text: `Hello ${name}, welcome to HealthOptics Web Site!. Your account created with email id: ${email}`,
+        }
+
+        await transporter.sendMail(mailoptions, (error, info) => {
+            if (error) {
+                console.log("Error sending email:", error);
+            } else {
+                console.log("Email sent:", info.response);
+            }
+        });
 
         return res.status(201).json({message : "User Registerd Successfull"})
 

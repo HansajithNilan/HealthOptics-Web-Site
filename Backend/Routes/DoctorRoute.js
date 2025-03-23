@@ -1,227 +1,247 @@
-import Doctor from "../models/Doctor.js";
-import DoctorAppointment from "../models/DoctorAppointment.js";
-import express from "express";
 
-// Create the router first
+import express from 'express';
 const router = express.Router();
 
-router.route("/adddoctor").post(async (req, res) => {
-  const {
-    firstname,
-    lastname,
-    contact,
-    email,
-    experiance,
-    language,
-    type,
-    department,
-    rating,
-    doctorfee,
-    discription,
-    date,
-    specialty,
-    imageurl,
-  } = req.body;
+import Doctor from '../models/Doctor.js';
+import DoctorAppointment from '../models/DoctorAppointment.js';
 
-  const newDoctor = new Doctor({
-    firstname,
-    lastname,
-    contact,
-    email,
-    experiance,
-    language,
-    type,
-    department,
-    rating,
-    doctorfee,
-    discription,
-    date,
-    specialty,
-    imageurl,
-  });
+router.route('/adddoctor').post(async (req, res) => {
 
-  try {
-    await newDoctor.save();
-    return res.status(200).json({ status: "Doctor added successfully" });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Error with add doctor", message: error });
-  }
-});
+    const {
+        firstname,
+        lastname,
+        contact,
+        email,
+        experiance,
+        language,
+        type,
+        department,
+        rating,
+        doctorfee,
+        discription,
+        date,
+        specialty,
+        imageurl    
+    } = req.body;
 
-router.route("/getdoctor/:type").post(async (req, res) => {
-  const type = req.params.type;
+    const newDoctor = new Doctor({
+        firstname,
+        lastname,
+        contact,
+        email,
+        experiance,
+        language,
+        type,
+        department,
+        rating,
+        doctorfee,
+        discription,
+        date,
+        specialty,
+        imageurl
+    });
 
-  try {
-    const doctor = await Doctor.find({ type: type });
+    try {
 
-    if (!doctor) {
-      return res.status(404).json({ status: "Doctor type not found" });
+        await newDoctor.save();
+        return res.status(200).json({status: "Doctor added successfully"});
+        
+    } catch (error) {
+
+        return res.status(500).json({status: "Error with add doctor", message: error});
+        
     }
 
-    return res.status(200).json({ status: "Doctor type is fatched", doctor });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Error with fetch Doctor", message: error });
-  }
 });
 
-router.route("/doctorid/:id").post(async (req, res) => {
-  const id = req.params.id;
+router.route('/getdoctor/:type').post(async(req, res) => {
 
-  try {
-    const doctor = await Doctor.findById(id);
+    const type = req.params.type;
 
-    if (!doctor) {
-      return res.status(404).json({ status: "Doctor not found" });
+    try {
+        
+        const doctor = await Doctor.find({ type: type });
+
+        if (!doctor) {
+            return res.status(404).json({ status: "Doctor type not found" });
+        }
+
+        return res.status(200).json({status: "Doctor type is fatched", doctor});
+
+    } catch (error) {
+        
+        return res.status(500).json({status: "Error with fetch Doctor", message: error});
+
     }
-
-    return res.status(200).json({ status: "Doctor found", doctor });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Error with fetching Doctor", message: error });
-  }
 });
 
-router.route("/createdoctorappointment").post(async (req, res) => {
-  const {
-    firstname,
-    lastname,
-    date,
-    gender,
-    age,
-    email,
-    contact,
-    address,
-    emergency,
-    doctor,
-    doctorfee,
-  } = req.body;
+router.route('/doctorid/:id').post(async(req, res) => {
 
-  const newDoctorAppointment = new DoctorAppointment({
-    firstname,
-    lastname,
-    date,
-    gender,
-    age,
-    email,
-    contact,
-    address,
-    emergency,
-    doctor,
-    doctorfee,
-  });
+    
+    const id = req.params.id;
 
-  try {
-    await newDoctorAppointment.save();
-    return res
-      .status(200)
-      .json({ status: "DoctorAppointment is added successfully" });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Error with add DoctorAppointment", message: error });
-  }
-});
+    try {
+        
+        const doctor = await Doctor.findById(id);
 
-router.route("/getalldoctorappointment/:email").post(async (req, res) => {
-  const email = req.params.email;
+        if (!doctor) {
+            return res.status(404).json({ status: "Doctor not found" });
+        }
 
-  try {
-    const doctor = await DoctorAppointment.find({ email: email });
+        return res.status(200).json({ status: "Doctor found", doctor });
 
-    if (!doctor) {
-      return res.status(404).json({ status: "doctorAppointment not found" });
+    } catch (error) {
+        
+        return res.status(500).json({ status: "Error with fetching Doctor", message: error });
+
     }
-
-    return res
-      .status(200)
-      .json({ status: "doctorAppointment is fatched", doctor });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Error with fetch doctorAppointment", message: error });
-  }
 });
 
-router.route("/editdoctorappointment/:id").put(async (req, res) => {
-  const doctorAppointmentID = req.params.id;
 
-  const {
-    firstname,
-    lastname,
-    date,
-    gender,
-    age,
-    email,
-    contact,
-    address,
-    emergency,
-    doctor,
-    doctorfee,
-  } = req.body;
+router.route('/createdoctorappointment').post(async(req, res) => {
 
-  const doctorAppointment = {
-    firstname,
-    lastname,
-    date,
-    gender,
-    age,
-    email,
-    contact,
-    address,
-    emergency,
-    doctor,
-    doctorfee,
-  };
+    const {
+        firstname,
+        lastname,
+        date,
+        gender,
+        age,
+        email,
+        contact,
+        address,
+        emergency,
+        doctor,
+        doctorfee
 
-  try {
-    await DoctorAppointment.findByIdAndUpdate(
-      doctorAppointmentID,
-      doctorAppointment
-    );
-    return res.status(200).json({ status: "DoctorAppointment updated" });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Error with update DoctorAppointment", message: error });
-  }
+    } = req.body;
+
+    const newDoctorAppointment = new DoctorAppointment({
+        firstname,
+        lastname,
+        date,
+        gender,
+        age,
+        email,
+        contact,
+        address,
+        emergency,
+        doctor,
+        doctorfee
+     });
+ 
+     try {
+         
+         await newDoctorAppointment.save();
+         return res.status(200).json({status: "DoctorAppointment is added successfully"});
+ 
+     } catch (error) {
+         
+         return res.status(500).json({status: "Error with add DoctorAppointment", message: error});
+ 
+     }   
+
 });
 
-router.route("/deletedoctorappointment/:id").delete(async (req, res) => {
-  const doctorAppointmentID = req.params.id;
+router.route('/getalldoctorappointment/:email').post(async(req, res) => {
 
-  try {
-    await DoctorAppointment.findByIdAndDelete(doctorAppointmentID);
-    return res.status(200).json({ status: "DoctorAppointment is deleted" });
-  } catch (error) {
-    return res
-      .status(400)
-      .json({ status: "Error with delete DoctorAppointment", message: error });
-  }
-});
+    const email = req.params.email;
 
-router.route("/getalldoctorappointment/:email/:id").post(async (req, res) => {
-  const id = req.params.id;
+    try {
+        
+        const doctor = await DoctorAppointment.find({ email: email });
 
-  try {
-    const doctor = await DoctorAppointment.findById(id);
+        if (!doctor) {
+            return res.status(404).json({ status: "doctorAppointment not found" });
+        }
 
-    if (!doctor) {
-      return res.status(404).json({ status: "doctorAppointment not found" });
+        return res.status(200).json({status: "doctorAppointment is fatched", doctor});
+
+    } catch (error) {
+        
+        return res.status(500).json({status: "Error with fetch doctorAppointment", message: error});
+
     }
-
-    return res
-      .status(200)
-      .json({ status: "doctorAppointment is fatched", doctor });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Error with fetch doctorAppointment", message: error });
-  }
 });
 
+
+router.route('/editdoctorappointment/:id').put(async (req, res) =>{
+
+    const doctorAppointmentID = req.params.id;
+
+    const {
+        firstname,
+        lastname,
+        date,
+        gender,
+        age,
+        email,
+        contact,
+        address,
+        emergency,
+        doctor,
+        doctorfee
+    } = req.body;
+
+    const doctorAppointment = {
+        firstname,
+        lastname,
+        date,
+        gender,
+        age,
+        email,
+        contact,
+        address,
+        emergency,
+        doctor,
+        doctorfee
+    }
+    
+    try {
+        
+        await DoctorAppointment.findByIdAndUpdate(doctorAppointmentID , doctorAppointment);
+        return res.status(200).json({status: "DoctorAppointment updated"});
+
+    } catch (error) {
+        
+        return res.status(500).json({status: "Error with update DoctorAppointment", message: error});
+
+    }
+});
+
+router.route('/deletedoctorappointment/:id').delete(async (req, res) => {
+
+    const doctorAppointmentID = req.params.id;
+
+    try {
+        
+        await DoctorAppointment.findByIdAndDelete(doctorAppointmentID);
+        return res.status(200).json({status : "DoctorAppointment is deleted"});
+
+    } catch (error) {
+        
+        return res.status(400).json({status : "Error with delete DoctorAppointment", message : error});
+
+    }
+});
+
+router.route('/getalldoctorappointment/:email/:id').post(async(req, res) => {
+
+    const id = req.params.id;
+
+    try {
+        
+        const doctor = await DoctorAppointment.findById(id);
+
+        if (!doctor) {
+            return res.status(404).json({ status: "doctorAppointment not found" });
+        }
+
+        return res.status(200).json({status: "doctorAppointment is fatched", doctor});
+
+    } catch (error) {
+        
+        return res.status(500).json({status: "Error with fetch doctorAppointment", message: error});
+
+    }
+});
 export default router;
