@@ -4,11 +4,13 @@ import "./SpectacleManage.css";
 import jsPDF from "jspdf";
 import axios from "axios";
 import SpectacleDetails from "./SpectacleDetails.jsx";
+import SpectacleForm from "./SpectacleForm";
 import Swal from "sweetalert2";
 
 const SpectacleManage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedSpectacle, setSelectedSpectacle] = useState(null);
+
 
   const handleShowMore = (spectacle) => {
     setSelectedSpectacle(spectacle);
@@ -18,6 +20,16 @@ const SpectacleManage = () => {
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedSpectacle(null);
+  };
+
+  const [showFormModal, setShowFormModal] = useState(false);
+
+  const handleOpenFormModal = () => {
+    setShowFormModal(true);
+  };
+  
+  const handleCloseFormModal = () => {
+    setShowFormModal(false);
   };
 
   // Search and filters
@@ -135,7 +147,7 @@ const SpectacleManage = () => {
           <button onClick={generatePDF} className="report-btn">
             Generate Report
           </button>
-          <button className="add-btn">Add Spectacle</button>
+          <button className="add-btn" onClick={handleOpenFormModal}>Add Spectacle</button>
         </div>
         <div className="filter-section">
           <input
@@ -229,6 +241,7 @@ const SpectacleManage = () => {
 
         {/* Modal for Show More */}
         <SpectacleDetails spectacle={selectedSpectacle} onClose={handleCloseModal} />
+        {showFormModal && <SpectacleForm onClose={handleCloseFormModal} />}
       </div>
     </DashboardLayout>
   );

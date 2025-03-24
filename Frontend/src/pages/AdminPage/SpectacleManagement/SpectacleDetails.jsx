@@ -1,4 +1,5 @@
 import React from "react";
+import { FaTimes, FaEraser } from "react-icons/fa";
 
 const SpectacleDetails = ({ spectacle, onClose }) => {
   if (!spectacle) return null;
@@ -6,6 +7,11 @@ const SpectacleDetails = ({ spectacle, onClose }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
+               <div>
+                  <button className="close-btn" onClick={onClose}>
+                    <FaTimes />
+                  </button>
+                </div>
         <h2>{spectacle.model} - Details</h2>
         <p><strong>Type:</strong> {spectacle.type}</p>
         <p><strong>Brand:</strong> {spectacle.brand}</p>
@@ -18,8 +24,7 @@ const SpectacleDetails = ({ spectacle, onClose }) => {
         <p><strong>Frame Sizes Available:</strong> {`${spectacle.framesize1}, ${spectacle.framesize2}, ${spectacle.framesize3}`}</p>
         <p><strong>Price:</strong> ${spectacle.price.toLocaleString()}</p>
         <p><strong>Rating:</strong> {spectacle.rating}</p>
-        <p><strong>Stock Quantity:</strong> N/A</p>
-        <button onClick={onClose}>Close</button>
+        <p><strong>Stock Quantity:</strong> {spectacle.stock}</p>
       </div>
     </div>
   );

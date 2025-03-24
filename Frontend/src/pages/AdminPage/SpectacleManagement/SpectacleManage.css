@@ -17,6 +17,13 @@
   height: auto;
 }
 
+.report-btn,
+.add-btn{
+  cursor: pointer;
+  color: white;
+  border: none;
+  border-radius: 3px;
+}
 .report-btn {
   background-color: #218838;
   padding: 8px 10px;
@@ -65,8 +72,6 @@
   max-height: 300px;
   display: block;
   background-color: #218838;
-
-
   overflow-y: auto;
 }
 
@@ -102,7 +107,7 @@
   background-color: #f9f9f9;
 }
 
-button {
+.spectacle-table button {
   margin-right: 10px;
   padding: 5px 10px;
   cursor: pointer;
@@ -112,31 +117,31 @@ button {
   border-radius: 3px;
 }
 
-button:hover {
+.spectacle-table button:hover {
   background-color: #0056b3;
 }
 
-tbody > tr > td:last-child {
+.spectacle-table tbody > tr > td:last-child {
   padding: 12px;
 }
 
-tbody > tr > td:last-child .actions-wrapper {
+.spectacle-table tbody > tr > td:last-child .actions-wrapper {
   display: flex;
 }
 
-.more-btn {
+.spectacle-table .more-btn {
   background: #242424;
 }
 
-.more-btn:hover {
+.spectacle-table .more-btn:hover {
   background-color: #000000;
 }
 
-.delete-btn {
+.spectacle-table .delete-btn {
   background-color: #b82323ea;
 }
 
-.delete-btn:hover {
+.spectacle-table .delete-btn:hover {
   background-color: #b82323;
 }
 
@@ -173,8 +178,25 @@ tbody > tr > td:last-child .actions-wrapper {
 
 .modal-content button {
   background-color: #28a745;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 10px;
+  
 }
 
 .modal-content button:hover {
   background-color: #218838;
 }
+
+.modal-content div{
+width: 100%;
+display: flex;
+justify-content: end;
+}
+
+.modal-content div button,
+.modal-content div button:hover{
+background-color: transparent;
+cursor: pointer;
+font-size: 1rem;
+  }
