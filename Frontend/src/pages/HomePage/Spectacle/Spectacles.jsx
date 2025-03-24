@@ -72,6 +72,7 @@ const Spectacles = () => {
                             <div className="spectacle-details">
                                 <h2 className="spectacle-model">{spectacle.model}</h2>
                                 <p className="spectacle-brand">{spectacle.brand} - {spectacle.type}</p>
+                                <p className="spectacle-gender">{spectacle.gender}</p>
                                 <p className="spectacle-price">LKR {spectacle.price}</p>
                                 <div className="spectacle-rating">
                                     {renderStars(spectacle.rating)}
