@@ -36,7 +36,7 @@ const spectacleSchema = new Schema({
         type: String,
         required: true
     },
-    discription : {
+    description : {
         type: String,
         required: true
     },
@@ -60,13 +60,11 @@ const spectacleSchema = new Schema({
         type: Number,
         required: true
     },
-    rating : {
-        type: Number,
-        required: true
-    },
-    imageurlcolor1 : [],
-    imageurlcolor2 : [], 
-    imageurlcolor3 : [],
+    rating: { type: Number, default: 0 },
+    
+    imageurlcolor1 : { type: [String], default: [] },
+    imageurlcolor2 :{ type: [String], default: [] }, 
+    imageurlcolor3 : { type: [String], default: [] },
 });
 
 const SpectacleModel = mongoose.model('spectacle', spectacleSchema);
