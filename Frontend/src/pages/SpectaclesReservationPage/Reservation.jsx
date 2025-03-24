@@ -15,12 +15,14 @@ function Reservation() {
   const [selectSize, setSelectSize] = useState(""); 
   const [selectedImage, setSelectedImage] = useState(null);
   const [quantity, setQuantity] = useState(1); // Default quantity is 1 
+  const [gender, setGender] = useState("Unisex");
+  const basePrice = 5000; // Base price of a spectacle
+  const [totalPrice, setTotalPrice] = useState(basePrice); // State for total price
 
   const handleSizeChange = (event) => {
     setSelectSize(event.target.value);
   };
 
-  
   useEffect(() => {
     if (selectedImage) {
       const timer = setTimeout(() => {
@@ -31,6 +33,9 @@ function Reservation() {
     }
   }, [selectedImage]);
 
+  useEffect(() => {
+    setTotalPrice(basePrice * Number(quantity)); // Update total price when quantity changes
+  }, [quantity]);
 
   const ImageRadioButtons = () => {
     const images = [
@@ -155,8 +160,26 @@ function Reservation() {
                   onChange={(e) => setQuantity(e.target.value)}/>
               </div>
               </div>
-              <h2>Select Spectacle Image</h2>
-              <ImageRadioButtons />
+              <div className="images-geneder-brand">
+                <div className="image-section-2">
+                <h2>Select Spectacle Image</h2>
+                <ImageRadioButtons />
+                </div>
+              <div className="gender-brand-section">
+                  <h3>Gender :</h3> 
+                <h4>{gender}</h4>
+
+              </div>
+              <div className="reservation-price">
+              <h2>Price  :</h2>
+              <p>$ {totalPrice}</p> {/* Updated Price Display */}
+            </div>
+              </div>
+            <div className="resevation-button">
+              <button type="submit" className="reserve-button">
+                Reserve Now
+              </button>
+            </div>
             </form>
           </div>
         </div>
