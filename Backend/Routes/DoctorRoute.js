@@ -1,4 +1,3 @@
-
 import express from 'express';
 const router = express.Router();
 
@@ -99,7 +98,7 @@ router.route('/doctorid/:id').post(async(req, res) => {
 
 
 router.route('/createdoctorappointment').post(async(req, res) => {
-
+    console.log("Request received to create doctor appointment:", req.body);
     const {
         firstname,
         lastname,
@@ -130,13 +129,13 @@ router.route('/createdoctorappointment').post(async(req, res) => {
      });
  
      try {
-         
          await newDoctorAppointment.save();
+         console.log("Doctor appointment created successfully:", newDoctorAppointment);
          return res.status(200).json({status: "DoctorAppointment is added successfully"});
  
      } catch (error) {
-         
-         return res.status(500).json({status: "Error with add DoctorAppointment", message: error});
+         console.error("Error creating doctor appointment:", error.message);
+         return res.status(500).json({status: "Error with add DoctorAppointment", message: error.message});
  
      }   
 
@@ -148,13 +147,13 @@ router.route('/getalldoctorappointment/:email').post(async(req, res) => {
 
     try {
         
-        const doctor = await DoctorAppointment.find({ email: email });
+        const doctorAppointments = await DoctorAppointment.find({ email: email });
 
-        if (!doctor) {
+        if (!doctorAppointments) {
             return res.status(404).json({ status: "doctorAppointment not found" });
         }
 
-        return res.status(200).json({status: "doctorAppointment is fatched", doctor});
+        return res.status(200).json({status: "doctorAppointment is fetched", doctorAppointments});
 
     } catch (error) {
         
@@ -197,9 +196,11 @@ router.route('/editdoctorappointment/:id').put(async (req, res) =>{
     }
     
     try {
-        
-        await DoctorAppointment.findByIdAndUpdate(doctorAppointmentID , doctorAppointment);
-        return res.status(200).json({status: "DoctorAppointment updated"});
+        const updatedAppointment = await DoctorAppointment.findByIdAndUpdate(doctorAppointmentID , doctorAppointment, { new: true });
+        if (!updatedAppointment) {
+            return res.status(404).json({ status: "DoctorAppointment not found" });
+        }
+        return res.status(200).json({ status: "DoctorAppointment updated", updatedAppointment });
 
     } catch (error) {
         
@@ -213,8 +214,10 @@ router.route('/deletedoctorappointment/:id').delete(async (req, res) => {
     const doctorAppointmentID = req.params.id;
 
     try {
-        
-        await DoctorAppointment.findByIdAndDelete(doctorAppointmentID);
+        const deletedAppointment = await DoctorAppointment.findByIdAndDelete(doctorAppointmentID);
+        if (!deletedAppointment) {
+            return res.status(404).json({ status: "DoctorAppointment not found" });
+        }
         return res.status(200).json({status : "DoctorAppointment is deleted"});
 
     } catch (error) {
@@ -236,7 +239,7 @@ router.route('/getalldoctorappointment/:email/:id').post(async(req, res) => {
             return res.status(404).json({ status: "doctorAppointment not found" });
         }
 
-        return res.status(200).json({status: "doctorAppointment is fatched", doctor});
+        return res.status(200).json({status: "doctorAppointment is fetched", doctor});
 
     } catch (error) {
         
