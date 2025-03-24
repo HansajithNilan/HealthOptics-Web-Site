@@ -4,6 +4,7 @@ import "./SpectacleManage.css";
 import jsPDF from "jspdf";
 import axios from "axios";
 import SpectacleDetails from "./SpectacleDetails.jsx";
+import Swal from "sweetalert2";
 
 const SpectacleManage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -99,9 +100,33 @@ const SpectacleManage = () => {
   };
 
   const handleDelete = (id) => {
-    console.log(`Deleting spectacle with id: ${id}`);
-    // Add your delete functionality here
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Proceed with deletion
+        console.log(`Deleting spectacle with id: ${id}`);
+        axios
+          .delete(`http://localhost:5000/api/spectacle/delete/${id}`)
+          .then((response) => {
+            console.log("Spectacle deleted successfully", response);
+            // Update state to reflect deletion
+            setSpectacles((prevSpectacles) =>
+              prevSpectacles.filter((spectacle) => spectacle._id !== id)
+            );
+          })
+          .catch((error) => {
+            console.error("Error deleting spectacle", error);
+          });
+      }
+    });
   };
+  
 
   return (
     <DashboardLayout title="Spectacle Management">
