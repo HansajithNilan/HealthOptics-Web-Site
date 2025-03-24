@@ -8,12 +8,13 @@ import UserRegisterPage from "./pages/UserRegisterPage/UserRegister.jsx";
 import AddDoctorAppointmentDetails from "./pages/HomePage/doctorappointment/AddDoctorAppointmentDetails.jsx";
 import MyAppointmentScreen from "./pages/HomePage/doctorappointment/MyAppointmentScreen.jsx";
 import OphthalmologistsScreen from "./pages/HomePage/doctorappointment/OphthalmologistsScreen.jsx";
-import PatientDetailsForm from "./pages/HomePage/doctorappointment/PatientDetailsForm.jsx";
-import PatientList from "./pages/HomePage/doctorappointment/PatientList.jsx"; // Import PatientList
-import EditPatient from "./pages/HomePage/doctorappointment/EditPatient.jsx"; // Import EditPatient
+import EditDoctorAppointment from "./pages/HomePage/doctorappointment/EditDoctorAppointment.jsx"; // Import EditDoctorAppointment
 
 import DoctorProfileFrom from "./pages/DoctorManagement/DoctorProfileFrom.jsx";
 import DoctorProfileTable from "./pages/DoctorManagement/DoctorProfileTable.jsx";
+
+import Dashboard from "./pages/AdminPage/Dashboard/Dashboard.jsx";
+import SpectacleManage from "./pages/AdminPage/SpectacleManagement/SpectacleManage.jsx";
 
 function App() {
   return (
@@ -22,15 +23,17 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/Register" element={<UserRegisterPage />} />
 
-        <Route path="/addappointment" element={<AddDoctorAppointmentDetails />}/>
-        <Route path="/patientdetails" element={<PatientDetailsForm />} />
-        <Route path="/myappointment" element={<MyAppointmentScreen />} />
-        <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
-        <Route path="/patientlist" element={<PatientList />} /> {/* Add route for PatientList */}
-        <Route path="/editPatient/:id" element={<EditPatient />} /> {/* Add route for EditPatient */}
-
-        <Route path="/doctorprofiletable" element={<DoctorProfileTable />} />
         <Route path="/doctorprofile" element={<DoctorProfileFrom />} />
+        <Route path="/doctorprofiletable" element={<DoctorProfileTable />} />
+      
+        <Route path="/addappointment" element={<AddDoctorAppointmentDetails />} />
+        <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
+        <Route path="/myappointment" element={<MyAppointmentScreen />} />
+        <Route path="/editdoctorappointment/:id" element={<EditDoctorAppointment />} /> {/* Add route for EditDoctorAppointment */}
+   
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/spectacles" element={<SpectacleManage />} />
+
       </Routes>
     </BrowserRouter>
   );

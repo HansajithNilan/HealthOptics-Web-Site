@@ -2,7 +2,7 @@ import React from "react";
 import "./Ophthalmologists.css";
 import eye1 from "/src/assets/eye1.jpg";
 import eye from "/src/assets/eye.jpg";
-
+import { Link } from "react-router-dom";
 import NavBar from "../../../components/NavBar/NavBar"; // Adjust path as necessary
 
 export default function OphthalmologistsScreen() {
@@ -25,6 +25,9 @@ export default function OphthalmologistsScreen() {
               Your Vision Matters,<br />
               Book an Appointment Now.
             </p>
+            <Link to="/addappointment">
+              <button className="book-appointment-btn">Book Appointment</button>
+            </Link>
           </div>
         </div>
         

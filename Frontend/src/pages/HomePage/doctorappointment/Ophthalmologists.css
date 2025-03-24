@@ -56,6 +56,21 @@ body {
     text-shadow: 1px 1px 2px #000000;
 }
 
+.book-appointment-btn {
+    background-color: #218838;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.book-appointment-btn:hover {
+    background-color: #1e7e34;
+}
+
 /* Expert Eye Care Section */
 .background11 {
     padding: 20px;
