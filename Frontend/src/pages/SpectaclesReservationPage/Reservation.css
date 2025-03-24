@@ -30,6 +30,7 @@
   justify-content: center;
 }
 .Image-section img {
+  margin-top: 40px;
   width: 400px;
   height: 500px;
   border-radius: 20px;
@@ -57,6 +58,7 @@
   display: flex;
 justify-content: space-between;
   margin-bottom: 25px;
+  
 }
 .name-mobnumber label {
   font-size: 1rem;
@@ -148,4 +150,96 @@ justify-content: space-between;
 .spectacle-size-options-main{
   display: flex;
 
+}
+.spectacles-quantity{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-left: 34px;
+  
+}
+.spectacles-quantity h2{
+  margin-top: 12px;
+
+}
+.spectacles-quantity label {
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-left: 15px;
+  
+}
+.spectacles-quantity input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 50px;
+  height: 20px;
+  outline: none;
+  margin-left: 20px;
+}
+.image-section-2{
+
+}
+.images-geneder-brand{
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.gender-brand-section{
+    display: flex;
+    
+
+}
+.gender-brand-section h3{
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-left:40px;
+  font-weight:bold;
+}
+.gender-brand-section h4{
+  
+  border-radius: 5px;
+color: red;
+
+ 
+  margin-left: 10px;
+}
+.reservation-price {
+  display: flex;
+  justify-content: end;
+ align-items: center;
+ margin-top: 60px;
+
+  margin-left: 15px;
+  
+}
+.reservation-price h2{
+    font-size: 25px;
+    margin-top: 8px;
+}
+.reservation-price p{
+  font-size: 20px;
+  margin-left: 5px;
+  
+}
+.resevation-button{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+}
+.resevation-button button{
+  padding: 10px 20px;
+  background-color: #fcbd49;
+  
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: black;
+}
+.resevation-button button:hover {
+  background-color: #df1d1d;
+  color: white;
 }
