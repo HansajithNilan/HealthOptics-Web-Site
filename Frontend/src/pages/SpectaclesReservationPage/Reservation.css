@@ -1,0 +1,245 @@
+.spectales-reservation-page {
+  margin: 0 20px;
+  padding: 0;
+}
+
+.spectacles-section {
+  margin: 130px auto;
+  width: 80%;
+}
+.reserve-main-section {
+  display: flex;
+  padding: 40px 10px;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     */
+  margin: 30px 10px;
+}
+.reserve-main-section {
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.spectacles-section h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+.Image-section {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+.Image-section img {
+  margin-top: 40px;
+  width: 400px;
+  height: 500px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.reserve-section {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  padding: 20px;
+}
+
+.reserve-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+ 
+}
+.reserve-form label {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+.name-mobnumber {
+  display: flex;
+justify-content: space-between;
+  margin-bottom: 25px;
+  
+}
+.name-mobnumber label {
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+.name-mobnumber input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+ 
+  width: 200px;
+  height: 25px;
+  outline: none;
+}
+.reserve-form h1{
+
+    margin-bottom: 30px;
+
+}
+.spectacle-frame-type-meterial {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.spectacle-frame-type-meterial label {
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+
+.spectacle-frame-type-meterial select,
+.spectacle-frame-type-meterial input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px;
+  height: 40px;
+  outline: none;
+  box-sizing: border-box; 
+}
+.spectacle-size-options{
+  
+
+ 
+  margin-bottom: 20px;
+}
+.spectacle-size-options label {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.spectacle-size-options input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.reserve-form h2{
+ 
+  padding-left: 13px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+
+
+}
+.image-radio-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.image-option {
+  border: 3px solid transparent;
+  border-radius: 10px;
+  padding: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.image-option img {
+  width: 80px;
+  height:60px;
+  border-radius: 5px;
+}
+
+.image-option.selected {
+  border-color: rgb(0, 0, 0); /* Highlight selected image */
+}
+.spectacle-size-options-main{
+  display: flex;
+
+}
+.spectacles-quantity{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-left: 34px;
+  
+}
+.spectacles-quantity h2{
+  margin-top: 12px;
+
+}
+.spectacles-quantity label {
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-left: 15px;
+  
+}
+.spectacles-quantity input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 50px;
+  height: 20px;
+  outline: none;
+  margin-left: 20px;
+}
+.image-section-2{
+
+}
+.images-geneder-brand{
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.gender-brand-section{
+    display: flex;
+    
+
+}
+.gender-brand-section h3{
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-left:40px;
+  font-weight:bold;
+}
+.gender-brand-section h4{
+  
+  border-radius: 5px;
+color: red;
+
+ 
+  margin-left: 10px;
+}
+.reservation-price {
+  display: flex;
+  justify-content: end;
+ align-items: center;
+ margin-top: 60px;
+
+  margin-left: 15px;
+  
+}
+.reservation-price h2{
+    font-size: 25px;
+    margin-top: 8px;
+}
+.reservation-price p{
+  font-size: 20px;
+  margin-left: 5px;
+  
+}
+.resevation-button{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+}
+.resevation-button button{
+  padding: 10px 20px;
+  background-color: #fcbd49;
+  
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: black;
+}
+.resevation-button button:hover {
+  background-color: #df1d1d;
+  color: white;
+}
