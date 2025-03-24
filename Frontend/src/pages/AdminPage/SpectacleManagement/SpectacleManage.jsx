@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DashboardLayout from "../../../components/DashboardLayout/DashboardLayout.jsx";
 import "./SpectacleManage.css";
 import jsPDF from "jspdf";
+import axios from "axios";
 
 const SpectacleManage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -23,104 +24,21 @@ const SpectacleManage = () => {
   const [gender, setGender] = useState("");
   const [price, setPrice] = useState("");
 
-  const spectacles = [
-    {
-      id: 1,
-      model: "Classic 444",
-      type: "Eyeglasses",
-      brand: "RayBan",
-      gender: "Unisex",
-      frameShape: "Round",
-      frameMaterial: "Metal",
-      frameType: "Full Rim",
-      hingeType: "Spring Hinge",
-      description: "Stylish and comfortable eyeglasses",
-      frameSize: ["Small", "Medium", "Large"],
-      price: 12000,
-      rating: 4.5,
-      stock: 10,
-    },
-    {
-      id: 2,
-      model: "Slim 335",
-      type: "Sunglasses",
-      brand: "Oakley",
-      gender: "Men",
-      frameShape: "Square",
-      frameMaterial: "Plastic",
-      frameType: "Half Rim",
-      hingeType: "Normal",
-      description: "Sleek and stylish sunglasses perfect for summer outings.",
-      frameSize: ["Medium", "Large"],
-      price: 15000,
-      rating: 4.2,
-      stock: 5,
-    },
-    {
-      id: 3,
-      model: "Elite 123",
-      type: "Eyeglasses",
-      brand: "Gucci",
-      gender: "Women",
-      frameShape: "Oval",
-      frameMaterial: "Metal",
-      frameType: "Full Rim",
-      hingeType: "Spring Hinge",
-      description: "Elegant eyeglasses with a sophisticated design.",
-      frameSize: ["Small"],
-      price: 20000,
-      rating: 5.0,
-      stock: 8,
-    },
-    {
-      id: 4,
-      model: "Classic 444",
-      type: "Eyeglasses",
-      brand: "RayBan",
-      gender: "Unisex",
-      frameShape: "Round",
-      frameMaterial: "Metal",
-      frameType: "Full Rim",
-      hingeType: "Spring Hinge",
-      description: "Stylish and comfortable eyeglasses",
-      frameSize: ["Small", "Medium", "Large"],
-      price: 12000,
-      rating: 4.5,
-      stock: 10,
-    },
-    {
-      id: 5,
-      model: "Classic 444",
-      type: "Eyeglasses",
-      brand: "RayBan",
-      gender: "Unisex",
-      frameShape: "Round",
-      frameMaterial: "Metal",
-      frameType: "Full Rim",
-      hingeType: "Spring Hinge",
-      description: "Stylish and comfortable eyeglasses",
-      frameSize: ["Small", "Medium", "Large"],
-      price: 12000,
-      rating: 4.5,
-      stock: 10,
-    },
-    {
-      id: 6,
-      model: "Classic 444",
-      type: "Eyeglasses",
-      brand: "RayBan",
-      gender: "Unisex",
-      frameShape: "Round",
-      frameMaterial: "Metal",
-      frameType: "Full Rim",
-      hingeType: "Spring Hinge",
-      description: "Stylish and comfortable eyeglasses",
-      frameSize: ["Small", "Medium", "Large"],
-      price: 12000,
-      rating: 4.5,
-      stock: 10,
-    },
-  ];
+  const [spectacles, setSpectacles] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/spectacle/")
+      .then((response) => {
+        setSpectacles(response.data);
+      })
+      .catch((error) => {
+        console.error(
+          "There was an error fetching the spectacles data:",
+          error
+        );
+      });
+  }, []);
 
   // Handle Search and filter
   const filteredSpectacles = spectacles.filter((item) => {
@@ -224,63 +142,63 @@ const SpectacleManage = () => {
         </div>
 
         <div className="table-container">
-        <table className="spectacle-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Model</th>
-              <th>Type</th>
-              <th>Brand</th>
-              <th>Frame Shape</th>
-              <th>Frame Material</th>
-              <th>Frame Size</th>
-              <th>Price</th>
-              <th>Stock Quantity</th>
-              <th></th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredSpectacles.map((spectacle) => (
-              <tr key={spectacle.id}>
-                <td>{spectacle.id}</td>
-                <td>{spectacle.model}</td>
-                <td>{spectacle.type}</td>
-                <td>{spectacle.brand}</td>
-                <td>{spectacle.frameShape}</td>
-                <td>{spectacle.frameMaterial}</td>
-                <td>{spectacle.frameSize.join(", ")}</td>
-                <td>${spectacle.price.toLocaleString()}</td>{" "}
-                {/* Format price */}
-                <td>{spectacle.stock}</td>
-                <td>
-                  <button
-                    onClick={() => handleShowMore(spectacle)}
-                    className="more-btn"
-                  >
-                    More
-                  </button>
-                </td>
-                <td>
-                  <div className="actions-wrapper">
-                    <button
-                      onClick={() => handleEdit(spectacle.id)}
-                      className="edit-btn"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(spectacle.id)}
-                      className="delete-btn"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
+          <table className="spectacle-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Model</th>
+                <th>Type</th>
+                <th>Brand</th>
+                <th>Frame Shape</th>
+                <th>Frame Material</th>
+                <th>Frame Size</th>
+                <th>Price</th>
+                <th>Stock Quantity</th>
+                <th>More Details</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredSpectacles.map((spectacle) => (
+                <tr key={spectacle._id}>
+                  {/* <td>{spectacle._id}</td> */}
+                  <td>{("000" + (parseInt(spectacle._id.slice(-3), 16) % 1000)).slice(-3)}</td>
+                  <td>{spectacle.model}</td>
+                  <td>{spectacle.type}</td>
+                  <td>{spectacle.brand}</td>
+                  <td>{spectacle.frameshape}</td>
+                  <td>{spectacle.framematerial}</td>
+                  <td>{`${spectacle.framesize1}, ${spectacle.framesize2}, ${spectacle.framesize3}`}</td>
+                  <td>${spectacle.price.toLocaleString()}</td>
+                  <td>{spectacle.stock}</td>
+                  <td>
+                    <button
+                      onClick={() => handleShowMore(spectacle)}
+                      className="more-btn"
+                    >
+                      More
+                    </button>
+                  </td>
+                  <td>
+                    <div className="actions-wrapper">
+                      <button
+                        onClick={() => handleEdit(spectacle._id)}
+                        className="edit-btn"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(spectacle._id)}
+                        className="delete-btn"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         {/* Modal for Show More */}
