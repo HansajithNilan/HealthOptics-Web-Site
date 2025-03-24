@@ -3,6 +3,7 @@ import DashboardLayout from "../../../components/DashboardLayout/DashboardLayout
 import "./SpectacleManage.css";
 import jsPDF from "jspdf";
 import axios from "axios";
+import SpectacleDetails from "./SpectacleDetails.jsx";
 
 const SpectacleManage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -202,53 +203,7 @@ const SpectacleManage = () => {
         </div>
 
         {/* Modal for Show More */}
-        {showModal && selectedSpectacle && (
-          <div className="modal-overlay">
-            <div className="modal-content">
-              <h2>{selectedSpectacle.model} - Details</h2>
-              <p>
-                <strong>Type:</strong> {selectedSpectacle.type}
-              </p>
-              <p>
-                <strong>Brand:</strong> {selectedSpectacle.brand}
-              </p>
-              <p>
-                <strong>Gender:</strong> {selectedSpectacle.gender}
-              </p>
-              <p>
-                <strong>Frame Shape:</strong> {selectedSpectacle.frameShape}
-              </p>
-              <p>
-                <strong>Frame Material:</strong>{" "}
-                {selectedSpectacle.frameMaterial}
-              </p>
-              <p>
-                <strong>Frame Type:</strong> {selectedSpectacle.frameType}
-              </p>
-              <p>
-                <strong>Hinge Type:</strong> {selectedSpectacle.hingeType}
-              </p>
-              <p>
-                <strong>Description:</strong> {selectedSpectacle.description}
-              </p>
-              <p>
-                <strong>Frame Sizes Available:</strong>{" "}
-                {selectedSpectacle.frameSize.join(", ")}
-              </p>
-              <p>
-                <strong>Price:</strong> $
-                {selectedSpectacle.price.toLocaleString()}
-              </p>
-              <p>
-                <strong>Rating:</strong> {selectedSpectacle.rating}
-              </p>
-              <p>
-                <strong>Stock Quantity:</strong> {selectedSpectacle.stock}
-              </p>
-              <button onClick={handleCloseModal}>Close</button>
-            </div>
-          </div>
-        )}
+        <SpectacleDetails spectacle={selectedSpectacle} onClose={handleCloseModal} />
       </div>
     </DashboardLayout>
   );
