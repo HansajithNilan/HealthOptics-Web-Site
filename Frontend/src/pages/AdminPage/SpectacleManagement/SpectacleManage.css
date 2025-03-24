@@ -60,11 +60,14 @@
 
 /* Spectacle Table */
 
+
 .table-container {
-  max-height: 300px; /* Adjust as needed */
-  overflow-y: auto;
+  max-height: 300px;
   display: block;
   background-color: #218838;
+
+
+  overflow-y: auto;
 }
 
 .spectacle-table {
@@ -75,9 +78,13 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* .spectacle-table thead{
-  position: fixed;
-} */
+.spectacle-table thead {
+  position: sticky;
+  top: 0;
+  background-color: #f5f5f5; /* Keep header visible */
+  z-index: 2;
+}
+
 
 .spectacle-table th,
 .spectacle-table td {
@@ -107,10 +114,6 @@ button {
 
 button:hover {
   background-color: #0056b3;
-}
-
-tbody{
-  overflow-y: auto;
 }
 
 tbody > tr > td:last-child {
