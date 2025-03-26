@@ -1,12 +1,12 @@
 .da-form-group {
   margin: 2% auto;
   padding: 2%;
-  width: 45%;
+  width: 50%;
   background-color: #fff; /* Light background for the form */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   border-radius: 8px; 
   margin-left: 680px;
-  margin-top: 10px;/* Rounded corners for modern look */
+  margin-top: -310px;/* Rounded corners for modern look */
 }
 
 .da-control-label {
@@ -99,7 +99,7 @@
   font-size: 40px;
   font-weight: bold;
   color: black;
-  margin-left: 780px;
+  margin-left: 500px;
   
 }
 .text112{
@@ -110,4 +110,40 @@
   position: relative;
   bottom: 420px !important;
   margin-top: 500px;
+}
+.EA11-control-label {
+  display: block;
+  
+  font-size: 14px;
+  font-weight: bold; /* Make labels bold */
+  color: #333; /* Darker text for better readability */
+}
+.flex {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.checkbox {
+  margin-right: 10px;
+}
+.EA1-control-label {
+  
+  margin-right: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+.welcome{
+  position: relative !important;
+  bottom: 500px !important;
+  font-size: 70px !important;
+  margin-left: 150px !important;
+  color: black !important;
+}
+.welcome_2{
+  position: relative !important;
+  bottom: 480px !important;
+  margin-left: 150px!important;
+  color: #17202a!important;
+  font-size: 21px !important;
 }
