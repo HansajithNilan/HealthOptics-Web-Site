@@ -42,15 +42,15 @@ const spectacleSchema = new Schema({
     },
     framesize1 : {
         type: String,
-        required: true
+        
     },
     framesize2 : {
         type: String,
-        required: true
+        
     },
     framesize3 : {
         type: String,
-        required: true
+
     },
     price : {
         type: Number,

@@ -26,6 +26,33 @@ const SpectacleForm = ({ onClose }) => {
     imageurlcolor3: "",
   });
 
+
+  const validateForm = () => {
+    if (!formData.model || !formData.type || !formData.brand || !formData.gender || !formData.frameshape || !formData.framematerial || !formData.frametype || !formData.hingetype || !formData.description) {
+      Swal.fire("Error!", "All fields are required except image URLs.", "error");
+      return false;
+    }
+    
+    if (!formData.framesize1 && !formData.framesize2 && !formData.framesize3) {
+      Swal.fire("Error!", "At least one frame size must be filled.", "error");
+      return false;
+    }
+
+    if (formData.price <= 0 || isNaN(formData.price)) {
+      Swal.fire("Error!", "Price must be a positive number.", "error");
+      return false;
+    }
+
+    if (formData.stock < 0 || isNaN(formData.stock)) {
+      Swal.fire("Error!", "Stock must be a non-negative number.", "error");
+      return false;
+    }
+    
+    return true;
+  };
+
+
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -37,18 +64,13 @@ const SpectacleForm = ({ onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Convert image URLs to arrays
+    if (!validateForm()) return;
+
     const updatedFormData = {
       ...formData,
-      imageurlcolor1: formData.imageurlcolor1
-        .split(",")
-        .map((url) => url.trim()),
-      imageurlcolor2: formData.imageurlcolor2
-        .split(",")
-        .map((url) => url.trim()),
-      imageurlcolor3: formData.imageurlcolor3
-        .split(",")
-        .map((url) => url.trim()),
+      imageurlcolor1: formData.imageurlcolor1.split(",").map((url) => url.trim()),
+      imageurlcolor2: formData.imageurlcolor2.split(",").map((url) => url.trim()),
+      imageurlcolor3: formData.imageurlcolor3.split(",").map((url) => url.trim()),
     };
 
     console.log(updatedFormData);
@@ -95,6 +117,12 @@ const SpectacleForm = ({ onClose }) => {
       imageurlcolor3: "",
     });
   };
+
+
+
+
+
+
 
   return (
     <div className="add-spectacle-form">
@@ -205,7 +233,7 @@ const SpectacleForm = ({ onClose }) => {
             value={formData.framesize1}
             onChange={handleInputChange}
             placeholder="Size 1"
-            required
+            
           />
           <input
             type="text"
@@ -213,7 +241,7 @@ const SpectacleForm = ({ onClose }) => {
             value={formData.framesize2}
             onChange={handleInputChange}
             placeholder="Size 2"
-            required
+            
           />
           <input
             type="text"
@@ -221,7 +249,7 @@ const SpectacleForm = ({ onClose }) => {
             value={formData.framesize3}
             onChange={handleInputChange}
             placeholder="Size 3"
-            required
+          
           />
         </div>
         <div>
