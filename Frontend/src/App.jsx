@@ -7,9 +7,14 @@ import UserRegisterPage from "./pages/UserRegisterPage/UserRegister.jsx";
 
 import SpectaclesReservation from "./pages/SpectaclesReservationPage/Reservation.jsx";
 
+import ReservationDetails from "./pages/SpectaclesReservationPage/ReservationDetails.jsx";
+import ReservationUpdate from "./pages/SpectaclesReservationPage/UpdateReservation.jsx";
+
+
 import AddDoctorAppointmentDetails from "./pages/HomePage/doctorappointment/AddDoctorAppointmentDetails.jsx";
 
 import MyAppointmentScreen from "./pages/HomePage/doctorappointment/MyAppointmentScreen.jsx";
+
 
 
 import DoctorProfileFrom from "./pages/DoctorManagement/DoctorProfileFrom.jsx";
@@ -36,6 +41,12 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/register" element={<UserRegisterPage />} />
         <Route path="/Register" element={<UserRegisterPage />} />
+
+        <Route path="/reservespectacles/:id" element={<SpectaclesReservation />} />
+        <Route path="/reservationDetails" element={<ReservationDetails />} />
+        <Route path="/updatereservation/:id" element={<ReservationUpdate/>} />
+
+
         <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
         <Route path="/myappointment" element={<MyAppointmentScreen />} />
         <Route
@@ -48,6 +59,7 @@ function App() {
           path="/addappointment"
           element={<AddDoctorAppointmentDetails />}
         />
+
         
         <Route
           path="/doctorprofile"

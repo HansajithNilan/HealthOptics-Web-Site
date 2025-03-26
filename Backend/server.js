@@ -19,14 +19,23 @@ import SpecReservationRoute from './Routes/SpecReservationRoute.js'
 
 
 
+const app = express();
+
+
+app.use(express.json());
+
+app.use(cors());
+
+
 
 
 import DoctorAppointmentRoute from "./Routes/DoctorAppointmentRoute.js"; // Import DoctorAppointmentRoute
 
 import SpectacleRoute from "./Routes/SpectacleRoute.js";
 
+
 dotenv.config();
-const app = express();
+
 
 
 
@@ -46,8 +55,10 @@ if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
+
 // Serve uploaded files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 
 app.use('/api/auth/',userRoutes)
 app.use('/api/auth/reservation',SpecReservationRoute)

@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { createReservation,filterReservation,getOneReservations,getReservations, updateReservation } from '../Controllers/SpectacleReservecontroller.js'
+import { createReservation,deleteReservation,filterReservation,getOneReservations,getReservations, updateReservation } from '../Controllers/SpectacleReservecontroller.js'
 
 
 const router = express.Router();
@@ -10,6 +10,7 @@ router.get('/getallreservations',getReservations)
 router.get('/getonereservation/:id',getOneReservations)
 router.put('/updateReservation/:id',updateReservation)
 router.get('/filterreservation',filterReservation)
+router.delete('/deletereservation/:id',deleteReservation)
 
 
 
