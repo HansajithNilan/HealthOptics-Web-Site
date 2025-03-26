@@ -35,7 +35,7 @@ router.route('/createdoctorappointment').post(async(req, res) => {
 
     try {
         await newDoctorAppointment.save();
-        console.log("Doctor appointment created successfully:", newDoctorAppointment);
+        console.log("Doctor appointment created successfully:");
         return res.status(200).json({status: "DoctorAppointment is added successfully"});
     } catch (error) {
         console.error("Error creating doctor appointment:", error.message);
