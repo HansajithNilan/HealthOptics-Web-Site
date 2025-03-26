@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import "./EditDoctorProfile.css";
 
 function EditDoctorProfile() {
@@ -72,14 +73,20 @@ function EditDoctorProfile() {
       });
 
       if (response.status === 200) {
-        toast.success("Doctor updated successfully!");
-        navigate("/admin/doctors"); // Redirect to AdminDoctorManage.jsx page
+        Swal.fire({
+          title: "Success!",
+          text: "Doctor profile updated successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          navigate("/admin/doctors"); // Redirect to AdminDoctorManage.jsx page
+        });
       } else {
         throw new Error(response.data.message || "Failed to update doctor profile");
       }
     } catch (error) {
-      toast.error("Failed to update doctor");
       console.error("Error updating doctor:", error);
+      Swal.fire("Error", error.response?.data?.message || "Failed to update doctor profile", "error");
     }
   };
 

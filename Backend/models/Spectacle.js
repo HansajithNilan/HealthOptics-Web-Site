@@ -36,33 +36,35 @@ const spectacleSchema = new Schema({
         type: String,
         required: true
     },
-    discription : {
+    description : {
         type: String,
         required: true
     },
     framesize1 : {
         type: String,
-        required: true
+        
     },
     framesize2 : {
         type: String,
-        required: true
+        
     },
     framesize3 : {
         type: String,
-        required: true
+
     },
     price : {
         type: Number,
         required: true
     },
-    rating : {
+    stock:{
         type: Number,
         required: true
     },
-    imageurlcolor1 : [],
-    imageurlcolor2 : [], 
-    imageurlcolor3 : [],
+    rating: { type: Number, default: 0 },
+    
+    imageurlcolor1 : { type: [String], default: [] },
+    imageurlcolor2 :{ type: [String], default: [] }, 
+    imageurlcolor3 : { type: [String], default: [] },
 });
 
 const SpectacleModel = mongoose.model('spectacle', spectacleSchema);

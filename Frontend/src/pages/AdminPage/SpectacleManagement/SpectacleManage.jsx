@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DashboardLayout from "../../../components/DashboardLayout/DashboardLayout.jsx";
 import "./SpectacleManage.css";
 import jsPDF from "jspdf";
-
+import axios from "axios";
+import SpectacleDetails from "./SpectacleDetails.jsx";
+import SpectacleForm from "./SpectacleForm";
+import Swal from "sweetalert2";
+import SpectacleUpdateForm from "./SpectacleUpdateForm.jsx";
 const SpectacleManage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedSpectacle, setSelectedSpectacle] = useState(null);
+
 
   const handleShowMore = (spectacle) => {
     setSelectedSpectacle(spectacle);
@@ -17,110 +22,37 @@ const SpectacleManage = () => {
     setSelectedSpectacle(null);
   };
 
+  const [showFormModal, setShowFormModal] = useState(false);
+
+  const handleOpenFormModal = () => {
+    setShowFormModal(true);
+  };
+  
+  const handleCloseFormModal = () => {
+    setShowFormModal(false);
+  };
+
   // Search and filters
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
   const [gender, setGender] = useState("");
   const [price, setPrice] = useState("");
 
-  const spectacles = [
-    {
-      id: 1,
-      model: "Classic 444",
-      type: "Eyeglasses",
-      brand: "RayBan",
-      gender: "Unisex",
-      frameShape: "Round",
-      frameMaterial: "Metal",
-      frameType: "Full Rim",
-      hingeType: "Spring Hinge",
-      description: "Stylish and comfortable eyeglasses",
-      frameSize: ["Small", "Medium", "Large"],
-      price: 12000,
-      rating: 4.5,
-      stock: 10,
-    },
-    {
-      id: 2,
-      model: "Slim 335",
-      type: "Sunglasses",
-      brand: "Oakley",
-      gender: "Men",
-      frameShape: "Square",
-      frameMaterial: "Plastic",
-      frameType: "Half Rim",
-      hingeType: "Normal",
-      description: "Sleek and stylish sunglasses perfect for summer outings.",
-      frameSize: ["Medium", "Large"],
-      price: 15000,
-      rating: 4.2,
-      stock: 5,
-    },
-    {
-      id: 3,
-      model: "Elite 123",
-      type: "Eyeglasses",
-      brand: "Gucci",
-      gender: "Women",
-      frameShape: "Oval",
-      frameMaterial: "Metal",
-      frameType: "Full Rim",
-      hingeType: "Spring Hinge",
-      description: "Elegant eyeglasses with a sophisticated design.",
-      frameSize: ["Small"],
-      price: 20000,
-      rating: 5.0,
-      stock: 8,
-    },
-    {
-      id: 4,
-      model: "Classic 444",
-      type: "Eyeglasses",
-      brand: "RayBan",
-      gender: "Unisex",
-      frameShape: "Round",
-      frameMaterial: "Metal",
-      frameType: "Full Rim",
-      hingeType: "Spring Hinge",
-      description: "Stylish and comfortable eyeglasses",
-      frameSize: ["Small", "Medium", "Large"],
-      price: 12000,
-      rating: 4.5,
-      stock: 10,
-    },
-    {
-      id: 5,
-      model: "Classic 444",
-      type: "Eyeglasses",
-      brand: "RayBan",
-      gender: "Unisex",
-      frameShape: "Round",
-      frameMaterial: "Metal",
-      frameType: "Full Rim",
-      hingeType: "Spring Hinge",
-      description: "Stylish and comfortable eyeglasses",
-      frameSize: ["Small", "Medium", "Large"],
-      price: 12000,
-      rating: 4.5,
-      stock: 10,
-    },
-    {
-      id: 6,
-      model: "Classic 444",
-      type: "Eyeglasses",
-      brand: "RayBan",
-      gender: "Unisex",
-      frameShape: "Round",
-      frameMaterial: "Metal",
-      frameType: "Full Rim",
-      hingeType: "Spring Hinge",
-      description: "Stylish and comfortable eyeglasses",
-      frameSize: ["Small", "Medium", "Large"],
-      price: 12000,
-      rating: 4.5,
-      stock: 10,
-    },
-  ];
+  const [spectacles, setSpectacles] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/spectacle/")
+      .then((response) => {
+        setSpectacles(response.data);
+      })
+      .catch((error) => {
+        console.error(
+          "There was an error fetching the spectacles data:",
+          error
+        );
+      });
+  }, []);
 
   // Handle Search and filter
   const filteredSpectacles = spectacles.filter((item) => {
@@ -174,15 +106,53 @@ const SpectacleManage = () => {
     doc.save("Stock_Report.pdf");
   };
 
-  const handleEdit = (id) => {
-    console.log(`Editing spectacle with id: ${id}`);
-    // Add your edit functionality here
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Proceed with deletion
+        console.log(`Deleting spectacle with id: ${id}`);
+        axios
+          .delete(`http://localhost:5000/api/spectacle/delete/${id}`)
+          .then((response) => {
+            console.log("Spectacle deleted successfully", response);
+            // Update state to reflect deletion
+            setSpectacles((prevSpectacles) =>
+              prevSpectacles.filter((spectacle) => spectacle._id !== id)
+            );
+          })
+          .catch((error) => {
+            console.error("Error deleting spectacle", error);
+          });
+      }
+    });
+  };
+  
+  const [showUpdateFormModal, setShowUpdateFormModal] = useState(false); // For updating
+  const [editingSpectacle, setEditingSpectacle] = useState(null);
+
+  const handleOpenUpdateFormModal = (spectacle) => {
+    setEditingSpectacle(spectacle);
+    setShowUpdateFormModal(true);
   };
 
-  const handleDelete = (id) => {
-    console.log(`Deleting spectacle with id: ${id}`);
-    // Add your delete functionality here
+  const handleCloseUpdateFormModal = () => {
+    setShowUpdateFormModal(false);
+    setEditingSpectacle(null);
   };
+
+  const handleUpdate = (updatedSpectacle) => {
+    setSpectacles((prev) =>
+      prev.map((item) => (item._id === updatedSpectacle._id ? updatedSpectacle : item))
+    );
+  };
+
 
   return (
     <DashboardLayout title="Spectacle Management">
@@ -191,7 +161,7 @@ const SpectacleManage = () => {
           <button onClick={generatePDF} className="report-btn">
             Generate Report
           </button>
-          <button className="add-btn">Add Spectacle</button>
+          <button className="add-btn" onClick={handleOpenFormModal}>Add Spectacle</button>
         </div>
         <div className="filter-section">
           <input
@@ -224,113 +194,76 @@ const SpectacleManage = () => {
         </div>
 
         <div className="table-container">
-        <table className="spectacle-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Model</th>
-              <th>Type</th>
-              <th>Brand</th>
-              <th>Frame Shape</th>
-              <th>Frame Material</th>
-              <th>Frame Size</th>
-              <th>Price</th>
-              <th>Stock Quantity</th>
-              <th></th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredSpectacles.map((spectacle) => (
-              <tr key={spectacle.id}>
-                <td>{spectacle.id}</td>
-                <td>{spectacle.model}</td>
-                <td>{spectacle.type}</td>
-                <td>{spectacle.brand}</td>
-                <td>{spectacle.frameShape}</td>
-                <td>{spectacle.frameMaterial}</td>
-                <td>{spectacle.frameSize.join(", ")}</td>
-                <td>${spectacle.price.toLocaleString()}</td>{" "}
-                {/* Format price */}
-                <td>{spectacle.stock}</td>
-                <td>
-                  <button
-                    onClick={() => handleShowMore(spectacle)}
-                    className="more-btn"
-                  >
-                    More
-                  </button>
-                </td>
-                <td>
-                  <div className="actions-wrapper">
-                    <button
-                      onClick={() => handleEdit(spectacle.id)}
-                      className="edit-btn"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(spectacle.id)}
-                      className="delete-btn"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
+          <table className="spectacle-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Model</th>
+                <th>Type</th>
+                <th>Brand</th>
+                <th>Frame Shape</th>
+                <th>Frame Material</th>
+                <th>Frame Size</th>
+                <th>Price</th>
+                <th>Stock Quantity</th>
+                <th>More Details</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredSpectacles.map((spectacle) => (
+                <tr key={spectacle._id}>
+                  {/* <td>{spectacle._id}</td> */}
+                  <td>{("000" + (parseInt(spectacle._id.slice(-3), 16) % 1000)).slice(-3)}</td>
+                  <td>{spectacle.model}</td>
+                  <td>{spectacle.type}</td>
+                  <td>{spectacle.brand}</td>
+                  <td>{spectacle.frameshape}</td>
+                  <td>{spectacle.framematerial}</td>
+                  <td>{`${spectacle.framesize1}, ${spectacle.framesize2}, ${spectacle.framesize3}`}</td>
+                  <td>${spectacle.price.toLocaleString()}</td>
+                  <td>{spectacle.stock}</td>
+                  <td>
+                    <button
+                      onClick={() => handleShowMore(spectacle)}
+                      className="more-btn"
+                    >
+                      More
+                    </button>
+                  </td>
+                  <td>
+                    <div className="actions-wrapper">
+                    <button
+                        onClick={() => handleOpenUpdateFormModal(spectacle)}
+                        className="edit-btn"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(spectacle._id)}
+                        className="delete-btn"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         {/* Modal for Show More */}
-        {showModal && selectedSpectacle && (
-          <div className="modal-overlay">
-            <div className="modal-content">
-              <h2>{selectedSpectacle.model} - Details</h2>
-              <p>
-                <strong>Type:</strong> {selectedSpectacle.type}
-              </p>
-              <p>
-                <strong>Brand:</strong> {selectedSpectacle.brand}
-              </p>
-              <p>
-                <strong>Gender:</strong> {selectedSpectacle.gender}
-              </p>
-              <p>
-                <strong>Frame Shape:</strong> {selectedSpectacle.frameShape}
-              </p>
-              <p>
-                <strong>Frame Material:</strong>{" "}
-                {selectedSpectacle.frameMaterial}
-              </p>
-              <p>
-                <strong>Frame Type:</strong> {selectedSpectacle.frameType}
-              </p>
-              <p>
-                <strong>Hinge Type:</strong> {selectedSpectacle.hingeType}
-              </p>
-              <p>
-                <strong>Description:</strong> {selectedSpectacle.description}
-              </p>
-              <p>
-                <strong>Frame Sizes Available:</strong>{" "}
-                {selectedSpectacle.frameSize.join(", ")}
-              </p>
-              <p>
-                <strong>Price:</strong> $
-                {selectedSpectacle.price.toLocaleString()}
-              </p>
-              <p>
-                <strong>Rating:</strong> {selectedSpectacle.rating}
-              </p>
-              <p>
-                <strong>Stock Quantity:</strong> {selectedSpectacle.stock}
-              </p>
-              <button onClick={handleCloseModal}>Close</button>
-            </div>
-          </div>
+        <SpectacleDetails spectacle={selectedSpectacle} onClose={handleCloseModal} />
+        {showFormModal && <SpectacleForm onClose={handleCloseFormModal} />}
+        {showUpdateFormModal && (
+          <SpectacleUpdateForm
+            onClose={handleCloseUpdateFormModal}
+            spectacle={editingSpectacle}
+            onUpdate={handleUpdate}
+          />
         )}
+
       </div>
     </DashboardLayout>
   );

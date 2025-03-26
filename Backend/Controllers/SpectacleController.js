@@ -25,6 +25,7 @@ export const getSpectacleById = async (req, res) => {
 
 // Admin - Create a new spectacle stock entry 
 export const createSpectacle = async (req, res) => {
+    console.log(req.body);
     try {
         const newSpectacle = new SpectacleModel(req.body);
         await newSpectacle.save();
@@ -33,7 +34,6 @@ export const createSpectacle = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
 
 // Admin - Update a spectacle stock
 export const updateSpectacle = async (req, res) => {
