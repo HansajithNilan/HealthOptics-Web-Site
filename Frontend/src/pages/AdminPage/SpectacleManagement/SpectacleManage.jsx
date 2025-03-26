@@ -6,7 +6,7 @@ import axios from "axios";
 import SpectacleDetails from "./SpectacleDetails.jsx";
 import SpectacleForm from "./SpectacleForm";
 import Swal from "sweetalert2";
-
+import SpectacleUpdateForm from "./SpectacleUpdateForm.jsx";
 const SpectacleManage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedSpectacle, setSelectedSpectacle] = useState(null);
@@ -106,11 +106,6 @@ const SpectacleManage = () => {
     doc.save("Stock_Report.pdf");
   };
 
-  const handleEdit = (id) => {
-    console.log(`Editing spectacle with id: ${id}`);
-    // Add your edit functionality here
-  };
-
   const handleDelete = (id) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -139,6 +134,25 @@ const SpectacleManage = () => {
     });
   };
   
+  const [showUpdateFormModal, setShowUpdateFormModal] = useState(false); // For updating
+  const [editingSpectacle, setEditingSpectacle] = useState(null);
+
+  const handleOpenUpdateFormModal = (spectacle) => {
+    setEditingSpectacle(spectacle);
+    setShowUpdateFormModal(true);
+  };
+
+  const handleCloseUpdateFormModal = () => {
+    setShowUpdateFormModal(false);
+    setEditingSpectacle(null);
+  };
+
+  const handleUpdate = (updatedSpectacle) => {
+    setSpectacles((prev) =>
+      prev.map((item) => (item._id === updatedSpectacle._id ? updatedSpectacle : item))
+    );
+  };
+
 
   return (
     <DashboardLayout title="Spectacle Management">
@@ -219,8 +233,8 @@ const SpectacleManage = () => {
                   </td>
                   <td>
                     <div className="actions-wrapper">
-                      <button
-                        onClick={() => handleEdit(spectacle._id)}
+                    <button
+                        onClick={() => handleOpenUpdateFormModal(spectacle)}
                         className="edit-btn"
                       >
                         Edit
@@ -242,6 +256,14 @@ const SpectacleManage = () => {
         {/* Modal for Show More */}
         <SpectacleDetails spectacle={selectedSpectacle} onClose={handleCloseModal} />
         {showFormModal && <SpectacleForm onClose={handleCloseFormModal} />}
+        {showUpdateFormModal && (
+          <SpectacleUpdateForm
+            onClose={handleCloseUpdateFormModal}
+            spectacle={editingSpectacle}
+            onUpdate={handleUpdate}
+          />
+        )}
+
       </div>
     </DashboardLayout>
   );
