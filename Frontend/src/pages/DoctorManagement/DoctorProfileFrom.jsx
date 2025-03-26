@@ -185,4 +185,4 @@ const AddDoctorForm = () => {
   );
 };
 
-export default AddDoctorForm;
+export default AddDoctorForm;

@@ -27,6 +27,8 @@ dotenv.config();
 
 app.use('/api/auth/',userRoutes)
 app.use('/api/auth/reservation',SpecReservationRoute)
+app.use('/api/auth/doctor',Doctor) // Correct path
+
 
 //console.log(process.env.MONGO_URL)
 
