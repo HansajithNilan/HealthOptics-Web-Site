@@ -2,50 +2,38 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const DoctorAppointmentSchema = new Schema({
-
-    firstname : {
+    firstname: {
         type: String,
         required: true
     },
-    lastname : {
+    lastname: {
         type: String,
         required: true
     },
-    date : {
+   
+    gender: {
         type: String,
         required: true
     },
-    gender : {
+    age: {
         type: String,
         required: true
     },
-    age : {
+    email: {
         type: String,
         required: true
     },
-    email : {
+    contact: {
         type: String,
         required: true
     },
-    contact : {
-        type : String,
-        required : true
+    address: {
+        type: String,
+        required: true
     },
-    address : {
-        type : String,
-        required : true
-    },
-    emergency : {
-        type : String,
-        required : true
-    },
-    doctor : {
-        type : String,
-        required : true
-    },
-    doctorfee : {
-        type : String,
-        required : true
+    date: {
+        type: String,
+        required: true
     },
     
 });

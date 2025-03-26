@@ -21,7 +21,9 @@ const Spectacles = () => {
     //       price: 12000,
     //       rating: 4,
     //       stock: 10,
+            
     //     },]
+
 
     const [spectacles, setSpectacles] = useState([]);
 
@@ -66,13 +68,14 @@ const Spectacles = () => {
                 {spectacles.map((spectacle) => (
                         <div key={spectacle.id} className="spectacle-card">
                             <img
-                                src={spectacle.imageurl}  // Assuming the image URL is in the data
+                                src={spectacle.imageurlcolor1[0]} 
                                 alt={spectacle.model}
                                 className="spectacle-image"
                             />
                             <div className="spectacle-details">
                                 <h2 className="spectacle-model">{spectacle.model}</h2>
                                 <p className="spectacle-brand">{spectacle.brand} - {spectacle.type}</p>
+                                <p className="spectacle-gender">{spectacle.gender}</p>
                                 <p className="spectacle-price">LKR {spectacle.price}</p>
                                 <div className="spectacle-rating">
                                     {renderStars(spectacle.rating)}
