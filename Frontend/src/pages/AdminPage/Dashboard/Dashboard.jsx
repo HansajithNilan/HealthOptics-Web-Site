@@ -16,6 +16,7 @@ const StatCard = ({ color, title, count, icon }) => (
 const Dashboard = () => {
   return (
     <DashboardLayout title="Dashboard">
+
       <div className="dashboardvihani">
         <StatCard color="blue" title="Department" count="26" icon="🏥" />
         <StatCard color="green" title="Doctor" count="20" icon="👨‍⚕️" />
@@ -24,6 +25,9 @@ const Dashboard = () => {
         <StatCard color="purple" title="Spectacles" count="112" icon="👓" /> {/* New Spectacles card */}
         {/* Add more components for charts and other data visualizations */}
       </div>
+
+      {/* <h1>Hi</h1> */}
+
     </DashboardLayout>
   );
 };

@@ -1,3 +1,4 @@
+
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -9,12 +10,21 @@ import fs from 'fs';
 import { dirname } from 'path';
 
 import userRoutes from './Routes/UserRoute.js'
+import Doctor from "./Routes/DoctorRoute.js";
 
 import doctorRoutes from "./Routes/DoctorRoute.js"; // Ensure this path is correct
 
 import SpecReservationRoute from './Routes/SpecReservationRoute.js'
 
+
+
+
+
+
+import DoctorAppointmentRoute from "./Routes/DoctorAppointmentRoute.js"; // Import DoctorAppointmentRoute
+
 import SpectacleRoute from "./Routes/SpectacleRoute.js";
+
 
 dotenv.config();
 const app = express();
@@ -40,12 +50,22 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use('/api/auth/',userRoutes)
 app.use('/api/auth/reservation',SpecReservationRoute)
+
+
+
+
+
+app.use("/api/auth/doctor", Doctor);
+app.use("/api/doctorappointment", DoctorAppointmentRoute); // Use DoctorAppointmentRoute
+
 app.use("/api/spectacle", SpectacleRoute);
 app.use("/api/doctors", doctorRoutes);
 
-//console.log(process.env.MONGO_URL)
 
-app.listen(5000,()=>{
+//console.log(process.env.MONGO_UR
+app.listen(5000, () => {
+    connectDB();
+
     console.log(process.env.MONGO_URL);
-    console.log("Server Started at http://localhost:5000")
+    console.log("Server Started at http://localhost:5000");
 });
