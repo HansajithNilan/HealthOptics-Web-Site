@@ -1,63 +1,17 @@
-import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
+import mongoose from "mongoose";
 
-const doctorSchema = new Schema({
+const doctorSchema = new mongoose.Schema({
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  address: { type: String, required: true },
+  dob: { type: String, required: true },
+  specialty: { type: String, required: true },
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  phone: { type: String, required: true },
+  gender: { type: String, required: true },
+  photo: { type: String },
+}, { timestamps: true });
 
-    firstname : {
-        type : String,
-        required : true
-    },
-    lastname : {
-        type : String,
-        required : true
-    },
-    contact : {
-        type : String,
-        required : true
-    },
-    email : {
-        type : String,
-        required : true
-    },
-    experiance : {
-        type : String,
-        required : true
-    },
-    language : {
-        type : String,
-        required : true
-    },
-    type : {
-        type : String,
-        required : true
-    },
-    department : {
-        type : String,
-        required : true
-    },
-    rating : {
-        type : Number,
-        required : true
-    },
-    doctorfee : {
-        type : Number,
-        required : true
-    },
-    discription : {
-        type : String,
-        required : true
-    },
-    date : {
-        type : String,
-        required : true
-    },
-    specialty : {
-        type : String,
-        required : true
-    },
-    imageurl : []
-});
-
-const Doctor = mongoose.model('doctor', doctorSchema);
-
-export default Doctor;
+export default mongoose.model("Doctor", doctorSchema);
