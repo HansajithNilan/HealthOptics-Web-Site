@@ -6,6 +6,7 @@ import "./SideBar.css";
 function SideBar() {
   const [activeMenu, setActiveMenu] = useState(null);
   const location = useLocation();
+  // const navigate = useNavigate();
 
   const toggleSubmenu = (menu) => {
     setActiveMenu(activeMenu === menu ? null : menu);
@@ -16,28 +17,15 @@ function SideBar() {
     {
       name: "Spectacles Management",
       path: "/admin/spectacles",
-      // submenu: [
-      //   { name: "Manage Spectacle Stock", path: "/admin/spectacles/stock" },
-      //   { name: "View Spectacle Details", path: "/admin/spectacles/details" },
-      // ],
     },
     {
       name: "Doctor Management",
-      path: "/admin/doctor",
-      submenu: [
-        { name: "Manage Doctors", path: "/admin/doctor/manage" },
-        { name: "View Doctor Details", path: "/admin/doctor/details" },
-      ],
+      path: "/admin/doctors",
     },
     {
       name: "Reservations Management",
       path: "/admin/reservations",
-      // submenu: [
-      //   { name: "View Reservations", path: "/admin/reservations/view" },
-      //   { name: "Manage Appointments", path: "/admin/reservations/manage" },
-      // ],
     },
-    // { name: "Logout", path: "/logout" },
   ];
 
   return (
@@ -72,7 +60,7 @@ function SideBar() {
               )}
             </div>
 
-            {activeMenu === item.name && (
+            {activeMenu === item.name && item.submenu && (
               <ul className="submenu">
                 {item.submenu.map((sub, subIndex) => (
                   <li key={subIndex}>

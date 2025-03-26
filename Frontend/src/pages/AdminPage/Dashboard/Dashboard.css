@@ -1,0 +1,28 @@
+.dashboardvihani {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .cardvihani {
+    flex: 1 1 200px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+  }
+  
+  .blue { background-color: #007bff; }
+  .green { background-color: #28a745; }
+  .yellow { background-color: #ffc107; }
+  .red { background-color: #dc3545; }
+  
+  .iconvihani {
+    font-size: 30px;
+  }
+  .purple {
+    background-color: #6f42c1; /* Adjust the color to fit your design */
+  }
+    
