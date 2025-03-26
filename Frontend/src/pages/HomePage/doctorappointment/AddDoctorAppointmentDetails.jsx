@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import "./DoctorAppointmentDetails.css";
-import m from "../../../assets/m.jpg";  // Ensure these paths are correct
+import m from "../../../assets/m.jpg"; // Ensure these paths are correct
 import m1 from "../../../assets/m1.jpg";
 import NavBar from "../../../components/NavBar/NavBar";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import Footer from "../../../components/Footer/footer.jsx";
+import Swal from "sweetalert2";
 
 function AddDoctorAppointmentDetails() {
   const [formData, setFormData] = useState({
@@ -18,29 +20,39 @@ function AddDoctorAppointmentDetails() {
     date: "",
     consent: false,
   });
-  const [isSubmitting, setSubmitting] = useState(false);  // State to manage submission status
+  const [isSubmitting, setSubmitting] = useState(false); // State to manage submission status
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitting(true);  // Begin submission attempt
+    setSubmitting(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/doctorappointment/createdoctorappointment", formData);
-      alert("Appointment booked successfully!");
-      navigate("/myappointment");  // Redirect after successful booking
-    } catch (error) {
+      const response = await axios.post(
+        "http://localhost:5000/api/doctorappointment/createdoctorappointment",
+        formData
+      );
+      Swal.fire("Thank you!", "Your Appointment Successfully", "success").then(
+        (result) => {
+          navigate("/myappointment");
+        }
+      );
+
       console.error("There was an error booking the appointment!", error);
-      alert(`Failed to book appointment. Error: ${error.response ? error.response.data.message : "Server error"}`);
+      alert(
+        `Failed to book appointment. Error: ${
+          error.response ? error.response.data.message : "Server error"
+        }`
+      );
     } finally {
-      setSubmitting(false);  // Reset submission status
+      setSubmitting(false);
     }
   };
 
@@ -56,7 +68,29 @@ function AddDoctorAppointmentDetails() {
       <div className="bookuappointment">
         <label className="text11">Book Your Appointment</label>
       </div>
-      <label className="text112">Meet Our Expert Doctor</label>
+      <h1 className="welcome" data-aos="fade-right">
+        <strong>
+          We Secure Your
+          <br />
+          Eye With Quality
+          <br />
+          Glasses
+        </strong>
+      </h1>
+
+      <div
+        style={{
+         textAlign: "justify",
+          // width: "700px",
+          fontSize: "14px",
+        }}
+      >
+        <p className="welcome_2" data-aos="fade-left">
+          As per your wish, you can buy our quality products at the lowest<br />
+          price. We offer a wide range of products from the most<br /> popular brands
+          to the most expensive brands. 
+        </p>
+      </div>
       <div className="background-image-section">
         <form className="da-form-group" onSubmit={handleSubmit}>
           {/* Fields for user input */}
@@ -90,10 +124,31 @@ function AddDoctorAppointmentDetails() {
           <div className="mb-3">
             <label className="da-control-label">Gender</label>
             <div className="flex">
-              <input type="radio" id="maleRadio" name="gender" value="Male" checked={formData.gender === "Male"} onChange={handleChange} required />
-              <label htmlFor="maleRadio">Male</label>
-              <input type="radio" id="femaleRadio" name="gender" value="Female" checked={formData.gender === "Female"} onChange={handleChange} required />
-              <label htmlFor="femaleRadio">Female</label>
+              <label htmlFor="maleRadio" className="EA1-control-label">
+                Male
+              </label>
+              <input
+                type="radio"
+                id="maleRadio"
+                name="gender"
+                value="Male"
+                checked={formData.gender === "Male"}
+                onChange={handleChange}
+                required
+              />{" "}
+              &nbsp; &nbsp;
+              <label htmlFor="femaleRadio" className="EA1-control-label">
+                Female
+              </label>
+              <input
+                type="radio"
+                id="femaleRadio"
+                name="gender"
+                value="Female"
+                checked={formData.gender === "Female"}
+                onChange={handleChange}
+                required
+              />
             </div>
           </div>
 
@@ -165,18 +220,21 @@ function AddDoctorAppointmentDetails() {
               required
             />
           </div>
+          <br />
 
           <div className="flex">
             <input
               type="checkbox"
               id="consent"
+              className="checkbox"
               name="consent"
               checked={formData.consent}
               onChange={handleChange}
               required
             />
-            <label htmlFor="consent">
-              I consent to the processing of my personal data in accordance with the Privacy Policy.
+            <label htmlFor="consent" className="EA11-control-label">
+              &nbsp;I consent to the processing of my personal data in
+              accordance with the Privacy Policy.
             </label>
           </div>
 
@@ -185,6 +243,7 @@ function AddDoctorAppointmentDetails() {
           </button>
         </form>
       </div>
+      <Footer />
     </div>
   );
 }

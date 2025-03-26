@@ -24,7 +24,8 @@ body {
     width: 100%;
     height: 600px; /* Increased height */
     object-fit: cover;
-    transition: transform 0.5s ease; /* Smooth transition effect */
+    transition: transform 0.5s ease; 
+    opacity: 70%;/* Smooth transition effect */
 }
 
 .eye:hover {
@@ -41,23 +42,25 @@ body {
 }
 
 .mainfont {
-    font-size: 60px;
+    font-size: 75px;
     font-weight: bold;
     color: black;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px #000000; /* Text shadow for better readability */
+    margin-bottom: 30px;
+    margin-top: 10px;
+    width: 700px;
+   
 }
 
 .eyefont {
-    font-size: 24px;
+    font-size: 36px;
     font-weight: bold;
-    color: white;
+    color: #d39614;
     line-height: 1.5;
-    text-shadow: 1px 1px 2px #000000;
+   
 }
 
 .book-appointment-btn {
-    background-color: #218838;
+    background-color: orange;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -68,7 +71,7 @@ body {
 }
 
 .book-appointment-btn:hover {
-    background-color: #1e7e34;
+    background-color: #df9d2c;
 }
 
 /* Expert Eye Care Section */
@@ -112,14 +115,18 @@ body {
 
 /* Clinic Hours Section */
 .table_71 {
-    background-color: #d8af4e; /* Theme color */
+    background-color: #d8af4e; 
+    
     color: white;
     padding: 25px;
     text-align: center;
+    
 }
 
 .table_7col_1 {
-    padding: 0 15px;
+    padding:  15px;
+    
+    
 }
 
 /* Doctor Search Section */

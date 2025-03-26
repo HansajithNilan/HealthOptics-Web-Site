@@ -16,10 +16,10 @@ export default function OphthalmologistsScreen() {
         <div className="hero-section">
           <img src={eye} alt="close-up of a blue eye" className="eye" />
           <div className="hero-content">
-            <h1 className="mainfont">
+            <h1 className="mainfont" data-aos="fade-up"><strong>
               Take Control Of<br />
               Your Eye Health<br />
-              With Us.
+              With Us.</strong>
             </h1>
             <p className="eyefont">
               Your Vision Matters,<br />
@@ -34,7 +34,7 @@ export default function OphthalmologistsScreen() {
         {/* Expert Eye Care Section */}
         <div className="background11">
           <div className="OpthTable_12">
-            <div className="content-left1">
+            <div className="content-left1" data-aos="fade-up">
               <h2>Experience Expert Eye Care Channelling Online</h2>
               <p>
                 "welcome to our eye care doctor channelling service! We understand 
@@ -45,7 +45,7 @@ export default function OphthalmologistsScreen() {
               </p>
             </div>
             <div className="content-right">
-              <img src={eye1} alt="Eye examination" className="img-fluid" />
+              <img src={eye1} alt="Eye examination" className="img-fluid" data-aos="fade-right" />
             </div>
           </div>
           
