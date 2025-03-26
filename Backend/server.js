@@ -25,9 +25,10 @@ import DoctorAppointmentRoute from "./Routes/DoctorAppointmentRoute.js"; // Impo
 
 import SpectacleRoute from "./Routes/SpectacleRoute.js";
 
-
 dotenv.config();
 const app = express();
+
+
 
 // Connect to MongoDB
 connectDB();
@@ -62,10 +63,9 @@ app.use("/api/spectacle", SpectacleRoute);
 app.use("/api/doctors", doctorRoutes);
 
 
-//console.log(process.env.MONGO_UR
-app.listen(5000, () => {
-    connectDB();
 
+app.listen(5000,()=>{
+ 
     console.log(process.env.MONGO_URL);
     console.log("Server Started at http://localhost:5000");
 });
