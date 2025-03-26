@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./Ophthalmologists.css";
 import eye1 from "/src/assets/eye1.jpg";
 import eye from "/src/assets/eye.jpg";
@@ -6,6 +7,26 @@ import eye from "/src/assets/eye.jpg";
 import NavBar from "../../../components/NavBar/NavBar";
 
 export default function OphthalmologistsScreen() {
+  const [doctors, setDoctors] = useState([]);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/doctors");
+        setDoctors(response.data); // Fetch and set doctor details
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+      }
+    };
+    fetchDoctors();
+  }, []);
+
+  const filteredDoctors = doctors.filter((doctor) =>
+    doctor.firstName.toLowerCase().includes(search.toLowerCase()) ||
+    doctor.lastName.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div>
       <NavBar />
@@ -64,6 +85,8 @@ export default function OphthalmologistsScreen() {
               type="search"
               placeholder="Search Doc Name."
               aria-label="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
           <div className="rating">
@@ -71,11 +94,37 @@ export default function OphthalmologistsScreen() {
             <select className="TypeSelect">
               <option value="all">All</option>
               <option value="Eye surgeon">Eye Surgeon</option>
-        
               <option value="General surgeon">General Surgeon</option>
             </select>
           </div>
         </div>
+      </div>
+      <div className="doctor-grid">
+        {filteredDoctors.map((doctor) => (
+          <div key={doctor._id} className="doctor-card">
+            <div className="doctor-image">
+              {doctor.photo ? (
+                <img
+                  src={`http://localhost:5000/uploads/${doctor.photo}`}
+                  alt={`${doctor.firstName} ${doctor.lastName}`}
+                />
+              ) : (
+                <div className="no-photo">No Photo</div>
+              )}
+            </div>
+            <div className="doctor-info">
+              <h3>{`${doctor.firstName} ${doctor.lastName}`}</h3>
+              <p><strong>Specialty:</strong> {doctor.specialty}</p>
+              <p><strong>City:</strong> {doctor.city}</p>
+              <p><strong>State:</strong> {doctor.state}</p>
+              <p><strong>Email:</strong> {doctor.email}</p>
+              <div className="doctor-actions">
+              
+                <button className="appointment-btn">Appointment</button>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
