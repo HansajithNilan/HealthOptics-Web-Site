@@ -4,14 +4,15 @@ import "./Reservation.css";
 import Footer from "../../components/Footer/footer.jsx";
 import Contact from "../HomePage/contact/contact.jsx";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Reservation() {
+import './UpdateReservation.css';
+
+function UpdateReservation() {
   const { id } = useParams();
-  const navigate = useNavigate(); // ✅ FIXED: useNavigate inside the function
-  const fetchDataRef = useRef(false); // Prevent multiple API calls
+  const fetchDataRef = useRef(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -26,11 +27,11 @@ function Reservation() {
     framematerial: "",
     gender: "",
     quantity: 1,
-    price: 0,
+    price: 0
   });
 
-  const notifySuccess = () => toast.success(`${formData.name}'s reservation created successfully!`);
-  const notifyError = (message) => toast.error(message || 'Error creating reservation!');
+  const notifySuccess = () => toast.success("Reservation updated successfully!");
+  const notifyError = (msg) => toast.error(`Error updating reservation: ${msg}`);
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageurl1, setImageurl1] = useState(null);
@@ -54,14 +55,34 @@ function Reservation() {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/spectacle/${id}`);
-        setImageurl1(res.data.imageurlcolor1);
-        setImageurl2(res.data.imageurlcolor2);
-        setImageurl3(res.data.imageurlcolor3);
-        setBasePrice(Number(res.data.price) || 0);
-        setFormData((prev) => ({ ...prev, brand: res.data.brand }));
+        const res = await axios.get(`http://localhost:5000/api/auth/reservation/getonereservation/${id}`);
+        const data = res.data;
+
+        setImageurl1(data.imageurlcolor1);
+        setImageurl2(data.imageurlcolor2);
+        setImageurl3(data.imageurlcolor3);
+        setBasePrice(Number(data.price) || 0);
+        setSelectedImage((prev) => prev || data.imageurlcolor || data.imageurlcolor1);
+
+
+        setFormData({
+          name: data.name || "",
+          phonenumber: data.phonenumber || "",
+          address: data.address || "",
+          email: data.email || "",
+          brand: data.brand || "",
+          frameshape: data.frameshape || "",
+          imageurlcolor: data.imageurlcolor || "",
+          framesize: data.framesize || "",
+          frametype: data.frametype || "",
+          framematerial: data.framematerial || "",
+          gender: data.gender || "",
+          quantity: data.quantity || 1,
+          price: Number(data.price) || 0
+        });
+
       } catch (err) {
-        console.error("Error fetching spectacle data", err);
+        console.error("Error fetching reservation:", err);
       }
     };
 
@@ -79,10 +100,7 @@ function Reservation() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const requiredFields = [
-      "name", "phonenumber", "address", "email", "brand", "frameshape",
-      "frametype", "framematerial", "framesize", "imageurlcolor", "quantity", "price", "gender"
-    ];
+    const requiredFields = ["name", "phonenumber", "address", "email", "brand", "frameshape", "frametype", "framematerial", "framesize", "imageurlcolor", "quantity", "price", "gender"];
 
     for (let field of requiredFields) {
       if (!formData[field] || String(formData[field]).trim() === "") {
@@ -103,15 +121,15 @@ function Reservation() {
     };
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/reservation/createReservation",
+      const res = await axios.put(
+        `http://localhost:5000/api/auth/reservation/updateReservation/${id}`,
         updatedFormData
       );
       notifySuccess();
-      // navigate('/reservationDetails'); 
+      console.log("Reservation updated:", res.data);
     } catch (err) {
-      notifyError(err.message);
-      console.error("Error Creating Reservation", err.response?.data || err.message);
+      notifyError(err.message || "Unknown error");
+      console.error("Error updating reservation:", err);
     }
   };
 
@@ -122,7 +140,7 @@ function Reservation() {
       imageurlcolor: imageUrl,
     }));
   };
-
+  
   const ImageRadioButtons = () => {
     const images = [
       { id: 1, src: imageurl1, alt: "Spectacle 1" },
@@ -133,13 +151,15 @@ function Reservation() {
     return (
       <div className="image-radio-buttons">
         {images.map((image) => (
-          <div
-            key={image.id}
-            className={`image-option ${selectedImage === image.src ? "selected" : ""}`}
-            onClick={() => handleImageSelect(image.src)}
-          >
-            <img src={image.src} alt={image.alt} className="image-choice" />
-          </div>
+          image.src && (
+            <div
+              key={image.id}
+              className={`image-option ${selectedImage === image.src ? "selected" : ""}`}
+              onClick={() => handleImageSelect(image.src)}
+            >
+              <img src={image.src} alt={image.alt} className="image-choice" />
+            </div>
+          )
         ))}
       </div>
     );
@@ -149,7 +169,7 @@ function Reservation() {
     <div className="spectales-reservation-page">
       <NavBar />
       <div className="spectacles-section">
-        <h1>Reserve your Spectacles</h1>
+        <h1>Update Your Reservation</h1>
         <div className="reserve-main-section">
           <div className="Image-section">
             <img
@@ -167,6 +187,7 @@ function Reservation() {
                 <label>Mobile Number:</label>
                 <input type="text" name="phonenumber" value={formData.phonenumber} onChange={handleInputChange} />
               </div>
+
               <div className="name-mobnumber">
                 <label>Address:</label>
                 <input type="text" name="address" value={formData.address} onChange={handleInputChange} />
@@ -182,6 +203,7 @@ function Reservation() {
                   <option value="half-rim">Half Rim</option>
                   <option value="full-rim">Full Rim</option>
                 </select>
+
                 <label>Frame Material:</label>
                 <select name="framematerial" value={formData.framematerial} onChange={handleInputChange}>
                   <option value="">Select Frame Material</option>
@@ -225,6 +247,7 @@ function Reservation() {
                   <h2>Select Spectacle Image</h2>
                   <ImageRadioButtons />
                 </div>
+
                 <div className="frame-shape-">
                   <label>Frame Shape:</label>
                   <select name="frameshape" value={formData.frameshape} onChange={handleInputChange}>
@@ -232,6 +255,7 @@ function Reservation() {
                     <option value="round">Round</option>
                     <option value="cat eye">Cat Eye</option>
                   </select>
+
                   <label>Gender:</label>
                   <select name="gender" value={formData.gender} onChange={handleInputChange}>
                     <option value="">Select Gender</option>
@@ -241,21 +265,26 @@ function Reservation() {
                 </div>
               </div>
 
-              <h3>Brand: {formData.brand}</h3>
-              <ToastContainer />
-              <div className="reservation-button">
-                <h1>Total Price: {totalPrice}</h1>
-                <button type="submit" className="reserve-button">Reserve Now</button>
+              
+<div className="brand-total-section">
+  <div className="brand-section-h1">
+  <h3>Brand: {formData.brand}</h3>
+  </div>
+  <div className="reservation-button">
+                <h1>Total Price: $ {totalPrice}</h1>
+                <button type="submit" className="reserve-button">Update Reservation</button>
               </div>
+  </div>
+              
             </form>
           </div>
         </div>
       </div>
       <Contact />
       <Footer />
-      
+      <ToastContainer />
     </div>
   );
 }
 
-export default Reservation;
+export default UpdateReservation;

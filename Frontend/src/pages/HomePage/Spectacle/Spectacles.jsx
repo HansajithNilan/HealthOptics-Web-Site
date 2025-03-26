@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from '../../../components/NavBar/NavBar.jsx';
 import './Spectacles.css';
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Spectacles = () => {
     // const spectacles = [
@@ -76,9 +77,11 @@ const Spectacles = () => {
                                 <div className="spectacle-rating">
                                     {renderStars(spectacle.rating)}
                                 </div>
+                                <Link to={`/reservespectacles/${spectacle._id}`} >
                                 <button className="shop-now-btn">
                                     Shop Now
                                 </button>
+                                </Link>
                             </div>
                         </div>
                     ))}

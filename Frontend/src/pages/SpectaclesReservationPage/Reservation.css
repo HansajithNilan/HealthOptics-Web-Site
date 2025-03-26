@@ -30,7 +30,7 @@
   justify-content: center;
 }
 .Image-section img {
-  margin-top: 40px;
+  margin-top: 70px;
   width: 400px;
   height: 500px;
   border-radius: 20px;
@@ -104,7 +104,7 @@ justify-content: space-between;
 }
 .spectacle-size-options{
   
-
+display: flex;
  
   margin-bottom: 20px;
 }
@@ -122,6 +122,14 @@ justify-content: space-between;
   font-size: 1rem;
   margin-bottom: 10px;
 
+
+}
+.image-section-2{
+  display: flex;
+  
+}
+.frame-shape-{
+  margin-left: 30px;
 
 }
 .image-radio-buttons {
@@ -153,7 +161,7 @@ justify-content: space-between;
 }
 .spectacles-quantity{
   display: flex;
-  justify-content: space-between;
+ 
   align-items: center;
   margin-bottom: 15px;
   margin-left: 34px;
@@ -187,9 +195,24 @@ justify-content: space-between;
   margin-bottom: 15px;
 }
 .gender-brand-section{
-    display: flex;
+   display: flex;
+
     
 
+}
+.gender-brand-section label{
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-left: 40px;
+
+}
+.gender-brand-section input{
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 150px;
+  height: 25px;
+  outline: none;
 }
 .gender-brand-section h3{
   font-size: 1rem;
@@ -206,12 +229,10 @@ color: red;
   margin-left: 10px;
 }
 .reservation-price {
-  display: flex;
+  
   justify-content: end;
  align-items: center;
- margin-top: 60px;
-
-  margin-left: 15px;
+ 
   
 }
 .reservation-price h2{
@@ -225,7 +246,7 @@ color: red;
 }
 .resevation-button{
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   margin-top: 20px;
 }
@@ -242,4 +263,30 @@ color: red;
 .resevation-button button:hover {
   background-color: #df1d1d;
   color: white;
+}
+.gender-select-options{
+  margin-left: 27px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.gender-select-options label {
+ 
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.gender-select-options input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.image-section-2 select,
+.image-section-2 input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px;
+  height: 40px;
+  outline: none;
+  box-sizing: border-box;
 }

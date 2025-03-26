@@ -6,7 +6,8 @@ import Homepage from "./pages/HomePage/Hompage/Homepage.jsx";
 
 import UserRegisterPage from "./pages/UserRegisterPage/UserRegister.jsx";
 import SpectaclesReservation from "./pages/SpectaclesReservationPage/Reservation.jsx";
-
+import ReservationDetails from "./pages/SpectaclesReservationPage/ReservationDetails.jsx";
+import ReservationUpdate from "./pages/SpectaclesReservationPage/UpdateReservation.jsx";
 
 
 import AddDoctorAppointmentDetails from "./pages/HomePage/doctorappointment/AddDoctorAppointmentDetails.jsx";
@@ -31,7 +32,10 @@ function App() {
         <Route path="/" element={<Homepage />} />
 
         <Route path="/Register" element={<UserRegisterPage />} />
-        <Route path="/reservespectacles" element={<SpectaclesReservation />} />
+        <Route path="/reservespectacles/:id" element={<SpectaclesReservation />} />
+        <Route path="/reservationDetails" element={<ReservationDetails />} />
+        <Route path="/updatereservation/:id" element={<ReservationUpdate/>} />
+
         
         <Route path="/addappointment" element={<AddDoctorAppointmentDetails />} />
         <Route path="/addpatient" element={<AddPatientDetails />} />

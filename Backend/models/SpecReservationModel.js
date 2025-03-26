@@ -3,55 +3,60 @@ import mongoose from "mongoose";
 const spectReserveSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: true,
+    required: true,
   },
   phonenumber: {
-    type: Number,
-    require: true,
+    type: String,
+    required: true,
   },
   address: {
     type: String,
-    require: true,
+    required: true,
   },
   email: {
-    type: String,
-    require: true,
+    type:String,
+    required:true,
+  },
+  gender:{
+    type:String,
+    required:true,
   },
   
 frametype:{
     type:String,
-    require:true,
+    required:true,
 },
   brand: {
     type: String,
-    require: true,
+    required:true,
   },
   frameshape: {
-    type: String,
-    require: true,
+    type:String,
+    required:true,
   },
-  hingetype: {
-    type: String,
-    require: true,
-  },
+ 
   framematerial: {
-    type: String,
-    require: true,
+    type:String,
+    required:true,
   },
   
   framesize: {
     type: String,
-    require: true,
+    required:true,
   },
   imageurlcolor:{
     type: String,
-    require: true,
+    required:true,
   },
   quantity: {
     type: Number,
-    require: true,
+    required:true,
   },
+price:{
+  type: Number,
+  require: true,
 
+}
 });
 
 const specReserveModel = mongoose.model(
