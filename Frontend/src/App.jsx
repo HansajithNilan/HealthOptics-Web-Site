@@ -82,10 +82,7 @@ function App() {
         <Route path="/admin/doctors" element={<AdminDoctorManage />} />{" "}
         {/* New route for AdminDoctorManage */}
         <Route path="/doctorprofile" element={<DoctorProfileFrom />} />
-        <Route path="/doctorprofiletable" element={<DoctorProfileTable />} />
-        <Route path="/doctorprofilepage/" element={<DoctorProfilepage />} />
-        <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/spectacles" element={<SpectacleManage />} />
+      
         <Route path="/spectacles" element={<Spectacle />} />
       </Routes>
     </BrowserRouter>
