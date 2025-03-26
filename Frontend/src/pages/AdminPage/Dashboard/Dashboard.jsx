@@ -4,7 +4,7 @@ import DashboardLayout from "../../../components/DashboardLayout/DashboardLayout
 const Dashboard = () => {
   return (
     <DashboardLayout title="Dashboard">
-      <h1>Hi</h1>
+      {/* <h1>Hi</h1> */}
     </DashboardLayout>
   );
 };
