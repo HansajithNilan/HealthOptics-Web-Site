@@ -1,0 +1,42 @@
+.main-containerDivana {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    color: #050101;
+}
+
+.main-descriptionDivana {
+    margin: 20px;
+    font-size: 18px;
+    color: #424141;
+    font-weight: bold;
+    
+}
+
+.main-buttonDivana {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: rgb(10, 0, 0);
+    background-color: #f38108;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.main-buttonDivana:hover {
+    background-color: #fdfbfa;
+    color: #000;
+    font-weight: bold;
+    
+}
+.management-imageDivana{
+    width: 450px; 
+    height: auto; 
+    display: block;
+    margin: 0 auto; 
+    padding-bottom: 20px; 
+}

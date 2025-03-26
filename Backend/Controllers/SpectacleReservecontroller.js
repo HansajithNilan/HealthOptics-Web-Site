@@ -1,38 +1,25 @@
 import specReserveModel from "../models/SpecReservationModel.js";
+import SpectacleModel from "../models/Spectacle.js";
 
-export const createReservation = async(req,res)=>{
-try {
 
-    const {name,phonenumber,address,frametype,framematerial,lenstype,quantity} = req.body
+export const createReservation = async (req, res) => {
+  try {
+    const { name, phonenumber, address, email, frametype, brand, frameshape, framematerial, framesize, imageurlcolor, quantity, gender, price } = req.body;
 
-    if(!name|| !phonenumber ||!address ||!frametype || !framematerial||!lenstype||!quantity){
-        res.status(422).json({message:`Please fill all fields`})
+    if (!name || !phonenumber || !address || !email || !frametype || !brand || !frameshape || !framematerial || !framesize || !imageurlcolor || !quantity || !gender || !price) {
+      return res.status(422).json({ message: `Please fill all fields` });
     }
 
-    
-
     const reservation = await specReserveModel.create({
-        name,
-        phonenumber,
-        address,
-        frametype,
-        framematerial,
-        lenstype,
-        quantity
+      name, phonenumber, address, email, frametype, brand, gender, frameshape, framematerial, framesize, imageurlcolor, quantity, price
+    });
 
+    return res.status(200).json(reservation);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
-
-    })
-    return res.status(200).json(reservation)
-
-} catch (error) {
-    return res.status(500).json({Message:error.Message});
-}
-   
-
-    
-
-}
 
 export const getReservations = async (req,res)=>{
 
@@ -56,7 +43,7 @@ export const getReservations = async (req,res)=>{
 export const getOneReservations = async(req,res)=>{
     try {
 
-        const {id} = req.params
+        const {id} = req.params;
 
         if(!id){
             return  res.status(422).json({message:'Id not found!'})
@@ -72,6 +59,14 @@ export const getOneReservations = async(req,res)=>{
        return res.status(404).json({message:error.message})
     }
 }
+
+// export const getonereservation = async(req,res)=>{
+//     try {
+//         const {phonenumber}
+//     } catch (error) {
+        
+//     }
+// }
 
 export const updateReservation =async(req,res)=>{
 
@@ -110,6 +105,37 @@ export const filterReservation =async(req,res)=>{
     } catch (error) {
         return res.status(500).json({message:error.message})
         
+    }
+
+}
+
+export const deleteReservation = async(req,res)=>{
+
+    try{
+        const {id} = req.params;
+
+        if(!id){
+            return res.status(422).json({message:"Id not found"})
+
+        }
+        const result = await specReserveModel.findByIdAndDelete(id)
+
+        return res.status(200).json({message:"Reservation Deleted Successfull:"})
+
+    }catch(err){
+        return res.status(500).json({message:err.message})
+    }
+
+}
+
+export const getallimageurls = async(req,res)=>{
+
+    try {
+        const spectaclesmageurls = await SpectacleModel.distinct({imageurlcolor1,})
+
+        
+    } catch (error) {
+        return res.status(500).json({message:error.message})
     }
 
 }
