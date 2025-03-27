@@ -36,7 +36,7 @@ import Spectacle from "./pages/HomePage/Spectacle/Spectacles.jsx";
 
 function App() {
   return (
-    <BrowserRouter>
+    
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/register" element={<UserRegisterPage />} />
@@ -86,7 +86,7 @@ function App() {
         <Route path="/spectacles" element={<Spectacle />} />
         <Route path="/loginpage" element={<Loginpage />} />
       </Routes>
-    </BrowserRouter>
+    
   );
 }
 
