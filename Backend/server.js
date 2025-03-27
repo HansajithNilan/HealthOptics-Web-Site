@@ -60,7 +60,7 @@ if (!fs.existsSync(uploadsDir)) {
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 
-app.use('/api/auth/',userRoutes)
+app.use('/api/auth/user',userRoutes)
 app.use('/api/auth/reservation',SpecReservationRoute)
 
 

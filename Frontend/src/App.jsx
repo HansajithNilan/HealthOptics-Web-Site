@@ -4,11 +4,10 @@ import "./App.css";
 
 import Homepage from "./pages/HomePage/Hompage/Homepage.jsx";
 import UserRegisterPage from "./pages/UserRegisterPage/UserRegister.jsx";
-
 import SpectaclesReservation from "./pages/SpectaclesReservationPage/Reservation.jsx";
-
 import ReservationDetails from "./pages/SpectaclesReservationPage/ReservationDetails.jsx";
 import ReservationUpdate from "./pages/SpectaclesReservationPage/UpdateReservation.jsx";
+import Loginpage from "./pages/LoginPage/loginpage.jsx";
 
 
 import AddDoctorAppointmentDetails from "./pages/HomePage/doctorappointment/AddDoctorAppointmentDetails.jsx";
@@ -33,6 +32,7 @@ import EditDoctorAppointment from "./pages/HomePage/doctorappointment/EditDoctor
 import DoctorProfileTable from "./pages/DoctorManagement/DoctorProfileTable.jsx";
 
 import Spectacle from "./pages/HomePage/Spectacle/Spectacles.jsx";
+
 
 function App() {
   return (
@@ -84,6 +84,7 @@ function App() {
         <Route path="/doctorprofile" element={<DoctorProfileFrom />} />
       
         <Route path="/spectacles" element={<Spectacle />} />
+        <Route path="/loginpage" element={<Loginpage />} />
       </Routes>
     </BrowserRouter>
   );
