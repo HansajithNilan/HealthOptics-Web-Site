@@ -78,15 +78,15 @@ export const userlogin = async(req,res,)=>{
 
         const RefreshToken = jwt.sign({userId:user._id},process.env.REFRESH,{expiresIn:'1w'})
 
-        
-
-        return res.status(200).json({
+        const userDetails={
             id:user._id,
             name:user.name,
             email:user.email,
             accessToken,
             RefreshToken
-        })
+        }
+
+        return res.status(200).json(userDetails )
 
     }catch(error){
         return res.status(500).json({message:error.message})
