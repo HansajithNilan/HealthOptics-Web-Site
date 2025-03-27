@@ -159,10 +159,10 @@ const SpectacleUpdateForm = ({ onClose, spectacle, onUpdate }) => {
   };
 
   return (
-    <div className="add-spectacle-form">
+    <div className="shakya-add-spectacle-form">
       <form onSubmit={handleSubmit}>
-        <div>
-          <button className="close-btn" onClick={onClose}>
+        <div className="close-btn">
+          <button className="shakya-close-btn" onClick={onClose}>
             <FaTimes />
           </button>
         </div>
