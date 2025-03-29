@@ -71,6 +71,7 @@ function LoginPage() {
         navigate("/spectacles");
         return;
       }
+     
   
       
       toast.error("Unrecognized user role.");
