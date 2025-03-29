@@ -7,14 +7,13 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [id, setId] = useState(null); // null instead of empty string for clarity
+  const [id, setId] = useState(); // null instead of empty string for clarity
+  const [name,setName] = useState('');
+  const [email,setEmail] = useState('')
 
   const fetchUser = async () => {
     const token = localStorage.getItem("accessToken");
-    if (!token) {
-      setId(null);
-      return;
-    }
+  
 
     const parsedToken = JSON.parse(token);
     try {
@@ -24,10 +23,13 @@ export const AuthProvider = ({ children }) => {
         },
       });
       setId(res.data.id);
+      setName(res.data.name);
+      setEmail(res.data.email);
+      
     } catch (err) {
       console.error(err);
       toast.error("Failed to fetch user data");
-      setId(null);
+ 
     }
   };
 
@@ -46,7 +48,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ id, login, logout }}>
+    <AuthContext.Provider value={{ id, login, logout,name,email}}>
       {children}
     </AuthContext.Provider>
   );

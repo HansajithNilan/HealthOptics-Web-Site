@@ -8,7 +8,7 @@ import SpectaclesReservation from "./pages/SpectaclesReservationPage/Reservation
 import ReservationDetails from "./pages/SpectaclesReservationPage/ReservationDetails.jsx";
 import ReservationUpdate from "./pages/SpectaclesReservationPage/UpdateReservation.jsx";
 import Loginpage from "./pages/LoginPage/loginpage.jsx";
-
+import ReservationDisplay from "./pages/UserReservation/ReservationDisplay.jsx";
 
 import AddDoctorAppointmentDetails from "./pages/HomePage/doctorappointment/AddDoctorAppointmentDetails.jsx";
 
@@ -42,9 +42,10 @@ function App() {
         <Route path="/register" element={<UserRegisterPage />} />
         <Route path="/Register" element={<UserRegisterPage />} />
 
-        <Route path="/reservespectacles/:id" element={<SpectaclesReservation />} />
+        <Route path="/reservespectacles/:id/:number" element={<SpectaclesReservation />} />
         <Route path="/reservationDetails" element={<ReservationDetails />} />
         <Route path="/updatereservation/:id" element={<ReservationUpdate/>} />
+        <Route path="/reservationdisplay/:number" element={<ReservationDisplay/>} />
 
 
         <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />

@@ -56,7 +56,14 @@ price:{
   type: Number,
   require: true,
 
+},
+number:{
+  type:Number,
+  require:true
+
 }
+
+
 });
 
 const specReserveModel = mongoose.model(

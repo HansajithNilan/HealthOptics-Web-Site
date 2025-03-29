@@ -6,7 +6,7 @@ import { AuthContext } from '../Context/AuthContext';
 
 function NavBar() {
   const [sticky, setSticky] = useState(false);
-  const { id, logout } = useContext(AuthContext);
+  const { id, logout,name } = useContext(AuthContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,6 +42,7 @@ function NavBar() {
           </>
         ) : (
           <li>
+           
             <button className="logout-btn" onClick={logout}>Sign out</button>
           </li>
         )}
