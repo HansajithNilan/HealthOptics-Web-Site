@@ -11,7 +11,7 @@ const doctorSchema = new mongoose.Schema({
   state: { type: String, required: true },
   phone: { type: String, required: true },
   gender: { type: String, required: true },
-  photo: { type: String },
+  photo: { type: String }, // Ensure the photo field exists
 }, { timestamps: true });
 
 export default mongoose.model("Doctor", doctorSchema);

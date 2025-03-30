@@ -24,7 +24,7 @@ function SideBar() {
     },
     {
       name: "Reservations Management",
-      path: "/admin/reservations",
+      path: "/reservationDetails",
     },
   ];
 

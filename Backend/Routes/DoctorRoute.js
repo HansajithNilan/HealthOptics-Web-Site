@@ -11,8 +11,6 @@ import {
   deleteDoctor,
 } from "../controllers/doctorController.js";
 
-
-
 const router = express.Router();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -20,13 +18,16 @@ const __dirname = dirname(__filename);
 const uploadsDir = path.join(__dirname, "../uploads");
 
 const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, uploadsDir)
+  destination: function (req, file, cb) {
+    cb(null, uploadsDir);
   },
-  filename: function(req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
-  }
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname)
+    );
+  },
 });
 
 const upload = multer({
@@ -35,19 +36,21 @@ const upload = multer({
   fileFilter: (req, file, cb) => {
     const filetypes = /jpeg|jpg|png/;
     const mimetype = filetypes.test(file.mimetype);
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    
+    const extname = filetypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+
     if (mimetype && extname) {
       return cb(null, true);
     }
-    cb(new Error('Only .jpg, .jpeg, and .png files are allowed'))
-  }
-}).single('photo');
+    cb(new Error("Only .jpg, .jpeg, and .png files are allowed"));
+  },
+}).single("photo");
 
-router.get("/", getDoctors);
+router.get("/", getDoctors); // Ensure this route is defined
 router.get("/:id", getDoctorById);
 router.post("/", (req, res) => {
-  upload(req, res, function(err) {
+  upload(req, res, function (err) {
     if (err instanceof multer.MulterError || err) {
       res.status(400).json({ message: err.message });
     } else {
@@ -60,13 +63,14 @@ router.put("/:id", (req, res) => {
     if (err) {
       res.status(400).json({ message: err.message });
     } else {
-      const updatedData = { ...req.body, photo: req.file ? req.file.filename : undefined };
+      const updatedData = {
+        ...req.body,
+        photo: req.file ? req.file.filename : undefined,
+      };
       updateDoctor(req, res, updatedData);
-
-
-    }});
-
+    }
   });
+});
 router.delete("/:id", deleteDoctor);
 
 export default router;
