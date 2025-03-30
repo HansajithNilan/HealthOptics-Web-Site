@@ -1,25 +1,61 @@
 import specReserveModel from "../models/SpecReservationModel.js";
 import SpectacleModel from "../models/Spectacle.js";
 
-
 export const createReservation = async (req, res) => {
-  try {
-    const { name, phonenumber, address, email, frametype, brand, frameshape, framematerial, framesize, imageurlcolor, quantity, gender, price } = req.body;
+    try {
+    
+      const { number } = req.params;
+  
 
-    if (!name || !phonenumber || !address || !email || !frametype || !brand || !frameshape || !framematerial || !framesize || !imageurlcolor || !quantity || !gender || !price) {
-      return res.status(422).json({ message: `Please fill all fields` });
+      const {
+        name,
+        phonenumber,
+        address,
+        email,
+        frametype,
+        brand,
+        frameshape,
+        framematerial,
+        framesize,
+        imageurlcolor,
+        quantity,
+        gender,
+        price
+      } = req.body;
+  
+
+      if (
+        !name || !phonenumber || !address || !email ||
+        !frametype || !brand || !frameshape || !framematerial ||
+        !framesize || !imageurlcolor || !quantity || !gender || !price || !number
+      ) {
+        return res.status(422).json({ message: `Please fill all fields` });
+      }
+  
+    
+      const reservation = await specReserveModel.create({
+        name,
+        phonenumber,
+        address,
+        email,
+        frametype,
+        brand,
+        frameshape,
+        framematerial,
+        framesize,
+        imageurlcolor,
+        quantity,
+        gender,
+        price,
+        number
+      });
+  
+      return res.status(200).json(reservation);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
     }
-
-    const reservation = await specReserveModel.create({
-      name, phonenumber, address, email, frametype, brand, gender, frameshape, framematerial, framesize, imageurlcolor, quantity, price
-    });
-
-    return res.status(200).json(reservation);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-};
-
+  };
+  
 
 export const getReservations = async (req,res)=>{
 
@@ -37,6 +73,24 @@ export const getReservations = async (req,res)=>{
         
     }
 
+
+}
+
+export const getbynumber = async(req,res)=>{
+    try{
+        const {number} = req.params;
+
+        if(!number){
+            return res.status(422).json({message:"Number not Found"})
+        }
+
+        const reservation = await specReserveModel.findOne({number:number})
+
+        return res.status(200).json(reservation)
+
+    }catch(error){
+        return res.status(404).json({message:error.message})
+    }
 
 }
 
@@ -67,6 +121,22 @@ export const getOneReservations = async(req,res)=>{
         
 //     }
 // }
+
+export const getreservationDetails  = async(req,res)=>{
+    try{
+        const {email} = req.params;
+
+        if(!email){
+            return res.status(422).json({message:"Email is not Found"})
+        }
+
+        const reservation = await specReserveModel.findOne({email:email})
+
+        return res.status(200).json(reservation)
+    }catch(err){
+        return res.status(404).json({message:error.message})
+    }
+}
 
 export const updateReservation =async(req,res)=>{
 
