@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import NavBar from "../../../components/NavBar/NavBar";
-import "../../../components/NavBar/NavBar.css";
+import Footer from "../../../components/Footer/footer.jsx";
 import m from "../../../assets/m.jpg";
-import Footer from '../../../components/Footer/footer.jsx'
 import "./EditDoctorAppointment.css";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 function EditDoctorAppointment() {
   const { id } = useParams();
@@ -22,15 +21,25 @@ function EditDoctorAppointment() {
     date: "",
     consent: false,
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchAppointment() {
       try {
-        const response = await axios.get(`http://localhost:5000/api/doctorappointment/getdoctorappointment/${id}`);
-        const appointment = response.data.doctorAppointment;
-        setFormData(appointment);
+        const response = await axios.get(
+          `http://localhost:5000/api/doctorappointment/getdoctorappointment/${id}`
+        );
+        setFormData(response.data.doctorAppointment);
       } catch (error) {
-        console.error("There was an error fetching the appointment!", error);
+        console.error("Error fetching appointment:", error);
+        Swal.fire({
+          title: "Error",
+          text: "Unable to fetch appointment details.",
+          icon: "error",
+          confirmButtonColor: "#e53e3e",
+        });
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchAppointment();
@@ -38,178 +47,184 @@ function EditDoctorAppointment() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: type === "checkbox" ? checked : value,
-    });
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:5000/api/doctorappointment/editdoctorappointment/${id}`, formData);
-      console.log(response.data);
-      Swal.fire('Updated', "Your Appointment is updated successfully", "success").then(result => {
-  
-        navigate("/myappointment");
-
-   });
-      
+      await axios.put(
+        `http://localhost:5000/api/doctorappointment/editdoctorappointment/${id}`,
+        formData
+      );
+      Swal.fire({
+        title: "Updated!",
+        text: "Your appointment has been updated successfully.",
+        icon: "success",
+        confirmButtonColor: "#2c5282",
+      }).then(() => navigate("/myappointment"));
     } catch (error) {
-      console.error("There was an error updating the appointment!", error);
-      Swal.fire('Error', "Error with updating user", "error");
+      console.error("Error updating appointment:", error);
+      Swal.fire({
+        title: "Error",
+        text: "Failed to update appointment.",
+        icon: "error",
+        confirmButtonColor: "#e53e3e",
+      });
     }
   };
 
+  if (isLoading) {
+    return <div className="loading">Loading appointment details...</div>;
+  }
+
   return (
-    <div >
-
+    <div className="edit-appointment-container">
       <NavBar />
-      <img src={m} alt="doctor" className="EA-m" />
-      <form className="EA-form-group" onSubmit={handleSubmit}>
-        <div className="EA-mb-3">
-          <label className="EA-control-label">First Name</label>
-          <input
-            type="text"
-            className="EA-form-control"
-            placeholder="Enter first name"
-            name="firstname"
-            value={formData.firstname}
-            onChange={handleChange}
-            required
-          />
+      <div className="hero-section">
+        <img src={m} alt="Doctor" className="hero-image" />
+        <div className="hero-text">
+          <h1>Edit Your Appointment</h1>
+          <p>Update your details with ease.</p>
         </div>
+      </div>
 
-        <div className="EA-mb-3">
-          <label className="EA-control-label">Last Name</label>
-          <input
-            type="text"
-            className="EA-form-control"
-            placeholder="Enter last name"
-            name="lastname"
-            value={formData.lastname}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <div className="edit-form-container">
+        <form className="edit-appointment-form" onSubmit={handleSubmit}>
+          <h2>Update Appointment Details</h2>
 
-        <div className="EA-mb-3">
-          <label className="EA-control-label">Gender</label>
-          <div className="flex">
-            <label className="EA1-control-label" htmlFor="maleRadio">Male</label>
+          <div className="form-row">
+            <div className="form-group">
+              <label>First Name</label>
+              <input
+                type="text"
+                name="firstname"
+                value={formData.firstname}
+                onChange={handleChange}
+                placeholder="Enter first name"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Last Name</label>
+              <input
+                type="text"
+                name="lastname"
+                value={formData.lastname}
+                onChange={handleChange}
+                placeholder="Enter last name"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Gender</label>
+            <div className="radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Male"
+                  checked={formData.gender === "Male"}
+                  onChange={handleChange}
+                  required
+                />
+                Male
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Female"
+                  checked={formData.gender === "Female"}
+                  onChange={handleChange}
+                  required
+                />
+                Female
+              </label>
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label>Age</label>
+              <input
+                type="number"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
+                placeholder="Enter age"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Contact Number</label>
+              <input
+                type="tel"
+                name="contact"
+                value={formData.contact}
+                onChange={handleChange}
+                pattern="[0-9]{10}"
+                placeholder="Enter 10-digit number"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Email</label>
             <input
-              type="radio"
-              id="maleRadio"
-              name="gender"
-              value="Male"
-              checked={formData.gender === "Male"}
+              type="email"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
-              required
-            /> &nbsp; &nbsp;
-            <label className="EA1-control-label" htmlFor="femaleRadio">Female</label>
-            <input
-              type="radio"
-              id="femaleRadio"
-              name="gender"
-              value="Female"
-              checked={formData.gender === "Female"}
-              onChange={handleChange}
+              placeholder="Enter email"
               required
             />
           </div>
-        </div>
-        <br />
 
-        <div className="EA-mb-3">
-          <label className="EA-control-label">Patient Age</label>
-          <input
-            type="number"
-            className="EA-form-control"
-            placeholder="Enter age"
-            name="age"
-            value={formData.age}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label>Address</label>
+            <textarea
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              placeholder="Enter address"
+              required
+            />
+          </div>
 
-        <div className="EA-mb-3">
-          <label className="EA-control-label">Email</label>
-          <input
-            type="email"
-            className="EA-form-control"
-            placeholder="Enter email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label>Appointment Date</label>
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              min={new Date().toISOString().split("T")[0]} // Disable past dates
+              required
+            />
+          </div>
 
-        <div className="EA-mb-3">
-          <label className="EA-control-label">Contact Number</label>
-          <input
-            type="tel"
-            id="contact"
-            name="contact"
-            pattern="[0-9]*"
-            maxLength="10"
-            minLength="10"
-            className="EA-form-control"
-            placeholder="Enter contact"
-            value={formData.contact}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="consent-group">
+            <input
+              type="checkbox"
+              name="consent"
+              checked={formData.consent}
+              onChange={handleChange}
+              required
+            />
+            <label>I consent to the processing of my data per the Privacy Policy.</label>
+          </div>
 
-        <div className="EA-mb-3">
-          <label className="EA-control-label">Address</label>
-          <textarea
-            id="address"
-            name="address"
-            placeholder="Enter address"
-            required
-            className="EA-form-control"
-            style={{ height: "50px" }}
-            value={formData.address}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-
-        <div className="EA-mb-3">
-          <label className="EA-control-label">Appointment Date</label>
-          <input
-            type="date"
-            className="EA-form-control"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <br />
-        <div className="flex">
-          <input
-            type="checkbox"
-            id="consent"
-            name="consent"
-            checked={formData.consent}
-            onChange={handleChange}
-            required
-          />
-          <label className="EA1-control-label">
-            &nbsp;&nbsp;&nbsp;I consent to the processing of my personal data
-            in accordance with the Privacy Policy.
-          </label>
-        </div>
-        <br />
-        <br />
-        <button type="submit" className="EA-submit">
-          Update Appointment
-        </button>
-      </form>
-      <Footer/>
+          <button type="submit">Update Appointment</button>
+        </form>
+      </div>
+      <Footer />
     </div>
   );
 }

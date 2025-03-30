@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./DoctorAppointmentDetails.css";
-import m from "../../../assets/m.jpg"; // Ensure these paths are correct
+import facebook from "../../../assets/facebook.png";
+import instagram from "../../../assets/instagram.png";
+import twitter from "../../../assets/twitter.png";
+import linkedin from "../../../assets/linkedin.png";
 import m1 from "../../../assets/m1.jpg";
 import NavBar from "../../../components/NavBar/NavBar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Footer from "../../../components/Footer/footer.jsx";
 import Swal from "sweetalert2";
 
 function AddDoctorAppointmentDetails() {
+  const location = useLocation();
+  const doctor = location.state?.doctor;
+
+  if (!doctor) {
+    return (
+      <p className="error-message">Doctor details not available. Please go back and select a doctor.</p>
+    );
+  }
+
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -18,9 +30,10 @@ function AddDoctorAppointmentDetails() {
     contact: "",
     address: "",
     date: "",
+    doctor: `${doctor.firstName} ${doctor.lastName}`,
     consent: false,
   });
-  const [isSubmitting, setSubmitting] = useState(false); // State to manage submission status
+  const [isSubmitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -35,213 +48,215 @@ function AddDoctorAppointmentDetails() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const response = await axios.post(
+      await axios.post(
         "http://localhost:5000/api/doctorappointment/createdoctorappointment",
         formData
       );
-      Swal.fire("Thank you!", "Your Appointment Successfully", "success").then(
-        (result) => {
-          navigate("/myappointment");
-        }
-      );
-
-      console.error("There was an error booking the appointment!", error);
-      alert(
-        `Failed to book appointment. Error: ${
-          error.response ? error.response.data.message : "Server error"
-        }`
-      );
+      Swal.fire({
+        title: "Thank You!",
+        text: "Your appointment has been booked successfully.",
+        icon: "success",
+        confirmButtonColor: "#2c5282",
+      }).then(() => navigate("/myappointment"));
+    } catch (error) {
+      console.error("Error booking appointment:", error);
+      Swal.fire({
+        title: "Error",
+        text: `Failed to book appointment: ${error.response?.data.message || "Server error"}`,
+        icon: "error",
+        confirmButtonColor: "#e53e3e",
+      });
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <div>
+    <div className="appointment-container">
       <NavBar />
-      <div className="appimg">
-        <img src={m} alt="apimg" className="m" />
+      <div className="hero-section">
+        <img src={m1} alt="Hero" className="hero-image" />
+        <div className="hero-text">
+          <h1>We Secure Your Eyes<br />With Quality Care</h1>
+          <p  style={{color:"#2A2F41"}}>Book an appointment with our expert doctors for top-notch service.</p>
+        </div>
       </div>
-      <div className="appimg1">
-        <img src={m1} alt="apimg" className="m1" />
-      </div>
-      <div className="bookuappointment">
-        <label className="text11">Book Your Appointment</label>
-      </div>
-      <h1 className="welcome" data-aos="fade-right">
-        <strong>
-          We Secure Your
-          <br />
-          Eye With Quality
-          <br />
-          Glasses
-        </strong>
-      </h1>
 
-      <div
-        style={{
-         textAlign: "justify",
-          // width: "700px",
-          fontSize: "14px",
-        }}
-      >
-        <p className="welcome_2" data-aos="fade-left">
-          As per your wish, you can buy our quality products at the lowest<br />
-          price. We offer a wide range of products from the most<br /> popular brands
-          to the most expensive brands. 
-        </p>
-      </div>
-      <div className="background-image-section">
-        <form className="da-form-group" onSubmit={handleSubmit}>
-          {/* Fields for user input */}
-          <div className="mb-3">
-            <label className="da-control-label">First Name</label>
-            <input
-              type="text"
-              className="da-form-control"
-              placeholder="Enter first name"
-              name="firstname"
-              value={formData.firstname}
-              onChange={handleChange}
-              required
-            />
+      <div className="appointment-content">
+        <div className="doctor-details-card">
+          <h3>Doctor Information</h3>
+          <div className="doctor-photo">
+            {doctor.photo ? (
+              <img
+                src={`http://localhost:5000/uploads/${doctor.photo}`}
+                alt={`${doctor.firstName} ${doctor.lastName}`}
+                onError={(e) => (e.target.src = "placeholder-image-url")}
+              />
+            ) : (
+              <div className="no-photo">No Photo Available</div>
+            )}
           </div>
-
-          <div className="mb-3">
-            <label className="da-control-label">Last Name</label>
-            <input
-              type="text"
-              className="da-form-control"
-              placeholder="Enter last name"
-              name="lastname"
-              value={formData.lastname}
-              onChange={handleChange}
-              required
-            />
+          <div className="doctor-info">
+            <p><strong>Name:</strong> {doctor.firstName} {doctor.lastName}</p>
+            <p><strong>Specialty:</strong> {doctor.specialty}</p>
+            <p><strong>Location:</strong> {doctor.city}, {doctor.state}</p>
+            <p><strong>Email:</strong> {doctor.email}</p>
+            <p><strong>Contact n:</strong> {doctor.phone}</p>
           </div>
+        </div>
 
-          {/* Gender selection */}
-          <div className="mb-3">
-            <label className="da-control-label">Gender</label>
-            <div className="flex">
-              <label htmlFor="maleRadio" className="EA1-control-label">
-                Male
-              </label>
+        <form className="appointment-form" onSubmit={handleSubmit}>
+          <h2>Book Your Appointment</h2>
+          <div className="form-row">
+            <div className="form-group">
+              <label>First Name</label>
               <input
-                type="radio"
-                id="maleRadio"
-                name="gender"
-                value="Male"
-                checked={formData.gender === "Male"}
+                type="text"
+                name="firstname"
+                value={formData.firstname}
                 onChange={handleChange}
+                placeholder="Enter first name"
                 required
-              />{" "}
-              &nbsp; &nbsp;
-              <label htmlFor="femaleRadio" className="EA1-control-label">
-                Female
-              </label>
+              />
+            </div>
+            <div className="form-group">
+              <label>Last Name</label>
               <input
-                type="radio"
-                id="femaleRadio"
-                name="gender"
-                value="Female"
-                checked={formData.gender === "Female"}
+                type="text"
+                name="lastname"
+                value={formData.lastname}
                 onChange={handleChange}
+                placeholder="Enter last name"
                 required
               />
             </div>
           </div>
 
-          <div className="mb-3">
-            <label className="da-control-label">Patient Age</label>
-            <input
-              type="number"
-              className="da-form-control"
-              placeholder="Enter age"
-              name="age"
-              value={formData.age}
-              onChange={handleChange}
-              required
-            />
+          <div className="form-group">
+            <label>Gender</label>
+            <div className="radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Male"
+                  checked={formData.gender === "Male"}
+                  onChange={handleChange}
+                  required
+                />
+                Male
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Female"
+                  checked={formData.gender === "Female"}
+                  onChange={handleChange}
+                  required
+                />
+                Female
+              </label>
+            </div>
           </div>
 
-          <div className="mb-3">
-            <label className="da-control-label">Email</label>
+          <div className="form-row">
+            <div className="form-group">
+              <label>Age</label>
+              <input
+                type="number"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
+                placeholder="Enter age"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Contact Number</label>
+              <input
+                type="tel"
+                name="contact"
+                value={formData.contact}
+                onChange={handleChange}
+                pattern="[0-9]{10}"
+                placeholder="Enter 10-digit number"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Email</label>
             <input
               type="email"
-              className="da-form-control"
-              placeholder="Enter email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              placeholder="Enter email"
               required
             />
           </div>
 
-          <div className="mb-3">
-            <label className="da-control-label">Contact Number</label>
-            <input
-              type="tel"
-              id="contact"
-              name="contact"
-              pattern="[0-9]*"
-              maxLength="10"
-              minLength="10"
-              className="da-form-control"
-              placeholder="Enter contact"
-              value={formData.contact}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <label className="da-control-label">Address</label>
+          <div className="form-group">
+            <label>Address</label>
             <textarea
-              id="address"
               name="address"
-              placeholder="Enter address"
-              required
-              className="da-form-control"
-              style={{ height: "50px" }}
               value={formData.address}
               onChange={handleChange}
+              placeholder="Enter address"
+              required
             />
           </div>
 
-          <div className="mb-3">
-            <label className="da-control-label">Appointment Date</label>
+          <div className="form-group">
+            <label>Appointment Date</label>
             <input
               type="date"
-              className="da-form-control"
               name="date"
               value={formData.date}
               onChange={handleChange}
+              min={new Date().toISOString().split("T")[0]} // Disable past dates
               required
             />
           </div>
-          <br />
 
-          <div className="flex">
+          <div className="consent-group">
             <input
               type="checkbox"
-              id="consent"
-              className="checkbox"
               name="consent"
               checked={formData.consent}
               onChange={handleChange}
               required
             />
-            <label htmlFor="consent" className="EA11-control-label">
-              &nbsp;I consent to the processing of my personal data in
-              accordance with the Privacy Policy.
-            </label>
+            <label>I agree to the processing of my data per the Privacy Policy.</label>
           </div>
 
-          <button type="submit" className="submit" disabled={isSubmitting}>
+          <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Booking..." : "Book Appointment"}
           </button>
         </form>
+      </div>
+
+      <div className="contact-section">
+        <div className="contact-details">
+          <p><span>📞</span> <a href="tel:+94771234567">+94 77 123 4567</a></p>
+          <p><span>📧</span> <a href="mailto:helthoptics@gmail.com">helthoptics@gmail.com</a></p>
+        </div>
+        <div className="social-icons">
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+            <img src={twitter} alt="Twitter" />
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <img src={facebook} alt="Facebook" />
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <img src={instagram} alt="Instagram" />
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+            <img src={linkedin} alt="LinkedIn" />
+          </a>
+        </div>
       </div>
       <Footer />
     </div>

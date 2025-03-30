@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable"; // Correctly import autoTable
 import "./Myappointment.css";
 import NavBar from "../../../components/NavBar/NavBar";
 import "../../../components/NavBar/NavBar.css";
 import Swal from "sweetalert2";
-import Footer from '../../../components/Footer/footer.jsx';
-import { useReactToPrint } from "react-to-print";
+import Footer from "../../../components/Footer/footer.jsx";
 
 function MyAppointmentScreen() {
   const [appointments, setAppointments] = useState([]);
-  const componentPDF = useRef();
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const [email, setEmail] = useState("madushdilshan222@gmail.com");
 
@@ -27,7 +27,7 @@ function MyAppointmentScreen() {
       }
     }
     fetchAppointments();
-  }, [email]); // Ensure useEffect depends on email
+  }, [email]);
 
   const deleteAppointment = async (id) => {
     if (window.confirm("Are you sure you want to delete this appointment?")) {
@@ -36,11 +36,11 @@ function MyAppointmentScreen() {
           `http://localhost:5000/api/doctorappointment/deletedoctorappointment/${id}`
         );
         console.log(response.data);
-        Swal.fire("Successfull", "You Appointment is deleted", "success").then(
-          (result) => {
-          window.location.reload();
+        Swal.fire("Successfull", "Your Appointment is deleted", "success").then(
+          () => {
+            window.location.reload();
           }
-       );
+        );
       } catch (error) {
         console.log(error);
         Swal.fire("Error with deleting appointment.");
@@ -48,15 +48,37 @@ function MyAppointmentScreen() {
     }
   };
 
-  const generatePDF = useReactToPrint({
-    content: () => componentPDF.current,
-    documentTitle: "eyeCAREoptical_doctor_appointment",
-  });
+  const generatePDF = (appointment) => {
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text("Doctor Appointment Details", 14, 20);
+
+    const tableColumn = ["Field", "Details"];
+    const tableRows = [
+      ["Patient Name", `${appointment.firstname} ${appointment.lastname}`],
+      ["Age", `${appointment.age} Years`],
+      ["Gender", appointment.gender],
+      ["Appointment Date", appointment.date],
+      ["Email", appointment.email],
+      ["Contact", appointment.contact],
+      ["Address", appointment.address],
+      ["Doctor Name", appointment.doctor],
+      ["Doctor Fee", `RS ${appointment.doctorfee}.00`],
+    ];
+
+    autoTable(doc, { // Use autoTable from the imported plugin
+      head: [tableColumn],
+      body: tableRows,
+      startY: 30,
+    });
+
+    doc.save(`Appointment_${appointment.firstname}_${appointment.lastname}.pdf`);
+  };
 
   return (
     <div>
       <NavBar />
-      <div className="row mb-5 appotable" ref={componentPDF}>
+      <div className="row mb-5 appotable">
         <br />
         <br />
         <br />
@@ -65,7 +87,6 @@ function MyAppointmentScreen() {
             <div className="fulldetailsapp" key={appointment._id}>
               <div>
                 <p>
-                  {" "}
                   <span style={{ fontSize: "19px" }}>
                     Patient Name:{" "}
                     <b>
@@ -118,16 +139,15 @@ function MyAppointmentScreen() {
                 </button>
                 <button
                   className="reservationpdfbtn"
-                  onClick={generatePDF}
+                  onClick={() => generatePDF(appointment)}
                   style={{ marginLeft: "60px" }}
                 >
                   <i className="fa fa-download" aria-hidden="true"></i>
                   <span style={{ fontSize: "10px", marginLeft: "10px" }}>
-                    Download Appointment
+                    Download PDF
                   </span>
                 </button>
               </div>
-              
             </div>
           ))}
         </div>
@@ -137,9 +157,8 @@ function MyAppointmentScreen() {
         <br />
         <br /> <br />
       </div>
-      <Footer/>
+      <Footer />
     </div>
-    
   );
 }
 
