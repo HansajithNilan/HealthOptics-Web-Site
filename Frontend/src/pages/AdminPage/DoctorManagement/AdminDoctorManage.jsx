@@ -16,6 +16,7 @@ const AdminDoctorManage = () => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [showViewModal, setShowViewModal] = useState(false);
   const [viewDoctor, setViewDoctor] = useState(null);
+  const [showAllDoctors, setShowAllDoctors] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,6 +70,10 @@ const AdminDoctorManage = () => {
     setShowViewModal(true);
   };
 
+  const handleToggleAllDoctors = () => {
+    setShowAllDoctors(!showAllDoctors); // Toggle the visibility of the table
+  };
+
   const generatePDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(18);
@@ -118,6 +123,7 @@ const AdminDoctorManage = () => {
       });
 
       doc.save("doctors_report.pdf");
+      
     }
   };
 
@@ -127,10 +133,15 @@ const AdminDoctorManage = () => {
         <div className="dashboard-header4617D">
           
           <div className="action-buttons4617D">
+            <button onClick={generatePDF} className="generate-pdf-btn4617D">
+              <i className="fas fa-file-pdf"></i> Generate Report
+            </button>
             <button onClick={handleAdd} className="add-doctor-btn4617D">
               <i className="fas fa-plus"></i> Add New Doctor
             </button>
-            
+            <button onClick={handleToggleAllDoctors} className="view-all-doctors-btn4617D">
+              <i className="fas fa-table"></i> {showAllDoctors ? "Hide All Doctors" : "View All Doctors"}
+            </button>
           </div>
         </div>
 
@@ -150,7 +161,56 @@ const AdminDoctorManage = () => {
             <option value="Optometrist">Optometrist</option>
             <option value="Ophthalmologist">Ophthalmologist</option>
           </select>
+          
+
         </div>
+        
+        {showAllDoctors && (
+          <div className="all-doctors-table-container">
+            <table className="all-doctors-table">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Name</th>
+                  <th>Specialty</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Gender</th>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Address</th>
+                  <th>Date of Birth</th>
+                </tr>
+              </thead>
+              <tbody>
+                {doctors.map((doctor) => (
+                  <tr key={doctor._id}>
+                    <td>
+                      {doctor.photo ? (
+                        <img
+                          src={`http://localhost:5000/uploads/${doctor.photo}`}
+                          alt={`${doctor.firstName} ${doctor.lastName}`}
+                          className="doctor-photo-table"
+                        />
+                      ) : (
+                        "No Photo"
+                      )}
+                    </td>
+                    <td>{`${doctor.firstName} ${doctor.lastName}`}</td>
+                    <td>{doctor.specialty}</td>
+                    <td>{doctor.email}</td>
+                    <td>{doctor.phone}</td>
+                    <td>{doctor.gender}</td>
+                    <td>{doctor.city}</td>
+                    <td>{doctor.state}</td>
+                    <td>{doctor.address}</td>
+                    <td>{doctor.dob}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
 
         <div className="doctors-grid4617D">
           {doctors.filter(doctor =>
@@ -190,21 +250,21 @@ const AdminDoctorManage = () => {
 
         {/* Delete Confirmation Modal */}
         {showDeleteModal && (
-          <div className="modal-overlay">
-            <div className="modal-content delete-modal">
-              <div className="modal-header">
+          <div className="modal-overlay-deleteDoctor">
+            <div className="modal-content-deleteDoctor">
+              <div className="modal-header-deleteDoctor">
                 <h2>Delete Doctor</h2>
-                <button onClick={() => setShowDeleteModal(false)} className="close-btn">
+                <button onClick={() => setShowDeleteModal(false)} className="close-btn-deleteDoctor">
                   <i className="fas fa-times"></i>
                 </button>
               </div>
-              <div className="modal-body">
+              <div className="modal-body-deleteDoctor">
                 <p>Are you sure you want to delete Dr. {selectedDoctor.firstName} {selectedDoctor.lastName}?</p>
-                <p className="warning-text">This action cannot be undone.</p>
+                <p className="warning-text-deleteDoctor">This action cannot be undone.</p>
               </div>
-              <div className="modal-actions">
-                <button onClick={() => setShowDeleteModal(false)} className="cancel-btn">Cancel</button>
-                <button onClick={() => handleDelete(selectedDoctor._id)} className="delete-confirm-btn">Delete</button>
+              <div className="modal-actions-deleteDoctor">
+                <button onClick={() => setShowDeleteModal(false)} className="cancel-btn-deleteDoctor">Cancel</button>
+                <button onClick={() => handleDelete(selectedDoctor._id)} className="delete-confirm-btn-deleteDoctor">Delete</button>
               </div>
             </div>
           </div>
@@ -212,15 +272,15 @@ const AdminDoctorManage = () => {
 
         {/* View Doctor Modal */}
         {showViewModal && viewDoctor && (
-          <div className="modal-overlay">
-            <div className="modal-content view-modal">
-              <div className="modal-header">
+          <div className="modal-overlay-viewDoctor">
+            <div className="modal-content-viewDoctor">
+              <div className="modal-header-viewDoctor">
                 <h2>Doctor Details</h2>
-                <button onClick={() => setShowViewModal(false)} className="close-btn">
+                <button onClick={() => setShowViewModal(false)} className="close-btn-viewDoctor">
                   <i className="fas fa-times"></i>
                 </button>
               </div>
-              <div className="modal-body">
+              <div className="modal-body-viewDoctor">
                 <p><strong>Name:</strong> {`${viewDoctor.firstName} ${viewDoctor.lastName}`}</p>
                 <p><strong>Specialty:</strong> {viewDoctor.specialty}</p>
                 <p><strong>Email:</strong> {viewDoctor.email}</p>
@@ -231,14 +291,14 @@ const AdminDoctorManage = () => {
                 <p><strong>Address:</strong> {viewDoctor.address}</p>
                 <p><strong>Date of Birth:</strong> {viewDoctor.dob}</p>
                 {viewDoctor.photo && (
-                  <div className="doctor-photo">
+                  <div className="doctor-photo-viewDoctor">
                     <img src={`http://localhost:5000/uploads/${viewDoctor.photo}`} alt={`${viewDoctor.firstName} ${viewDoctor.lastName}`} />
                   </div>
                 )}
               </div>
-              <div className="modal-actions">
-                <button onClick={generatePDF} className="report-btn">Generate Report</button>
-                <button onClick={() => setShowViewModal(false)} className="close-btn">Close</button>
+              <div className="modal-actions-viewDoctor">
+                
+                <button onClick={() => setShowViewModal(false)} className="close-btn-viewDoctor">Close</button>
               </div>
             </div>
           </div>
