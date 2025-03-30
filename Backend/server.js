@@ -10,11 +10,11 @@ import Doctor from "./Routes/DoctorRoute.js";
 import SpecReservationRoute from "./Routes/SpecReservationRoute.js";
 import DoctorAppointmentRoute from "./Routes/DoctorAppointmentRoute.js"; // Import the route
 import fs from 'fs';
+import SpectacleRoute from "./Routes/SpectacleRoute.js"
 
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
 const app = express();
 
 
@@ -38,8 +38,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve s
 
 
 
-// Connect to MongoDB
-connectDB();
 
 // Increase payload size limit
 app.use(express.json({ limit: '50mb' }));
@@ -65,6 +63,7 @@ app.use('/api/auth/reservation',SpecReservationRoute)
 app.use("/api/auth/doctor", Doctor);
 app.use("/api/doctors", Doctor); // Ensure this path matches the frontend request
 app.use("/api/doctorappointment", DoctorAppointmentRoute); // Mount the route
+app.use('/api/spectacle',SpectacleRoute)
 
 app.listen(5000, () => {
   connectDB(); // Call the connectDB function
