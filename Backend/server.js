@@ -10,6 +10,8 @@ import SpecReservationRoute from "./Routes/SpecReservationRoute.js";
 import DoctorAppointmentRoute from "./Routes/DoctorAppointmentRoute.js";
 import { dirname } from 'path'; // Import the route
 import fs from 'fs';
+import SpectacleRoute from "./Routes/SpectacleRoute.js"
+
 
 const app = express();
 app.use(express.json());
@@ -27,8 +29,6 @@ if (!fs.existsSync(uploadsDir)) {
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve static files from the uploads directory
 
-// Connect to MongoDB
-connectDB();
 
 // Increase payload size limit
 app.use(express.json({ limit: "50mb" }));
@@ -46,6 +46,7 @@ app.use("/api/auth/reservation", SpecReservationRoute);
 app.use("/api/auth/doctor", Doctor);
 app.use("/api/doctors", Doctor); // Ensure this path matches the frontend request
 app.use("/api/doctorappointment", DoctorAppointmentRoute); // Mount the route
+app.use('/api/spectacle',SpectacleRoute)
 
 app.listen(5000, () => {
   connectDB(); // Call the connectDB function
