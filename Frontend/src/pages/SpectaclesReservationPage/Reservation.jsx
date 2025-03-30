@@ -1,18 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import NavBar from "../../components/NavBar/NavBar.jsx";
 import "./Reservation.css";
 import Footer from "../../components/Footer/footer.jsx";
 import Contact from "../HomePage/contact/contact.jsx";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from "../../components/Context/AuthContext.jsx";
 
 function Reservation() {
-  const { id } = useParams();
+  const {name,email}= useContext(AuthContext);
+
+  const { id,number } = useParams();
   const navigate = useNavigate(); // ✅ FIXED: useNavigate inside the function
   const fetchDataRef = useRef(false); // Prevent multiple API calls
-
+  // const[numbers,setNumbers]= useState(0);
+  
   const [formData, setFormData] = useState({
     name: "",
     phonenumber: "",
@@ -27,6 +31,7 @@ function Reservation() {
     gender: "",
     quantity: 1,
     price: 0,
+    number:0,
   });
 
   const notifySuccess = () => toast.success(`${formData.name}'s reservation created successfully!`);
@@ -80,7 +85,7 @@ function Reservation() {
     e.preventDefault();
 
     const requiredFields = [
-      "name", "phonenumber", "address", "email", "brand", "frameshape",
+       "phonenumber", "address", "brand", "frameshape",
       "frametype", "framematerial", "framesize", "imageurlcolor", "quantity", "price", "gender"
     ];
 
@@ -98,17 +103,21 @@ function Reservation() {
 
     const updatedFormData = {
       ...formData,
+      name:name,
+      email:email,
       price: totalPrice,
       imageurlcolor: String(selectedImage),
+      number:number
     };
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/reservation/createReservation",
+        `http://localhost:5000/api/auth/reservation/createReservation/${number}`,
         updatedFormData
       );
       notifySuccess();
-      // navigate('/reservationDetails'); 
+      navigate(`/reservationdisplay/${number}`);
+
     } catch (err) {
       notifyError(err.message);
       console.error("Error Creating Reservation", err.response?.data || err.message);
@@ -163,7 +172,7 @@ function Reservation() {
               <h1>Personal Details</h1>
               <div className="name-mobnumber">
                 <label>Name:</label>
-                <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
+                <input type="text" name="name" value={name} disabled />
                 <label>Mobile Number:</label>
                 <input type="text" name="phonenumber" value={formData.phonenumber} onChange={handleInputChange} />
               </div>
@@ -171,7 +180,7 @@ function Reservation() {
                 <label>Address:</label>
                 <input type="text" name="address" value={formData.address} onChange={handleInputChange} />
                 <label>Email:</label>
-                <input type="text" name="email" value={formData.email} onChange={handleInputChange} />
+                <input type="text" name="email" value={email} disabled />
               </div>
 
               <h1>Spectacle Details</h1>
@@ -245,7 +254,8 @@ function Reservation() {
               <ToastContainer />
               <div className="reservation-button">
                 <h1>Total Price: {totalPrice}</h1>
-                <button type="submit" className="reserve-button">Reserve Now</button>
+                <button type="submit" className="reserve-button" >Reserve Now</button>
+ 
               </div>
             </form>
           </div>

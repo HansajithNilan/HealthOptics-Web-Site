@@ -26,7 +26,7 @@ function UserRegister() {
 
     console.log({ name, email, password, role });
 
-    axios.post('http://localhost:5000/api/auth/register', { name, email, password, role })
+    axios.post('http://localhost:5000/api/auth/user/register', { name, email, password, role })
       .then((result) => {
         console.log('User registration successful:', result.data);
         notifySuccess();
