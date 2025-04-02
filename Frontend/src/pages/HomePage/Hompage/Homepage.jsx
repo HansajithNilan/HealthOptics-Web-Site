@@ -6,6 +6,7 @@ import Programs from '../healthprograms/programs.jsx'
 import About from '../About/about.jsx'
 import Footer from '../../../components/Footer/footer.jsx'
 import Contact from '../contact/contact.jsx'
+import SpectaclesDoctor from '../Spectacles&Doctor/SpectaclesDoctor.jsx'
 
 function Homepage() {
   return (
@@ -16,11 +17,13 @@ function Homepage() {
         <Introduction title="HealthOptics" subtitle="Choose Your Matching Spectacls"/>
         <Programs/>
         <Introduction title="About us" subtitle="Choose Your Matching Spectacls"/>
+        <SpectaclesDoctor/>
         <About/>
         <Contact/>
-        <Footer/>
+       
 
         </div>
+        <Footer/>
     </div>
   )
 }

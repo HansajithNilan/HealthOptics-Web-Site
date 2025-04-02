@@ -4,6 +4,8 @@ import logo from '../../../public/website_logo.png';
 import './NavBar.css';
 import { AuthContext } from '../Context/AuthContext';
 
+import cartImage from '../../assets/cartImage.png'
+
 function NavBar() {
   const [sticky, setSticky] = useState(false);
   const { id, logout,name } = useContext(AuthContext);
@@ -39,12 +41,21 @@ function NavBar() {
                 <button className="signup-btn">Sign Up</button>
               </Link>
             </li>
+         
+           
+
+       
           </>
         ) : (
           <li>
+             <button className="logout-btn" onClick={logout}>Sign out</button>
+          <div className="cart-container" >
            
-            <button className="logout-btn" onClick={logout}>Sign out</button>
+            <img src={cartImage} width={20} height={20} />
+            <span className='cart-numbers'>0</span>
+            </div>
           </li>
+          
         )}
       </ul>
     </nav>

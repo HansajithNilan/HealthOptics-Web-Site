@@ -68,7 +68,7 @@ function LoginPage() {
       if (data.role === "user") {
         toast.success("Login successful!");
         login();
-        navigate("/spectacles");
+        navigate("/");
         return;
       }
      
