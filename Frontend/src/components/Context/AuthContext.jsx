@@ -7,7 +7,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [id, setId] = useState(); // null instead of empty string for clarity
+  const [id, setId] = useState([]); // null instead of empty string for clarity
   const [name,setName] = useState('');
   const [email,setEmail] = useState('')
 
