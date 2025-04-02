@@ -52,6 +52,9 @@
 .expert-section {
   padding: 4rem 2rem;
   background: #fff;
+  max-width: 1450px;
+  margin: 0 auto 2rem;
+  border-radius: 12px;
 }
 
 .expert-content {
@@ -89,7 +92,7 @@
 .search-section {
   padding: 2rem;
   background: #fff;
-  max-width: 1200px;
+  max-width: 1150px;
   margin: 0 auto 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -219,7 +222,7 @@
 
 /* Timetable Section */
 .timetable-section {
-  max-width: 1200px;
+  max-width: 1150px;
   margin: 2rem auto;
   padding: 2rem;
   background: #fff;
