@@ -1,14 +1,238 @@
-.footer{
-    margin: 10px auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid #797979;
-    padding: 15px 0;
-   
+/* Footer.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+.vivo-footer {
+  background: linear-gradient(135deg, #f7f2e7 0%, #edd59f 100%); /* Subtle gradient background */
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  padding: 60px 0;
+  border-top: 1px solid #ddd;
 }
-.footer ul li{
-    list-style: none;
-    display: inline-block;
-    margin-left: 20px;
+
+.vivo-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.vivo-left {
+  flex: 1;
+  padding-right: 30px;
+}
+
+.vivo-logo h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2c3e50; /* Darker color for the logo */
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+  margin-left: 70px;
+  
+
+}
+
+.vivo-tagline {
+  font-size: 14.4px;
+  font-weight: 300;
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  
+  letter-spacing: 0.5px;
+}
+
+.vivo-contact-info p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #34495e;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+}
+
+.vivo-contact-info .icon {
+  margin-right: 12px;
+  font-size: 16px;
+  color: #e67e22; /* Orange accent for icons */
+}
+
+.vivo-middle {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.vivo-section {
+  flex: 1;
+  padding-right: 20px;
+  padding-left: 20px;
+  text-align: left;
+  
+}
+
+.vivo-section h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e67e22; /* Orange underline */
+  padding-bottom: 8px;
+  position: relative;
+  margin-right: 30px;
+
+  
+  
+}
+
+.vivo-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.vivo-section ul li {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7f8c8d;
+  margin-bottom: 12px;
+  transition: color 0.3s ease;
+}
+
+.vivo-section ul li:hover {
+  color: #e67e22; /* Orange on hover */
+}
+
+.news-date {
+  font-size: 12px;
+  font-weight: 300;
+  color: #95a5a6;
+  display: block;
+  margin-top: 5px;
+}
+
+.vivo-right {
+  flex: 1;
+  text-align: left;
+  padding-left: 30px;
+}
+
+.emergency-line {
+  margin-bottom: 30px;
+}
+
+.emergency-line h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2c3e50;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.emergency-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #e67e22; /* Orange for the emergency number */
+  margin-bottom: 12px;
+}
+
+.emergency-line p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7f8c8d;
+  line-height: 1.6;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-right: 100px;
+}
+.social-media img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+  
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: #e67e22; /* Orange background */
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  margin-left: 12px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #d35400; /* Darker orange on hover */
+  transform: scale(1.1);
+}
+
+.footer-links a {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7f8c8d;
+  text-decoration: none;
+  margin: 0 5px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #e67e22;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .vivo-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .vivo-left,
+  .vivo-middle,
+  .vivo-right {
+    padding: 0;
+    text-align: left;
+  }
+
+  .vivo-middle {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .vivo-right {
+    text-align: left;
+  }
+
+  .social-icon {
+    margin-left: 0;
+    margin-right: 12px;
+  }
+}
+.logofooter{
+  width: 140px;
+  margin-left: -40px;
+  margin-bottom: -45px;
+  
+}
+.vivo-logo{
+  position: relative;
+  top: -30px;
+
+  
+
+  
 }

@@ -3,8 +3,15 @@ import Doctor from "../models/Doctor.js";
 // Get all doctors
 export const getDoctors = async (req, res) => {
   try {
-    const doctors = await Doctor.find(); // Ensure photo is included in the response
-    res.status(200).json(doctors);
+    const doctors = await Doctor.find();
+    const formattedDoctors = doctors.map(doctor => {
+      const doctorObj = doctor.toObject();
+      if (doctorObj.photo) {
+        doctorObj.photoUrl = `http://localhost:5000/uploads/${doctorObj.photo}`;
+      }
+      return doctorObj;
+    });
+    res.status(200).json(formattedDoctors);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

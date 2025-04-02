@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 function AddDoctorAppointmentDetails() {
   const location = useLocation();
   const doctor = location.state?.doctor;
+  const user = JSON.parse(localStorage.getItem("currentUser")); // Get user from localStorage
 
   if (!doctor) {
     return (
@@ -22,11 +23,11 @@ function AddDoctorAppointmentDetails() {
   }
 
   const [formData, setFormData] = useState({
-    firstname: "",
+    firstname: user?.name?.split(' ')[0] || "", // Auto-fill first name from user's name
     lastname: "",
     gender: "",
     age: "",
-    email: "",
+    email: user?.email || "", // Auto-fill email from localStorage
     contact: "",
     address: "",
     date: "",
