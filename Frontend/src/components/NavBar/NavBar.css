@@ -30,8 +30,8 @@ nav ul li{
 }
 
 .container{
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 8%;
+    padding-right: 8%;
 
 }
 
@@ -70,3 +70,33 @@ nav ul li{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
 }
+.logout-btn{
+    margin-right: 20px;
+
+}
+.logout-btn {
+    /* Style your logout button as needed */
+    margin-right: 20px;
+  }
+  
+  .cart-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .cart-container img {
+    display: block;
+  }
+  
+  .cart-numbers {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+  }
+  

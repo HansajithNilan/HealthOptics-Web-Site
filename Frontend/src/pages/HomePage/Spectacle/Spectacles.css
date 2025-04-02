@@ -78,20 +78,50 @@
 }
 
 /* Shop Now button */
-.shop-now-btn {
+.shop-now-button {
     margin-top: 16px;
+    font-size: 11px;
     padding: 12px;
     background-color: #2563eb; /* Blue background */
     color: white;
     font-weight: 600;
     text-align: center;
     border-radius: 8px;
-    width: 100%;
+    width: 50%;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
+.spectacle-button-section{
+    display: flex;
+    
+}
 .shop-now-btn:hover {
     background-color: #1d4ed8; /* Darker blue on hover */
+}
+.add-to-cart-button{
+
+margin-top: 16px;
+   font-size: 11px;
+   /* Blue background */
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 8px;
+    width: 50%;
+    border: none;
+
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.add-to-cart-button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.add-to-cart-button img{
+    width: 15px;
+    height: 15px;
+    color: white;
+
 }
