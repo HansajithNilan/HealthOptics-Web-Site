@@ -7,23 +7,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../../stores/cart.jsx";
 
 import cartImage from "../../../assets/cartImage.png";
+import Cartab from "../../CartTab/cartab.jsx";
 
 const Spectacles = () => {
-  const carts = useSelector((store) => store.cart.items);
-  console.log(carts);
+ 
+
   const dispatch = useDispatch();
   const [spectacles, setSpectacles] = useState([]);
 
   const navigate = useNavigate();
 
-  const handleAddToCart = (id) => {
-    dispatch(
-      addToCart({
-        spectacleId: id,
-        quantity: 1,
-      })
-    );
-  };
+
 
   useEffect(() => {
     axios
@@ -82,8 +76,10 @@ const Spectacles = () => {
   return (
     <div>
       <NavBar />
-
+     
+    
       <div className="spectacle-grid-container">
+        <Cartab/>
         <h1>Spectacles</h1>
         <div className="spectacle-grid">
           {spectacles.map((spectacle) => (
@@ -110,13 +106,7 @@ const Spectacles = () => {
                   >
                     Shop Now
                   </button>
-                  <button
-                    className="add-to-cart-button"
-                    onClick={() => handleAddToCart(spectacle._id)}
-                  >
-                    <img src={cartImage} alt="Add to cart" />
-                    Add To Cart
-                  </button>
+                 
                 </div>
               </div>
             </div>

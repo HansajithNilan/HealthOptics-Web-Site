@@ -8,7 +8,11 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from "../../components/Context/AuthContext.jsx";
-
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../../stores/cart.jsx";
+import 'react-toastify/dist/ReactToastify.css';
+import cartImage from '../../assets/cartImage.png'
+import Cartab from "../CartTab/cartab.jsx";
 function Reservation() {
   const {name,email}= useContext(AuthContext);
 
@@ -17,6 +21,10 @@ function Reservation() {
   const fetchDataRef = useRef(false); // Prevent multiple API calls
   // const[numbers,setNumbers]= useState(0);
   
+
+  const dispatch = useDispatch();
+
+
   const [formData, setFormData] = useState({
     name: "",
     phonenumber: "",
@@ -131,6 +139,16 @@ function Reservation() {
       imageurlcolor: imageUrl,
     }));
   };
+  const handleAddToCart = () => {
+    const spectacleId = id; // Assuming you have the spectacle ID available
+    const quantity = formData.quantity;
+
+    dispatch(addToCart({ spectacleId, quantity }));
+
+    console.log("Added to cart:", { spectacleId, quantity });
+    toast.success("Added to cart successfully!");
+    
+  }
 
   const ImageRadioButtons = () => {
     const images = [
@@ -154,10 +172,14 @@ function Reservation() {
     );
   };
 
+
+ 
+
   return (
     <div className="spectales-reservation-page">
       <NavBar />
       <div className="spectacles-section">
+      <Cartab/>
         <h1>Reserve your Spectacles</h1>
         <div className="reserve-main-section">
           <div className="Image-section">
@@ -251,12 +273,16 @@ function Reservation() {
               </div>
 
               <h3>Brand: {formData.brand}</h3>
-              <ToastContainer />
+            
+              <h1>Total Price: {totalPrice}</h1>
               <div className="reservation-button">
-                <h1>Total Price: {totalPrice}</h1>
+            
                 <button type="submit" className="reserve-button" >Reserve Now</button>
+              <button type="button" className="add-to-cart-"  onClick={handleAddToCart}><img src={cartImage} width={18} height={18}/>  Add To Cart</button>
  
               </div>
+              <ToastContainer position="top-right" autoClose={3000} />
+
             </form>
           </div>
         </div>

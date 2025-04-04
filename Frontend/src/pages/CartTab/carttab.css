@@ -1,0 +1,39 @@
+.carttab-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #465061; /* Tailwind: bg-gray-700 */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
+    width: 18rem; /* Tailwind: w-96 */
+    height: 100%;
+    display: grid;
+    grid-template-rows: 60px 1fr 60px;
+    padding-top: 80px;
+    transition: transform 0.3s ease-in-out;
+  }
+  .carttab-container.false {
+    transform: translateX(100%);
+  }
+  
+  /* Visible state (cart tab slides into view) */
+  .carttab-container.true {
+    transform: translateX(0%);
+  }
+  
+  .carttab-header {
+    padding: 1.25rem; /* Tailwind: p-5 */
+    color: white;
+    font-size: 1.5rem; /* Tailwind: text-2xl */
+    font-weight: 600;
+  }
+  
+  .carttab-items {
+    padding: 1.25rem; /* Tailwind: p-5 */
+    overflow-y: auto;
+  }
+  
+  .carttab-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  

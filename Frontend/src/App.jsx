@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+
 import "./App.css";
 
 import Homepage from "./pages/HomePage/Hompage/Homepage.jsx";
@@ -32,7 +34,7 @@ import EditDoctorAppointment from "./pages/HomePage/doctorappointment/EditDoctor
 import DoctorProfileTable from "./pages/DoctorManagement/DoctorProfileTable.jsx";
 
 import Spectacle from "./pages/HomePage/Spectacle/Spectacles.jsx";
-
+import Cartab from "./pages/CartTab/cartab.jsx";
 
 function App() {
   return (
@@ -86,6 +88,7 @@ function App() {
       
         <Route path="/spectacles" element={<Spectacle />} />
         <Route path="/loginpage" element={<Loginpage />} />
+        {/* <Route path="/cart" element={<Cartab />} /> */}
       </Routes>
     
   );
