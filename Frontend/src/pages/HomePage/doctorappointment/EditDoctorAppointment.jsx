@@ -19,6 +19,7 @@ function EditDoctorAppointment() {
     contact: "",
     address: "",
     date: "",
+    timeSlot: "",
     consent: false,
   });
   const [isLoading, setIsLoading] = useState(true);
@@ -65,7 +66,7 @@ function EditDoctorAppointment() {
         text: "Your appointment has been updated successfully.",
         icon: "success",
         confirmButtonColor: "#2c5282",
-      }).then(() => navigate("/myappointment"));
+      }).then(() => navigate("/OnMyAppointment"));
     } catch (error) {
       console.error("Error updating appointment:", error);
       Swal.fire({
@@ -208,6 +209,21 @@ function EditDoctorAppointment() {
               min={new Date().toISOString().split("T")[0]} // Disable past dates
               required
             />
+          </div>
+
+          <div className="form-group">
+            <label>Appointment Time</label>
+            <select
+              name="timeSlot"
+              value={formData.timeSlot}
+              onChange={handleChange}
+              required
+              className="form-input"
+            >
+              <option value="">Select Time Slot</option>
+              <option value="09:00 AM - 10:00 AM">09:00 AM - 10:00 AM</option>
+              <option value="04:00 PM - 06:00 PM">04:00 PM - 06:00 PM</option>
+            </select>
           </div>
 
           <div className="consent-group">

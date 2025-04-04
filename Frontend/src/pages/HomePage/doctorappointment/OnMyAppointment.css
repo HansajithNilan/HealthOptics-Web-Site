@@ -1,0 +1,191 @@
+.OMA-appointment-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding: 80px 20px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.OMA-appointment-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.OMA-appointment-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.OMA-card-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.OMA-card-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.OMA-card-subtitle {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 400;
+}
+
+.OMA-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.OMA-details-section {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.3s ease;
+}
+
+.OMA-details-section:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.OMA-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.OMA-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.OMA-detail-item {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.OMA-detail-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 6px;
+}
+
+.OMA-detail-value {
+  font-size: 16px;
+  font-weight: 400;
+  color: #1e293b;
+  word-break: break-word;
+}
+
+.OMA-status-message {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  background: #ffffff;
+  margin: 20px auto;
+  max-width: 450px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.OMA-loading {
+  color: #1d4ed8;
+}
+
+.OMA-error {
+  color: #b91c1c;
+}
+
+.OMA-action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.OMA-btn {
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  border: none;
+  color: #ffffff;
+}
+
+.OMA-btn-update {
+  background: #2c6e49;
+}
+
+.OMA-btn-update:hover {
+  background: #3f9c6a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.OMA-btn-delete {
+  background: #7f1d1d;
+}
+
+.OMA-btn-delete:hover {
+  background: #a33434;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.OMA-btn-download {
+  background: #1e3a8a;
+}
+
+.OMA-btn-download:hover {
+  background: #3552b5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .OMA-appointment-card {
+    padding: 30px;
+  }
+
+  .OMA-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .OMA-card-title {
+    font-size: 22px;
+  }
+
+  .OMA-section-title {
+    font-size: 16px;
+  }
+
+  .OMA-btn {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+}

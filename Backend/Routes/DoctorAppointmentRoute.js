@@ -9,6 +9,7 @@ router.route('/createdoctorappointment').post(async(req, res) => {
         firstname,
         lastname,
         date,
+        timeSlot,  // Add this line
         gender,
         age,
         email,
@@ -23,6 +24,7 @@ router.route('/createdoctorappointment').post(async(req, res) => {
         firstname,
         lastname,
         date,
+        timeSlot,  // Add this line
         gender,
         age,
         email,
@@ -129,6 +131,22 @@ router.route('/getdoctorappointment/:id').get(async(req, res) => {
         return res.status(200).json({ status: "DoctorAppointment fetched", doctorAppointment });
     } catch (error) {
         return res.status(500).json({ status: "Error with fetch DoctorAppointment", message: error });
+    }
+});
+
+router.route('/getallappointments').get(async(req, res) => {
+    try {
+        const allAppointments = await DoctorAppointment.find({});
+        return res.status(200).json({
+            status: "Success", 
+            appointments: allAppointments
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: "Error",
+            message: "Error fetching appointments",
+            error: error.message
+        });
     }
 });
 

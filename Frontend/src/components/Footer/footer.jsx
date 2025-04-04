@@ -41,7 +41,7 @@ function Footer() {
               <li>Team</li>
               <li>Doctors Profile</li>
               <li>Working Hours</li>
-              <li>Appointments</li>
+              <li>  Appointments</li>
               <li>Contact & Location</li>
             </ul>
           </div>

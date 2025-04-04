@@ -2,7 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../public/website_logo.png';
 import './NavBar.css';
-import { AuthContext } from '../Context/AuthContext';
+import { AuthContext } from '../Context/AuthContext.jsx';
+
 
 import cartImage from '../../assets/cartImage.png'
 

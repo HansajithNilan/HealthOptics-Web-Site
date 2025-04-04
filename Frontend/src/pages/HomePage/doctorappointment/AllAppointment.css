@@ -1,0 +1,113 @@
+/* Container for the entire appointment table */
+.appotable {
+    margin-top: 60px;
+    max-height: 80vh;
+    overflow-y: auto;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Appointment grid layout */
+.appointment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 0 10px;
+}
+
+/* Individual appointment card */
+.fulldetailsapp {
+    margin: 10px;
+    background-color: #ffffff;
+    width: 100%;
+    height: auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.fulldetailsapp:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Typography for appointment details */
+.namedatefee {
+    font-size: 18px;
+    font-weight: 500;
+    color: #1f2937;
+    margin-top: 10px;
+}
+
+.appointment-details p {
+    font-size: 16px;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+.appointment-details b {
+    color: #111827;
+    font-weight: 600;
+}
+
+/* Search section */
+.search-section {
+    padding: 30px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Loading and error states */
+.loading, .error {
+    text-align: center;
+    padding: 40px;
+    margin-top: 120px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.loading {
+    color: #6b7280;
+}
+
+.error {
+    color: #dc2626;
+}
+
+/* Divider */
+hr {
+    border: 0;
+    border-top: 1px solid #e5e7eb;
+    margin: 15px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .appointment-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-input {
+        max-width: 100%;
+    }
+}
