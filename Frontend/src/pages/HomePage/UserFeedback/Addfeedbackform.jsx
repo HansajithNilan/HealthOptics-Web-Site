@@ -10,7 +10,7 @@ import feedbackImage from '../../../assets/feedbacksimage.jpg';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const FeedbackForm = () => {
+const Addfeedbackform = () => {
   const { id, name, email } = useContext(AuthContext);
   const [feedbacks, setFeedbacks] = useState([]);
   const [formData, setFormData] = useState({
@@ -343,4 +343,4 @@ const FeedbackForm = () => {
   );
 };
 
-export default FeedbackForm;
+export default Addfeedbackform;

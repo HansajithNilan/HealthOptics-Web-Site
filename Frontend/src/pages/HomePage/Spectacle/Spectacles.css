@@ -76,6 +76,12 @@
 .empty {
     color: #d1d5db; /* Gray color for empty stars */
 }
+.spectacle-button-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
 
 /* Shop Now button */
 .shop-now-button {
@@ -88,40 +94,15 @@
     text-align: center;
     border-radius: 8px;
     width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-.spectacle-button-section{
-    display: flex;
-    
-}
+
 .shop-now-btn:hover {
     background-color: #1d4ed8; /* Darker blue on hover */
 }
-.add-to-cart-button{
 
-margin-top: 16px;
-   font-size: 11px;
-   /* Blue background */
-    color: white;
-    font-weight: 600;
-    text-align: center;
-    border-radius: 8px;
-    width: 50%;
-    border: none;
-
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.add-to-cart-button{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.add-to-cart-button img{
-    width: 15px;
-    height: 15px;
-    color: white;
-
-}

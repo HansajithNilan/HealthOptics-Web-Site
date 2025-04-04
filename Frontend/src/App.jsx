@@ -1,10 +1,17 @@
 import React from "react";
+
 import { Routes, Route } from "react-router-dom";
+
+
+
+
+
 import "./App.css";
 
 import Homepage from "./pages/HomePage/Hompage/Homepage.jsx";
-import Addfeedbackform from "./pages/HomePage/UserFeedback/Addfeedbackform.jsx";
-import AllFeedbacks from './pages/HomePage/userFeedback/AllFeedbacks';
+
+import AddfeedBackform from "./pages/HomePage/UserFeedback/Addfeedbackform.jsx";
+import AllFeedbacks from './pages/HomePage/UserFeedback/AllFeedbacks.jsx';
 
 import UserRegisterPage from "./pages/UserRegisterPage/UserRegister.jsx";
 
@@ -31,18 +38,19 @@ import AdminDoctorManage from "./pages/AdminPage/DoctorManagement/AdminDoctorMan
 import EditDoctorAppointment from "./pages/HomePage/doctorappointment/EditDoctorAppointment.jsx";
 import DoctorProfileTable from "./pages/DoctorManagement/DoctorProfileTable.jsx";
 import Spectacle from "./pages/HomePage/Spectacle/Spectacles.jsx";
-
+import Cartab from "./pages/CartTab/cartab.jsx";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
-      <Route path="/feedback" element={<Addfeedbackform />} />
+      <Route path="/feedback" element={<AddfeedBackform />} />
       <Route path="/all-feedbacks" element={<AllFeedbacks />} />
       
+
       <Route path="/register" element={<UserRegisterPage />} />
-      <Route path="/Register" element={<UserRegisterPage />} />
-      <Route path="/reservespectacles/:id" element={<SpectaclesReservation />} />
+      
+      <Route path="/reservespectacles/:id/:number" element={<SpectaclesReservation />} />
       <Route path="/reservationDetails" element={<ReservationDetails />} />
       <Route path="/updatereservation/:id" element={<ReservationUpdate/>} />
       <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
@@ -68,6 +76,7 @@ function App() {
       <Route path="/loginpage" element={<Loginpage/>} />
      
     </Routes>
+
   );
 }
 
