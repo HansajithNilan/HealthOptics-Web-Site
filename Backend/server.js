@@ -11,11 +11,12 @@ import DoctorAppointmentRoute from "./Routes/DoctorAppointmentRoute.js";
 import { dirname } from 'path'; // Import the route
 import fs from 'fs';
 import SpectacleRoute from "./Routes/SpectacleRoute.js"
-
+import feedbackRoutes from './Routes/FeedbackRoute.js';
 
 const app = express();
 app.use(express.json());
 app.use(cors({}));
+
 dotenv.config();
 
 
@@ -47,6 +48,7 @@ app.use("/api/auth/doctor", Doctor);
 app.use("/api/doctors", Doctor); // Ensure this path matches the frontend request
 app.use("/api/doctorappointment", DoctorAppointmentRoute); // Mount the route
 app.use('/api/spectacle',SpectacleRoute)
+app.use('/api/feedback', feedbackRoutes);
 
 app.listen(5000, () => {
   connectDB(); // Call the connectDB function

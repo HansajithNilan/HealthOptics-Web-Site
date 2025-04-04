@@ -4,12 +4,12 @@ import "./DashboardLayout.css";
 
 const DashboardLayout = ({ title, children }) => {
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-layout-container">
       <SideBar />
-      <div className="dashboard-content">
+      <div className="dashboard-layout-content">
         {/* Static Dashboard Header */}
 
-        <div className="dashboard-header">
+        <div className="dashboard-layout-header">
           <h2>{title}</h2>
           <div className="side-header">
           <div className="profile">

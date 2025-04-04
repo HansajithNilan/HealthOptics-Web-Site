@@ -5,8 +5,8 @@ const SpectacleDetails = ({ spectacle, onClose }) => {
   if (!spectacle) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="shakya-modal-overlay">
+      <div className="shakya-modal-content">
                <div>
                   <button className="close-btn" onClick={onClose}>
                     <FaTimes />
