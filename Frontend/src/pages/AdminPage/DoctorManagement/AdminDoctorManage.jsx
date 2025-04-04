@@ -281,6 +281,24 @@ const AdminDoctorManage = () => {
                 </button>
               </div>
               <div className="modal-body-viewDoctor">
+                {viewDoctor.photo ? (
+                  <div className="doctor-photo-viewDoctor">
+                    <img 
+                      src={`http://localhost:5000/uploads/${viewDoctor.photo}`}
+                      alt={`${viewDoctor.firstName} ${viewDoctor.lastName}`}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://via.placeholder.com/200x200?text=No+Photo";
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div className="doctor-photo-viewDoctor">
+                    <div className="no-photo-viewDoctor">
+                      No Photo Available
+                    </div>
+                  </div>
+                )}
                 <p><strong>Name:</strong> {`${viewDoctor.firstName} ${viewDoctor.lastName}`}</p>
                 <p><strong>Specialty:</strong> {viewDoctor.specialty}</p>
                 <p><strong>Email:</strong> {viewDoctor.email}</p>
@@ -290,11 +308,6 @@ const AdminDoctorManage = () => {
                 <p><strong>State:</strong> {viewDoctor.state}</p>
                 <p><strong>Address:</strong> {viewDoctor.address}</p>
                 <p><strong>Date of Birth:</strong> {viewDoctor.dob}</p>
-                {viewDoctor.photo && (
-                  <div className="doctor-photo-viewDoctor">
-                    <img src={`http://localhost:5000/uploads/${viewDoctor.photo}`} alt={`${viewDoctor.firstName} ${viewDoctor.lastName}`} />
-                  </div>
-                )}
               </div>
               <div className="modal-actions-viewDoctor">
                 

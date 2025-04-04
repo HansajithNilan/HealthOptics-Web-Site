@@ -332,14 +332,29 @@
 }
 
 .doctor-photo-viewDoctor {
-  margin-top: 15px;
+  margin: 20px 0;
   text-align: center;
 }
 
 .doctor-photo-viewDoctor img {
-  max-width: 100%;
-  height: auto;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.no-photo-viewDoctor {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  background: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 14px;
 }
 
 .modal-actions-viewDoctor {
