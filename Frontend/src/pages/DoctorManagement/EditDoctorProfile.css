@@ -1,105 +1,135 @@
-.edit-doctor-container {
+.edit-doctor-container-EDPF {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5;
-  padding: 20px;
+  background-color: #f9fafb; /* Light gray for a clean backdrop */
+  padding: 30px;
 }
 
-.edit-doctor-card {
-  background: white;
+.edit-doctor-card-EDPF {
+  background: #ffffff;
   border-radius: 12px;
-  padding: 2rem;
+  padding: 2.5rem;
   width: 100%;
-  max-width: 600px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 650px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
 }
 
-.edit-title {
-  color: #333;
-  font-size: 1.8rem;
+.edit-title-EDPF {
+  color: #1e3a8a; /* Professional navy blue */
+  font-size: 2rem;
+  font-weight: 600;
   margin-bottom: 2rem;
   text-align: center;
+  letter-spacing: -0.5px;
 }
 
-.edit-form {
-  display: flex;
-  flex-direction: column;
+.edit-form-EDPF {
+  display: grid;
   gap: 1.5rem;
 }
 
-.form-group {
+.form-group-EDPF {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.form-group label {
-  font-size: 0.9rem;
-  color: #666;
+.form-group-EDPF label {
+  font-size: 0.95rem;
+  color: #374151; /* Dark gray for readability */
   font-weight: 500;
 }
 
-.form-input {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
+.form-input-EDPF {
+  padding: 0.85rem 1rem;
+  border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.form-input:focus {
-  border-color: #2196F3;
+.form-input-EDPF:focus {
+  border-color: #1e3a8a; /* Matching navy blue */
   outline: none;
-  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
 }
 
-.form-actions {
+.form-input-EDPF::placeholder {
+  color: #9ca3af; /* Light gray for placeholders */
+}
+
+.form-actions-EDPF {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
   justify-content: flex-end;
 }
 
-.cancel-btn, .update-btn {
-  padding: 0.75rem 1.5rem;
+.cancel-btn-EDPF,
+.update-btn-EDPF {
+  padding: 0.85rem 2rem;
   border: none;
   border-radius: 6px;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.cancel-btn {
-  background-color: #9e9e9e;
-  color: white;
+.cancel-btn-EDPF {
+  background-color: #6b7280; /* Neutral gray */
+  color: #ffffff;
 }
 
-.update-btn {
-  background-color: #2196F3;
-  color: white;
+.update-btn-EDPF {
+  background-color: #1e3a8a; /* Professional navy blue */
+  color: #ffffff;
 }
 
-.cancel-btn:hover, .update-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.cancel-btn-EDPF:hover,
+.update-btn-EDPF:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cancel-btn:active, .update-btn:active {
+.cancel-btn-EDPF:hover {
+  background-color: #4b5563; /* Darker gray on hover */
+}
+
+.update-btn-EDPF:hover {
+  background-color: #172554; /* Darker navy on hover */
+}
+
+.cancel-btn-EDPF:active,
+.update-btn-EDPF:active {
   transform: translateY(0);
+  box-shadow: none;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
-  .edit-doctor-card {
+  .edit-doctor-card-EDPF {
     padding: 1.5rem;
+    max-width: 100%;
+    margin: 0 15px;
   }
 
-  .form-actions {
+  .edit-title-EDPF {
+    font-size: 1.75rem;
+  }
+
+  .form-actions-EDPF {
     flex-direction: column;
+    gap: 0.75rem;
   }
 
-  .cancel-btn, .update-btn {
+  .cancel-btn-EDPF,
+  .update-btn-EDPF {
     width: 100%;
+    padding: 0.75rem;
   }
 }

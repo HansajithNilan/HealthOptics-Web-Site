@@ -1,86 +1,101 @@
 .sidebar {
-    width: 300px;
-    height: 100vh;
-    background-color: #0f1425;
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 20px;
-    transition: width 0.3s ease-in-out;
-  }
-  
-  .sidebar-header {
-    display: flex;
-    justify-content:space-around;
-    align-items: center;
-    margin:10px 0;
-  }
+  width: 300px;
+  height: 100vh;
+  background: linear-gradient(180deg, #1a1f2e 0%, #0f121d 100%);
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  transition: width 0.3s ease-in-out;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+}
 
-  .sidebar-header img{
-      width:70px;
-      height: 60px;
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    display: block;
-  }
-  
-  .toggle-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  
-  .sidebar-links {
-    list-style: none;
-    padding: 0;
-    margin-top: 30px;
-  }
-  
-  .sidebar-links li {
-    margin: 15px 0;
-  }
-  
-  .sidebar-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-    display: block;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #fd7311, #ff9a44);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.sidebar-links li {
+  margin: 10px 0;
+}
 
 .menu-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .main-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: #d1d5db;
   flex-grow: 1;
+  transition: all 0.3s ease;
+}
+
+.sidebar-icon {
+  font-size: 22px;
+  min-width: 24px;
+  color: #9ca3af;
+  transition: all 0.3s ease;
 }
 
 .submenu-toggle {
   background: none;
   border: none;
-  color: white;
+  color: #9ca3af;
   cursor: pointer;
-  font-size: 1.2rem;
+  padding: 12px;
+  transition: all 0.3s ease;
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+.chevron.rotated {
+  transform: rotate(180deg);
 }
 
 .submenu {
   list-style: none;
-  padding: 0;
-  margin: 5px 0 5px 15px;
-  border-radius: 5px;
-  overflow: hidden;
+  padding: 5px 0 5px 40px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  margin: 5px 0;
+  animation: slideDown 0.3s ease;
 }
 
 .submenu li {
@@ -90,20 +105,61 @@
 .submenu-link {
   display: block;
   padding: 8px 15px;
-  color: white;
+  color: #b3b8c2;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.95rem;
   border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
-/* Hover effect */
+/* Hover effects */
 .menu-item:hover,
 .submenu-link:hover {
-  background-color: #f5f4f342;
+  background: rgba(255, 255, 255, 0.1);
 }
 
+.menu-item:hover .main-link,
+.menu-item:hover .sidebar-icon {
+  color: #ffffff;
+}
 
-.menu-item.active,
+/* Active states */
+.menu-item.active {
+  background: rgba(253, 115, 17, 0.15);
+}
+
+.menu-item.active .main-link,
+.menu-item.active .sidebar-icon {
+  color: #fd7311;
+}
+
 .submenu-link.active {
-  background-color: #f5f4f342; 
+  background: rgba(253, 115, 17, 0.2);
+  color: #fd7311;
+}
+
+/* Animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar styling */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(253, 115, 17, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(253, 115, 17, 0.5);
 }

@@ -3,10 +3,11 @@ import DashboardLayout from "../../../components/DashboardLayout/DashboardLayout
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import jsPDF from "jspdf";
-import 'jspdf-autotable';
-import { toast } from 'react-toastify';
+import "jspdf-autotable";
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import "./AdminDoctorManage.css";
+import { FaEye, FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 const AdminDoctorManage = () => {
   const [doctors, setDoctors] = useState([]);
@@ -26,32 +27,33 @@ const AdminDoctorManage = () => {
   const fetchDoctors = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/doctors");
-      setDoctors(response.data); // Fetch and set doctor details
+      setDoctors(response.data);
     } catch (error) {
       console.error("Error fetching doctors:", error);
+      toast.error("Failed to fetch doctors");
     }
   };
 
   const handleAdd = () => {
-    navigate("/doctorprofile"); // Navigate to the DoctorProfile page
+    navigate("/doctorprofile");
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this doctor?")) {
-      try {
-        await axios.delete(`http://localhost:5000/api/doctors/${id}`);
-        toast.success("Doctor deleted successfully!");
-        setDoctors(prev => prev.filter(doc => doc._id !== id)); // Optimistically update the UI
-        Swal.fire({
-          title: "Deleted!",
-          text: "Doctor has been deleted successfully.",
-          icon: "success",
-          confirmButtonText: "OK",
-        });
-      } catch (error) {
-        toast.error("Failed to delete doctor");
-        console.error("Error deleting doctor:", error);
-      }
+    try {
+      await axios.delete(`http://localhost:5000/api/doctors/${id}`);
+      setDoctors((prev) => prev.filter((doc) => doc._id !== id));
+      toast.success("Doctor deleted successfully!");
+      Swal.fire({
+        title: "Deleted!",
+        text: "Doctor has been removed successfully.",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+    } catch (error) {
+      toast.error("Failed to delete doctor");
+      console.error("Error deleting doctor:", error);
+    } finally {
+      setShowDeleteModal(false);
     }
   };
 
@@ -61,25 +63,25 @@ const AdminDoctorManage = () => {
   };
 
   const handleEdit = (id) => {
-    navigate(`/editdoctor/${id}`); // Navigate to EditDoctorProfile with the doctor ID
+    navigate(`/editdoctor/${id}`);
   };
 
   const handleView = (id) => {
-    const doctor = doctors.find(doc => doc._id === id);
+    const doctor = doctors.find((doc) => doc._id === id);
     setViewDoctor(doctor);
     setShowViewModal(true);
   };
 
   const handleToggleAllDoctors = () => {
-    setShowAllDoctors(!showAllDoctors); // Toggle the visibility of the table
+    setShowAllDoctors(!showAllDoctors);
   };
 
   const generatePDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(18);
+    doc.setFont("helvetica", "bold");
 
     if (viewDoctor) {
-      // Generate report for the currently viewed doctor
       doc.text("Doctor Details Report", 14, 22);
       const details = [
         ["Field", "Value"],
@@ -98,15 +100,15 @@ const AdminDoctorManage = () => {
         head: [details[0]],
         body: details.slice(1),
         startY: 30,
+        theme: "striped",
+        headStyles: { fillColor: [33, 150, 243] },
       });
 
-      doc.save(`${viewDoctor.firstName}_${viewDoctor.lastName}_details.pdf`);
+      doc.save(`${viewDoctor.firstName}_${viewDoctor.lastName}_report.pdf`);
     } else {
-      // Generate report for all doctors
-      doc.text("Doctors Report", 14, 22);
-
+      doc.text("All Doctors Report", 14, 22);
       const headers = [["Name", "Specialty", "Email", "Phone", "Gender", "City", "State"]];
-      const data = doctors.map(doctor => [
+      const data = doctors.map((doctor) => [
         `${doctor.firstName} ${doctor.lastName}`,
         doctor.specialty,
         doctor.email,
@@ -120,33 +122,40 @@ const AdminDoctorManage = () => {
         head: headers,
         body: data,
         startY: 30,
+        theme: "striped",
+        headStyles: { fillColor: [33, 150, 243] },
       });
 
-      doc.save("doctors_report.pdf");
-      
+      doc.save("all_doctors_report.pdf");
     }
   };
 
+  const filteredDoctors = doctors.filter(
+    (doctor) =>
+      (doctor.firstName.toLowerCase().includes(search.toLowerCase()) ||
+        doctor.lastName.toLowerCase().includes(search.toLowerCase())) &&
+      (specialty === "" || doctor.specialty === specialty)
+  );
+
   return (
     <DashboardLayout title="Doctor Management">
-      <div className="doctor-admin-container4617D">
-        <div className="dashboard-header4617D">
-          
-          <div className="action-buttons4617D">
-            <button onClick={generatePDF} className="generate-pdf-btn4617D">
+      <div className="doctor-admin-containerADOM">
+        <div className="dashboard-headerADOM">
+          <div className="action-buttonsADOM">
+            <button onClick={generatePDF} className="generate-pdf-btnADOM">
               <i className="fas fa-file-pdf"></i> Generate Report
             </button>
-            <button onClick={handleAdd} className="add-doctor-btn4617D">
+            <button onClick={handleAdd} className="add-doctor-btnADOM">
               <i className="fas fa-plus"></i> Add New Doctor
             </button>
-            <button onClick={handleToggleAllDoctors} className="view-all-doctors-btn4617D">
-              <i className="fas fa-table"></i> {showAllDoctors ? "Hide All Doctors" : "View All Doctors"}
+            <button onClick={handleToggleAllDoctors} className="view-all-doctors-btnADOM">
+              <i className="fas fa-table"></i> {showAllDoctors ? "Hide Table" : "View All Doctors"}
             </button>
           </div>
         </div>
 
-        <div className="search-filters4617D">
-          <div className="search-box4617D">
+        <div className="search-filtersADOM">
+          <div className="search-boxADOM">
             <i className="fas fa-search"></i>
             <input
               type="text"
@@ -155,19 +164,21 @@ const AdminDoctorManage = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <select value={specialty} onChange={(e) => setSpecialty(e.target.value)} className="specialty-select4617D">
+          <select
+            value={specialty}
+            onChange={(e) => setSpecialty(e.target.value)}
+            className="specialty-selectADOM"
+          >
             <option value="">All Specialties</option>
             <option value="Eye Surgeon">Eye Surgeon</option>
             <option value="Optometrist">Optometrist</option>
             <option value="Ophthalmologist">Ophthalmologist</option>
           </select>
-          
-
         </div>
-        
+
         {showAllDoctors && (
-          <div className="all-doctors-table-container">
-            <table className="all-doctors-table">
+          <div className="all-doctors-table-containerADOM">
+            <table className="all-doctors-tableADOM">
               <thead>
                 <tr>
                   <th>Photo</th>
@@ -183,121 +194,142 @@ const AdminDoctorManage = () => {
                 </tr>
               </thead>
               <tbody>
-                {doctors.map((doctor) => (
-                  <tr key={doctor._id}>
-                    <td>
-                      {doctor.photo ? (
-                        <img
-                          src={`http://localhost:5000/uploads/${doctor.photo}`}
-                          alt={`${doctor.firstName} ${doctor.lastName}`}
-                          className="doctor-photo-table"
-                        />
-                      ) : (
-                        "No Photo"
-                      )}
+                {filteredDoctors.length > 0 ? (
+                  filteredDoctors.map((doctor) => (
+                    <tr key={doctor._id}>
+                      <td>
+                        {doctor.photo ? (
+                          <img
+                            src={`http://localhost:5000/uploads/${doctor.photo}`}
+                            alt={`${doctor.firstName} ${doctor.lastName}`}
+                            className="doctor-photo-tableADOM"
+                          />
+                        ) : (
+                          <span className="no-photo-tableADOM">No Photo</span>
+                        )}
+                      </td>
+                      <td>{`${doctor.firstName} ${doctor.lastName}`}</td>
+                      <td>{doctor.specialty}</td>
+                      <td>{doctor.email}</td>
+                      <td>{doctor.phone}</td>
+                      <td>{doctor.gender}</td>
+                      <td>{doctor.city}</td>
+                      <td>{doctor.state}</td>
+                      <td>{doctor.address}</td>
+                      <td>{doctor.dob}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="10" className="no-dataADOM">
+                      No doctors found
                     </td>
-                    <td>{`${doctor.firstName} ${doctor.lastName}`}</td>
-                    <td>{doctor.specialty}</td>
-                    <td>{doctor.email}</td>
-                    <td>{doctor.phone}</td>
-                    <td>{doctor.gender}</td>
-                    <td>{doctor.city}</td>
-                    <td>{doctor.state}</td>
-                    <td>{doctor.address}</td>
-                    <td>{doctor.dob}</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
         )}
 
-        <div className="doctors-grid4617D">
-          {doctors.filter(doctor =>
-            (doctor.firstName.toLowerCase().includes(search.toLowerCase()) ||
-            doctor.lastName.toLowerCase().includes(search.toLowerCase())) &&
-            (specialty === "" || doctor.specialty === specialty)
-          ).map((doctor) => (
-            <div key={doctor._id} className="doctor-card4617D">
-              <div className="doctor-image4617D">
+        <div className="doctors-gridADOM">
+          {filteredDoctors.map((doctor) => (
+            <div key={doctor._id} className="doctor-cardADOM">
+              <div className="doctor-imageADOM">
                 {doctor.photo ? (
-                  <img src={`http://localhost:5000/uploads/${doctor.photo}`} alt={`${doctor.firstName} ${doctor.lastName}`} />
+                  <img
+                    src={`http://localhost:5000/uploads/${doctor.photo}`}
+                    alt={`${doctor.firstName} ${doctor.lastName}`}
+                  />
                 ) : (
-                  <div className="no-photo4617D">No Photo</div>
+                  <div className="no-photoADOM">No Photo</div>
                 )}
               </div>
-              <div className="doctor-info4617D">
+              <div className="doctor-infoADOM">
                 <h3>{`${doctor.firstName} ${doctor.lastName}`}</h3>
                 <p><strong>Specialty:</strong> {doctor.specialty}</p>
                 <p><strong>City:</strong> {doctor.city}</p>
                 <p><strong>State:</strong> {doctor.state}</p>
                 <p><strong>Email:</strong> {doctor.email}</p>
               </div>
-              <div className="doctor-actions4617D">
-                <button onClick={() => handleView(doctor._id)} className="action-btn4617D view-btn4617D" title="View Doctor">
-                  <i className="fas fa-eye"></i> View
+              <div className="doctor-actionsADOM">
+                <button
+                  onClick={() => handleView(doctor._id)}
+                  className="action-btnADOM view-btnADOM"
+                  title="View Details"
+                >
+                  <FaEye className="btn-iconADOM" />
+                  View
                 </button>
-                <button onClick={() => handleEdit(doctor._id)} className="action-btn4617D edit-btn4617D" title="Edit Doctor">
-                  <i className="fas fa-edit"></i> Edit
+                <button
+                  onClick={() => handleEdit(doctor._id)}
+                  className="action-btnADOM edit-btnADOM"
+                  title="Edit Doctor"
+                >
+                  <FaEdit className="btn-iconADOM" />
+                  Edit
                 </button>
-                <button onClick={() => handleDeleteClick(doctor)} className="action-btn4617D delete-btn4617D" title="Delete Doctor">
-                  <i className="fas fa-trash"></i> Delete
+                <button
+                  onClick={() => handleDeleteClick(doctor)}
+                  className="action-btnADOM delete-btnADOM"
+                  title="Delete Doctor"
+                >
+                  <FaTrashAlt className="btn-iconADOM" />
+                  Delete
                 </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Delete Confirmation Modal */}
         {showDeleteModal && (
-          <div className="modal-overlay-deleteDoctor">
-            <div className="modal-content-deleteDoctor">
-              <div className="modal-header-deleteDoctor">
-                <h2>Delete Doctor</h2>
-                <button onClick={() => setShowDeleteModal(false)} className="close-btn-deleteDoctor">
+          <div className="modal-overlay-deleteDoctorADOM">
+            <div className="modal-content-deleteDoctorADOM">
+              <div className="modal-header-deleteDoctorADOM">
+                <h2>Confirm Deletion</h2>
+                <button onClick={() => setShowDeleteModal(false)} className="close-btn-deleteDoctorADOM">
                   <i className="fas fa-times"></i>
                 </button>
               </div>
-              <div className="modal-body-deleteDoctor">
-                <p>Are you sure you want to delete Dr. {selectedDoctor.firstName} {selectedDoctor.lastName}?</p>
-                <p className="warning-text-deleteDoctor">This action cannot be undone.</p>
+              <div className="modal-body-deleteDoctorADOM">
+                <p>
+                  Are you sure you want to delete Dr. {selectedDoctor.firstName} {selectedDoctor.lastName}?
+                </p>
+                <p className="warning-text-deleteDoctorADOM">This action is irreversible.</p>
               </div>
-              <div className="modal-actions-deleteDoctor">
-                <button onClick={() => setShowDeleteModal(false)} className="cancel-btn-deleteDoctor">Cancel</button>
-                <button onClick={() => handleDelete(selectedDoctor._id)} className="delete-confirm-btn-deleteDoctor">Delete</button>
+              <div className="modal-actions-deleteDoctorADOM">
+                <button
+                  onClick={() => setShowDeleteModal(false)}
+                  className="cancel-btn-deleteDoctorADOM"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleDelete(selectedDoctor._id)}
+                  className="delete-confirm-btn-deleteDoctorADOM"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
         )}
 
-        {/* View Doctor Modal */}
         {showViewModal && viewDoctor && (
-          <div className="modal-overlay-viewDoctor">
-            <div className="modal-content-viewDoctor">
-              <div className="modal-header-viewDoctor">
+          <div className="modal-overlay-viewDoctorADOM">
+            <div className="modal-content-viewDoctorADOM">
+              <div className="modal-header-viewDoctorADOM">
                 <h2>Doctor Details</h2>
-                <button onClick={() => setShowViewModal(false)} className="close-btn-viewDoctor">
-                  <i className="fas fa-times"></i>
-                </button>
               </div>
-              <div className="modal-body-viewDoctor">
+              <div className="modal-body-viewDoctorADOM">
                 {viewDoctor.photo ? (
-                  <div className="doctor-photo-viewDoctor">
-                    <img 
+                  <div className="doctor-photo-viewDoctorADOM">
+                    <img
                       src={`http://localhost:5000/uploads/${viewDoctor.photo}`}
                       alt={`${viewDoctor.firstName} ${viewDoctor.lastName}`}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://via.placeholder.com/200x200?text=No+Photo";
-                      }}
                     />
                   </div>
                 ) : (
-                  <div className="doctor-photo-viewDoctor">
-                    <div className="no-photo-viewDoctor">
-                      No Photo Available
-                    </div>
-                  </div>
+                  <div className="no-photo-viewDoctorADOM">No Photo Available</div>
                 )}
                 <p><strong>Name:</strong> {`${viewDoctor.firstName} ${viewDoctor.lastName}`}</p>
                 <p><strong>Specialty:</strong> {viewDoctor.specialty}</p>
@@ -309,9 +341,10 @@ const AdminDoctorManage = () => {
                 <p><strong>Address:</strong> {viewDoctor.address}</p>
                 <p><strong>Date of Birth:</strong> {viewDoctor.dob}</p>
               </div>
-              <div className="modal-actions-viewDoctor">
-                
-                <button onClick={() => setShowViewModal(false)} className="close-btn-viewDoctor">Close</button>
+              <div className="modal-actions-viewDoctorADOM">
+                <button onClick={() => setShowViewModal(false)} className="close-btn-viewDoctorADOM">
+                  Close
+                </button>
               </div>
             </div>
           </div>

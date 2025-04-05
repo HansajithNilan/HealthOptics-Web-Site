@@ -2,140 +2,143 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 30px;
-  margin: 30px auto;
-  flex-wrap: wrap;
-  padding: 20px;
-  background-color: #f5f5f5; /* Light background for better contrast */
-  border-radius: 10px;
+  gap: 40px;
+  margin: 40px auto;
+  max-width: 1200px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .image-container4617 {
   flex: 1;
+  min-width: 300px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .doctor-image4617 {
   width: 100%;
-  max-width: 450px;
+  max-width: 400px;
   height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.doctor-image4617:hover {
+  transform: scale(1.02);
 }
 
 .form-container4617 {
   flex: 1;
   max-width: 600px;
-  background: #ffffff; /* White background for the form */
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
 }
 
 .form-title4617 {
   text-align: center;
-  font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333; /* Dark text for better readability */
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #1f2937;
+  letter-spacing: -0.5px;
 }
 
 .form4617 {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  display: grid;
+  gap: 20px;
 }
 
 .form-group4617 {
-  width: 100%; /* Full width for better alignment */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group4617 label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
 }
 
 .input-field4617 {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
   font-size: 14px;
-  background-color: #f9f9f9; /* Light input background */
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.radio-group4617 {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+.input-field4617:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input-field4617::placeholder {
+  color: #9ca3af;
 }
 
 .submit-button4617 {
   width: 100%;
-  max-width: 200px;
-  background-color: #4caf50; /* Green button for success */
-  color: #fff;
-  font-weight: bold;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
   padding: 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s;
-  margin: 20px auto 0;
-  display: block;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .submit-button4617:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.submit-button4617:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
 }
 
 .image-preview4617 {
-  width: 150px;
-  height: 100px;
-  margin-top: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  width: 120px;
+  height: 80px;
+  margin-top: 8px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
   object-fit: cover;
-  background-color: white;
+  background-color: #f9fafb;
 }
 
 .error {
-  color: red;
+  color: #dc2626;
   font-size: 12px;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
-.custom-swal-popup4617 {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #f8f9fa;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .doctor-container4617 {
+    flex-direction: column;
+    padding: 20px;
+    margin: 20px;
+  }
 
-.custom-swal-title4617 {
-  color: #f84610;
-  font-weight: bold;
-  font-size: 24px;
-}
+  .form-container4617 {
+    padding: 20px;
+  }
 
-.custom-swal-confirm-button4617 {
-  background-color: #e32929;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-.custom-swal-confirm-button4617:hover {
-  background-color: #bf2020;
-}
-
-.custom-swal-content4617 {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.custom-swal-icon4617 {
-  color: red; /* Change icon color to red */
+  .doctor-image4617 {
+    max-width: 300px;
+  }
 }
