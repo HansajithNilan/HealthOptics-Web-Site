@@ -1,21 +1,28 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import { Routes, Route } from "react-router-dom";
+
 import "./App.css";
 
 import Homepage from "./pages/HomePage/Hompage/Homepage.jsx";
+
+import AddfeedBackform from "./pages/HomePage/UserFeedback/Addfeedbackform.jsx";
+import AllFeedbacks from "./pages/HomePage/UserFeedback/AllFeedbacks.jsx";
+
 import UserRegisterPage from "./pages/UserRegisterPage/UserRegister.jsx";
 
 import SpectaclesReservation from "./pages/SpectaclesReservationPage/Reservation.jsx";
-
+import ReservationDisplay from "./pages/UserReservation/ReservationDisplay.jsx";
 import ReservationDetails from "./pages/SpectaclesReservationPage/ReservationDetails.jsx";
 import ReservationUpdate from "./pages/SpectaclesReservationPage/UpdateReservation.jsx";
 
-
 import AddDoctorAppointmentDetails from "./pages/HomePage/doctorappointment/AddDoctorAppointmentDetails.jsx";
 
-import MyAppointmentScreen from "./pages/HomePage/doctorappointment/MyAppointmentScreen.jsx";
+import AllAppointmentScreen from "./pages/HomePage/doctorappointment/AllAppointmentScreen.jsx";
 
+// import MyAppointmentScreen from "./pages/HomePage/doctorappointment/MyAppointmentScreen.jsx";
 
+import Loginpage from "./pages/LoginPage/loginpage.jsx";
 
 import DoctorProfileFrom from "./pages/DoctorManagement/DoctorProfileFrom.jsx";
 import DoctorProfilepage from "./pages/DoctorManagement/DoctorProfilepage.jsx";
@@ -25,70 +32,67 @@ import OphthalmologistsScreen from "./pages/HomePage/doctorappointment/Ophthalmo
 import Dashboard from "./pages/AdminPage/Dashboard/Dashboard.jsx";
 import SpectacleManage from "./pages/AdminPage/SpectacleManagement/SpectacleManage.jsx";
 
-// Import AdminDoctorManage component, make sure the path matches where the component is in your project.
-import AdminDoctorManage from "./pages/AdminPage/DoctorManagement/AdminDoctorManage.jsx"; // Corrected path
-
-import EditDoctorAppointment from "./pages/HomePage/doctorappointment/EditDoctorAppointment.jsx"; // Import EditDoctorAppointment
-
-import DoctorProfileTable from "./pages/DoctorManagement/DoctorProfileTable.jsx";
+import AdminDoctorManage from "./pages/AdminPage/DoctorManagement/AdminDoctorManage.jsx";
+import EditDoctorAppointment from "./pages/HomePage/doctorappointment/EditDoctorAppointment.jsx";
 
 import Spectacle from "./pages/HomePage/Spectacle/Spectacles.jsx";
 
+import OnMyAppointment from "./pages/HomePage/doctorappointment/OnMyAppointment.jsx";
+
+import Cartab from "./pages/CartTab/cartab.jsx";
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/register" element={<UserRegisterPage />} />
-        <Route path="/Register" element={<UserRegisterPage />} />
-
-        <Route path="/reservespectacles/:id" element={<SpectaclesReservation />} />
-        <Route path="/reservationDetails" element={<ReservationDetails />} />
-        <Route path="/updatereservation/:id" element={<ReservationUpdate/>} />
-
-
-        <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
-        <Route path="/myappointment" element={<MyAppointmentScreen />} />
-        <Route
-          path="/editdoctorappointment/:id"
-          element={<EditDoctorAppointment />}
-        />{" "}
-        {/* Add route for EditDoctorAppointment */}
-        <Route path="/reservespectacles" element={<SpectaclesReservation />} />
-        <Route
-          path="/addappointment"
-          element={<AddDoctorAppointmentDetails />}
-        />
-
-        
-        <Route
-          path="/doctorprofile"
-          element={
-            <DoctorProfileFrom
-              onDoctorAdded={(doctor) => {
-                const state = window.history.state;
-                if (state && state.onDoctorAdded) {
-                  state.onDoctorAdded(doctor);
-                }
-              }}
-            />
-          }
-        />
-        <Route path="/doctorprofilepage" element={<DoctorProfilepage />} />
-        <Route path="/editdoctor/:id" element={<EditDoctorProfile />} />
-        <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
-        <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/spectacles" element={<SpectacleManage />} />
-        <Route path="/admin/doctors" element={<AdminDoctorManage />} />{" "}
-        {/* New route for AdminDoctorManage */}
-        <Route path="/doctorprofile" element={<DoctorProfileFrom />} />
-        <Route path="/doctorprofiletable" element={<DoctorProfileTable />} />
-        <Route path="/doctorprofilepage/" element={<DoctorProfilepage />} />
-        <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/spectacles" element={<SpectacleManage />} />
-        <Route path="/spectacles" element={<Spectacle />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      {/* <Route path="/myappointment" element={<MyAppointmentScreen />} /> */}
+      <Route path="/register" element={<UserRegisterPage />} />
+      <Route path="/Register" element={<UserRegisterPage />} />
+      <Route
+        path="/reservespectacles/:id/:number"
+        element={<SpectaclesReservation />}
+      />
+      <Route path="/reservationDetails" element={<ReservationDetails />} />
+      <Route path="/updatereservation/:id" element={<ReservationUpdate />} />
+      <Route
+        path="/reservationdisplay/:number"
+        element={<ReservationDisplay />}
+      />
+      <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
+      <Route path="/allappointments" element={<AllAppointmentScreen />} />
+      <Route
+        path="/editdoctorappointment/:id"
+        element={<EditDoctorAppointment />}
+      />{" "}
+      {/* Add route for EditDoctorAppointment */}
+      <Route path="/reservespectacles" element={<SpectaclesReservation />} />
+      <Route path="/addappointment" element={<AddDoctorAppointmentDetails />} />
+      <Route
+        path="/doctorprofile"
+        element={
+          <DoctorProfileFrom
+            onDoctorAdded={(doctor) => {
+              const state = window.history.state;
+              if (state && state.onDoctorAdded) {
+                state.onDoctorAdded(doctor);
+              }
+            }}
+          />
+        }
+      />
+      <Route path="/doctorprofilepage" element={<DoctorProfilepage />} />
+      <Route path="/editdoctor/:id" element={<EditDoctorProfile />} />
+      <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
+      <Route path="/admin/dashboard" element={<Dashboard />} />
+      <Route path="/admin/spectacles" element={<SpectacleManage />} />
+      <Route path="/admin/doctors" element={<AdminDoctorManage />} />{" "}
+      <Route path="/doctorprofile" element={<DoctorProfileFrom />} />
+      <Route path="/spectacles" element={<Spectacle />} />
+      <Route path="/loginpage" element={<Loginpage />} />
+      <Route path="/onmyappointment" element={<OnMyAppointment />} />
+      <Route path="/feedback" element={<AddfeedBackform />} />
+      <Route path="/all-feedbacks" element={<AllFeedbacks />} />
+    </Routes>
   );
 }
 

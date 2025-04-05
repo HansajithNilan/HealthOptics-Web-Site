@@ -4,7 +4,14 @@ import Doctor from "../models/Doctor.js";
 export const getDoctors = async (req, res) => {
   try {
     const doctors = await Doctor.find();
-    res.status(200).json(doctors);
+    const formattedDoctors = doctors.map(doctor => {
+      const doctorObj = doctor.toObject();
+      if (doctorObj.photo) {
+        doctorObj.photoUrl = `http://localhost:5000/uploads/${doctorObj.photo}`;
+      }
+      return doctorObj;
+    });
+    res.status(200).json(formattedDoctors);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -27,6 +34,9 @@ export const getDoctorById = async (req, res) => {
 export const createDoctor = async (req, res) => {
   try {
     const { firstName, lastName, email, address, dob, specialty, city, state, phone, gender } = req.body;
+
+    // Log the uploaded file information
+    console.log('Uploaded file:', req.file);
 
     // Validate required fields
     if (!firstName || !lastName || !email || !address || !dob || !specialty || !city || !state || !phone || !gender) {
@@ -65,9 +75,15 @@ export const createDoctor = async (req, res) => {
 
     const savedDoctor = await newDoctor.save();
     
+    // Return the complete doctor object with full photo URL
+    const doctorResponse = savedDoctor.toObject();
+    if (doctorResponse.photo) {
+      doctorResponse.photoUrl = `http://localhost:5000/uploads/${doctorResponse.photo}`;
+    }
+    
     res.status(201).json({
       message: "Doctor created successfully",
-      doctor: savedDoctor
+      doctor: doctorResponse
     });
   } catch (error) {
     console.error("Error creating doctor:", error);

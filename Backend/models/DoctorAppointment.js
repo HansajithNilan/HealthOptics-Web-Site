@@ -35,6 +35,11 @@ const DoctorAppointmentSchema = new Schema({
         type: String,
         required: true
     },
+    timeSlot: {
+        type: String,
+        required: true,
+        enum: ['09:00 AM - 10:00 AM', '04:00 PM - 06:00 PM']
+    },
     
 });
 

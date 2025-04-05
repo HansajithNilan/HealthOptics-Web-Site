@@ -1,0 +1,13 @@
+.cartItem-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cartItem-container h6{
+  font-size: 0.7rem; /* Tailwind: text-xl */
+  font-weight: 100;
+  color: white;
+  margin-left: 4px;
+
+}

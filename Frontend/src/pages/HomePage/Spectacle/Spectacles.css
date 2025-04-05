@@ -76,17 +76,27 @@
 .empty {
     color: #d1d5db; /* Gray color for empty stars */
 }
+.spectacle-button-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
 
 /* Shop Now button */
-.shop-now-btn {
+.shop-now-button {
     margin-top: 16px;
+    font-size: 11px;
     padding: 12px;
     background-color: #2563eb; /* Blue background */
     color: white;
     font-weight: 600;
     text-align: center;
     border-radius: 8px;
-    width: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -95,3 +105,4 @@
 .shop-now-btn:hover {
     background-color: #1d4ed8; /* Darker blue on hover */
 }
+

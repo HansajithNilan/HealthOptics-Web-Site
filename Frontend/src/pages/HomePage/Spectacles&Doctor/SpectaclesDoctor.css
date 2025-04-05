@@ -1,0 +1,105 @@
+.section-images-home{
+    display: flex;
+    justify-content: space-around;
+    max-width:1000px;
+    align-items: center;
+    background-size: cover;
+
+    margin: auto;
+    gap: 2rem;
+
+}
+.section-images-home img{
+
+  margin-top: 10px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.SpectaclesDoctorImage{
+    position: relative;
+    width:450px ;
+    height:350px ;
+    
+    
+}
+.SpectaclesDoctorImage {
+    width: 100%;
+
+}
+.SpectaclesDoctorImage h1
+
+{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight:700;
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    font-size: 2rem;
+   
+}
+.SpectaclesDoctorImage h5{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight:300;
+    position: absolute;
+    top: 50%;
+    left: 37%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+
+
+}
+
+.custom-button {
+    position: absolute;
+    top: 65%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    fontSize: 2rem;
+    fontWeight: bold;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #ffae17cc;
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: #949494;
+}
+
+.doctorappoimentImage{
+    position: relative;
+    width:450px ;
+    height:350px ;
+}
+.doctorappoimentImage h1{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight:700;
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    font-size: 2rem;
+}
+.doctorappoimentImage h5{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight:300;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 255);
+    font-size: 1rem
+}

@@ -9,6 +9,8 @@ import Contact from '../HomePage/contact/contact';
 
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import Swal from 'sweetalert2';
+
 
 function ReservationDetails() {
   const [reservations, setReservations] = useState([]);
@@ -28,14 +30,31 @@ function ReservationDetails() {
   }, []);
 
   const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:5000/api/auth/reservation/deletereservation/${id}`)
-      .then((res) => {
-        console.log(res);
-        window.location.reload();
-      })
-      .catch((err) => console.log('Delete error:', err));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this reservation!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/api/auth/reservation/deletereservation/${id}`)
+          .then((res) => {
+            Swal.fire('Deleted!', 'Reservation has been deleted.', 'success');
+            setReservations(prev => prev.filter(reserve => reserve._id !== id)); // Update list without reload
+          })
+          .catch((err) => {
+            console.error('Delete error:', err);
+            Swal.fire('Error!', 'Something went wrong during deletion.', 'error');
+          });
+      }
+    });
   };
+  
+  
 
   const generatePDF = () => {
     const doc = new jsPDF();
