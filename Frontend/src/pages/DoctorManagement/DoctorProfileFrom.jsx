@@ -119,7 +119,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
             <h2 className="form-title4617">Add Doctor Profile</h2>
             <form onSubmit={handleSubmit} className="form4617">
               <div className="form-group4617">
-                <label>First Name :</label> 
+                <label>First Name </label> 
                 <input
                   type="text"
                   placeholder="First Name"
@@ -130,7 +130,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                 />
               </div>
               <div className="form-group4617">
-                <label>Last Name :</label>
+                <label>Last Name </label>
                 <input
                   type="text"
                   placeholder="Last Name"
@@ -141,7 +141,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                 />
               </div>
               <div className="form-group4617">
-                <label>Email :</label>
+                <label>Email </label>
                 <input
                   type="email"
                   placeholder="Email"
@@ -152,7 +152,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                 />
               </div>
               <div className="form-group4617">
-                <label>Address :</label>
+                <label>Address </label>
                 <input
                   type="text"
                   placeholder="Address"
@@ -163,7 +163,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                 />
               </div>
               <div className="form-group4617">
-                <label>Phone Number :</label>
+                <label>Date of Birth</label>
                 <input
                   type="date"
                   placeholder="Date of Birth"
@@ -174,7 +174,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                 />
               </div>
               <div className="form-group4617">
-                <label>Specialty :</label>
+                <label>Specialty </label>
               <select
                   
                   
@@ -183,7 +183,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                   required
                   className="input-field4617"
                 >
-                  <option value="">Select Specialty</option>
+                  <option value="" disabled>Select Specialty</option>
                   <option value="Eye Surgeon">Eye Surgeon</option>
                   <option value="Optometrist">Optometrist</option>
                   <option value="Ophthalmologist">Ophthalmologist</option>
@@ -193,7 +193,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
               
               
               <div className="form-group4617">
-                <label>City :</label>
+                <label>City </label>
                 <input
                   type="text"
                   placeholder="City"
@@ -204,7 +204,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                 />
               </div>
               <div className="form-group4617">
-                <label>State :</label>
+                <label>State </label>
                 <input
                   type="text"
                   placeholder="State"
@@ -215,7 +215,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                 />
               </div>
               <div className="form-group4617">
-                <label>Phone Number :</label>
+                <label>Phone Number </label>
                 <input
                   type="tel"
                   placeholder="Phone"
@@ -228,7 +228,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                 />
               </div>
               <div className="form-group4617">
-                <label>Gender :</label>
+                <label>Gender </label>
                 <select
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
@@ -242,7 +242,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                 </select>
               </div>
               <div className="form-group4617">
-                <label> Doctor Photo:</label>
+                <label> Doctor Photo</label>
                 <input
                   type="file"
                   accept="image/*"

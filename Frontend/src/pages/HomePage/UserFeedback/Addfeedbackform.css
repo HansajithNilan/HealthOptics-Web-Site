@@ -156,10 +156,11 @@
     color: #7f8c8d;
     cursor: pointer;
     transition: color 0.3s ease;
+    
   }
   
   .ADDFBmic-btn:hover {
-    color: #3498db;
+    color: #dc2508;
   }
   
   .ADDFBmic-btn.active {
@@ -206,7 +207,7 @@
   }
   
   .ADDFBsubmit-btn:hover {
-    background: #2980b9;
+    background: #f07603;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }

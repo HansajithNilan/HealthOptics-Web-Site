@@ -1,31 +1,51 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import { FaBars, FaTimes, FaChevronDown, FaUserMd, FaComments, FaCalendarAlt } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
+import { GiSunglasses } from "react-icons/gi";
+import { BsCalendarCheck } from "react-icons/bs";
 import "./SideBar.css";
 
 function SideBar() {
   const [activeMenu, setActiveMenu] = useState(null);
   const location = useLocation();
-  // const navigate = useNavigate();
 
   const toggleSubmenu = (menu) => {
     setActiveMenu(activeMenu === menu ? null : menu);
   };
 
   const mainLinks = [
-    { name: "Dashboard", path: "/admin/dashboard" },
+    { 
+      name: "Dashboard", 
+      path: "/admin/dashboard",
+      icon: <MdDashboard className="sidebar-icon" />
+    },
     {
       name: "Spectacles Management",
       path: "/admin/spectacles",
+      icon: <GiSunglasses className="sidebar-icon" />
     },
     {
       name: "Doctor Management",
       path: "/admin/doctors",
+      icon: <FaUserMd className="sidebar-icon" />
     },
     {
       name: "Reservations Management",
       path: "/reservationDetails",
+      icon: <FaCalendarAlt className="sidebar-icon" />
     },
+    {
+      name: "Feedback Management",
+      path: "/admin/feedbacks",
+      icon: <FaComments className="sidebar-icon" />
+    },
+    {
+      name:"Appointment Management",
+      icon:<BsCalendarCheck className="sidebar-icon" />,
+      
+
+    }
   ];
 
   return (
@@ -48,14 +68,15 @@ function SideBar() {
               }`}
             >
               <Link to={item.path} className="main-link">
-                {item.name}
+                {item.icon}
+                <span>{item.name}</span>
               </Link>
               {item.submenu && (
                 <button
                   className="submenu-toggle"
                   onClick={() => toggleSubmenu(item.name)}
                 >
-                  <FaChevronDown />
+                  <FaChevronDown className={`chevron ${activeMenu === item.name ? 'rotated' : ''}`} />
                 </button>
               )}
             </div>
