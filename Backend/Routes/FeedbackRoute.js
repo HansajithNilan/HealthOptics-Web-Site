@@ -8,5 +8,6 @@ router.post('/create', ensureAuthenticated, createFeedback);
 router.get('/all', getAllFeedback);
 router.put('/update/:id', ensureAuthenticated, updateFeedback);
 router.delete('/delete/:id', ensureAuthenticated, deleteFeedback);
+router.delete('/admindelete/:id', deleteFeedback);
 
 export default router;

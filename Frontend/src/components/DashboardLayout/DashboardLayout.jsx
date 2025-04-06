@@ -7,22 +7,26 @@ const DashboardLayout = ({ title, children }) => {
     <div className="dashboard-layout-container">
       <SideBar />
       <div className="dashboard-layout-content">
-        {/* Static Dashboard Header */}
-
+        {/* Dashboard Header */}
         <div className="dashboard-layout-header">
-          <h2>{title}</h2>
+          <h2 className="dashboard-title">{title}</h2>
           <div className="side-header">
-          <div className="profile">
-             <img src="/dp.jpg" alt="Profile" className="profile-picture"/>
+            <div className="profile">
+              <img
+                src="/dp.jpg"
+                alt="Profile"
+                className="profile-picture"
+              />
               <span className="profile-name">Admin</span>
-          </div>
-          <button className="logout-button">Logout</button>
+            </div>
+            <button className="logout-button">Logout</button>
           </div>
         </div>
 
-
-        {/* The children prop will render the page content */}
-        {children}
+        {/* Main Content */}
+        <div className="dashboard-main-content">
+          {children}
+        </div>
       </div>
     </div>
   );
