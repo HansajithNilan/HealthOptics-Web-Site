@@ -316,7 +316,7 @@ const SpectacleManage = () => {
             <th>Brand</th>
             <th>Frame Shape</th>
             <th>Frame Material</th>
-            <th>Frame Size</th>
+            {/* <th>Frame Size</th> */}
             <th>Price</th>
             <th>Stock Quantity</th>
             <th>More Details</th>
@@ -332,7 +332,7 @@ const SpectacleManage = () => {
               <td>{spectacle.brand}</td>
               <td>{spectacle.frameshape}</td>
               <td>{spectacle.framematerial}</td>
-              <td>{`${spectacle.framesize1}, ${spectacle.framesize2}, ${spectacle.framesize3}`}</td>
+              {/* <td>{`${spectacle.framesize1}, ${spectacle.framesize2}, ${spectacle.framesize3}`}</td> */}
               <td>${spectacle.price.toLocaleString()}</td>
               <td>{spectacle.stock}</td>
               <td>
