@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import { FaTimes, FaEraser } from "react-icons/fa";
 
 const SpectacleDetails = ({ spectacle, onClose }) => {
@@ -12,7 +12,8 @@ const SpectacleDetails = ({ spectacle, onClose }) => {
             <FaTimes />
           </button>
         </div>
-        <h2>{spectacle.model} - Details</h2>
+
+        <h2>{spectacle.model}</h2>
         <div className="shakya-detail-modal-grid">
         <div>
         <p><strong>Type:</strong> {spectacle.type}</p>
@@ -22,33 +23,17 @@ const SpectacleDetails = ({ spectacle, onClose }) => {
         <p><strong>Frame Material:</strong> {spectacle.framematerial}</p>
         <p><strong>Frame Type:</strong> {spectacle.frametype}</p>
         <p><strong>Hinge Type:</strong> {spectacle.hingetype}</p>
-        <p><strong>Description:</strong> {spectacle.description || 'N/A'}</p> {/* Fixed typo from 'discription' */}
-        
-        {/* Frame Sizes */}
-        {/* <p>
-          <strong>Frame Sizes Available:</strong> 
-          {[
-            spectacle.framesize1,
-            spectacle.framesize2,
-            spectacle.framesize3
-          ]
-            .filter(size => size) // Remove empty sizes
-            .join(", ") || "None specified"}
-        </p> */}
-        
-        <p><strong>Price:</strong> ${spectacle.price.toLocaleString()}</p>
+        {/* <p><strong>Description:</strong> {spectacle.description || 'N/A'}</p>  */}
+        <p><strong>Price:</strong> LKR {spectacle.price.toLocaleString()}</p>
         <p><strong>Rating:</strong> {spectacle.rating || 0}</p>
-        
-       
-        {/* Total Stock */}
         <p><strong>Total Stock Quantity:</strong> {spectacle.stock || 0}</p>
         </div>
         
-    
+        <div>
         {/* Variant Details */}
         {spectacle.variants && spectacle.variants.length > 0 && (
           <div className="variant-details">
-            <h3>Variant Stock Details:</h3>
+            <h3>Variant Stock Details</h3>
             <table className="variant-table">
               <thead>
                 <tr>
@@ -69,6 +54,7 @@ const SpectacleDetails = ({ spectacle, onClose }) => {
             </table>
           </div>
         )}
+        </div>
       </div>
       </div>
     
