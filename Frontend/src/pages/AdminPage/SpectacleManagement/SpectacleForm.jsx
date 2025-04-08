@@ -5,6 +5,7 @@ import { FaTimes, FaEraser } from "react-icons/fa";
 import "./SpectacleForm.css";
 
 const SpectacleForm = ({ onClose }) => {
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     model: "",
     type: "",
@@ -15,26 +16,62 @@ const SpectacleForm = ({ onClose }) => {
     frametype: "",
     hingetype: "",
     description: "",
-    framesize1: "",
-    framesize2: "",
-    framesize3: "",
+    framesizes: ["", "", ""],
     price: "",
-    stock: "",
-    rating: "",
-    imageurlcolor1: "",
-    imageurlcolor2: "",
-    imageurlcolor3: "",
+    colors: [
+      { name: "", imageUrls: "" },
+      { name: "", imageUrls: "" },
+      { name: "", imageUrls: "" },
+    ],
+    variants: [],
   });
 
+  const validateStep1 = () => {
+    const requiredFields = [
+      "model",
+      "type",
+      "brand",
+      "gender",
+      "frameshape",
+      "framematerial",
+      "frametype",
+      "hingetype",
+      "description",
+      "price",
+    ];
 
-  const validateForm = () => {
-    if (!formData.model || !formData.type || !formData.brand || !formData.gender || !formData.frameshape || !formData.framematerial || !formData.frametype || !formData.hingetype || !formData.description) {
-      Swal.fire("Error!", "All fields are required except image URLs.", "error");
+    if (requiredFields.some((field) => !formData[field])) {
+      Swal.fire("Error!", "All required fields must be filled.", "error");
       return false;
     }
-    
-    if (!formData.framesize1 && !formData.framesize2 && !formData.framesize3) {
+
+    if (!formData.framesizes.some((size) => size)) {
       Swal.fire("Error!", "At least one frame size must be filled.", "error");
+      return false;
+    }
+
+    const sizeFormatRegex = /^\d{2}-\d{2}-\d{3}$/;
+    const isValidSize = formData.framesizes.every((size) => {
+      if (!size) return true; // Skip empty ones (already checked one exists)
+      if (!sizeFormatRegex.test(size)) return false;
+
+      const [lens, bridge, temple] = size.split("-").map(Number);
+      return (
+        lens >= 40 &&
+        lens <= 70 &&
+        bridge >= 10 &&
+        bridge <= 25 &&
+        temple >= 120 &&
+        temple <= 160
+      );
+    });
+
+    if (!isValidSize) {
+      Swal.fire(
+        "Error!",
+        "One or more frame sizes are in an invalid format or range (e.g. 55-14-135).",
+        "error"
+      );
       return false;
     }
 
@@ -43,51 +80,125 @@ const SpectacleForm = ({ onClose }) => {
       return false;
     }
 
-    if (formData.stock < 0 || isNaN(formData.stock)) {
-      Swal.fire("Error!", "Stock must be a non-negative number.", "error");
+    if (!formData.colors.some((color) => color.name)) {
+      Swal.fire("Error!", "At least one color name must be filled.", "error");
       return false;
     }
-    
+
+    const wordCount = formData.description.trim().split(/\s+/).length;
+    if (wordCount > maxDescriptionWords) {
+      Swal.fire(
+        "Error!",
+        `Description must not exceed ${maxDescriptionWords} words.`,
+        "error"
+      );
+
+      return false;
+    }
+
     return true;
   };
 
-
+  const maxDescriptionWords = 45;
+  const [descriptionWarning, setDescriptionWarning] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+
+    if (name === "description") {
+      const wordCount = value.trim().split(/\s+/).length;
+
+      if (wordCount > maxDescriptionWords) {
+        setDescriptionWarning(
+          `Description cannot exceed ${maxDescriptionWords} words. Currently: ${wordCount}`
+        );
+      } else {
+        setDescriptionWarning("");
+      }
+    }
+
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
+    }));
+  };
+
+  const handleFrameSizeChange = (index, value) => {
+    const newSizes = [...formData.framesizes];
+    newSizes[index] = value;
+    setFormData((prev) => ({ ...prev, framesizes: newSizes }));
+  };
+
+  const handleVariantChange = (index, value) => {
+    const newVariants = [...formData.variants];
+    newVariants[index].stock = value >= 0 ? value : 0;
+    setFormData((prev) => ({ ...prev, variants: newVariants }));
+  };
+
+  const handleColorChange = (index, field, value) => {
+    const newColors = [...formData.colors];
+    newColors[index] = { ...newColors[index], [field]: value };
+    setFormData((prev) => ({ ...prev, colors: newColors }));
+  };
+
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (!validateStep1()) return;
+
+    // Generate variants based on framesizes and colors
+    const validSizes = formData.framesizes.filter((size) => size);
+    const validColors = formData.colors.filter((color) => color.name);
+    const variants = [];
+
+    validSizes.forEach((size) => {
+      validColors.forEach((color) => {
+        variants.push({
+          framesize: size,
+          color: color.name,
+          stock: 0,
+        });
+      });
     });
+
+    setFormData((prev) => ({ ...prev, variants }));
+    setStep(2);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    const totalStock = formData.variants.reduce(
+      (sum, variant) => sum + Number(variant.stock),
+      0
+    );
 
-    const updatedFormData = {
+    const payload = {
       ...formData,
-      imageurlcolor1: formData.imageurlcolor1.split(",").map((url) => url.trim()),
-      imageurlcolor2: formData.imageurlcolor2.split(",").map((url) => url.trim()),
-      imageurlcolor3: formData.imageurlcolor3.split(",").map((url) => url.trim()),
+      framesize1: formData.framesizes[0],
+      framesize2: formData.framesizes[1],
+      framesize3: formData.framesizes[2],
+      imageurlcolor1: formData.colors[0].imageUrls
+        .split(",")
+        .map((url) => url.trim()),
+      imageurlcolor2: formData.colors[1].imageUrls
+        .split(",")
+        .map((url) => url.trim()),
+      imageurlcolor3: formData.colors[2].imageUrls
+        .split(",")
+        .map((url) => url.trim()),
+      stock: totalStock,
+      variants: formData.variants,
     };
 
-    console.log(updatedFormData);
-
     axios
-      .post("http://localhost:5000/api/spectacle/add", updatedFormData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+      .post("http://localhost:5000/api/spectacle/add", payload, {
+        headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
-        console.log("Spectacle added successfully:", response);
         Swal.fire("Success!", "Spectacle has been added!", "success");
-        onClose(); // Close form modal
+        onClose();
       })
       .catch((error) => {
-        console.error("Error adding spectacle:", error);
         Swal.fire(
           "Error!",
           "There was an error adding the spectacle.",
@@ -107,217 +218,262 @@ const SpectacleForm = ({ onClose }) => {
       frametype: "",
       hingetype: "",
       description: "",
-      framesize1: "",
-      framesize2: "",
-      framesize3: "",
+      framesizes: ["", "", ""],
       price: "",
-      stock: "",
-      imageurlcolor1: "",
-      imageurlcolor2: "",
-      imageurlcolor3: "",
+      colors: [
+        { name: "", imageUrls: "" },
+        { name: "", imageUrls: "" },
+        { name: "", imageUrls: "" },
+      ],
+      variants: [],
     });
+    setStep(1);
   };
 
-
-
-
-
-
+  const [showFrameSizeHint, setShowFrameSizeHint] = useState(false);
 
   return (
-    <div className="shakya-add-spectacle-form">
-      <form onSubmit={handleSubmit}>
-        <div className="close-btn">
-          <button className="shakya-close-btn" onClick={onClose}>
-            <FaTimes />
-          </button>
-        </div>
+    <div>
+      {step === 1 ? (
+        <div className="shakya-add-spectacle-form">
+          <form onSubmit={handleNext}>
+            <div className="close-btn">
+              <button className="shakya-close-btn" onClick={onClose}>
+                <FaTimes />
+              </button>
+            </div>
 
-        <div>
-          <h2>Add New Spectacle</h2>
-        </div>
+            <h2>Add New Spectacle</h2>
 
-        <div>
-          <label>Model</label>
-          <input
-            type="text"
-            name="model"
-            value={formData.model}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Type</label>
-          <select
-            name="type"
-            value={formData.type}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Select Type</option>
-            <option value="Eyeglasses">Eyeglasses</option>
-            <option value="Sunglasses">Sunglasses</option>
-          </select>
-        </div>
-        <div>
-          <label>Brand</label>
-          <input
-            type="text"
-            name="brand"
-            value={formData.brand}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Gender</label>
-          <select
-            name="gender"
-            value={formData.gender}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Select Gender</option>
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-            <option value="Unisex">Unisex</option>
-          </select>
-        </div>
-        <div>
-          <label>Frame Shape</label>
-          <input
-            type="text"
-            name="frameshape"
-            value={formData.frameshape}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Frame Material</label>
-          <input
-            type="text"
-            name="framematerial"
-            value={formData.framematerial}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Frame Type</label>
-          <input
-            type="text"
-            name="frametype"
-            value={formData.frametype}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Hinge Type</label>
-          <input
-            type="text"
-            name="hingetype"
-            value={formData.hingetype}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+            {/* Basic Fields */}
+            <div>
+              <label>Model</label>
+              <input
+                type="text"
+                name="model"
+                value={formData.model}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Type</label>
+              <select
+                name="type"
+                value={formData.type}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="">Select Type</option>
+                <option value="Eyeglasses">Eyeglasses</option>
+                <option value="Sunglasses">Sunglasses</option>
+              </select>
+            </div>
+            <div>
+              <label>Brand</label>
+              <input
+                type="text"
+                name="brand"
+                value={formData.brand}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Gender</label>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="">Select Gender</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Unisex">Unisex</option>
+              </select>
+            </div>
+            <div>
+              <label>Frame Shape</label>
+              <input
+                type="text"
+                name="frameshape"
+                value={formData.frameshape}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Frame Material</label>
+              <input
+                type="text"
+                name="framematerial"
+                value={formData.framematerial}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Frame Type</label>
+              <input
+                type="text"
+                name="frametype"
+                value={formData.frametype}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Hinge Type</label>
+              <input
+                type="text"
+                name="hingetype"
+                value={formData.hingetype}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
 
-        <div>
-          <label>Frame Sizes</label>
-          <input
-            type="text"
-            name="framesize1"
-            value={formData.framesize1}
-            onChange={handleInputChange}
-            placeholder="Size 1"
-            
-          />
-          <input
-            type="text"
-            name="framesize2"
-            value={formData.framesize2}
-            onChange={handleInputChange}
-            placeholder="Size 2"
-            
-          />
-          <input
-            type="text"
-            name="framesize3"
-            value={formData.framesize3}
-            onChange={handleInputChange}
-            placeholder="Size 3"
-          
-          />
+            <div>
+              {/* Frame Sizes */}
+              <label>Frame Sizes</label>
+              {[0, 1, 2].map((index) => (
+                <input
+                  key={index}
+                  type="text"
+                  value={formData.framesizes[index]}
+                  onChange={(e) => {
+                    handleFrameSizeChange(index, e.target.value);
+                    setShowFrameSizeHint(true);
+                  }}
+                  onBlur={() => setShowFrameSizeHint(false)} // Hide when focus leaves
+                  placeholder="L-B-T (e.g. 55-14-135)"
+                />
+              ))}
+
+              {/* Show hint when typing */}
+              {showFrameSizeHint && (
+                // <p style={{ fontSize: "12px", color: "#555", marginTop: "4px" }}>
+                <p style={{ color: "red", fontSize: "12px" }}>
+                  Range - Lens: 40–70 mm, Bridge: 10–25 mm, Temple: 120–160 mm
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label>Price</label>
+              <input
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            {/* Colors with Names */}
+
+            <div>
+              <label>Colors & Image URLs</label>
+              {[0, 1, 2].map((index) => (
+                <div key={index}>
+                  <input
+                    type="text"
+                    value={formData.colors[index].name}
+                    onChange={(e) =>
+                      handleColorChange(index, "name", e.target.value)
+                    }
+                    placeholder={`Color ${index + 1} Name`}
+                  />
+                  <input
+                    type="text"
+                    value={formData.colors[index].imageUrls}
+                    onChange={(e) =>
+                      handleColorChange(index, "imageUrls", e.target.value)
+                    }
+                    placeholder={`Color ${index + 1} URLs (comma-separated)`}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div>
+              <label>Description</label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                required
+                rows="6"
+              />
+              {descriptionWarning && (
+                <p style={{ color: "red", fontSize: "12px" }}>
+                  {descriptionWarning}
+                </p>
+              )}
+            </div>
+
+            <div className="form-actions">
+              <button type="button" className="clear-btn" onClick={handleClear}>
+                <FaEraser /> Clear
+              </button>
+              <button type="submit" className="submit-btn">
+                Next
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label>Price</label>
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleInputChange}
-            required
-          />
+      ) : (
+        <div className="shakya-variants-stock-form">
+          <form onSubmit={handleSubmit}>
+            <div className="close-btn">
+              <button className="shakya-close-btn" onClick={onClose}>
+                <FaTimes />
+              </button>
+            </div>
+
+            <h2>Add Stock Variants</h2>
+
+            <div>
+              <label>
+                Total Stock:{" "}
+                {formData.variants.reduce((sum, v) => sum + Number(v.stock), 0)}
+              </label>
+            </div>
+
+            <div>
+              {formData.variants.map((variant, index) => (
+                <div key={index} className="variant-section">
+                  <label>
+                    <span>{variant.color}</span>
+                    <span>{variant.framesize}</span>
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={variant.stock}
+                    onChange={(e) => handleVariantChange(index, e.target.value)}
+                    required
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="form-actions">
+              <button
+                type="button"
+                className="clear-btn"
+                onClick={() => setStep(1)}
+              >
+                Back
+              </button>
+              <button type="submit" className="submit-btn">
+                Add Spectacle
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label>Stock Quantity</label>
-          <input
-            type="number"
-            name="stock"
-            value={formData.stock}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Image URLs</label>
-          <input
-            type="text"
-            name="imageurlcolor1"
-            value={formData.imageurlcolor1}
-            onChange={handleInputChange}
-            placeholder="Color 1 URLs"
-            required
-          />
-          <input
-            type="text"
-            name="imageurlcolor2"
-            value={formData.imageurlcolor2}
-            onChange={handleInputChange}
-            placeholder="Color 2 URLs"
-            required
-          />
-          <input
-            type="text"
-            name="imageurlcolor3"
-            value={formData.imageurlcolor3}
-            onChange={handleInputChange}
-            placeholder="Color 3 URLs"
-            required
-          />
-        </div>
-        <div>
-          <label>Description</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-            required
-            rows="6"
-          />{" "}
-        </div>
-        <div className="form-actions">
-          <button type="submit" className="submit-btn">
-            Add Spectacle
-          </button>
-          <button type="button" className="clear-btn" onClick={handleClear}>
-            Clear
-          </button>
-        </div>
-      </form>
+      )}
     </div>
   );
 };

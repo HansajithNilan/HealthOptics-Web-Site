@@ -8,11 +8,9 @@ import SpectacleForm from "./SpectacleForm";
 import Swal from "sweetalert2";
 import SpectacleUpdateForm from "./SpectacleUpdateForm.jsx";
 
-
 const SpectacleManage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedSpectacle, setSelectedSpectacle] = useState(null);
-
 
   const handleShowMore = (spectacle) => {
     setSelectedSpectacle(spectacle);
@@ -29,7 +27,7 @@ const SpectacleManage = () => {
   const handleOpenFormModal = () => {
     setShowFormModal(true);
   };
-  
+
   const handleCloseFormModal = () => {
     setShowFormModal(false);
   };
@@ -110,12 +108,12 @@ const SpectacleManage = () => {
 
   const handleDelete = (id) => {
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel',
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
         // Proceed with deletion
@@ -135,7 +133,7 @@ const SpectacleManage = () => {
       }
     });
   };
-  
+
   const [showUpdateFormModal, setShowUpdateFormModal] = useState(false); // For updating
   const [editingSpectacle, setEditingSpectacle] = useState(null);
 
@@ -151,10 +149,11 @@ const SpectacleManage = () => {
 
   const handleUpdate = (updatedSpectacle) => {
     setSpectacles((prev) =>
-      prev.map((item) => (item._id === updatedSpectacle._id ? updatedSpectacle : item))
+      prev.map((item) =>
+        item._id === updatedSpectacle._id ? updatedSpectacle : item
+      )
     );
   };
-
 
   return (
     // <DashboardLayout title="Spectacle Management">
@@ -270,113 +269,121 @@ const SpectacleManage = () => {
     // </DashboardLayout>
 
     <DashboardLayout title="Spectacle Management">
-  <div className="shakya-spectacle-container">
-    <div className="shakya-spec-section">
-      <button onClick={generatePDF} className="shakya-report-btn">
-        Generate Report
-      </button>
-      <button className="shakya-add-btn" onClick={handleOpenFormModal}>
-        Add Spectacle
-      </button>
-    </div>
-    <div className="shakya-filter-section">
-      <input
-        type="text"
-        placeholder="Search Model or Brand"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <select value={type} onChange={(e) => setType(e.target.value)}>
-        <option value="">All Types</option>
-        <option value="Eyeglasses">Eyeglasses</option>
-        <option value="Sunglasses">Sunglasses</option>
-      </select>
-      <select value={gender} onChange={(e) => setGender(e.target.value)}>
-        <option value="">All Genders</option>
-        <option value="Unisex">Unisex</option>
-        <option value="Men">Men</option>
-        <option value="Women">Women</option>
-      </select>
-      <select value={price} onChange={(e) => setPrice(e.target.value)}>
-        <option value="">All Prices</option>
-        <option value="5000-10000">Rs. 5,000 - Rs. 10,000</option>
-        <option value="10000-15000">Rs. 10,000 - Rs. 15,000</option>
-        <option value="15000-20000">Rs. 15,000 - Rs. 20,000</option>
-        <option value="20000">Above Rs. 20,000</option>
-      </select>
-    </div>
+      <div className="shakya-spectacle-container">
+        <div className="shakya-spec-section">
+          <button onClick={generatePDF} className="shakya-report-btn">
+            Generate Report
+          </button>
+          <button className="shakya-add-btn" onClick={handleOpenFormModal}>
+            Add Spectacle
+          </button>
+        </div>
+        <div className="shakya-filter-section">
+          <input
+            type="text"
+            placeholder="Search Model or Brand"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <select value={type} onChange={(e) => setType(e.target.value)}>
+            <option value="">All Types</option>
+            <option value="Eyeglasses">Eyeglasses</option>
+            <option value="Sunglasses">Sunglasses</option>
+          </select>
+          <select value={gender} onChange={(e) => setGender(e.target.value)}>
+            <option value="">All Genders</option>
+            <option value="Unisex">Unisex</option>
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+          </select>
+          <select value={price} onChange={(e) => setPrice(e.target.value)}>
+            <option value="">All Prices</option>
+            <option value="5000-10000">LKR 5,000 - LKR 10,000</option>
+            <option value="10000-15000">LKR 10,000 - LKR 15,000</option>
+            <option value="15000-20000">LKR 15,000 - LKR 20,000</option>
+            <option value="20000">Above LKR 20,000</option>
+          </select>
+        </div>
 
-    <div className="shakya-table-container">
-      <table className="shakya-spectacle-table">
-        <thead className="shakya-thead">
-          <tr className="shakya-tr">
-            <th>ID</th>
-            <th>Model</th>
-            <th>Type</th>
-            <th>Brand</th>
-            <th>Frame Shape</th>
-            <th>Frame Material</th>
-            <th>Frame Size</th>
-            <th>Price</th>
-            <th>Stock Quantity</th>
-            <th>More Details</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody className="shakya-tbody"> 
-          {filteredSpectacles.map((spectacle) => (
-            <tr key={spectacle._id} class="shakya-tr">
-              <td>{("000" + (parseInt(spectacle._id.slice(-3), 16) % 1000)).slice(-3)}</td>
-              <td>{spectacle.model}</td>
-              <td>{spectacle.type}</td>
-              <td>{spectacle.brand}</td>
-              <td>{spectacle.frameshape}</td>
-              <td>{spectacle.framematerial}</td>
-              <td>{`${spectacle.framesize1}, ${spectacle.framesize2}, ${spectacle.framesize3}`}</td>
-              <td>${spectacle.price.toLocaleString()}</td>
-              <td>{spectacle.stock}</td>
-              <td>
-                <button
-                  onClick={() => handleShowMore(spectacle)}
-                  className="shakya-more-btn"
-                >
-                  More
-                </button>
-              </td>
-              <td>
-                <div className="shakya-actions-wrapper">
-                  <button
-                    onClick={() => handleOpenUpdateFormModal(spectacle)}
-                    className="shakya-edit-btn"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(spectacle._id)}
-                    className="shakya-delete-btn"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        <div className="shakya-table-container">
+          <table className="shakya-spectacle-table">
+            <thead className="shakya-thead">
+              <tr className="shakya-tr">
+                <th>ID</th>
+                <th>Model</th>
+                <th>Type</th>
+                <th>Brand</th>
+                <th>Frame Shape</th>
+                <th>Frame Material</th>
+                {/* <th>Frame Size</th> */}
+                <th>Price</th>
+                <th>Stock Quantity</th>
+                <th>More Details</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody className="shakya-tbody">
+              {filteredSpectacles.map((spectacle) => (
+                <tr key={spectacle._id} class="shakya-tr">
+                  <td>
+                    {(
+                      "000" +
+                      (parseInt(spectacle._id.slice(-3), 16) % 1000)
+                    ).slice(-3)}
+                  </td>
+                  <td>{spectacle.model}</td>
+                  <td>{spectacle.type}</td>
+                  <td>{spectacle.brand}</td>
+                  <td>{spectacle.frameshape}</td>
+                  <td>{spectacle.framematerial}</td>
+                  {/* <td>{`${spectacle.framesize1}, ${spectacle.framesize2}, ${spectacle.framesize3}`}</td> */}
+                  <td>LKR {spectacle.price.toLocaleString()}</td>
+                  <td>{spectacle.stock}</td>
+                  <td>
+                    <button
+                      onClick={() => handleShowMore(spectacle)}
+                      className="shakya-more-btn"
+                    >
+                      More
+                    </button>
+                  </td>
+                  <td>
+                    <div className="shakya-actions-wrapper">
+                      <button
+                        onClick={() => handleOpenUpdateFormModal(spectacle)}
+                        className="shakya-edit-btn"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(spectacle._id)}
+                        className="shakya-delete-btn"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-    {/* Modal for Show More */}
-    <SpectacleDetails spectacle={selectedSpectacle} onClose={handleCloseModal} />
-    {showFormModal && <SpectacleForm onClose={handleCloseFormModal} />}
-    {showUpdateFormModal && (
-      <SpectacleUpdateForm
-        onClose={handleCloseUpdateFormModal}
-        spectacle={editingSpectacle}
-        onUpdate={handleUpdate}
-      />
-    )}
-  </div>
-</DashboardLayout>
+        {/* Modal for Show More */}
+        <SpectacleDetails
+          spectacle={selectedSpectacle}
+          onClose={handleCloseModal}
+        />
+        {showFormModal && <SpectacleForm onClose={handleCloseFormModal} />}
+        {showUpdateFormModal && (
+          <SpectacleUpdateForm
+            onClose={handleCloseUpdateFormModal}
+            spectacle={editingSpectacle}
+            onUpdate={handleUpdate}
+          />
+        )}
+      </div>
+    </DashboardLayout>
   );
 };
 

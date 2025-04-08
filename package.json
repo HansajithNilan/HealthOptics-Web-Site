@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.6.1",
     "axios": "^1.8.4",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
@@ -25,6 +26,7 @@
     "nodemailer": "^6.10.0",
     "nodemon": "^3.1.9",
     "react-hook-form": "^7.54.2",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^6.30.0",
     "react-scroll": "^1.9.3",
     "react-to-print": "^3.0.5",
