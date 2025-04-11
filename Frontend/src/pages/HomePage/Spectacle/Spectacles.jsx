@@ -44,6 +44,7 @@ const Spectacles = () => {
     navigate(`/reservespectacles/${id}/${number}`);
   };
 
+  /*
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 !== 0;
@@ -72,18 +73,52 @@ const Spectacles = () => {
     }
     return stars;
   };
+*/
 
   return (
     <div>
       <NavBar />
      
     
-      <div className="spectacle-grid-container">
+      <div className="shakya-spectacle-grid-container">
         <Cartab/>
-        <h1>Spectacles</h1>
-        <div className="spectacle-grid">
+        <div className="shakya-spec-header">
+        <h1>Discover Your Perfect Look</h1>
+        <p>
+        Discover style and comfort with our new spectacles, modern frames, timeless classics. Durable, high-quality materials offer clarity and style. See better, look your best.
+        </p>
+        </div>
+        
+
+        <div className="shakya-filter-section">
+          <input
+            type="text"
+            placeholder="Search Model or Brand"
+          />
+          <select >
+            <option value="">All Types</option>
+            <option value="Eyeglasses">Eyeglasses</option>
+            <option value="Sunglasses">Sunglasses</option>
+          </select>
+          <select>
+            <option value="">All Genders</option>
+            <option value="Unisex">Unisex</option>
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+          </select>
+          <select >
+            <option value="">All Prices</option>
+            <option value="5000-10000">LKR 5,000 - LKR 10,000</option>
+            <option value="10000-15000">LKR 10,000 - LKR 15,000</option>
+            <option value="15000-20000">LKR 15,000 - LKR 20,000</option>
+            <option value="20000">Above LKR 20,000</option>
+          </select>
+        </div>
+
+
+        <div className="shakya-spectacle-grid">
           {spectacles.map((spectacle) => (
-            <div key={spectacle.id} className="spectacle-card">
+            <div key={spectacle.id} className="shakya-spectacle-card">
               <img
                 src={spectacle.imageurlcolor1?.[0]}
                 alt={spectacle.model}
@@ -92,14 +127,21 @@ const Spectacles = () => {
               <div className="spectacle-details">
                 <h2 className="spectacle-model">{spectacle.model}</h2>
                 <p className="spectacle-brand">
-                  {spectacle.brand} - {spectacle.type}
+                  <span>{spectacle.brand}</span>
+                  
                 </p>
-                <p className="spectacle-gender">{spectacle.gender}</p>
+                <p className="spectacle-gender-type">
+                <span>{spectacle.type}</span> 
+                <span>{spectacle.gender}</span> 
+                </p>
                 <p className="spectacle-price">LKR {spectacle.price}</p>
-                <div className="spectacle-rating">
+                {/* <div className="spectacle-rating">
                   {renderStars(spectacle.rating)}
-                </div>
-                <div className="spectacle-button-section">
+                </div> */}
+                <div className="shakya-spectacle-button-section">
+                  <button className="more-details-button">
+                    More Details
+                  </button>
                   <button
                     className="shop-now-button"
                     onClick={() => handleShopNow(spectacle._id)}
