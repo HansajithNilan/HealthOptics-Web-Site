@@ -75,6 +75,26 @@ const Spectacles = () => {
   };
 */
 
+
+  // Search and filters
+  const [search, setSearch] = useState("");
+  const [type, setType] = useState("");
+  const [gender, setGender] = useState("");
+  const [price, setPrice] = useState("");
+
+    // Handle Search and filter
+    const filteredSpectacles = spectacles.filter((item) => {
+      const [minPrice, maxPrice] = String(price).split("-").map(Number);
+      return (
+        (item.model.toLowerCase().includes(search.toLowerCase()) ||
+          item.brand.toLowerCase().includes(search.toLowerCase())) &&
+        (type === "" || item.type === type) &&
+        (gender === "" || item.gender === gender) &&
+        (price === "" ||
+          (item.price >= minPrice && (maxPrice ? item.price <= maxPrice : true)))
+      );
+    });
+
   return (
     <div>
       <NavBar />
@@ -90,10 +110,12 @@ const Spectacles = () => {
         </div>
         
 
-        <div className="shakya-filter-section">
+        {/* <div className="shakya-filter-section">
           <input
             type="text"
             placeholder="Search Model or Brand"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <select >
             <option value="">All Types</option>
@@ -113,11 +135,38 @@ const Spectacles = () => {
             <option value="15000-20000">LKR 15,000 - LKR 20,000</option>
             <option value="20000">Above LKR 20,000</option>
           </select>
+        </div> */}
+        <div className="shakya-filter-section">
+          <input
+            type="text"
+            placeholder="Search Model or Brand"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <select value={type} onChange={(e) => setType(e.target.value)}>
+            <option value="">All Types</option>
+            <option value="Eyeglasses">Eyeglasses</option>
+            <option value="Sunglasses">Sunglasses</option>
+          </select>
+          <select value={gender} onChange={(e) => setGender(e.target.value)}>
+            <option value="">All Genders</option>
+            <option value="Unisex">Unisex</option>
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+          </select>
+          <select value={price} onChange={(e) => setPrice(e.target.value)}>
+            <option value="">All Prices</option>
+            <option value="5000-10000">LKR 5,000 - LKR 10,000</option>
+            <option value="10000-15000">LKR 10,000 - LKR 15,000</option>
+            <option value="15000-20000">LKR 15,000 - LKR 20,000</option>
+            <option value="20000">Above LKR 20,000</option>
+          </select>
         </div>
 
 
+
         <div className="shakya-spectacle-grid">
-          {spectacles.map((spectacle) => (
+          {filteredSpectacles.map((spectacle) => (
             <div key={spectacle.id} className="shakya-spectacle-card">
               <img
                 src={spectacle.imageurlcolor1?.[0]}
