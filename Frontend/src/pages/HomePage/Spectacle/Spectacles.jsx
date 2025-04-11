@@ -9,6 +9,8 @@ import { addToCart } from "../../../stores/cart.jsx";
 import cartImage from "../../../assets/cartImage.png";
 import Cartab from "../../CartTab/cartab.jsx";
 
+import SpectacleTryOn from "./SpectaclesTryOn.jsx";
+
 const Spectacles = () => {
  
 
@@ -94,6 +96,19 @@ const Spectacles = () => {
           (item.price >= minPrice && (maxPrice ? item.price <= maxPrice : true)))
       );
     });
+
+    const [showModal, setShowModal] = useState(false);
+    const [selectedSpectacle, setSelectedSpectacle] = useState(null);
+    
+    const handleShowTryOn = (spectacle) => {
+      setSelectedSpectacle(spectacle);
+      setShowModal(true);
+    };
+
+    const handleCloseTryOn = (spectacle) => {
+      setShowModal(false);
+      setSelectedSpectacle(null);
+    };
 
   return (
     <div>
@@ -188,8 +203,10 @@ const Spectacles = () => {
                   {renderStars(spectacle.rating)}
                 </div> */}
                 <div className="shakya-spectacle-button-section">
-                  <button className="more-details-button">
-                    More Details
+                  <button 
+                  className="more-details-button"
+                  onClick={() => handleShowTryOn(spectacle)}>
+                    Try On
                   </button>
                   <button
                     className="shop-now-button"
@@ -204,6 +221,10 @@ const Spectacles = () => {
           ))}
         </div>
       </div>
+      <SpectacleTryOn
+          spectacle={selectedSpectacle}
+          onClose={handleCloseTryOn}
+        />
     </div>
   );
 };
