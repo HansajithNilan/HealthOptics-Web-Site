@@ -1,4 +1,4 @@
-.spectacle-grid-container{
+.shakya-spectacle-grid-container{
     /* background-color: red; */
     width: 75%;
     margin:150px auto;
@@ -7,7 +7,7 @@
 }
 
 
-.spectacle-grid {
+.shakya-spectacle-grid {
     display: grid;
     width:100%;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -19,7 +19,7 @@
 }
 
 /* Card styling for each spectacle */
-.spectacle-card {
+.shakya-spectacle-card {
     border: 1px solid #e5e7eb; /* Light gray border */
     border-radius: 8px;
     padding: 16px;
@@ -28,13 +28,14 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.spectacle-card:hover {
+.shakya-spectacle-card:hover {
     transform: scale(1.01);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Image styling */
-.spectacle-image {
+
+.shakya-spectacle-card .spectacle-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
@@ -42,67 +43,257 @@
 }
 
 /* Spectacle details */
-.spectacle-details {
-    margin-top: 16px;
+.shakya-spectacle-card .spectacle-details {
+    margin-top: 10px;
 }
 
-.spectacle-model {
+.shakya-spectacle-card .spectacle-details h2{
+    text-align: left;
+    margin-bottom:6px;
+}
+
+.shakya-spectacle-card .spectacle-model {
     font-size: 1.25rem;
     font-weight: 600;
 }
 
-.spectacle-brand {
+.shakya-spectacle-card .spectacle-brand {
     color: #4b5563; /* Gray for text */
 }
 
-.spectacle-price {
-    color: #3b82f6; /* Blue for price */
-    font-weight: 600;
-    font-size: 1.125rem;
+.shakya-spectacle-card .spectacle-gender-type{
+    color: #4b5563;
+    display: flex;
+    gap: 5px;
+    /* background-color: #fbbf24; */
     margin-top: 8px;
+    font-size:0.8rem;
+}
+
+.shakya-spectacle-card .spectacle-price {
+    /* color: #3b82f6; Blue for price */
+    color:#fd7311;
+    font-weight: 800;
+    font-size: 1.125rem;
+    margin-top: 12px;
 }
 
 /* Rating stars */
-.spectacle-rating {
+.shakya-spectacle-card .spectacle-rating {
     display: flex;
     gap: 4px;
     margin-top: 8px;
 }
 
-.star {
+.shakya-spectacle-card .star {
     color: #fbbf24; /* Yellow color for full/half stars */
 }
 
-.empty {
+.shakya-spectacle-card .empty {
     color: #d1d5db; /* Gray color for empty stars */
 }
-.spectacle-button-section{
+.shakya-spectacle-card .shakya-spectacle-button-section{
     display: flex;
-    justify-content: center;
+    justify-content:left;
     align-items: center;
-   
 }
 
 /* Shop Now button */
-.shop-now-button {
+.shakya-spectacle-card .shop-now-button ,
+.shakya-spectacle-card .more-details-button,
+.shakya-try-on-btn button
+{
     margin-top: 16px;
     font-size: 11px;
-    padding: 12px;
-    background-color: #2563eb; /* Blue background */
-    color: white;
+    padding: 12px;   
     font-weight: 600;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 3px;
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
+   
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
+
+    /* background-color: #2563eb; */
+    color: #000000;
+    border: 1.5px solid #000000;
+    background-color: transparent;
 }
 
-.shop-now-btn:hover {
-    background-color: #1d4ed8; /* Darker blue on hover */
+.shakya-spectacle-card .shop-now-button {
+    color: #ffffff;
+    background-color:#000000;
+}
+/* 
+.shakya-spectacle-card .shop-now-btn:hover {
+    background-color: #1d4ed8; /* Darker blue on hover 
+} 
+*/
+
+.shakya-spec-header{
+    text-align: center;
+    margin-bottom: 30px;
 }
 
+.shakya-spec-header p{
+    width: 90%;
+    margin:0 auto;
+    line-height: 24px;
+    margin-top: 20px;
+}
+
+.spectacle-gender-type > span {
+    font-weight: bold;
+    margin-right: 10px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    background-color: #e4e6e9de;
+    color:#4b5563f1;
+    text-align: left;
+  }
+
+  .spectacle-gender-type > span:nth-child(2) {
+    background-color: #fd73115b;
+    color:#fd7311; 
+  }
+
+
+/* Try on Modal */
+
+.shakya-spectacle-try-on-modal {
+    position: fixed;
+    inset: 0; /* Shorthand for top: 0, left: 0, right: 0, bottom: 0 */
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .shakya-spectacle-try-on-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 95vh;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  .try-on-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .try-on-close-btn .shakya-close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #000;
+  }
+  
+  .try-on-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 20px;
+  }
+  
+  .try-on-grid > div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .try-on-grid > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 50px;
+  }
+  
+  .shakya-large-image-container {
+    text-align: center;
+  }
+  
+  .try-on-large-image {
+    width: 280px;
+    height: 280px;
+    object-fit: contain;
+  }
+  
+  .shakya-small-images-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .shakya-small-images-container div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #d4d6da4d;
+    width: 80%;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .shakya-small-images-container div:hover {
+    background: #d4d6da8a;
+  }
+
+  .shakya-small-images-container div.active {
+    background: #d4d6dac0;
+  }
+  
+  .small-image-item {
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .try-on-small-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border: 2px solid transparent;
+    transition: border 0.2s;
+  }
+  
+  .small-image-item p {
+    margin: 5px 0 0;
+    font-size: 14px;
+  }
+  
+  .modal-spectacle-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+  }
+  
+  .spectacle-gender-type {
+    font-size: 0.8rem;
+  }
+  
+  .shakya-try-on-btn button {
+    width: 150px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .shakya-try-on-btn button:hover {
+    background: #000;
+    color: #fff;
+  }
