@@ -149,59 +149,6 @@ function Reservation() {
       imageurlcolor: imageUrl,
     }));
   };
-  const handleTryOnface = async () => {
-    setShowCamera(true);
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        videoRef.current.play();
-  
-        const video = videoRef.current;
-  
-        video.addEventListener("play", () => {
-          const canvas = faceapi.createCanvasFromMedia(video);
-          canvasRef.current = canvas;
-          document.querySelector(".Image-section").append(canvas);
-  
-          const displaySize = { width: video.width, height: video.height };
-          faceapi.matchDimensions(canvas, displaySize);
-  
-          setInterval(async () => {
-            const detections = await faceapi
-              .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
-              .withFaceLandmarks(true);
-  
-            const resizedDetections = faceapi.resizeResults(detections, displaySize);
-  
-            canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-  
-            if (resizedDetections.length > 0 && selectedImage) {
-              const ctx = canvas.getContext("2d");
-              const landmarks = resizedDetections[0].landmarks;
-              const leftEye = landmarks.getLeftEye();
-              const rightEye = landmarks.getRightEye();
-  
-              const eyeDistance = rightEye[0].x - leftEye[3].x;
-              const x = leftEye[0].x - eyeDistance * 0.2;
-              const y = leftEye[0].y - eyeDistance * 0.6;
-              const width = eyeDistance * 1.6;
-              const height = eyeDistance * 0.9;
-  
-              const img = new Image();
-              img.src = selectedImage;
-              img.onload = () => {
-                ctx.drawImage(img, x, y, width, height);
-              };
-            }
-          }, 100);
-        });
-      }
-    } catch (err) {
-      console.error("Error accessing camera:", err);
-      toast.error("Failed to access camera");
-    }
-  };
 
   const handleAddToCart = () => {
     const spectacleId = id;
@@ -210,19 +157,6 @@ function Reservation() {
     toast.success("Added to cart successfully!");
   };
 
-  const handleTryOn = async () => {
-    setShowCamera(true);
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        videoRef.current.play();
-      }
-    } catch (err) {
-      console.error("Error accessing camera:", err);
-      toast.error("Failed to access camera");
-    }
-  };
 
   const ImageRadioButtons = () => {
     const images = [
@@ -357,7 +291,7 @@ function Reservation() {
 
               <div className="reservation-button">
                 <button type="submit" className="reserve-button">Reserve Now</button>
-                <button type="button" className="reserve-button" onClick={handleTryOn}>Try On</button>
+         
                 <button type="button" className="add-to-cart-" onClick={handleAddToCart}>
                   <img src={cartImage} width={18} height={18} alt="cart" /> Add To Cart
                 </button>
