@@ -1,135 +1,194 @@
-.edit-doctor-container-EDPF {
+/* General Layout */
+.EditDoctorProfile-wrapper {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f9fafb; /* Light gray for a clean backdrop */
-  padding: 30px;
+  background: linear-gradient(135deg, #e6f0fa 0%, #f9fafb 100%);
+  padding: 40px;
 }
 
-.edit-doctor-card-EDPF {
+/* Container */
+.EditDoctorProfile-container {
   background: #ffffff;
-  border-radius: 12px;
-  padding: 2.5rem;
+  border-radius: 16px;
+  padding: 3rem;
   width: 100%;
-  max-width: 650px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e5e7eb;
+  max-width: 700px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
 }
 
-.edit-title-EDPF {
-  color: #1e3a8a; /* Professional navy blue */
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
+/* Title */
+.EditDoctorProfile-title {
+  color: #1e40af;
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
   text-align: center;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.025em;
 }
 
-.edit-form-EDPF {
+/* Form */
+.EditDoctorProfile-form {
   display: grid;
-  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
 }
 
-.form-group-EDPF {
+/* Field */
+.EditDoctorProfile-field {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.form-group-EDPF label {
-  font-size: 0.95rem;
-  color: #374151; /* Dark gray for readability */
-  font-weight: 500;
-}
-
-.form-input-EDPF {
-  padding: 0.85rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
+.EditDoctorProfile-label {
   font-size: 1rem;
-  background-color: #ffffff;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.form-input-EDPF:focus {
-  border-color: #1e3a8a; /* Matching navy blue */
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
-}
-
-.form-input-EDPF::placeholder {
-  color: #9ca3af; /* Light gray for placeholders */
-}
-
-.form-actions-EDPF {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-  justify-content: flex-end;
-}
-
-.cancel-btn-EDPF,
-.update-btn-EDPF {
-  padding: 0.85rem 2rem;
-  border: none;
-  border-radius: 6px;
   font-weight: 600;
+  color: #2d3748;
+}
+
+/* Input Styles */
+.EditDoctorProfile-input {
+  padding: 0.9rem 1.25rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
   font-size: 1rem;
+  background: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.EditDoctorProfile-input:focus {
+  border-color: #1e40af;
+  box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.15);
+  outline: none;
+}
+
+.EditDoctorProfile-input::placeholder {
+  color: #a0aec0;
+  font-style: italic;
+}
+
+/* File Input */
+.EditDoctorProfile-file-input {
+  padding: 0.5rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  background: #f9fafb;
+  font-size: 0.95rem;
+  color: #4b5563;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.cancel-btn-EDPF {
-  background-color: #6b7280; /* Neutral gray */
+.EditDoctorProfile-file-input::-webkit-file-upload-button {
+  background: #1e40af;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.EditDoctorProfile-file-input::-webkit-file-upload-button:hover {
+  background: #1e3a8a;
+}
+
+/* Actions */
+.EditDoctorProfile-actions {
+  grid-column: span 2;
+  display: flex;
+  gap: 1.25rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+/* Buttons */
+.EditDoctorProfile-cancel-btn,
+.EditDoctorProfile-submit-btn {
+  padding: 0.9rem 2.25rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.EditDoctorProfile-cancel-btn {
+  background: #6b7280;
   color: #ffffff;
 }
 
-.update-btn-EDPF {
-  background-color: #1e3a8a; /* Professional navy blue */
+.EditDoctorProfile-submit-btn {
+  background: #1e40af;
   color: #ffffff;
 }
 
-.cancel-btn-EDPF:hover,
-.update-btn-EDPF:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.EditDoctorProfile-cancel-btn:hover,
+.EditDoctorProfile-submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.cancel-btn-EDPF:hover {
-  background-color: #4b5563; /* Darker gray on hover */
+.EditDoctorProfile-cancel-btn:hover {
+  background: #4b5563;
 }
 
-.update-btn-EDPF:hover {
-  background-color: #172554; /* Darker navy on hover */
+.EditDoctorProfile-submit-btn:hover {
+  background: #1e3a8a;
 }
 
-.cancel-btn-EDPF:active,
-.update-btn-EDPF:active {
+.EditDoctorProfile-cancel-btn:active,
+.EditDoctorProfile-submit-btn:active {
   transform: translateY(0);
   box-shadow: none;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .edit-doctor-card-EDPF {
-    padding: 1.5rem;
+  .EditDoctorProfile-wrapper {
+    padding: 20px;
+  }
+
+  .EditDoctorProfile-container {
+    padding: 2rem;
     max-width: 100%;
-    margin: 0 15px;
+    margin: 0 10px;
   }
 
-  .edit-title-EDPF {
-    font-size: 1.75rem;
+  .EditDoctorProfile-title {
+    font-size: 1.875rem;
   }
 
-  .form-actions-EDPF {
+  .EditDoctorProfile-form {
+    grid-template-columns: 1fr;
+  }
+
+  .EditDoctorProfile-actions {
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
   }
 
-  .cancel-btn-EDPF,
-  .update-btn-EDPF {
+  .EditDoctorProfile-cancel-btn,
+  .EditDoctorProfile-submit-btn {
     width: 100%;
+    padding: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .EditDoctorProfile-title {
+    font-size: 1.5rem;
+  }
+
+  .EditDoctorProfile-field {
+    gap: 0.4rem;
+  }
+
+  .EditDoctorProfile-input,
+  .EditDoctorProfile-file-input {
     padding: 0.75rem;
   }
 }

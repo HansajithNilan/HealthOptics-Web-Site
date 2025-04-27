@@ -1,246 +1,254 @@
 /* General Layout */
-.AFBfeedback-page {
-    min-height: 100vh;
-    display: flex;
+.AllFeedbacks-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f8f9fa;
+  font-family: 'Roboto', sans-serif;
+}
+
+.AllFeedbacks-container {
+  flex: 1;
+  padding-bottom: 50px;
+}
+
+/* Hero Section */
+.AllFeedbacks-hero {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.AllFeedbacks-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.AllFeedbacks-hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  padding: 30px 50px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+}
+
+.AllFeedbacks-hero-overlay h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.AllFeedbacks-hero-overlay p {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+/* Feedback Wrapper */
+.AllFeedbacks-wrapper {
+  max-width: 1200px;
+  margin: -40px auto 0;
+  padding: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header Section */
+.AllFeedbacks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.AllFeedbacks-search-container {
+  flex: 1;
+  max-width: 500px;
+}
+
+.AllFeedbacks-search-input {
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafafa;
+  transition: all 0.3s ease;
+}
+
+.AllFeedbacks-search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.AllFeedbacks-search-input::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+.AllFeedbacks-back-btn {
+  padding: 12px 30px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.AllFeedbacks-back-btn:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Feedback Grid */
+.AllFeedbacks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.AllFeedbacks-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.AllFeedbacks-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.AllFeedbacks-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.AllFeedbacks-user-details h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.AllFeedbacks-user-email {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 5px 0 0;
+}
+
+.AllFeedbacks-card-date {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.AllFeedbacks-card-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  color: #666;
+}
+
+.AllFeedbacks-card-rating span {
+  font-size: 0.95rem;
+}
+
+.AllFeedbacks-card-comment {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.AllFeedbacks-no-feedback {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #777;
+  padding: 25px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .AllFeedbacks-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .AllFeedbacks-header {
     flex-direction: column;
-    background: #f5f6f8;
-    font-family: 'Poppins', sans-serif;
+    gap: 15px;
   }
-  
-  .AFBfeedback-container {
-    flex: 1;
-    padding-bottom: 40px;
+
+  .AllFeedbacks-search-container {
+    max-width: 100%;
+    margin-bottom: 10px;
   }
-  
-  /* Hero Section */
-  .AFBfeedback-hero {
-    position: relative;
+
+  .AllFeedbacks-back-btn {
     width: 100%;
-    height: 400px;
   }
-  
-  .AFBfeedback-hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.75);
+}
+
+@media (max-width: 768px) {
+  .AllFeedbacks-hero {
+    height: 350px;
   }
-  
-  .AFBhero-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #fff;
-    padding: 25px;
-    background: rgba(0, 0, 0, 0.65);
-    border-radius: 12px;
+
+  .AllFeedbacks-hero-overlay h1 {
+    font-size: 2rem;
   }
-  
-  .AFBhero-overlay h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-  }
-  
-  .AFBhero-overlay p {
-    font-size: 1.2rem;
-    font-weight: 300;
-  }
-  
-  /* Feedback Wrapper */
-  .AFBall-feedbacks-wrapper {
-    max-width: 1300px;
-    margin: -50px auto 0;
-    padding: 20px;
-    position: relative;
-    z-index: 2;
-  }
-  
-  /* Header Section */
-  .AFBfeedback-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px;
-  }
-  
-  .AFBsearch-container {
-    flex: 1;
-    max-width: 450px;
-  }
-  
-  .AFBsearch-input {
-    width: 100%;
-    padding: 12px 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-  }
-  
-  .AFBsearch-input:focus {
-    border-color: #3498db;
-    outline: none;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
-  }
-  
-  .AFBsearch-input::placeholder {
-    color: #95a5a6;
-    font-style: italic;
-  }
-  
-  .AFBback-btn {
-    padding: 12px 25px;
-    background: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .AFBback-btn:hover {
-    background: #2980b9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Feedback Grid */
-  .AFBfeedback-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 25px;
-    padding: 20px 0;
-  }
-  
-  .AFBfeedback-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .AFBfeedback-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .AFBcard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ecf0f1;
-  }
-  
-  .AFBuser-details h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin: 0;
-  }
-  
-  .AFBuser-email {
-    font-size: 0.9rem;
-    color: #7f8c8d;
-    margin: 5px 0 0;
-  }
-  
-  .AFBcard-date {
-    font-size: 0.85rem;
-    color: #95a5a6;
-  }
-  
-  .AFBcard-rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 10px 0;
-    color: #7f8c8d;
-  }
-  
-  .AFBcard-rating span {
-    font-size: 0.9rem;
-  }
-  
-  .AFBcard-comment {
-    font-size: 0.95rem;
-    color: #34495e;
-    line-height: 1.6;
-  }
-  
-  .AFBno-feedback {
-    text-align: center;
+
+  .AllFeedbacks-hero-overlay p {
     font-size: 1.1rem;
-    color: #7f8c8d;
+  }
+
+  .AllFeedbacks-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .AllFeedbacks-wrapper {
+    margin-top: -20px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .AllFeedbacks-card {
     padding: 20px;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .AFBfeedback-grid {
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-  
-    .AFBfeedback-header {
-      flex-direction: column;
-      gap: 15px;
-    }
-  
-    .AFBsearch-container {
-      max-width: 100%;
-      margin-bottom: 10px;
-    }
-  
-    .AFBback-btn {
-      width: 100%;
-    }
+
+  .AllFeedbacks-user-details h3 {
+    font-size: 1.2rem;
   }
-  
-  @media (max-width: 768px) {
-    .AFBfeedback-hero {
-      height: 300px;
-    }
-  
-    .AFBhero-overlay h1 {
-      font-size: 2rem;
-    }
-  
-    .AFBhero-overlay p {
-      font-size: 1rem;
-    }
-  
-    .AFBfeedback-grid {
-      grid-template-columns: 1fr;
-    }
-  
-    .AFBall-feedbacks-wrapper {
-      margin-top: -30px;
-      padding: 15px;
-    }
+
+  .AllFeedbacks-card-comment {
+    font-size: 0.95rem;
   }
-  
-  @media (max-width: 480px) {
-    .AFBfeedback-card {
-      padding: 15px;
-    }
-  
-    .AFBcard-header h3 {
-      font-size: 1.1rem;
-    }
-  
-    .AFBcard-comment {
-      font-size: 0.9rem;
-    }
+
+  .AllFeedbacks-hero-overlay {
+    padding: 20px 30px;
   }
+}

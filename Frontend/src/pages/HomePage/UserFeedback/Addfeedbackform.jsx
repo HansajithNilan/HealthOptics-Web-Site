@@ -6,7 +6,7 @@ import { AuthContext } from '../../../components/Context/AuthContext';
 import './Addfeedbackform.css';
 import NavBar from '../../../components/NavBar/NavBar';
 import Footer from '../../../components/Footer/footer';
-import feedbackImage from '../../../assets/feedbacksimage.jpg';
+import feedbackImage from '../../../assets/feedbacksimage20.jpg';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -46,10 +46,13 @@ const Addfeedbackform = () => {
 
       speechRecognition.onerror = (event) => {
         console.error('Speech recognition error:', event.error);
+        toast.error('Speech recognition failed. Please try again.');
         setIsListening(false);
       };
 
       setRecognition(speechRecognition);
+    } else {
+      toast.warn('Speech recognition is not supported in your browser.');
     }
   }, []);
 
@@ -59,7 +62,7 @@ const Addfeedbackform = () => {
       const userFeedbacks = response.data.filter((feedback) => feedback.email === email);
       setFeedbacks(userFeedbacks);
     } catch (error) {
-      toast.error('Error fetching feedbacks');
+      toast.error('Failed to load feedbacks. Please try again.');
     }
   };
 
@@ -85,27 +88,11 @@ const Addfeedbackform = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!localStorage.getItem('accessToken')) {
+    if (!formData.name || !formData.email || !formData.rating || !formData.additionalComment || !formData.consent) {
       return Swal.fire({
         icon: 'error',
-        title: 'Authentication Required',
-        text: 'Please log in to submit feedback.',
-      });
-    }
-
-    if (!formData.name || !formData.email || !formData.rating || !formData.additionalComment) {
-      return Swal.fire({
-        icon: 'error',
-        title: 'Missing Fields',
-        text: 'Please fill in all required fields.',
-      });
-    }
-
-    if (!formData.consent) {
-      return Swal.fire({
-        icon: 'warning',
-        title: 'Consent Required',
-        text: 'Please provide consent to submit feedback.',
+        title: 'Incomplete Form',
+        text: 'Please fill in all required fields and provide consent.',
       });
     }
 
@@ -129,19 +116,12 @@ const Addfeedbackform = () => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: error.response?.data?.message || 'Failed to submit feedback.',
+        text: error.response?.data?.message || 'Something went wrong. Please try again.',
       });
     }
   };
 
   const handleEdit = (feedback) => {
-    if (!localStorage.getItem('accessToken')) {
-      return Swal.fire({
-        icon: 'error',
-        title: 'Authentication Required',
-        text: 'Please log in to edit feedback.',
-      });
-    }
     setIsEditing(true);
     setEditId(feedback._id);
     setFormData({ ...feedback, consent: true });
@@ -149,14 +129,6 @@ const Addfeedbackform = () => {
   };
 
   const handleDelete = async (feedbackId) => {
-    if (!localStorage.getItem('accessToken')) {
-      return Swal.fire({
-        icon: 'error',
-        title: 'Authentication Required',
-        text: 'Please log in to delete feedback.',
-      });
-    }
-
     const result = await Swal.fire({
       title: 'Are you sure?',
       text: 'This action cannot be undone.',
@@ -185,156 +157,170 @@ const Addfeedbackform = () => {
 
   const toggleListening = () => {
     if (!recognition) {
-      return Swal.fire({
-        icon: 'error',
-        title: 'Not Supported',
-        text: 'Speech recognition is not supported in your browser.',
-      });
+      return toast.warn('Speech recognition is not supported in your browser.');
     }
-    if (isListening) recognition.stop();
-    else recognition.start();
+    if (isListening) {
+      recognition.stop();
+      toast.info('Speech recognition stopped.');
+    } else {
+      recognition.start();
+      toast.info('Speech recognition started.');
+    }
     setIsListening(!isListening);
   };
 
   return (
-    <div className="ADDFBfeedback-page">
+    <div className="FeedbackForm-page">
       <NavBar />
-      <section className="ADDFBfeedback-container">
-        <div className="ADDFBfeedback-hero">
+      <section className="FeedbackForm-container">
+        <div className="FeedbackForm-hero">
           <img src={feedbackImage} alt="Feedback Banner" />
-          <div className="ADDFBhero-overlay">
-            <h1>Your Feedback Matters</h1>
-            <p>Share your experience to help us improve our services.</p>
+          <div className="FeedbackForm-hero-overlay">
+            <h1>We Value Your Feedback</h1>
+            <p>Your insights help us enhance our services.</p>
           </div>
         </div>
 
-        <div className="ADDFBfeedback-content">
-          <form onSubmit={handleSubmit} className="ADDFBfeedback-form">
-            <h2 className="ADDFBform-title">{isEditing ? 'Edit Feedback' : 'Add Feedback'}</h2>
+        <div className="FeedbackForm-content">
+          <form onSubmit={handleSubmit} className="FeedbackForm-form">
+            <h2 className="FeedbackForm-title">{isEditing ? 'Edit Your Feedback' : 'Submit Feedback'}</h2>
 
-            <label className="ADDFBform-label">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter your name"
-              className="ADDFBform-input"
-              required
-            />
+            <div className="FeedbackForm-group">
+              <label className="FeedbackForm-label">Name</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your Name"
+                className="FeedbackForm-input"
+                required
+              />
+            </div>
 
-            <label className="ADDFBform-label">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              className="ADDFBform-input"
-              required
-            />
+            <div className="FeedbackForm-group">
+              <label className="FeedbackForm-label">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Your Email"
+                className="FeedbackForm-input"
+                required
+              />
+            </div>
 
-            <label className="ADDFBform-label">Rating</label>
-            <div className="ADDFBrating-section">
-              <p className="ADDFBrating-text">How would you rate our service?</p>
-              <div className="ADDFBstar-rating">
-                {[...Array(5)].map((_, index) => {
-                  const ratingValue = index + 1;
-                  return (
-                    <label key={index}>
-                      <input
-                        type="radio"
-                        name="rating"
-                        value={ratingValue}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, rating: Number(e.target.value) }))}
-                        checked={formData.rating === ratingValue}
-                      />
-                      <FaStar
-                        className="ADDFBstar"
-                        color={ratingValue <= (hover || formData.rating) ? '#ffca28' : '#e0e0e0'}
-                        size={28}
-                        onMouseEnter={() => setHover(ratingValue)}
-                        onMouseLeave={() => setHover(null)}
-                      />
-                    </label>
-                  );
-                })}
+            <div className="FeedbackForm-group">
+              <label className="FeedbackForm-label">Rating</label>
+              <div className="FeedbackForm-rating-section">
+                <p className="FeedbackForm-rating-text">Rate our service:</p>
+                <div className="FeedbackForm-star-rating">
+                  {[...Array(5)].map((_, index) => {
+                    const ratingValue = index + 1;
+                    return (
+                      <label key={index}>
+                        <input
+                          type="radio"
+                          name="rating"
+                          value={ratingValue}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, rating: Number(e.target.value) }))}
+                          checked={formData.rating === ratingValue}
+                        />
+                        <FaStar
+                          className="FeedbackForm-star"
+                          color={ratingValue <= (hover || formData.rating) ? '#f39c12' : '#d3d3d3'}
+                          size={30}
+                          onMouseEnter={() => setHover(ratingValue)}
+                          onMouseLeave={() => setHover(null)}
+                        />
+                      </label>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
-            <label className="ADDFBform-label">Comments</label>
-            <div className="ADDFBcomment-section">
-              <textarea
-                name="additionalComment"
-                value={formData.additionalComment}
-                onChange={handleChange}
-                placeholder="Share your thoughts or use the microphone"
-                className="ADDFBform-textarea"
-                required
-              />
-              <button
-                type="button"
-                onClick={toggleListening}
-                className={`ADDFBmic-btn ${isListening ? 'active' : ''}`}
-                title={isListening ? 'Stop recording' : 'Start recording'}
-              >
-                {isListening ? <FaMicrophoneSlash /> : <FaMicrophone />}
-              </button>
+            <div className="FeedbackForm-group">
+              <label className="FeedbackForm-label">Comments</label>
+              <div className="FeedbackForm-comment-section">
+                <textarea
+                  name="additionalComment"
+                  value={formData.additionalComment}
+                  onChange={handleChange}
+                  placeholder="Tell us about your experience..."
+                  className="FeedbackForm-textarea"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={toggleListening}
+                  className={`FeedbackForm-mic-btn ${isListening ? 'FeedbackForm-listening' : ''}`}
+                  title={isListening ? 'Stop recording' : 'Start recording'}
+                >
+                  {isListening ? <FaMicrophoneSlash /> : <FaMicrophone />}
+                </button>
+              </div>
             </div>
 
-            <label className="ADDFBconsent-label">
-              <input
-                type="checkbox"
-                name="consent"
-                checked={formData.consent}
-                onChange={handleChange}
-                required
-              />
-              I consent to the storage and handling of my data.
-            </label>
+            <div className="FeedbackForm-group FeedbackForm-consent-group">
+              <label className="FeedbackForm-consent-label">
+                <input
+                  type="checkbox"
+                  name="consent"
+                  checked={formData.consent}
+                  onChange={handleChange}
+                  required
+                />
+                I agree to the storage and use of my data.
+              </label>
+            </div>
 
-            <div className="ADDFBform-actions">
-              <button type="button" className="ADDFBview-btn" onClick={() => navigate('/all-feedbacks')}>
-                View All Feedback
+            <div className="FeedbackForm-actions">
+              <button type="button" className="FeedbackForm-view-btn" onClick={() => navigate('/all-feedbacks')}>
+                View Feedbacks
               </button>
-              <button type="submit" className="ADDFBsubmit-btn">
-                {isEditing ? 'Update' : 'Submit'}
+              <button type="submit" className="FeedbackForm-submit-btn">
+                {isEditing ? 'Update Feedback' : 'Submit Feedback'}
               </button>
             </div>
           </form>
 
-          <div className="ADDFBfeedback-list">
-            {feedbacks.map((feedback) => (
-              <div key={feedback._id} className="ADDFBfeedback-item">
-                <div className="ADDFBfeedback-header">
-                  <h3>{feedback.name}</h3>
-                  <span className="ADDFBfeedback-date">
-                    {new Date(feedback.createdAt).toLocaleDateString()}
-                  </span>
-                </div>
-                <div className="ADDFBfeedback-rating">
-                  {[...Array(5)].map((_, index) => (
-                    <FaStar
-                      key={index}
-                      color={index < feedback.rating ? '#ffca28' : '#e0e0e0'}
-                      size={20}
-                    />
-                  ))}
-                  <span> ({feedback.rating}/5)</span>
-                </div>
-                <p>{feedback.additionalComment}</p>
-                {feedback.email === email && (
-                  <div className="ADDFBfeedback-controls">
-                    <button className="ADDFBedit-btn" onClick={() => handleEdit(feedback)}>
+          <div className="FeedbackForm-list">
+           
+            {feedbacks.length === 0 ? (
+              <p className="FeedbackForm-no-feedback">No feedback submitted yet.</p>
+            ) : (
+              feedbacks.map((feedback) => (
+                <div key={feedback._id} className="FeedbackForm-item">
+                  <div className="FeedbackForm-header">
+                    <h4>{feedback.name}</h4>
+                    <span className="FeedbackForm-date">
+                      {new Date(feedback.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <div className="FeedbackForm-rating">
+                    {[...Array(5)].map((_, index) => (
+                      <FaStar
+                        key={index}
+                        color={index < feedback.rating ? '#f39c12' : '#d3d3d3'}
+                        size={20}
+                      />
+                    ))}
+                    <span> ({feedback.rating}/5)</span>
+                  </div>
+                  <p>{feedback.additionalComment}</p>
+                  <div className="FeedbackForm-controls">
+                    <button className="FeedbackForm-edit-btn" onClick={() => handleEdit(feedback)}>
                       <FaEdit /> Edit
                     </button>
-                    <button className="ADDFBdelete-btn" onClick={() => handleDelete(feedback._id)}>
+                    <button className="FeedbackForm-delete-btn" onClick={() => handleDelete(feedback._id)}>
                       <FaTrash /> Delete
                     </button>
                   </div>
-                )}
-              </div>
-            ))}
+                </div>
+              ))
+            )}
           </div>
         </div>
       </section>

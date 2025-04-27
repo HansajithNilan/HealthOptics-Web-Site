@@ -5,7 +5,7 @@ import NavBar from '../../../components/NavBar/NavBar';
 import Footer from '../../../components/Footer/footer';
 import './AllFeedback.css';
 import { useNavigate } from 'react-router-dom';
-import allfeedbackImage from '../../../assets/allfeedbackimage.jpg';
+import allfeedbackImage from '../../../assets/allfeedbackimage21.jpg';
 
 const AllFeedbacks = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -31,61 +31,61 @@ const AllFeedbacks = () => {
   );
 
   return (
-    <div className="AFBfeedback-page">
+    <div className="AllFeedbacks-page">
       <NavBar />
-      <section className="AFBfeedback-container">
-        <div className="AFBfeedback-hero">
+      <section className="AllFeedbacks-container">
+        <div className="AllFeedbacks-hero">
           <img src={allfeedbackImage} alt="All Feedbacks Banner" />
-          <div className="AFBhero-overlay">
-            <h1>All Customer Feedback</h1>
-            <p>Discover what our customers are saying about us</p>
+          <div className="AllFeedbacks-hero-overlay">
+            <h1>Customer Feedback</h1>
+            <p>See what our customers have to say about us</p>
           </div>
         </div>
 
-        <div className="AFBall-feedbacks-wrapper">
-          <div className="AFBfeedback-header">
-            <div className="AFBsearch-container">
+        <div className="AllFeedbacks-wrapper">
+          <div className="AllFeedbacks-header">
+            <div className="AllFeedbacks-search-container">
               <input
                 type="text"
                 placeholder="Search by name or email..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="AFBsearch-input"
+                className="AllFeedbacks-search-input"
               />
             </div>
-            <button className="AFBback-btn" onClick={() => navigate('/feedback')}>
-              Back to Feedback Form
+            <button className="AllFeedbacks-back-btn" onClick={() => navigate('/feedback')}>
+              Return to Feedback Form
             </button>
           </div>
 
-          <div className="AFBfeedback-grid">
+          <div className="AllFeedbacks-grid">
             {filteredFeedbacks.length > 0 ? (
               filteredFeedbacks.map((feedback) => (
-                <div key={feedback._id} className="AFBfeedback-card">
-                  <div className="AFBcard-header">
-                    <div className="AFBuser-details">
+                <div key={feedback._id} className="AllFeedbacks-card">
+                  <div className="AllFeedbacks-card-header">
+                    <div className="AllFeedbacks-user-details">
                       <h3>{feedback.name}</h3>
-                      <p className="AFBuser-email">{feedback.email}</p>
+                      <p className="AllFeedbacks-user-email">{feedback.email}</p>
                     </div>
-                    <span className="AFBcard-date">
+                    <span className="AllFeedbacks-card-date">
                       {new Date(feedback.createdAt).toLocaleDateString()}
                     </span>
                   </div>
-                  <div className="AFBcard-rating">
+                  <div className="AllFeedbacks-card-rating">
                     {[...Array(5)].map((_, index) => (
                       <FaStar
                         key={index}
-                        color={index < feedback.rating ? '#ffca28' : '#e0e0e0'}
-                        size={20}
+                        color={index < feedback.rating ? '#f39c12' : '#d3d3d3'}
+                        size={22}
                       />
                     ))}
                     <span>({feedback.rating}/5)</span>
                   </div>
-                  <p className="AFBcard-comment">{feedback.additionalComment}</p>
+                  <p className="AllFeedbacks-card-comment">{feedback.additionalComment}</p>
                 </div>
               ))
             ) : (
-              <p className="AFBno-feedback">No feedback matches your search.</p>
+              <p className="AllFeedbacks-no-feedback">No feedback matches your search criteria.</p>
             )}
           </div>
         </div>

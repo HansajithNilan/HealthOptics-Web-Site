@@ -1,363 +1,384 @@
 /* General Layout */
-.ADDFBfeedback-page {
-    min-height: 100vh;
-    display: flex;
+.FeedbackForm-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f8f9fa;
+  font-family: 'Roboto', sans-serif;
+}
+
+.FeedbackForm-container {
+  flex: 1;
+  padding: 0 0 50px;
+}
+
+/* Hero Section */
+.FeedbackForm-hero {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+}
+
+.FeedbackForm-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.FeedbackForm-hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  padding: 25px 40px;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 8px;
+}
+
+.FeedbackForm-hero-overlay h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.FeedbackForm-hero-overlay p {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+/* Content Layout */
+.FeedbackForm-content {
+  display: flex;
+  max-width: 1200px;
+  margin: -50px auto 0;
+  padding: 20px;
+  gap: 30px;
+}
+
+/* Feedback Form */
+.FeedbackForm-form {
+  flex: 0 0 45%;
+  background: #fff;
+  padding: 35px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 20px;
+}
+
+.FeedbackForm-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.FeedbackForm-group {
+  margin-bottom: 20px;
+}
+
+.FeedbackForm-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.FeedbackForm-input,
+.FeedbackForm-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafafa;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.FeedbackForm-input:focus,
+.FeedbackForm-textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.FeedbackForm-rating-section {
+  margin: 20px 0;
+}
+
+.FeedbackForm-rating-text {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.FeedbackForm-star-rating {
+  display: flex;
+  gap: 12px;
+}
+
+.FeedbackForm-star-rating label {
+  cursor: pointer;
+}
+
+.FeedbackForm-star-rating input {
+  display: none;
+}
+
+.FeedbackForm-star {
+  transition: transform 0.2s ease;
+}
+
+.FeedbackForm-star:hover {
+  transform: scale(1.2);
+}
+
+.FeedbackForm-comment-section {
+  position: relative;
+}
+
+.FeedbackForm-textarea {
+  height: 130px;
+  resize: vertical;
+}
+
+.FeedbackForm-mic-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: #007bff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.FeedbackForm-mic-btn:hover {
+  background: #f61d21;
+}
+
+.FeedbackForm-mic-btn.FeedbackForm-listening {
+  background: #dc3545;
+  animation: FeedbackForm-pulse 1.5s infinite;
+}
+
+@keyframes FeedbackForm-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.FeedbackForm-consent-group {
+  margin: 20px 0;
+}
+
+.FeedbackForm-consent-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.FeedbackForm-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.FeedbackForm-submit-btn,
+.FeedbackForm-view-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.FeedbackForm-submit-btn {
+  background: #007bff;
+  color: #fff;
+}
+
+.FeedbackForm-submit-btn:hover {
+  
+  transform: translateY(-2px);
+}
+
+.FeedbackForm-view-btn {
+  background: #28a745;
+  color: #fff;
+}
+
+.FeedbackForm-view-btn:hover {
+  background: #218838;
+  transform: translateY(-2px);
+}
+
+/* Feedback List */
+.FeedbackForm-list {
+  flex: 0 0 50%;
+  max-height: 650px;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.FeedbackForm-list-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.FeedbackForm-no-feedback {
+  font-size: 1rem;
+  color: #777;
+  text-align: center;
+}
+
+.FeedbackForm-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.FeedbackForm-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.FeedbackForm-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.FeedbackForm-item {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.FeedbackForm-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.FeedbackForm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.FeedbackForm-header h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.FeedbackForm-date {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.FeedbackForm-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  color: #666;
+}
+
+.FeedbackForm-item p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.FeedbackForm-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.FeedbackForm-edit-btn,
+.FeedbackForm-delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.FeedbackForm-edit-btn {
+  background: #007bff;
+}
+
+.FeedbackForm-edit-btn:hover {
+  background: #16671d;
+}
+
+.FeedbackForm-delete-btn {
+  background: #dc3545;
+}
+
+.FeedbackForm-delete-btn:hover {
+  background: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .FeedbackForm-content {
     flex-direction: column;
-    background: #f5f6f8;
-    font-family: 'Poppins', sans-serif;
+    margin-top: -30px;
   }
-  
-  .ADDFBfeedback-container {
+
+  .FeedbackForm-form,
+  .FeedbackForm-list {
     flex: 1;
-    padding: 0 0 40px;
-  }
-  
-  /* Hero Section */
-  .ADDFBfeedback-hero {
-    position: relative;
     width: 100%;
-    height: 450px;
+    max-width: 600px;
+    margin: 0 auto;
   }
-  
-  .ADDFBfeedback-hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.8);
+}
+
+@media (max-width: 768px) {
+  .FeedbackForm-hero-overlay h1 {
+    font-size: 2rem;
   }
-  
-  .ADDFBhero-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #fff;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-  }
-  
-  .ADDFBhero-overlay h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-  }
-  
-  .ADDFBhero-overlay p {
-    font-size: 1.3rem;
-    font-weight: 300;
-  }
-  
-  /* Content Layout */
-  .ADDFBfeedback-content {
-    display: flex;
-    max-width: 1300px;
-    margin: -60px auto 0;
-    padding: 20px;
-    gap: 40px;
-    position: relative;
-    z-index: 2;
-  }
-  
-  /* Feedback Form */
-  .ADDFBfeedback-form {
-    flex: 0 0 40%;
-    background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-    position: sticky;
-    top: 20px;
-  }
-  
-  .ADDFBform-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .ADDFBform-label {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #34495e;
-    margin-bottom: 8px;
-    display: block;
-  }
-  
-  .ADDFBform-input,
-  .ADDFBform-textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+
+  .FeedbackForm-hero-overlay p {
     font-size: 1rem;
-    transition: border-color 0.3s ease;
   }
-  
-  .ADDFBform-input:focus,
-  .ADDFBform-textarea:focus {
-    border-color: #3498db;
-    outline: none;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
-  }
-  
-  .ADDFBrating-section {
-    margin: 20px 0;
-  }
-  
-  .ADDFBrating-text {
-    font-size: 1.1rem;
-    color: #7f8c8d;
-    margin-bottom: 10px;
-  }
-  
-  .ADDFBstar-rating {
-    display: flex;
+
+  .FeedbackForm-actions {
+    flex-direction: column;
     gap: 10px;
   }
-  
-  .ADDFBstar-rating label {
-    cursor: pointer;
+
+  .FeedbackForm-submit-btn,
+  .FeedbackForm-view-btn {
+    width: 100%;
   }
-  
-  .ADDFBstar-rating input {
-    display: none;
-  }
-  
-  .ADDFBstar {
-    transition: transform 0.2s ease;
-  }
-  
-  .ADDFBstar:hover {
-    transform: scale(1.15);
-  }
-  
-  .ADDFBcomment-section {
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .ADDFBform-textarea {
-    height: 120px;
-    resize: vertical;
-  }
-  
-  .ADDFBmic-btn {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: #7f8c8d;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    
-  }
-  
-  .ADDFBmic-btn:hover {
-    color: #dc2508;
-  }
-  
-  .ADDFBmic-btn.active {
-    color: #e74c3c;
-    animation: pulse 1s infinite;
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-  }
-  
-  .ADDFBconsent-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    color: #7f8c8d;
-    margin: 15px 0;
-  }
-  
-  .ADDFBform-actions {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 25px;
-  }
-  
-  .ADDFBsubmit-btn,
-  .ADDFBview-btn {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .ADDFBsubmit-btn {
-    background: #3498db;
-    color: #fff;
-  }
-  
-  .ADDFBsubmit-btn:hover {
-    background: #f07603;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .ADDFBview-btn {
-    background: #2ecc71;
-    color: #fff;
-  }
-  
-  .ADDFBview-btn:hover {
-    background: #27ae60;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Feedback List */
-  .ADDFBfeedback-list {
-    flex: 0 0 55%;
-    max-height: 700px;
-    overflow-y: auto;
-    padding: 20px;
-  }
-  
-  .ADDFBfeedback-list::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  .ADDFBfeedback-list::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-  }
-  
-  .ADDFBfeedback-list::-webkit-scrollbar-thumb {
-    background: #3498db;
-    border-radius: 10px;
-  }
-  
-  .ADDFBfeedback-item {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease;
-  }
-  
-  .ADDFBfeedback-item:hover {
-    transform: translateY(-5px);
-  }
-  
-  .ADDFBfeedback-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .ADDFBfeedback-header h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #2c3e50;
-  }
-  
-  .ADDFBfeedback-date {
-    font-size: 0.85rem;
-    color: #95a5a6;
-  }
-  
-  .ADDFBfeedback-rating {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 10px 0;
-    color: #7f8c8d;
-  }
-  
-  .ADDFBfeedback-item p {
-    font-size: 0.95rem;
-    color: #34495e;
-    line-height: 1.5;
-  }
-  
-  .ADDFBfeedback-controls {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-  }
-  
-  .ADDFBedit-btn,
-  .ADDFBdelete-btn {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .ADDFBedit-btn {
-    background: #3498db;
-  }
-  
-  .ADDFBedit-btn:hover {
-    background: #2980b9;
-  }
-  
-  .ADDFBdelete-btn {
-    background: #e74c3c;
-  }
-  
-  .ADDFBdelete-btn:hover {
-    background: #c0392b;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .ADDFBfeedback-content {
-      flex-direction: column;
-      margin-top: -40px;
-    }
-  
-    .ADDFBfeedback-form,
-    .ADDFBfeedback-list {
-      flex: 1;
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .ADDFBhero-overlay h1 {
-      font-size: 2rem;
-    }
-  
-    .ADDFBhero-overlay p {
-      font-size: 1rem;
-    }
-  
-    .ADDFBform-actions {
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    .ADDFBsubmit-btn,
-    .ADDFBview-btn {
-      width: 100%;
-    }
-  }
+}
