@@ -4,66 +4,59 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Swal from "sweetalert2";
 import DashboardLayout from "../../components/DashboardLayout/DashboardLayout";
-import doctorImage from "../../assets/doctor-image.png";
+import doctorImage from "../../assets/doctor-image21.jpg";
 import './DoctorProfileFrom.css';
 
 const DoctorProfileForm = ({ onDoctorAdded }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [dob, setDob] = useState('');
-  const [specialty, setSpecialty] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [phone, setPhone] = useState('');
-  const [gender, setGender] = useState('');
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    dob: '',
+    specialty: '',
+    city: '',
+    state: '',
+    phone: '',
+    gender: ''
+  });
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    if (!/^\d{10}$/.test(phone)) {
+    if (!/^\d{10}$/.test(formData.phone)) {
       toast.error("Phone number must be exactly 10 digits");
       setLoading(false);
       return;
     }
 
     try {
-      if (!firstName || !lastName || !email || !address || !dob || !specialty || !city || !state || !phone || !gender) {
+      const requiredFields = Object.keys(formData);
+      if (requiredFields.some(field => !formData[field])) {
         toast.error("All fields are required");
         setLoading(false);
         return;
       }
 
-      const formData = new FormData();
-      formData.append("firstName", firstName);
-      formData.append("lastName", lastName);
-      formData.append("email", email);
-      formData.append("address", address);
-      formData.append("dob", dob);
-      formData.append("specialty", specialty);
-      formData.append("city", city);
-      formData.append("state", state);
-      formData.append("phone", phone);
-      formData.append("gender", gender);
-
-      if (photo) {
-        formData.append("photo", photo);
-      }
+      const data = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        data.append(key, value);
+      });
+      if (photo) data.append("photo", photo);
 
       const response = await axios.post(
         "http://localhost:5000/api/doctors",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        data,
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
 
       if (response.status === 201) {
@@ -73,190 +66,176 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-          resetForm();
-          if (onDoctorAdded) {
-            onDoctorAdded(response.data.doctor); // Notify parent component
-          }
-          navigate("/admin/doctors"); // Redirect to AdminDoctorManage.jsx page
+          setFormData({
+            firstName: '', lastName: '', email: '', address: '',
+            dob: '', specialty: '', city: '', state: '', phone: '', gender: ''
+          });
+          setPhoto(null);
+          onDoctorAdded?.(response.data.doctor);
+          navigate("/admin/doctors");
         });
-      } else {
-        throw new Error(response.data.message || "Failed to create doctor profile");
       }
     } catch (error) {
-      console.error("Error creating doctor:", error);
       Swal.fire("Error", error.response?.data?.message || "Failed to create doctor profile", "error");
     } finally {
       setLoading(false);
     }
   };
 
-  const resetForm = () => {
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setAddress('');
-    setDob('');
-    setSpecialty('');
-    setCity('');
-    setState('');
-    setPhone('');
-    setGender('');
-    setPhoto(null);
-  };
-
-  const handlePhotoChange = (e) => {
-    setPhoto(e.target.files[0]);
-  };
-
   return (
-    <DashboardLayout title="Add Doctor Profile">
-      <div>
-        <div className="doctor-container4617">
-          <div className="image-container4617">
-            <img src={doctorImage} alt="Doctor" className="doctor-image4617" />
+    <DashboardLayout title="Add New Doctor Profile">
+      <div className="dpf-container">
+        <div className="dpf-header">
+          <img src={doctorImage} alt="Doctor" className="dpf-image" />
+          <div className="dpf-header-text">
+            <h2>Create Doctor Profile</h2>
+            <p>Fill in the details to add a new doctor to the system</p>
           </div>
-          <div className="form-container4617">
-            <h2 className="form-title4617">Add Doctor Profile</h2>
-            <form onSubmit={handleSubmit} className="form4617">
-              <div className="form-group4617">
-                <label>First Name </label> 
+        </div>
+
+        <form onSubmit={handleSubmit} className="dpf-form">
+          <div className="dpf-section">
+            <h3>Personal Information</h3>
+            <div className="dpf-grid">
+              <div className="dpf-group">
+                <label>First Name</label>
                 <input
                   type="text"
-                  placeholder="First Name"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
                   required
-                  className="input-field4617"
                 />
               </div>
-              <div className="form-group4617">
-                <label>Last Name </label>
+              <div className="dpf-group">
+                <label>Last Name</label>
                 <input
                   type="text"
-                  placeholder="Last Name"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
                   required
-                  className="input-field4617"
                 />
               </div>
-              <div className="form-group4617">
-                <label>Email </label>
+              <div className="dpf-group">
+                <label>Email Address</label>
                 <input
                   type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
-                  className="input-field4617"
                 />
               </div>
-              <div className="form-group4617">
-                <label>Address </label>
-                <input
-                  type="text"
-                  placeholder="Address"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  required
-                  className="input-field4617"
-                />
-              </div>
-              <div className="form-group4617">
+              <div className="dpf-group">
                 <label>Date of Birth</label>
                 <input
                   type="date"
-                  placeholder="Date of Birth"
-                  value={dob}
-                  onChange={(e) => setDob(e.target.value)}
+                  name="dob"
+                  value={formData.dob}
+                  onChange={handleChange}
                   required
-                  className="input-field4617"
                 />
               </div>
-              <div className="form-group4617">
-                <label>Specialty </label>
-              <select
-                  
-                  
-                  value={specialty}
-                  onChange={(e) => setSpecialty(e.target.value)}
-                  required
-                  className="input-field4617"
-                >
-                  <option value="" disabled>Select Specialty</option>
-                  <option value="Eye Surgeon">Eye Surgeon</option>
-                  <option value="Optometrist">Optometrist</option>
-                  <option value="Ophthalmologist">Ophthalmologist</option>
-                </select>
-
-              </div>
-              
-              
-              <div className="form-group4617">
-                <label>City </label>
-                <input
-                  type="text"
-                  placeholder="City"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  required
-                  className="input-field4617"
-                />
-              </div>
-              <div className="form-group4617">
-                <label>State </label>
-                <input
-                  type="text"
-                  placeholder="State"
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
-                  required
-                  className="input-field4617"
-                />
-              </div>
-              <div className="form-group4617">
-                <label>Phone Number </label>
-                <input
-                  type="tel"
-                  placeholder="Phone"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  required
-                  className="input-field4617"
-                  pattern="\d{10}"
-                  title="Phone number must be exactly 10 digits"
-                />
-              </div>
-              <div className="form-group4617">
-                <label>Gender </label>
+              <div className="dpf-group">
+                <label>Gender</label>
                 <select
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
                   required
-                  className="input-field4617"
                 >
                   <option value="">Select Gender</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
-                  
+                  <option value="other">Other</option>
                 </select>
               </div>
-              <div className="form-group4617">
-                <label> Doctor Photo</label>
+            </div>
+          </div>
+
+          <div className="dp-DATAsection">
+            <h3>Professional Details</h3>
+            <div className="dpf-grid">
+              <div className="dpf-group">
+                <label>Specialty</label>
+                <select
+                  name="specialty"
+                  value={formData.specialty}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select Specialty</option>
+                  <option value="Eye Surgeon">Eye Surgeon</option>
+                  <option value="Optometrist">Optometrist</option>
+                  <option value="Ophthalmologist">Ophthalmologist</option>
+                </select>
+              </div>
+              <div className="dpf-group">
+                <label>Phone Number</label>
                 <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handlePhotoChange}
-                  className="input-field4617"
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  pattern="\d{10}"
                 />
               </div>
-              <button type="submit" disabled={loading} className="submit-button4617">
-                {loading ? 'Creating...' : 'Create Doctor Profile'}
-              </button>
-            </form>
-            
+            </div>
           </div>
-        </div>
+
+          <div className="dpf-section">
+            <h3>Location</h3>
+            <div className="dpf-grid">
+              <div className="dpf-group dpf-full-width">
+                <label>Address</label>
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="dpf-group">
+                <label>City</label>
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="dpf-group">
+                <label>State</label>
+                <input
+                  type="text"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="dpf-section">
+            <h3>Profile Photo</h3>
+            <div className="dpf-group">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setPhoto(e.target.files[0])}
+              />
+            </div>
+          </div>
+
+          <button type="submit" disabled={loading} className="dpf-submit">
+            {loading ? 'Creating Profile...' : 'Create Doctor Profile'}
+          </button>
+        </form>
       </div>
     </DashboardLayout>
   );

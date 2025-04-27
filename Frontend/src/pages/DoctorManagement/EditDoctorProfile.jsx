@@ -35,7 +35,7 @@ function EditDoctorProfile() {
         lastName: doctorData.lastName || "",
         email: doctorData.email || "",
         address: doctorData.address || "",
-        dob: doctorData.dob ? doctorData.dob.split("T")[0] : "", // Format date for input
+        dob: doctorData.dob ? doctorData.dob.split("T")[0] : "",
         specialty: doctorData.specialty || "",
         city: doctorData.city || "",
         state: doctorData.state || "",
@@ -45,7 +45,7 @@ function EditDoctorProfile() {
       });
     } catch (error) {
       console.error("Error fetching doctor:", error);
-      toast.error("Failed to fetch doctor details");
+      toast.error("Failed to load doctor details");
     }
   };
 
@@ -91,81 +91,81 @@ function EditDoctorProfile() {
   };
 
   return (
-    <div className="edit-doctor-container-EDPF">
-      <div className="edit-doctor-card-EDPF">
-        <h2 className="edit-title-EDPF">Edit Doctor Profile</h2>
-        <form onSubmit={handleSubmit} className="edit-form-EDPF">
-          <div className="form-group-EDPF">
-            <label>First Name</label>
+    <div className="EditDoctorProfile-wrapper">
+      <div className="EditDoctorProfile-container">
+        <h2 className="EditDoctorProfile-title">Edit Doctor Profile</h2>
+        <form onSubmit={handleSubmit} className="EditDoctorProfile-form">
+          <div className="EditDoctorProfile-field">
+            <label className="EditDoctorProfile-label">First Name</label>
             <input
               type="text"
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              className="form-input-EDPF"
+              className="EditDoctorProfile-input"
               required
               placeholder="Enter first name"
             />
           </div>
 
-          <div className="form-group-EDPF">
-            <label>Last Name</label>
+          <div className="EditDoctorProfile-field">
+            <label className="EditDoctorProfile-label">Last Name</label>
             <input
               type="text"
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className="form-input-EDPF"
+              className="EditDoctorProfile-input"
               required
               placeholder="Enter last name"
             />
           </div>
 
-          <div className="form-group-EDPF">
-            <label>Email</label>
+          <div className="EditDoctorProfile-field">
+            <label className="EditDoctorProfile-label">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="form-input-EDPF"
+              className="EditDoctorProfile-input"
               required
-              placeholder="Enter email"
+              placeholder="Enter email address"
             />
           </div>
 
-          <div className="form-group-EDPF">
-            <label>Address</label>
+          <div className="EditDoctorProfile-field">
+            <label className="EditDoctorProfile-label">Address</label>
             <input
               type="text"
               name="address"
               value={formData.address}
               onChange={handleChange}
-              className="form-input-EDPF"
+              className="EditDoctorProfile-input"
               required
-              placeholder="Enter address"
+              placeholder="Enter full address"
             />
           </div>
 
-          <div className="form-group-EDPF">
-            <label>Date of Birth</label>
+          <div className="EditDoctorProfile-field">
+            <label className="EditDoctorProfile-label">Date of Birth</label>
             <input
               type="date"
               name="dob"
               value={formData.dob}
               onChange={handleChange}
-              className="form-input-EDPF"
+              className="EditDoctorProfile-input"
               required
             />
           </div>
 
-          <div className="form-group-EDPF">
-            <label>Specialty</label>
+          <div className="EditDoctorProfile-field">
+            <label className="EditDoctorProfile-label">Specialty</label>
             <select
               name="specialty"
               value={formData.specialty}
               onChange={handleChange}
-              className="form-input-EDPF"
+              className="EditDoctorProfile-input"
               required
             >
               <option value="" disabled>Select Specialty</option>
@@ -175,54 +175,54 @@ function EditDoctorProfile() {
             </select>
           </div>
 
-          <div className="form-group-EDPF">
-            <label>City</label>
+          <div className="EditDoctorProfile-field">
+            <label className="EditDoctorProfile-label">City</label>
             <input
               type="text"
               name="city"
               value={formData.city}
               onChange={handleChange}
-              className="form-input-EDPF"
+              className="EditDoctorProfile-input"
               required
               placeholder="Enter city"
             />
           </div>
 
-          <div className="form-group-EDPF">
-            <label>State</label>
+          <div className="EditDoctorProfile-field">
+            <label className="EditDoctorProfile-label">State</label>
             <input
               type="text"
               name="state"
               value={formData.state}
               onChange={handleChange}
-              className="form-input-EDPF"
+              className="EditDoctorProfile-input"
               required
               placeholder="Enter state"
             />
           </div>
 
-          <div className="form-group-EDPF">
-            <label>Phone</label>
+          <div className="EditDoctorProfile-field">
+            <label className="EditDoctorProfile-label">Phone</label>
             <input
               type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="form-input-EDPF"
+              className="EditDoctorProfile-input"
               required
-              placeholder="Enter 10-digit phone"
+              placeholder="Enter 10-digit phone number"
               pattern="\d{10}"
               title="Phone number must be exactly 10 digits"
             />
           </div>
 
-          <div className="form-group-EDPF">
-            <label>Gender</label>
+          <div className="EditDoctorProfile-field">
+            <label className="EditDoctorProfile-label">Gender</label>
             <select
               name="gender"
               value={formData.gender}
               onChange={handleChange}
-              className="form-input-EDPF"
+              className="EditDoctorProfile-input"
               required
             >
               <option value="" disabled>Select Gender</option>
@@ -232,26 +232,26 @@ function EditDoctorProfile() {
             </select>
           </div>
 
-          <div className="form-group-EDPF">
-            <label>Photo</label>
+          <div className="EditDoctorProfile-field">
+            <label className="EditDoctorProfile-label">Profile Photo</label>
             <input
               type="file"
               accept="image/*"
               onChange={handlePhotoChange}
-              className="form-input-EDPF"
+              className="EditDoctorProfile-file-input"
             />
           </div>
 
-          <div className="form-actions-EDPF">
+          <div className="EditDoctorProfile-actions">
             <button
               type="button"
-              className="cancel-btn-EDPF"
+              className="EditDoctorProfile-cancel-btn"
               onClick={() => navigate("/admin/doctors")}
             >
               Cancel
             </button>
-            <button type="submit" className="update-btn-EDPF">
-              Update Doctor
+            <button type="submit" className="EditDoctorProfile-submit-btn">
+              Update Profile
             </button>
           </div>
         </form>

@@ -149,7 +149,7 @@ const AdminDoctorManage = () => {
               <i className="fas fa-plus"></i> Add New Doctor
             </button>
             <button onClick={handleToggleAllDoctors} className="view-all-doctors-btnADOM">
-              <i className="fas fa-table"></i> {showAllDoctors ? "Hide Table" : "View All Doctors"}
+              <i className="fas fa-table"></i> {showAllDoctors ? "Hide All Doctors" : "View All Doctors"}
             </button>
           </div>
         </div>
