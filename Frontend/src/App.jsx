@@ -40,6 +40,7 @@ import DoctorProfileTable from "./pages/DoctorManagement/DoctorProfileTable.jsx"
 import Spectacle from "./pages/HomePage/Spectacle/Spectacles.jsx";
 import Cartab from "./pages/CartTab/cartab.jsx";
 import AdminFeedbackManage from "./pages/AdminPage/FeedbackManagement/AdminFeedbackManage.jsx";
+import ReservationDisplay from "./pages/UserReservation/ReservationDisplay.jsx";
 
 function App() {
   return (
@@ -51,13 +52,14 @@ function App() {
 
       <Route path="/register" element={<UserRegisterPage />} />
       
-      <Route path="/reservespectacles/:id" element={<SpectaclesReservation />} />
+      <Route path="/reservespectacles/:id/:number" element={<SpectaclesReservation />} />
       <Route path="/reservationDetails" element={<ReservationDetails />} />
       <Route path="/updatereservation/:id" element={<ReservationUpdate/>} />
       <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
       <Route path="/myappointment" element={<MyAppointmentScreen />} />
       <Route path="/editdoctorappointment/:id" element={<EditDoctorAppointment />} />
       <Route path="/reservespectacles" element={<SpectaclesReservation />} />
+      <Route path="/reservationdisplay/:number" element={<ReservationDisplay />} />
       <Route path="/addappointment" element={<AddDoctorAppointmentDetails />} />
       <Route path="/doctorprofile" element={
         <DoctorProfileFrom onDoctorAdded={(doctor) => {
