@@ -70,6 +70,7 @@ const cartItems = useSelector((state) => state.cart.items);
           
         )}
       </ul>
+      
     </nav>
   );
 }

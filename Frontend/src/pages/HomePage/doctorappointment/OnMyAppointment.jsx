@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../../components/NavBar/NavBar";
 import Footer from "../../../components/Footer/footer";
 import "./OnMyAppointment.css";
@@ -12,6 +12,7 @@ function OnMyAppointment() {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   // Delete appointment with confirmation
   const deleteAppointment = async (id) => {
@@ -68,8 +69,8 @@ function OnMyAppointment() {
       ["Address", appointment.address],
       ["Date", appointment.date],
       ["Time", appointment.timeSlot],
-      ["Doctor", appointment.doctor],
-      ["Fee", `Rs ${appointment.doctorfee ||2500}.00`],
+      ["Doctor",`Dr. ${appointment.doctor}`],
+      ["Total Fee", `Rs ${appointment.doctorfee || 2500}.00`],
     ];
 
     autoTable(doc, {
@@ -91,23 +92,32 @@ function OnMyAppointment() {
       try {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         const email = currentUser?.email;
-        if (!email) throw new Error("User email not found in local storage.");
+        
+        if (!email) {
+          setError("Please login to view appointments");
+          navigate("/loginpage");
+          return;
+        }
 
         const response = await axios.post(
           `http://localhost:5000/api/doctorappointment/getalldoctorappointment/${email}`
         );
 
-        setAppointments(response.data.doctorAppointments || []);
-        setLoading(false);
+        if (response.data.doctorAppointments) {
+          setAppointments(response.data.doctorAppointments);
+        } else {
+          setError("No appointments found");
+        }
       } catch (error) {
         console.error("Fetch error:", error);
-        setError(error.message || "Unable to retrieve appointment details.");
+        setError(error.response?.data?.message || "Unable to retrieve appointment details");
+      } finally {
         setLoading(false);
       }
     };
 
     fetchAppointments();
-  }, []);
+  }, [navigate]);
 
   if (loading) return <div className="OMA-status-message OMA-loading">Loading Appointments...</div>;
   if (error) return <div className="OMA-status-message OMA-error">{error}</div>;
@@ -141,8 +151,8 @@ function OnMyAppointment() {
                 <div className="OMA-details-grid">
                   <DetailItem label="Date" value={appointment.date} />
                   <DetailItem label="Time" value={appointment.timeSlot} />
-                  <DetailItem label="Doctor" value={appointment.doctor} />
-                  <DetailItem label="Fee" value={`Rs ${appointment.doctorfee || 0}.00`} />
+                  <DetailItem label="Doctor" value={`Dr. ${appointment.doctor}`} />
+                  <DetailItem label="Total Fee" value={`Rs ${appointment.doctorfee || 0}.00`} />
                 </div>
               </div>
             </div>

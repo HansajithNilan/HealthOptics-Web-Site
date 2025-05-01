@@ -8,6 +8,9 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
+import About from "./pages/HomePage/About/about.jsx";
+import Services from "./pages/HomePage/Services/Services.jsx";
+
 import Homepage from "./pages/HomePage/Hompage/Homepage.jsx";
 
 import AddfeedBackform from "./pages/HomePage/UserFeedback/Addfeedbackform.jsx";
@@ -22,7 +25,7 @@ import ReservationUpdate from "./pages/SpectaclesReservationPage/UpdateReservati
 
 import AddDoctorAppointmentDetails from "./pages/HomePage/doctorappointment/AddDoctorAppointmentDetails.jsx";
 
-import MyAppointmentScreen from "./pages/HomePage/doctorappointment/OnMyAppointment.jsx";
+
 
 import Loginpage from "./pages/LoginPage/loginpage.jsx";
 
@@ -41,6 +44,7 @@ import Spectacle from "./pages/HomePage/Spectacle/Spectacles.jsx";
 import Cartab from "./pages/CartTab/cartab.jsx";
 import AdminFeedbackManage from "./pages/AdminPage/FeedbackManagement/AdminFeedbackManage.jsx";
 import ReservationDisplay from "./pages/UserReservation/ReservationDisplay.jsx";
+import OnMyAppointment from "./pages/HomePage/doctorappointment/OnMyAppointment.jsx";
 
 function App() {
   return (
@@ -48,6 +52,10 @@ function App() {
       <Route path="/" element={<Homepage />} />
       <Route path="/feedback" element={<AddfeedBackform />} />
       <Route path="/all-feedbacks" element={<AllFeedbacks />} />
+      <Route path="/onmyappointment" element={<OnMyAppointment />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/Services" element={<Services />} />
+      <Route path="/services" element={<Services />} />
       
 
       <Route path="/register" element={<UserRegisterPage />} />
@@ -56,7 +64,7 @@ function App() {
       <Route path="/reservationDetails" element={<ReservationDetails />} />
       <Route path="/updatereservation/:id" element={<ReservationUpdate/>} />
       <Route path="/ophthalmologists" element={<OphthalmologistsScreen />} />
-      <Route path="/myappointment" element={<MyAppointmentScreen />} />
+      <Route path="/myappointment" element={<OnMyAppointment />} />
       <Route path="/editdoctorappointment/:id" element={<EditDoctorAppointment />} />
       <Route path="/reservespectacles" element={<SpectaclesReservation />} />
       <Route path="/reservationdisplay/:number" element={<ReservationDisplay />} />
@@ -78,6 +86,7 @@ function App() {
       <Route path="/spectacles" element={<Spectacle />} />
       <Route path="/loginpage" element={<Loginpage/>} />
       <Route path="/admin/feedbacks" element={<AdminFeedbackManage />} />
+
      
     </Routes>
 
