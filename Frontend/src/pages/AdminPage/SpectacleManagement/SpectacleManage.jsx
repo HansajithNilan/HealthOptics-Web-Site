@@ -42,7 +42,7 @@ const SpectacleManage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/spectacle/")
+      .get("http://localhost:3000/api/spectacle/")
       .then((response) => {
         setSpectacles(response.data);
       })
@@ -119,7 +119,7 @@ const SpectacleManage = () => {
         // Proceed with deletion
         console.log(`Deleting spectacle with id: ${id}`);
         axios
-          .delete(`http://localhost:5000/api/spectacle/delete/${id}`)
+          .delete(`http://localhost:3000/api/spectacle/delete/${id}`)
           .then((response) => {
             console.log("Spectacle deleted successfully", response);
             // Update state to reflect deletion

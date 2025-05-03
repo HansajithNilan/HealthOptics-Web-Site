@@ -50,8 +50,8 @@ app.use("/api/doctorappointment", DoctorAppointmentRoute); // Mount the route
 app.use('/api/spectacle',SpectacleRoute)
 app.use('/api/feedback', feedbackRoutes);
 
-app.listen(5000, () => {
+app.listen(3000, () => {
   connectDB(); // Call the connectDB function
   console.log(process.env.MONGO_URL);
-  console.log("Server Started at http://localhost:5000");
+  console.log("Server Started at http://localhost:3000");
 });

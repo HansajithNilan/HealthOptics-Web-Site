@@ -26,7 +26,7 @@ const AdminDoctorManage = () => {
 
   const fetchDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/doctors");
+      const response = await axios.get("http://localhost:3000/api/doctors");
       setDoctors(response.data);
     } catch (error) {
       console.error("Error fetching doctors:", error);
@@ -40,7 +40,7 @@ const AdminDoctorManage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/doctors/${id}`);
+      await axios.delete(`http://localhost:3000/api/doctors/${id}`);
       setDoctors((prev) => prev.filter((doc) => doc._id !== id));
       toast.success("Doctor deleted successfully!");
       Swal.fire({
@@ -200,7 +200,7 @@ const AdminDoctorManage = () => {
                       <td>
                         {doctor.photo ? (
                           <img
-                            src={`http://localhost:5000/uploads/${doctor.photo}`}
+                            src={`http://localhost:3000/uploads/${doctor.photo}`}
                             alt={`${doctor.firstName} ${doctor.lastName}`}
                             className="doctor-photo-tableADOM"
                           />
@@ -237,7 +237,7 @@ const AdminDoctorManage = () => {
               <div className="doctor-imageADOM">
                 {doctor.photo ? (
                   <img
-                    src={`http://localhost:5000/uploads/${doctor.photo}`}
+                    src={`http://localhost:3000/uploads/${doctor.photo}`}
                     alt={`${doctor.firstName} ${doctor.lastName}`}
                   />
                 ) : (
@@ -324,7 +324,7 @@ const AdminDoctorManage = () => {
                 {viewDoctor.photo ? (
                   <div className="doctor-photo-viewDoctorADOM">
                     <img
-                      src={`http://localhost:5000/uploads/${viewDoctor.photo}`}
+                      src={`http://localhost:3000/uploads/${viewDoctor.photo}`}
                       alt={`${viewDoctor.firstName} ${viewDoctor.lastName}`}
                     />
                   </div>

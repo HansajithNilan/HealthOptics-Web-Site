@@ -23,7 +23,7 @@ const Spectacles = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/spectacle/")
+      .get("http://localhost:3000/api/spectacle/")
       .then((response) => {
         setSpectacles(response.data);
       })

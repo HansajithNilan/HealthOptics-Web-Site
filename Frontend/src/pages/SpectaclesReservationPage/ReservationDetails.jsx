@@ -18,7 +18,7 @@ function ReservationDetails() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/auth/reservation/getallreservations')
+      .get('http://localhost:3000/api/auth/reservation/getallreservations')
       .then((response) => {
         if (Array.isArray(response.data)) {
           setReservations(response.data);
@@ -41,7 +41,7 @@ function ReservationDetails() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/api/auth/reservation/deletereservation/${id}`)
+          .delete(`http://localhost:3000/api/auth/reservation/deletereservation/${id}`)
           .then((res) => {
             Swal.fire('Deleted!', 'Reservation has been deleted.', 'success');
             setReservations(prev => prev.filter(reserve => reserve._id !== id)); // Update list without reload

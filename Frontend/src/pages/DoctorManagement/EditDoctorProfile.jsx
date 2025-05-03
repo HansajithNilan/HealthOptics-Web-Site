@@ -28,7 +28,7 @@ function EditDoctorProfile() {
 
   const fetchDoctor = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/doctors/${id}`);
+      const response = await axios.get(`http://localhost:3000/api/doctors/${id}`);
       const doctorData = response.data;
       setFormData({
         firstName: doctorData.firstName || "",
@@ -68,7 +68,7 @@ function EditDoctorProfile() {
         }
       });
 
-      const response = await axios.put(`http://localhost:5000/api/doctors/${id}`, updatedData, {
+      const response = await axios.put(`http://localhost:3000/api/doctors/${id}`, updatedData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

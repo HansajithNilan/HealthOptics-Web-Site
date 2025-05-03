@@ -15,7 +15,7 @@ const AdminFeedbackManage = () => {
 
   const fetchFeedbacks = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/feedback/all");
+      const response = await axios.get("http://localhost:3000/api/feedback/all");
       setFeedbacks(response.data);
     } catch (error) {
       console.error("Error fetching feedbacks:", error);
@@ -40,7 +40,7 @@ const AdminFeedbackManage = () => {
       });
 
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:5000/api/feedback/admindelete/${id}`);
+        await axios.delete(`http://localhost:3000/api/feedback/admindelete/${id}`);
         Swal.fire("Deleted!", "Feedback has been deleted.", "success");
         fetchFeedbacks();
       }

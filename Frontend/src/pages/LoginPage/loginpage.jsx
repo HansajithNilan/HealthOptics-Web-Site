@@ -26,7 +26,7 @@ function LoginPage() {
   
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/user/login",
+        "http://localhost:3000/api/auth/user/login",
         user
       );
   
@@ -46,7 +46,7 @@ function LoginPage() {
       if (data.role === "admin") {
         try {
           const res = await axios.get(
-            "http://localhost:5000/api/auth/user/adminlogin",
+            "http://localhost:3000/api/auth/user/adminlogin",
             {
               headers: {
                 Authorization: `Bearer ${token}`,

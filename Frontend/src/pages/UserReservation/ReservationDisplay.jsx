@@ -20,7 +20,7 @@ function ReservationDisplay() {
     const fetchDetails = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/auth/reservation/getreservationnumber/${number}`
+          `http://localhost:3000/api/auth/reservation/getreservationnumber/${number}`
         );
 
         const data = res.data;

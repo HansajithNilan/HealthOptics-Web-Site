@@ -54,7 +54,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
       if (photo) data.append("photo", photo);
 
       const response = await axios.post(
-        "http://localhost:5000/api/doctors",
+        "http://localhost:3000/api/doctors",
         data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

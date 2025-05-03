@@ -1,11 +1,17 @@
 import React from 'react'
 
 import about_img from '../../../assets/about_image.jpg'
+import NavBar from '../../../components/NavBar/NavBar'
+import Footer from '../../../components/Footer/footer'
 
 import './about.css'
+
 function about() {
+ 
   return (
+    
     <div className='about'>
+       <NavBar />
         <div className='about-left'>
             <img src={about_img} className='about-image'></img>
         </div>
@@ -15,8 +21,9 @@ function about() {
             
 
         </div>
-      
+        <Footer />
     </div>
+    
   )
 }
 

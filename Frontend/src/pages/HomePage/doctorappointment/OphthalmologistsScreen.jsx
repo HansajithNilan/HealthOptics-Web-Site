@@ -42,7 +42,7 @@ export default function OphthalmologistsScreen() {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/doctors");
+        const response = await axios.get("http://localhost:3000/api/doctors");
         setDoctors(response.data);
       } catch (error) {
         console.error("Error fetching doctors:", error);
@@ -126,7 +126,7 @@ export default function OphthalmologistsScreen() {
                 <div className="doctor-image">
                   {doctor.photo ? (
                     <img
-                      src={`http://localhost:5000/uploads/${doctor.photo}`}
+                      src={`http://localhost:3000/uploads/${doctor.photo}`}
                       alt={`${doctor.firstName} ${doctor.lastName}`}
                       onError={(e) => (e.target.src = "placeholder-image-url")}
                     />

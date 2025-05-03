@@ -8,7 +8,7 @@ import Footer from '../../../components/Footer/footer.jsx'
 import Contact from '../contact/contact.jsx'
 import SpectaclesDoctor from '../Spectacles&Doctor/SpectaclesDoctor.jsx'
 import Cartab from '../../CartTab/cartab.jsx'
-
+import Services from '../Services/Services.jsx'
 function Homepage() {
   return (
     <div>

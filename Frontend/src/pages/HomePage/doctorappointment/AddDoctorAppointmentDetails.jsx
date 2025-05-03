@@ -49,25 +49,45 @@ function AddDoctorAppointmentDetails() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+    
     try {
       await axios.post(
-        "http://localhost:5000/api/doctorappointment/createdoctorappointment",
+        "http://localhost:3000/api/doctorappointment/createdoctorappointment",
         formData
       );
-      Swal.fire({
-        title: "Thank You!",
-        text: "Your appointment has been booked successfully.",
-        icon: "success",
-        confirmButtonColor: "#2c5282",
-      }).then(() => navigate("/OnMyAppointment",));
+
+      if (response.data) {
+        Swal.fire({
+          title: "Thank You!",
+          text: "Your appointment has been booked successfully.",
+          icon: "success",
+          confirmButtonColor: "#2c5282",
+        }).then(() => {
+          navigate("/onmyappointment"); // Fix navigation path
+        });
+      }
     } catch (error) {
       console.error("Error booking appointment:", error);
-      Swal.fire({
-        title: "Error",
-        text: `Failed to book appointment: ${error.response?.data.message || "Server error"}`,
-        icon: "error",
-        confirmButtonColor: "#e53e3e",
-      });
+      const errorMessage = error.response?.data?.message || "Server error";
+      
+      if (error.response?.status === 401) {
+        Swal.fire({
+          title: "Session Expired",
+          text: "Please login again to continue",
+          icon: "warning",
+          confirmButtonColor: "#2c5282",
+        }).then(() => {
+          localStorage.removeItem("token");
+          navigate("/login");
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: `Failed to book appointment: ${errorMessage}`,
+          icon: "error",
+          confirmButtonColor: "#e53e3e",
+        });
+      }
     } finally {
       setSubmitting(false);
     }
@@ -90,7 +110,7 @@ function AddDoctorAppointmentDetails() {
           <div className="doctor-photo">
             {doctor.photo ? (
               <img
-                src={`http://localhost:5000/uploads/${doctor.photo}`}
+                src={`http://localhost:3000/uploads/${doctor.photo}`}
                 alt={`${doctor.firstName} ${doctor.lastName}`}
                 onError={(e) => (e.target.src = "placeholder-image-url")}
               />
@@ -99,11 +119,11 @@ function AddDoctorAppointmentDetails() {
             )}
           </div>
           <div className="doctor-info">
-            <p><strong>Name:</strong> {doctor.firstName} {doctor.lastName}</p>
+            <p><strong>Name: </strong> Dr.{doctor.firstName} {doctor.lastName}</p>
             <p><strong>Specialty:</strong> {doctor.specialty}</p>
             <p><strong>Location:</strong> {doctor.city}, {doctor.state}</p>
             <p><strong>Email:</strong> {doctor.email}</p>
-            <p><strong>Contact n:</strong> {doctor.phone}</p>
+            <p><strong>Contact no:</strong> {doctor.phone}</p>
           </div>
         </div>
 

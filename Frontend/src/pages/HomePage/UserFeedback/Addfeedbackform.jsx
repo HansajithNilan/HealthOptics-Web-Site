@@ -58,7 +58,7 @@ const Addfeedbackform = () => {
 
   const fetchFeedbacks = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/feedback/all');
+      const response = await axios.get('http://localhost:3000/api/feedback/all');
       const userFeedbacks = response.data.filter((feedback) => feedback.email === email);
       setFeedbacks(userFeedbacks);
     } catch (error) {
@@ -101,12 +101,12 @@ const Addfeedbackform = () => {
       const feedbackData = { ...formData, rating: Number(formData.rating), userId: id };
 
       if (isEditing) {
-        await axios.put(`http://localhost:5000/api/feedback/update/${editId}`, feedbackData, config);
+        await axios.put(`http://localhost:3000/api/feedback/update/${editId}`, feedbackData, config);
         Swal.fire({ icon: 'success', title: 'Updated!', text: 'Feedback updated successfully.' });
         setIsEditing(false);
         setEditId(null);
       } else {
-        await axios.post('http://localhost:5000/api/feedback/create', feedbackData, config);
+        await axios.post('http://localhost:3000/api/feedback/create', feedbackData, config);
         Swal.fire({ icon: 'success', title: 'Thank You!', text: 'Feedback submitted successfully.' });
       }
 
@@ -142,7 +142,7 @@ const Addfeedbackform = () => {
     if (result.isConfirmed) {
       try {
         const config = getAuthConfig();
-        await axios.delete(`http://localhost:5000/api/feedback/delete/${feedbackId}`, config);
+        await axios.delete(`http://localhost:3000/api/feedback/delete/${feedbackId}`, config);
         Swal.fire({ icon: 'success', title: 'Deleted!', text: 'Feedback has been removed.' });
         fetchFeedbacks();
       } catch (error) {

@@ -191,7 +191,7 @@ const SpectacleForm = ({ onClose }) => {
     };
 
     axios
-      .post("http://localhost:5000/api/spectacle/add", payload, {
+      .post("http://localhost:3000/api/spectacle/add", payload, {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {

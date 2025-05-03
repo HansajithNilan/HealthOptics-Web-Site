@@ -40,7 +40,14 @@ const DoctorAppointmentSchema = new Schema({
         required: true,
         enum: ['09:00 AM - 10:00 AM', '04:00 PM - 06:00 PM']
     },
-    
+    doctor: {
+        type: String,
+        required: true
+    },
+    doctorfee: {
+        type: Number,
+        default: 2500
+    }
 });
 
 const DoctorAppointment = mongoose.model('doctorappointments', DoctorAppointmentSchema);

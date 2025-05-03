@@ -14,7 +14,7 @@ function AllAppointmentScreen() {
     const fetchAllAppointments = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/doctorappointment/getallappointments"
+          "http://localhost:3000/api/doctorappointment/getallappointments"
         );
         setAppointments(response.data.appointments);
         setLoading(false);

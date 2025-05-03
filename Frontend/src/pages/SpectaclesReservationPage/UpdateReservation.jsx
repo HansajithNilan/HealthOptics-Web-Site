@@ -55,7 +55,7 @@ function UpdateReservation() {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/auth/reservation/getonereservation/${id}`);
+        const res = await axios.get(`http://localhost:3000/api/auth/reservation/getonereservation/${id}`);
         const data = res.data;
 
         setImageurl1(data.imageurlcolor1);
@@ -122,7 +122,7 @@ function UpdateReservation() {
 
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/auth/reservation/updateReservation/${id}`,
+        `http://localhost:3000/api/auth/reservation/updateReservation/${id}`,
         updatedFormData
       );
       notifySuccess();
