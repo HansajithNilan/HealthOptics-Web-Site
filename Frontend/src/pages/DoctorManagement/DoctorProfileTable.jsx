@@ -72,11 +72,11 @@ function DoctorProfileTable() {
                 <td>
                   {doctor.photo ? (
                     <img
-                      src={`http://localhost:5000/uploads/${doctor.photo}`}
+                      src={`http://localhost:3000/uploads/${doctor.photo}`}
                       alt="Doctor"
                       onError={(e) => {
                         e.target.onerror = null; // Prevent infinite loop
-                        e.target.src = "http://localhost:5000/uploads/placeholder.png"; // Fallback image
+                        e.target.src = "http://localhost:3000/uploads/placeholder.png"; // Fallback image
                       }}
                       style={{ width: "50px", height: "50px", borderRadius: "5px" }}
                     />

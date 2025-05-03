@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import DashboardLayout from "../../../components/DashboardLayout/DashboardLayout.jsx";
 import "./Dashboard.css";
 import { FaBuilding, FaUserMd, FaUsers, FaCalendarCheck, FaGlasses } from "react-icons/fa";
+import { AuthContext } from "../../../components/Context/AuthContext.jsx";
 
 const StatCard = ({ color, title, count, icon }) => (
   <div className={`cardvihani ${color}`}>
@@ -14,6 +15,9 @@ const StatCard = ({ color, title, count, icon }) => (
 );
 
 const Dashboard = () => {
+
+  const {name } = useContext(AuthContext);
+  const userName = name.split(" ")[0]; // Get the first name from the full name
   return (
     <DashboardLayout title="Health Optics Dashboard">
       <div className="dashboardvihani">
