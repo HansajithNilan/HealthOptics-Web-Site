@@ -232,7 +232,7 @@ const SpectacleUpdateForm = ({ onClose, spectacle, onUpdate }) => {
 
     axios
       .put(
-        `http://localhost:5000/api/spectacle/update/${spectacle._id}`,
+        `http://localhost:3000/api/spectacle/update/${spectacle._id}`,
         payload,
         {
           headers: { "Content-Type": "application/json" },
