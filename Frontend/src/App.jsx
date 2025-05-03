@@ -46,6 +46,8 @@ import AdminFeedbackManage from "./pages/AdminPage/FeedbackManagement/AdminFeedb
 import ReservationDisplay from "./pages/UserReservation/ReservationDisplay.jsx";
 import OnMyAppointment from "./pages/HomePage/doctorappointment/OnMyAppointment.jsx";
 
+import TrySpectacles from "./pages/HomePage/Spectacle/TrySpectacles.jsx";
+
 function App() {
   return (
     <Routes>
@@ -86,6 +88,8 @@ function App() {
       <Route path="/spectacles" element={<Spectacle />} />
       <Route path="/loginpage" element={<Loginpage/>} />
       <Route path="/admin/feedbacks" element={<AdminFeedbackManage />} />
+
+      <Route path="/tryspectacles/:id" element={<TrySpectacles />} />
 
      
     </Routes>
