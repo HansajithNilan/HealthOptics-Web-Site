@@ -21,7 +21,7 @@ function about() {
             
 
         </div>
-        <Footer />
+        
     </div>
     
   )

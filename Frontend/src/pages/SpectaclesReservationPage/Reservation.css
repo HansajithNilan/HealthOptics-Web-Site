@@ -12,7 +12,16 @@
   border-radius: 10px;
 }
 
-
+.reserve-button{
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #a51329;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+}
 .spectacles-section {
   margin: 130px auto;
   width: 80%;
@@ -271,10 +280,16 @@ color: red;
   color: black;
 }
 .add-to-cart- {
+  border-radius: 5px;
   display: flex;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+  background-color: rgb(29, 133, 62);
 }
 .add-to-cart- img{
   margin-right: 10px;

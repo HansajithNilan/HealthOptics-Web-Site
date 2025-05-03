@@ -16,6 +16,43 @@ body, html {
   backdrop-filter: blur(3px);
   
 }
+.popup-overla {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(3px);
+}
+
+.popup-box {
+ 
+  padding: 25px 35px;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 1.5rem;
+  font-weight:  bold;
+  color: #121111;
+}
+
+.popup-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #ddd;
+  border-top: 3px solid #f9a825;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
 
 .login-container {
   /* background: rgba(174, 167, 167, 0.15); */
@@ -78,17 +115,39 @@ h2 {
 .options label{
     color: #000000;
 }
-
-.login-btn {
-  width: 100%;
-  padding: 0.6rem;
-  background-color: #1f1f1f;
-  border: none;
-  color: rgb(255, 198, 65);
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fff;
+  border-top: 2px solid #333;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
 }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.login-btn {
+  background-color: rgb(245, 189, 78);
+  color: white;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  gap: 8px;
+  
+}
+button[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 
 .register-link {
   text-align: center;
