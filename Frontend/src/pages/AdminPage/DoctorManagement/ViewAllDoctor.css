@@ -1,0 +1,90 @@
+/* ViewAllDoctor.css */
+
+.dashboard-headerADOM {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  
+  .generate-pdf-btnADOM {
+    background-color: #1d4ed8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+  }
+  
+  .generate-pdf-btnADOM:hover {
+    background-color: #2563eb;
+  }
+  
+  .all-doctors-table-containerADOM {
+    overflow-x: auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .all-doctors-tableADOM {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    color: #333;
+  }
+  
+  .all-doctors-tableADOM th,
+  .all-doctors-tableADOM td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .all-doctors-tableADOM th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    color: #111827;
+  }
+  
+  .all-doctors-tableADOM tbody tr:hover {
+    background-color: #f1f5f9;
+  }
+  
+  .doctor-photo-tableADOM {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .no-photo-tableADOM {
+    font-style: italic;
+    color: #6b7280;
+  }
+  
+  .no-dataADOM {
+    text-align: center;
+    padding: 20px;
+    font-size: 16px;
+    color: #6b7280;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .generate-pdf-btnADOM {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  
+    .all-doctors-tableADOM th,
+    .all-doctors-tableADOM td {
+      padding: 10px;
+      font-size: 14px;
+    }
+  }
+  

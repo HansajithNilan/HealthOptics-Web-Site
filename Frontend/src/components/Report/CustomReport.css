@@ -1,0 +1,35 @@
+.custom-report-container {
+    padding: 40px;
+    text-align: center;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  .report-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .download-btn {
+    padding: 12px 24px;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .download-btn:hover {
+    background-color: #1c5980;
+  }
+  
+  .note {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+  }
+  

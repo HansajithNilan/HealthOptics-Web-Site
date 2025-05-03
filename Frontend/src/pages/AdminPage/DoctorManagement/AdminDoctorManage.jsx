@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import DashboardLayout from "../../../components/DashboardLayout/DashboardLayout.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import "./AdminDoctorManage.css";
 import { FaEye, FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { TfiViewListAlt } from "react-icons/tfi";
+import { IoMdPersonAdd } from "react-icons/io";
 
 const AdminDoctorManage = () => {
   const [doctors, setDoctors] = useState([]);
@@ -73,61 +73,7 @@ const AdminDoctorManage = () => {
   };
 
   const handleToggleAllDoctors = () => {
-    setShowAllDoctors(!showAllDoctors);
-  };
-
-  const generatePDF = () => {
-    const doc = new jsPDF();
-    doc.setFontSize(18);
-    doc.setFont("helvetica", "bold");
-
-    if (viewDoctor) {
-      doc.text("Doctor Details Report", 14, 22);
-      const details = [
-        ["Field", "Value"],
-        ["Name", `${viewDoctor.firstName} ${viewDoctor.lastName}`],
-        ["Specialty", viewDoctor.specialty],
-        ["Email", viewDoctor.email],
-        ["Phone", viewDoctor.phone],
-        ["Gender", viewDoctor.gender],
-        ["City", viewDoctor.city],
-        ["State", viewDoctor.state],
-        ["Address", viewDoctor.address],
-        ["Date of Birth", viewDoctor.dob],
-      ];
-
-      doc.autoTable({
-        head: [details[0]],
-        body: details.slice(1),
-        startY: 30,
-        theme: "striped",
-        headStyles: { fillColor: [33, 150, 243] },
-      });
-
-      doc.save(`${viewDoctor.firstName}_${viewDoctor.lastName}_report.pdf`);
-    } else {
-      doc.text("All Doctors Report", 14, 22);
-      const headers = [["Name", "Specialty", "Email", "Phone", "Gender", "City", "State"]];
-      const data = doctors.map((doctor) => [
-        `${doctor.firstName} ${doctor.lastName}`,
-        doctor.specialty,
-        doctor.email,
-        doctor.phone,
-        doctor.gender,
-        doctor.city,
-        doctor.state,
-      ]);
-
-      doc.autoTable({
-        head: headers,
-        body: data,
-        startY: 30,
-        theme: "striped",
-        headStyles: { fillColor: [33, 150, 243] },
-      });
-
-      doc.save("all_doctors_report.pdf");
-    }
+    navigate('/admin/doctors/all', { state: { doctors: filteredDoctors } });
   };
 
   const filteredDoctors = doctors.filter(
@@ -142,14 +88,11 @@ const AdminDoctorManage = () => {
       <div className="doctor-admin-containerADOM">
         <div className="dashboard-headerADOM">
           <div className="action-buttonsADOM">
-            <button onClick={generatePDF} className="generate-pdf-btnADOM">
-              <i className="fas fa-file-pdf"></i> Generate Report
-            </button>
             <button onClick={handleAdd} className="add-doctor-btnADOM">
-              <i className="fas fa-plus"></i> Add New Doctor
+              <i className="fas fa-plus"></i> <IoMdPersonAdd /> Add New Doctor
             </button>
             <button onClick={handleToggleAllDoctors} className="view-all-doctors-btnADOM">
-              <i className="fas fa-table"></i> {showAllDoctors ? "Hide Table" : "View All Doctors"}
+              <i className="fas fa-table"></i> <TfiViewListAlt /> View All Doctors
             </button>
           </div>
         </div>
@@ -177,58 +120,7 @@ const AdminDoctorManage = () => {
         </div>
 
         {showAllDoctors && (
-          <div className="all-doctors-table-containerADOM">
-            <table className="all-doctors-tableADOM">
-              <thead>
-                <tr>
-                  <th>Photo</th>
-                  <th>Name</th>
-                  <th>Specialty</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Gender</th>
-                  <th>City</th>
-                  <th>State</th>
-                  <th>Address</th>
-                  <th>Date of Birth</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredDoctors.length > 0 ? (
-                  filteredDoctors.map((doctor) => (
-                    <tr key={doctor._id}>
-                      <td>
-                        {doctor.photo ? (
-                          <img
-                            src={`http://localhost:3000/uploads/${doctor.photo}`}
-                            alt={`${doctor.firstName} ${doctor.lastName}`}
-                            className="doctor-photo-tableADOM"
-                          />
-                        ) : (
-                          <span className="no-photo-tableADOM">No Photo</span>
-                        )}
-                      </td>
-                      <td>{`${doctor.firstName} ${doctor.lastName}`}</td>
-                      <td>{doctor.specialty}</td>
-                      <td>{doctor.email}</td>
-                      <td>{doctor.phone}</td>
-                      <td>{doctor.gender}</td>
-                      <td>{doctor.city}</td>
-                      <td>{doctor.state}</td>
-                      <td>{doctor.address}</td>
-                      <td>{doctor.dob}</td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="10" className="no-dataADOM">
-                      No doctors found
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+          <></>
         )}
 
         <div className="doctors-gridADOM">
