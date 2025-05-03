@@ -7,7 +7,7 @@ export const getDoctors = async (req, res) => {
     const formattedDoctors = doctors.map(doctor => {
       const doctorObj = doctor.toObject();
       if (doctorObj.photo) {
-        doctorObj.photoUrl = `http://localhost:5000/uploads/${doctorObj.photo}`;
+        doctorObj.photoUrl = `http://localhost:3000/uploads/${doctorObj.photo}`;
       }
       return doctorObj;
     });
