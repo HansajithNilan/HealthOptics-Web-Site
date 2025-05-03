@@ -29,7 +29,7 @@ function OnMyAppointment() {
       if (result.isConfirmed) {
         try {
           await axios.delete(
-            `http://localhost:5000/api/doctorappointment/deletedoctorappointment/${id}`
+            `http://localhost:3000/api/doctorappointment/deletedoctorappointment/${id}`
           );
           Swal.fire({
             title: "Success",
@@ -100,7 +100,7 @@ function OnMyAppointment() {
         }
 
         const response = await axios.post(
-          `http://localhost:5000/api/doctorappointment/getalldoctorappointment/${email}`
+          `http://localhost:3000/api/doctorappointment/getalldoctorappointment/${email}`
         );
 
         if (response.data.doctorAppointments) {

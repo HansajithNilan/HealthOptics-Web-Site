@@ -8,7 +8,7 @@ const AddDoctorProfile = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/doctors");
+        const response = await axios.get("http://localhost:3000/api/doctors");
         setDoctors(response.data); // Fetch and set doctor details
       } catch (error) {
         console.error("Error fetching doctors:", error);
@@ -26,7 +26,7 @@ const AddDoctorProfile = () => {
             <div className="doctor-image-vihani">
               {doctor.photo ? (
                 <img
-                  src={`http://localhost:5000/uploads/${doctor.photo}`}
+                  src={`http://localhost:3000/uploads/${doctor.photo}`}
                   alt={`${doctor.firstName} ${doctor.lastName}`}
                 />
               ) : (

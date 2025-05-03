@@ -28,7 +28,7 @@ function EditDoctorAppointment() {
     async function fetchAppointment() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/doctorappointment/getdoctorappointment/${id}`
+          `http://localhost:3000/api/doctorappointment/getdoctorappointment/${id}`
         );
         setFormData(response.data.doctorAppointment);
       } catch (error) {
@@ -58,7 +58,7 @@ function EditDoctorAppointment() {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:5000/api/doctorappointment/editdoctorappointment/${id}`,
+        `http://localhost:3000/api/doctorappointment/editdoctorappointment/${id}`,
         formData
       );
       Swal.fire({

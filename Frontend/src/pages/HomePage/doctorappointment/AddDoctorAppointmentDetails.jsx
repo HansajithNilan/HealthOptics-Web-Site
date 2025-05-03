@@ -51,6 +51,7 @@ function AddDoctorAppointmentDetails() {
     setSubmitting(true);
     
     try {
+<<<<<<< HEAD
       const appointmentData = {
         ...formData,
         doctor: `${doctor.firstName} ${doctor.lastName}`,
@@ -60,6 +61,11 @@ function AddDoctorAppointmentDetails() {
       const response = await axios.post(
         "http://localhost:5000/api/doctorappointment/createdoctorappointment",
         appointmentData
+=======
+      await axios.post(
+        "http://localhost:3000/api/doctorappointment/createdoctorappointment",
+        formData
+>>>>>>> 9b33ff8 (Port number changed)
       );
 
       if (response.data) {
@@ -116,7 +122,7 @@ function AddDoctorAppointmentDetails() {
           <div className="doctor-photo">
             {doctor.photo ? (
               <img
-                src={`http://localhost:5000/uploads/${doctor.photo}`}
+                src={`http://localhost:3000/uploads/${doctor.photo}`}
                 alt={`${doctor.firstName} ${doctor.lastName}`}
                 onError={(e) => (e.target.src = "placeholder-image-url")}
               />

@@ -13,7 +13,7 @@ function DoctorProfileTable() {
 
   const fetchDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/doctors");
+      const response = await axios.get("http://localhost:3000/api/doctors");
       setDoctors(response.data); // Ensure the response data matches the expected format
     } catch (error) {
       console.error("Error fetching doctors:", error);
@@ -27,7 +27,7 @@ function DoctorProfileTable() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this doctor?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/doctors/${id}`);
+        await axios.delete(`http://localhost:3000/api/doctors/${id}`);
         fetchDoctors(); // Refresh the table after deletion
       } catch (error) {
         console.error("Error deleting doctor:", error);
