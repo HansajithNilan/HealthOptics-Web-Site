@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
 
     const parsedToken = JSON.parse(token);
     try {
-      const res = await axios.get("http://localhost:5000/api/auth/user/getcurrentuser", {
+      const res = await axios.get("http://localhost:3000/api/auth/user/getcurrentuser", {
         headers: {
           Authorization: `Bearer ${parsedToken}`,
         },
