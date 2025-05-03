@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaCamera, FaTimes } from "react-icons/fa";
 import "./Spectacles.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SpectacleTryOn = ({ spectacle, onClose }) => {
   console.log("SpectacleTryOn rendering with:", spectacle);
   if (!spectacle) return null;
+  const navigate = useNavigate();
 
   // State to manage the currently selected image
   const [selectedImage, setSelectedImage] = useState(
     spectacle.imageurlcolor1?.[0] || ""
   );
+
+  const handleTryNow = (id) => {
+    navigate(`/tryspectacles/${id}`, { state: { imageUrl: selectedImage } });
+  };
 
   // Define image URLs and their corresponding colors
   const colorImages = [
@@ -56,12 +63,12 @@ const SpectacleTryOn = ({ spectacle, onClose }) => {
               </p>
             </div>
             {/* Small Images with Color Names */}
-            {/* <div className="shakya-small-images-container">
+             <div className="shakya-small-images-container">
               {colorImages.length > 0 ? (
                 colorImages.map((item, index) => (
                   <div
                     key={index}
-                    className="small-image-item"
+                    className={`small-image-item ${selectedImage === item.url ? "active" : ""}`}
                     onClick={() => handleImageClick(item.url)}
                   >
                     <img
@@ -75,27 +82,7 @@ const SpectacleTryOn = ({ spectacle, onClose }) => {
               ) : (
                 <p>No available images</p>
               )}
-            </div> */}
-             <div className="shakya-small-images-container">
-  {colorImages.length > 0 ? (
-    colorImages.map((item, index) => (
-      <div
-        key={index}
-        className={`small-image-item ${selectedImage === item.url ? "active" : ""}`}
-        onClick={() => handleImageClick(item.url)}
-      >
-        <img
-          src={item.url}
-          alt={`${spectacle.model} ${item.color}`}
-          className="try-on-small-image"
-        />
-        <p>{item.color}</p>
-      </div>
-    ))
-  ) : (
-    <p>No available images</p>
-  )}
-</div>
+            </div>
           </div>
 
           <div>
@@ -112,7 +99,7 @@ const SpectacleTryOn = ({ spectacle, onClose }) => {
               )}
             </div>
             <div className="shakya-try-on-btn">
-            <button onClick={() => console.log("Selected image for try-on:", selectedImage)}>
+              <button className="shop-now-btn" onClick={() => handleTryNow(spectacle._id)}>
                 <FaCamera style={{ marginRight: "10px" }} />
                 TRY ON
               </button>
