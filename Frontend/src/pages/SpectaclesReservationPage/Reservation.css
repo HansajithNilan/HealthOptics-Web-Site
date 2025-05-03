@@ -6,6 +6,15 @@
   margin-top: 30px;
   text-align: center;
 }
+<<<<<<< HEAD
+=======
+
+.camera-preview video {
+  border: 3px solid #ccc;
+  border-radius: 10px;
+}
+
+>>>>>>> 9ca2a4e (Minor Updates)
 
 .camera-preview video {
   border: 3px solid #ccc;

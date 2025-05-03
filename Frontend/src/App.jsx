@@ -45,8 +45,11 @@ import Cartab from "./pages/CartTab/cartab.jsx";
 import AdminFeedbackManage from "./pages/AdminPage/FeedbackManagement/AdminFeedbackManage.jsx";
 import ReservationDisplay from "./pages/UserReservation/ReservationDisplay.jsx";
 import OnMyAppointment from "./pages/HomePage/doctorappointment/OnMyAppointment.jsx";
+<<<<<<< HEAD
 import ViewAllDoctor from "./pages/AdminPage/DoctorManagement/ViewAllDoctor.jsx";
 import CustomReport from "./components/Report/CustomReport.jsx";
+=======
+>>>>>>> 9ca2a4e (Minor Updates)
 
 import TrySpectacles from "./pages/HomePage/Spectacle/TrySpectacles.jsx";
 

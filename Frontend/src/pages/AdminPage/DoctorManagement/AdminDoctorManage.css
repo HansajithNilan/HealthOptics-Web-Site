@@ -40,11 +40,19 @@
 }
 
 .add-doctor-btnADOM {
+<<<<<<< HEAD
   background-color: #03870a; /* Professional green */
 }
 
 .add-doctor-btnADOM:hover {
   background-color: #2e5603;
+=======
+  background-color: #1b8155; /* Professional green */
+}
+
+.add-doctor-btnADOM:hover {
+  background-color: #075832;
+>>>>>>> 9ca2a4e (Minor Updates)
   transform: translateY(-2px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }

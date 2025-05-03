@@ -24,7 +24,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+<<<<<<< HEAD
   filter: brightness(0.9);
+=======
+  filter: brightness(0.7);
+>>>>>>> 9ca2a4e (Minor Updates)
 }
 
 .FeedbackForm-hero-overlay {

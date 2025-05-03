@@ -16,7 +16,11 @@
 .AllFeedbacks-hero {
   position: relative;
   width: 100%;
+<<<<<<< HEAD
   height: 450px;
+=======
+  height: 400px;
+>>>>>>> 9ca2a4e (Minor Updates)
   overflow: hidden;
 }
 
@@ -24,7 +28,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+<<<<<<< HEAD
   filter: brightness(0.9);
+=======
+  filter: brightness(0.7);
+>>>>>>> 9ca2a4e (Minor Updates)
 }
 
 .AllFeedbacks-hero-overlay {
@@ -102,15 +110,24 @@
   background: #007bff;
   color: #fff;
   border: none;
+<<<<<<< HEAD
   border-radius: 10px;
   font-size: 0.8rem;
+=======
+  border-radius: 6px;
+  font-size: 1rem;
+>>>>>>> 9ca2a4e (Minor Updates)
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .AllFeedbacks-back-btn:hover {
+<<<<<<< HEAD
   background: #f20606;
+=======
+  background: #0056b3;
+>>>>>>> 9ca2a4e (Minor Updates)
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }

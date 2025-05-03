@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 .add-doctor-container4917 {
+=======
+.dpf-container {
+>>>>>>> 9ca2a4e (Minor Updates)
   max-width: 900px;
   margin: 30px auto;
   padding: 20px;
@@ -7,7 +11,11 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+<<<<<<< HEAD
 .add-doctor-header4917 {
+=======
+.dpf-header {
+>>>>>>> 9ca2a4e (Minor Updates)
   display: flex;
   align-items: center;
   gap: 20px;
@@ -16,6 +24,7 @@
   border-bottom: 1px solid #e5e7eb;
 }
 
+<<<<<<< HEAD
 .add-doctor-image4917 {
   width: 120px;
   height: 150px;
@@ -28,54 +37,105 @@
 }
 
 .add-doctor-header-text4917 h2 {
+=======
+.dpf-image {
+  width: 120px;
+  height: 145px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+.dpf-header-text h2 {
+>>>>>>> 9ca2a4e (Minor Updates)
   font-size: 24px;
   font-weight: 600;
   color: #1f2937;
   margin: 0;
 }
 
+<<<<<<< HEAD
 .add-doctor-header-text4917 p {
+=======
+.dpf-header-text p {
+>>>>>>> 9ca2a4e (Minor Updates)
   font-size: 14px;
   color: #6b7280;
   margin: 5px 0 0;
 }
 
+<<<<<<< HEAD
 .add-doctor-form4917 {
+=======
+.dpf-form {
+>>>>>>> 9ca2a4e (Minor Updates)
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
+<<<<<<< HEAD
 .add-doctor-section4917 {
+=======
+.dpf-section {
+>>>>>>> 9ca2a4e (Minor Updates)
   background: #f9fafb;
   padding: 20px;
   border-radius: 6px;
 }
 
+<<<<<<< HEAD
 .add-doctor-grid4917 {
+=======
+.dpf-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 15px;
+}
+
+.dpf-grid {
+>>>>>>> 9ca2a4e (Minor Updates)
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
+<<<<<<< HEAD
 .add-doctor-group4917 {
+=======
+.dpf-group {
+>>>>>>> 9ca2a4e (Minor Updates)
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
+<<<<<<< HEAD
 .add-doctor-group4917.full-width {
   grid-column: 1 / -1;
 }
 
 .add-doctor-group4917 label {
+=======
+.dpf-group.dpf-full-width {
+  grid-column: 1 / -1;
+}
+
+.dpf-group label {
+>>>>>>> 9ca2a4e (Minor Updates)
   font-size: 14px;
   font-weight: 500;
   color: #374151;
 }
 
+<<<<<<< HEAD
 .add-doctor-group4917 input,
 .add-doctor-group4917 select {
+=======
+.dpf-group input,
+.dpf-group select {
+>>>>>>> 9ca2a4e (Minor Updates)
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #d1d5db;
@@ -85,14 +145,23 @@
   transition: border-color 0.2s ease;
 }
 
+<<<<<<< HEAD
 .add-doctor-group4917 input:focus,
 .add-doctor-group4917 select:focus {
+=======
+.dpf-group input:focus,
+.dpf-group select:focus {
+>>>>>>> 9ca2a4e (Minor Updates)
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
+<<<<<<< HEAD
 .add-doctor-submit4917 {
+=======
+.dpf-submit {
+>>>>>>> 9ca2a4e (Minor Updates)
   background: #2563eb;
   color: white;
   padding: 12px 24px;
@@ -104,15 +173,24 @@
   transition: background-color 0.2s ease;
 }
 
+<<<<<<< HEAD
 .add-doctor-submit4917:hover {
   background: #1d4ed8;
 }
 
 .add-doctor-submit4917:disabled {
+=======
+.dpf-submit:hover {
+  background: #1d4ed8;
+}
+
+.dpf-submit:disabled {
+>>>>>>> 9ca2a4e (Minor Updates)
   background: #93c5fd;
   cursor: not-allowed;
 }
 
+<<<<<<< HEAD
 .add-doctor-photo-preview4917 {
   text-align: center;
   margin-bottom: 8px;
@@ -141,5 +219,20 @@
   .add-doctor-header4917 {
     flex-direction: column;
     text-align: center;
+=======
+@media (max-width: 768px) {
+  .dpf-container {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .dpf-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .dpf-grid {
+    grid-template-columns: 1fr;
+>>>>>>> 9ca2a4e (Minor Updates)
   }
 }

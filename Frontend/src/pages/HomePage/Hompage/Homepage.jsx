@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import NavBar from '../../../components/NavBar/NavBar.jsx';
 import Imagetext from '../Introduction/imagetext.jsx';
@@ -11,6 +12,19 @@ import Cartab from '../../CartTab/cartab.jsx';
 import Services from '../Services/Services.jsx';
 import './Homepage.css';
 
+=======
+import React from 'react'
+import NavBar from '../../../components/NavBar/NavBar.jsx'
+import Imagetext from '../Introduction/imagetext.jsx'
+import Introduction from '../systemintro/introduction.jsx'
+import Programs from '../healthprograms/programs.jsx'
+import About from '../About/about.jsx'
+import Footer from '../../../components/Footer/footer.jsx'
+import Contact from '../contact/contact.jsx'
+import SpectaclesDoctor from '../Spectacles&Doctor/SpectaclesDoctor.jsx'
+import Cartab from '../../CartTab/cartab.jsx'
+import Services from '../Services/Services.jsx'
+>>>>>>> 9ca2a4e (Minor Updates)
 function Homepage() {
   const [showPopup, setShowPopup] = useState(true);
 
