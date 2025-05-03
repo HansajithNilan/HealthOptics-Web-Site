@@ -10,6 +10,7 @@ import Contact from '../HomePage/contact/contact';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import Swal from 'sweetalert2';
+import SideBar from '../../components/SideBar/SideBar';
 
 
 function ReservationDetails() {
@@ -100,8 +101,10 @@ function ReservationDetails() {
   
 
   return (
+    <div>
     <div className="user-profile-wrapper">
-      <NavBar />
+      <SideBar />
+   
       <div className="user-profile-container">
         <h1>All Reservations</h1>
 
@@ -180,6 +183,8 @@ function ReservationDetails() {
       <Contact />
       <Footer />
     </div>
+    </div>
+    
   );
 }
 
