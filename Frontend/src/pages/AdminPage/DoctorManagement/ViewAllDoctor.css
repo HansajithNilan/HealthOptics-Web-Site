@@ -20,9 +20,7 @@
     transition: background-color 0.3s;
   }
   
-  .generate-pdf-btnADOM:hover {
-    background-color: #2563eb;
-  }
+  
   
   .all-doctors-table-containerADOM {
     overflow-x: auto;

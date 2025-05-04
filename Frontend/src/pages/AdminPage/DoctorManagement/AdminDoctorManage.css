@@ -17,7 +17,7 @@
   margin-top: -50px;
 }
 
-.generate-pdf-btnADOM,
+
 .add-doctor-btnADOM,
 .view-all-doctors-btnADOM {
   padding: 0.8rem 1.6rem;
@@ -32,9 +32,6 @@
   color: white;
 }
 
-.generate-pdf-btnADOM {
-  background-color: #f97316; /* Professional orange */
-}
 
 .generate-pdf-btnADOM:hover {
 
@@ -43,11 +40,11 @@
 }
 
 .add-doctor-btnADOM {
-  background-color: #1b8155; /* Professional green */
+  background-color: #03870a; /* Professional green */
 }
 
 .add-doctor-btnADOM:hover {
-  background-color: #075832;
+  background-color: #2e5603;
   transform: translateY(-2px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }

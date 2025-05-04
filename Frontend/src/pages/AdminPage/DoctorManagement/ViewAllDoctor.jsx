@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import DashboardLayout from "../../../components/DashboardLayout/DashboardLayout.jsx";
 import "./ViewAllDoctor.css";
 import Swal from "sweetalert2";
+import { RiDownload2Fill } from "react-icons/ri";
 
 const ViewAllDoctor = () => {
   const location = useLocation();
@@ -23,7 +24,7 @@ const ViewAllDoctor = () => {
     <DashboardLayout title="All Doctors">
       <div className="dashboard-headerADOM">
         <button onClick={goToCustomReport} className="generate-pdf-btnADOM">
-          <i className="fas fa-file-pdf"></i> Generate PDF Report
+          <i className="fas fa-file-pdf"></i> Generate PDF Report <RiDownload2Fill />
         </button>
       </div>
       <div className="all-doctors-table-containerADOM">

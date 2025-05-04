@@ -16,7 +16,7 @@
 .AllFeedbacks-hero {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 450px;
   overflow: hidden;
 }
 
@@ -24,7 +24,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.7);
+  filter: brightness(0.9);
 }
 
 .AllFeedbacks-hero-overlay {
@@ -102,15 +102,15 @@
   background: #007bff;
   color: #fff;
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .AllFeedbacks-back-btn:hover {
-  background: #0056b3;
+  background: #f20606;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }

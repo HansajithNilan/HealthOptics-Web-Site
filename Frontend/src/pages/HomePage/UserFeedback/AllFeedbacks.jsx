@@ -5,7 +5,8 @@ import NavBar from '../../../components/NavBar/NavBar';
 import Footer from '../../../components/Footer/footer';
 import './AllFeedback.css';
 import { useNavigate } from 'react-router-dom';
-import allfeedbackImage from '../../../assets/allfeedbackimage21.jpg';
+import allfeedbackImage from '../../../assets/new feedback2.jpg';
+import { IoChevronBackCircleSharp } from "react-icons/io5";
 
 const AllFeedbacks = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -54,7 +55,7 @@ const AllFeedbacks = () => {
               />
             </div>
             <button className="AllFeedbacks-back-btn" onClick={() => navigate('/feedback')}>
-              Return to Feedback Form
+            <IoChevronBackCircleSharp />   Back Feedback Form
             </button>
           </div>
 
