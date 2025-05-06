@@ -124,33 +124,6 @@ const Spectacles = () => {
         </p>
         </div>
         
-
-        {/* <div className="shakya-filter-section">
-          <input
-            type="text"
-            placeholder="Search Model or Brand"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <select >
-            <option value="">All Types</option>
-            <option value="Eyeglasses">Eyeglasses</option>
-            <option value="Sunglasses">Sunglasses</option>
-          </select>
-          <select>
-            <option value="">All Genders</option>
-            <option value="Unisex">Unisex</option>
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-          </select>
-          <select >
-            <option value="">All Prices</option>
-            <option value="5000-10000">LKR 5,000 - LKR 10,000</option>
-            <option value="10000-15000">LKR 10,000 - LKR 15,000</option>
-            <option value="15000-20000">LKR 15,000 - LKR 20,000</option>
-            <option value="20000">Above LKR 20,000</option>
-          </select>
-        </div> */}
         <div className="shakya-filter-section">
           <input
             type="text"
