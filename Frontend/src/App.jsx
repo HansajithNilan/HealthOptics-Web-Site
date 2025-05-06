@@ -12,7 +12,7 @@ import About from "./pages/HomePage/About/about.jsx";
 import Services from "./pages/HomePage/Services/Services.jsx";
 
 import Homepage from "./pages/HomePage/Hompage/Homepage.jsx";
-
+import AllAppointmentScreen from "./pages/HomePage/doctorappointment/AllAppointmentScreen.jsx";
 import AddfeedBackform from "./pages/HomePage/UserFeedback/Addfeedbackform.jsx";
 import AllFeedbacks from './pages/HomePage/UserFeedback/AllFeedbacks.jsx';
 
@@ -84,6 +84,7 @@ function App() {
       <Route path="/doctorprofilepage" element={<DoctorProfilepage />} />
       <Route path="/editdoctor/:id" element={<EditDoctorProfile />} />
       <Route path="/admin/dashboard" element={<Dashboard />} />
+      <Route path="/allappoiment" element={<AllAppointmentScreen />} />
       <Route path="/admin/spectacles" element={<SpectacleManage />} />
       <Route path="/admin/doctors" element={<AdminDoctorManage />} />
       <Route path="/admin/doctors/all" element={<ViewAllDoctor />} />
