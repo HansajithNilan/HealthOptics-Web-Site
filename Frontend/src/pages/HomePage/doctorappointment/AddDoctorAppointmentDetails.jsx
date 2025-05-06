@@ -51,7 +51,7 @@ function AddDoctorAppointmentDetails() {
     setSubmitting(true);
     
     try {
-      await axios.post(
+      const response = await axios.post(
         "http://localhost:3000/api/doctorappointment/createdoctorappointment",
         formData
       );
