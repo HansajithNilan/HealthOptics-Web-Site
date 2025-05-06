@@ -59,7 +59,7 @@ function LoginPage() {
 
           toast.success("Admin login successful!");
           login();
-          navigate("/admin/dashboard");
+          navigate("/");
         } catch (error) {
           toast.error("Admin login validation failed.");
         }

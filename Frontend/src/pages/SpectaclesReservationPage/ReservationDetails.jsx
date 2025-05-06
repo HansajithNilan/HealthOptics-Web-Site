@@ -11,6 +11,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import Swal from 'sweetalert2';
 import SideBar from '../../components/SideBar/SideBar';
+import DashboardLayout from '../../components/DashboardLayout/DashboardLayout.jsx';
 
 
 function ReservationDetails() {
@@ -101,12 +102,14 @@ function ReservationDetails() {
   
 
   return (
-    <div>
+    
+    <DashboardLayout title="All Reservation Details">
     <div className="user-profile-wrapper">
+
       <SideBar />
    
       <div className="user-profile-container">
-        <h1>All Reservations</h1>
+       
 
        <div className='Search-function-filter'>
         <div className='search-function'><input
@@ -180,11 +183,11 @@ function ReservationDetails() {
           </tbody>
         </table>
       </div>
-      <Contact />
+      
       <Footer />
     </div>
-    </div>
-    
+  
+    </DashboardLayout>
   );
 }
 
