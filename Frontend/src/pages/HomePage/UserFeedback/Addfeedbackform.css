@@ -152,7 +152,7 @@
   position: absolute;
   bottom: 12px;
   right: 12px;
-  background: #007bff;
+  background: #800505;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -211,7 +211,7 @@
 }
 
 .FeedbackForm-submit-btn {
-  background: #007bff;
+  background: #ef8850;
   color: #fff;
 }
 
@@ -221,12 +221,12 @@
 }
 
 .FeedbackForm-view-btn {
-  background: #28a745;
+  background: #459157;
   color: #fff;
 }
 
 .FeedbackForm-view-btn:hover {
-  background: #218838;
+  background: #5d605e;
   transform: translateY(-2px);
 }
 
