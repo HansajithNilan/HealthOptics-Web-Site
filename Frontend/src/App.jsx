@@ -45,6 +45,8 @@ import Cartab from "./pages/CartTab/cartab.jsx";
 import AdminFeedbackManage from "./pages/AdminPage/FeedbackManagement/AdminFeedbackManage.jsx";
 import ReservationDisplay from "./pages/UserReservation/ReservationDisplay.jsx";
 import OnMyAppointment from "./pages/HomePage/doctorappointment/OnMyAppointment.jsx";
+import ViewAllDoctor from "./pages/AdminPage/DoctorManagement/ViewAllDoctor.jsx";
+import CustomReport from "./components/Report/CustomReport.jsx";
 
 import TrySpectacles from "./pages/HomePage/Spectacle/TrySpectacles.jsx";
 
@@ -84,6 +86,8 @@ function App() {
       <Route path="/admin/dashboard" element={<Dashboard />} />
       <Route path="/admin/spectacles" element={<SpectacleManage />} />
       <Route path="/admin/doctors" element={<AdminDoctorManage />} />
+      <Route path="/admin/doctors/all" element={<ViewAllDoctor />} />
+      <Route path="/admin/doctors/report" element={<CustomReport />} />
       <Route path="/doctorprofiletable" element={<DoctorProfileTable />} />
       <Route path="/spectacles" element={<Spectacle />} />
       <Route path="/loginpage" element={<Loginpage/>} />

@@ -11,6 +11,22 @@
   display: flex;
   flex-direction: column;
 }
+.logout-dropdown-menu span {
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+
+}
+.logout-dropdown-menu span:hover{
+  color: #1a1f2e;
+  font-weight: 500;
+  background-color: #ddd;
+  transition: background 0.3s ease;
+}
+
 
 .dashboard-layout-header {
   padding: 20px 30px;
@@ -23,6 +39,26 @@
   position: sticky;
   top: 0;
   z-index: 10;
+}
+.logout-dropdown-container{
+  position: relative;
+
+}
+.logout-dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 150px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  
+  z-index: 100;
+  border-radius: .5rem;
 }
 
 .dashboard-title {

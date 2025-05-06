@@ -16,33 +16,36 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const userlogin = async (e) => {
     e.preventDefault();
-  
+    setLoading(true);
+
     const user = { email, password };
-  
+
     try {
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate delay
+
       const response = await axios.post(
         "http://localhost:3000/api/auth/user/login",
         user
       );
-  
+
       const data = response.data;
-      console.log(data);
-  
+
       if (data.accessToken) {
         localStorage.setItem("accessToken", JSON.stringify(data.accessToken));
       }
-  
+
       if (data.id) {
         localStorage.setItem("currentUser", JSON.stringify(data));
       }
-  
+
       const token = data.accessToken;
-  
+
       if (data.role === "admin") {
         try {
           const res = await axios.get(
@@ -53,34 +56,30 @@ function LoginPage() {
               },
             }
           );
-  
-          console.log("Admin validated:", res.data);
+
           toast.success("Admin login successful!");
-          login(); 
+          login();
           navigate("/admin/dashboard");
         } catch (error) {
-          console.error("Admin validation failed:", error.response?.data || error.message);
           toast.error("Admin login validation failed.");
         }
         return;
       }
-  
+
       if (data.role === "user") {
         toast.success("Login successful!");
         login();
         navigate("/");
         return;
       }
-     
-  
-      
+
       toast.error("Unrecognized user role.");
     } catch (error) {
-      console.error("Login failed:", error.response?.data || error.message);
       toast.error("Login failed. Please check your credentials.");
+    } finally {
+      setLoading(false);
     }
   };
-  
 
   return (
     <div>
@@ -119,9 +118,11 @@ function LoginPage() {
               </label>
               <a href="#">Forgot Password?</a>
             </div>
-            <button type="submit" className="login-btn">
-              Login
+            <button type="submit" disabled={loading} className="login-btn">
+              <span>{loading ?"" : "Login"}</span>
+              {loading && 'Login...'}
             </button>
+
             <ToastContainer />
           </form>
           <p className="register-link">
@@ -129,6 +130,17 @@ function LoginPage() {
           </p>
         </div>
       </div>
+
+      {/* Popup Spinner */}
+      {loading && (
+        <div className="popup-overla">
+          <div className="popup-box">
+            <div className="popup-spinner"></div>
+            <p>Loging in...</p>
+          </div>
+        </div>
+      )}
+
       <Contact />
       <Footer />
     </div>

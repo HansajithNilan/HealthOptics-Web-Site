@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -19,14 +19,32 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
     state: '',
     phone: '',
     gender: ''
+    
   });
   const [photo, setPhoto] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    return () => {
+      if (photoPreview) {
+        URL.revokeObjectURL(photoPreview);
+      }
+    };
+  }, [photoPreview]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPhoto(file);
+      setPhotoPreview(URL.createObjectURL(file));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -71,6 +89,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
             dob: '', specialty: '', city: '', state: '', phone: '', gender: ''
           });
           setPhoto(null);
+          setPhotoPreview(null);
           onDoctorAdded?.(response.data.doctor);
           navigate("/admin/doctors");
         });
@@ -84,20 +103,20 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
 
   return (
     <DashboardLayout title="Add New Doctor Profile">
-      <div className="dpf-container">
-        <div className="dpf-header">
-          <img src={doctorImage} alt="Doctor" className="dpf-image" />
-          <div className="dpf-header-text">
+      <div className="add-doctor-container4917">
+        <div className="add-doctor-header4917">
+          <img src={doctorImage} alt="Doctor" className="add-doctor-image4917" />
+          <div className="add-doctor-header-text4917">
             <h2>Create Doctor Profile</h2>
             <p>Fill in the details to add a new doctor to the system</p>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="dpf-form">
-          <div className="dpf-section">
+        <form onSubmit={handleSubmit} className="add-doctor-form4917">
+          <div className="add-doctor-section4917">
             <h3>Personal Information</h3>
-            <div className="dpf-grid">
-              <div className="dpf-group">
+            <div className="add-doctor-grid4917">
+              <div className="add-doctor-group4917">
                 <label>First Name</label>
                 <input
                   type="text"
@@ -107,7 +126,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                   required
                 />
               </div>
-              <div className="dpf-group">
+              <div className="add-doctor-group4917">
                 <label>Last Name</label>
                 <input
                   type="text"
@@ -117,7 +136,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                   required
                 />
               </div>
-              <div className="dpf-group">
+              <div className="add-doctor-group4917">
                 <label>Email Address</label>
                 <input
                   type="email"
@@ -127,7 +146,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                   required
                 />
               </div>
-              <div className="dpf-group">
+              <div className="add-doctor-group4917">
                 <label>Date of Birth</label>
                 <input
                   type="date"
@@ -137,7 +156,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                   required
                 />
               </div>
-              <div className="dpf-group">
+              <div className="add-doctor-group4917">
                 <label>Gender</label>
                 <select
                   name="gender"
@@ -154,10 +173,10 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
             </div>
           </div>
 
-          <div className="dp-DATAsection">
+          <div className="dp-DATAsection4917">
             <h3>Professional Details</h3>
-            <div className="dpf-grid">
-              <div className="dpf-group">
+            <div className="add-doctor-grid4917">
+              <div className="add-doctor-group4917">
                 <label>Specialty</label>
                 <select
                   name="specialty"
@@ -171,7 +190,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                   <option value="Ophthalmologist">Ophthalmologist</option>
                 </select>
               </div>
-              <div className="dpf-group">
+              <div className="add-doctor-group4917">
                 <label>Phone Number</label>
                 <input
                   type="tel"
@@ -185,10 +204,10 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
             </div>
           </div>
 
-          <div className="dpf-section">
+          <div className="add-doctor-section4917">
             <h3>Location</h3>
-            <div className="dpf-grid">
-              <div className="dpf-group dpf-full-width">
+            <div className="add-doctor-grid4917">
+              <div className="add-doctor-group4917 add-doctor-full-width4917">
                 <label>Address</label>
                 <input
                   type="text"
@@ -198,7 +217,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                   required
                 />
               </div>
-              <div className="dpf-group">
+              <div className="add-doctor-group4917">
                 <label>City</label>
                 <input
                   type="text"
@@ -208,7 +227,7 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
                   required
                 />
               </div>
-              <div className="dpf-group">
+              <div className="add-doctor-group4917">
                 <label>State</label>
                 <input
                   type="text"
@@ -221,18 +240,28 @@ const DoctorProfileForm = ({ onDoctorAdded }) => {
             </div>
           </div>
 
-          <div className="dpf-section">
+          <div className="add-doctor-section4917">
             <h3>Profile Photo</h3>
-            <div className="dpf-group">
+            <div className="add-doctor-group4917">
+              <div className="add-doctor-photo-preview4917">
+                {photoPreview && (
+                  <img 
+                    src={photoPreview}
+                    alt="Preview" 
+                    className="add-doctor-preview-image4917"
+                  />
+                )}
+              </div>
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => setPhoto(e.target.files[0])}
+                onChange={handlePhotoChange}
+                className="add-doctor-file-input4917"
               />
             </div>
           </div>
 
-          <button type="submit" disabled={loading} className="dpf-submit">
+          <button type="submit" disabled={loading} className="add-doctor-submit4917">
             {loading ? 'Creating Profile...' : 'Create Doctor Profile'}
           </button>
         </form>
