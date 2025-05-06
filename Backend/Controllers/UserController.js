@@ -87,7 +87,7 @@ export const userlogin = async(req,res,)=>{
             RefreshToken
         }
 
-        return res.status(200).json(userDetails )
+        return res.status(200).json(userDetails)
 
     }catch(error){
         return res.status(500).json({message:error.message})
@@ -123,7 +123,8 @@ export const getCurrentUser = async(req,res)=>{
         return res.status(200).json({
             id:user._id,
             name:user.name,
-            email:user.email
+            email:user.email,
+            role:user.role,
         })
 
 
@@ -135,7 +136,7 @@ return res.status(500).json({message:error.message})
 
 export const adminlogin = async(req,res)=>{
 
-   return res.status(200).json({message:"Only admin can Access this route"})
+   return res.status(200).json({message:"Only admin can Access this route",})
 
     
 

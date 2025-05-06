@@ -42,6 +42,7 @@ function SideBar() {
     },
     {
       name:"Appointment Management",
+      path:"/allappoiment",
       icon:<BsCalendarCheck className="sidebar-icon" />,
       
 
