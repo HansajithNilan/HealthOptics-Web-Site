@@ -6,11 +6,7 @@ import { AuthContext } from '../../../components/Context/AuthContext';
 import './Addfeedbackform.css';
 import NavBar from '../../../components/NavBar/NavBar';
 import Footer from '../../../components/Footer/footer';
-<<<<<<< HEAD
 import feedbackImage from '../../../assets/feedbacksimage30.jpg';
-=======
-import feedbackImage from '../../../assets/feedbacksimage20.jpg';
->>>>>>> 9ca2a4e (Minor Updates)
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 

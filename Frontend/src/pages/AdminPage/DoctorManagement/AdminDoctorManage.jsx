@@ -120,9 +120,6 @@ const AdminDoctorManage = () => {
         </div>
 
         {showAllDoctors && (
-<<<<<<< HEAD
-          <></>
-=======
           <div className="all-doctors-table-containerADOM">
             <table className="all-doctors-tableADOM">
               <thead>
@@ -175,7 +172,7 @@ const AdminDoctorManage = () => {
               </tbody>
             </table>
           </div>
->>>>>>> 9ca2a4e (Minor Updates)
+
         )}
 
         <div className="doctors-gridADOM">

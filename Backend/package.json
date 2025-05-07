@@ -2,7 +2,7 @@
   "name": "healthoptics",
   "version": "1.0.0",
   "description": "\"# HealthOptics-Web-Site\"",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon Backend/server.js"
   },
