@@ -9,7 +9,8 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [id, setId] = useState([]); // null instead of empty string for clarity
   const [name,setName] = useState('');
-  const [email,setEmail] = useState('')
+  const [email,setEmail] = useState('');
+  const [role,setRole] = useState('');
 
   const fetchUser = async () => {
     const token = localStorage.getItem("accessToken");
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }) => {
       setId(res.data.id);
       setName(res.data.name);
       setEmail(res.data.email);
+      setRole(res.data.role);
       
     } catch (err) {
       console.error(err);
@@ -48,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ id, login, logout,name,email}}>
+    <AuthContext.Provider value={{ id, login, logout,name,email,role}}>
       {children}
     </AuthContext.Provider>
   );
