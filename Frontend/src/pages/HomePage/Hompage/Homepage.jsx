@@ -51,7 +51,7 @@ function Homepage() {
             <Programs />
             <Introduction title="About us" subtitle="Learn more about what we do" />
             <SpectaclesDoctor />
-            <Aboutsection /> 
+           
             <Contact /> 
           </div>
           

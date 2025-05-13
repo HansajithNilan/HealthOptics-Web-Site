@@ -1,158 +1,198 @@
-nav{
-    width: 100%;
-   
-    color: #ffffff;
-    padding: 1px 0;
-    position:fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index:10;
-   
-    
+nav {
+  width: 100%;
+  padding: 15px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
 }
-.dropdown-wrapper {
-    position: relative;
-  }
-  
-  .dropdown-menu {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    z-index: 1000;
-    padding: 0.5rem 0;
-  }
-  
-  .dropdown-menu button {
-    width: 100%;
-    padding: 8px 12px;
-    background: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .dropdown-menu button:hover {
-    background-color: #f0f0f0;
-  }
-  
-.logo{
-    width: 150px;
 
+.logo {
+  width: 150px;
+  transition: all 0.3s ease;
 }
-.logo-after{
-    width: 110px;
+
+.logo-after {
+  width: 110px;
 }
+
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
 nav ul li {
-    display: inline-block;
-    list-style: none;
-    margin: 5px 20px;
-    font-size: 20px;
-    color: white;
-    text-shadow:
-        -1px -1px 0 black,
-         1px -1px 0 black,
-        -1px  1px 0 black,
-         1px  1px 0 black;
+  display: inline-block;
+  list-style: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  text-shadow: none;
+  transition: all 0.3s ease;
 }
 
-
-.container{
-    padding-left: 8%;
-    padding-right: 8%;
-
+nav ul li a {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
 }
 
-
-.signin-btn{
-    background-color: orange;
-    border: none;
-    padding: 5px;
-    height: 30px;
-    width: 70px;
-    color: rgb(0, 0, 0);
-    margin-right: 10px;
-    border-radius: 5px;
-    font-size: 13px;
-    font-weight: bold;
-    
-}
-.signin-btn:hover{
-    color: black;
-    background-color: white;
-    cursor: pointer;
-}
-.sigup-btn:hover{
-    color: black;
-    background-color: white;
-    cursor: pointer;
-}
-.signup-btn{
-    border-radius: 5px;
-    background-color: orange;
-    border: none;
-    padding: 5px;
-    width: 70px;
-    color: rgb(0, 0, 0);
-    height: 30px;
-    font-size: 13px;
-    font-weight: bold;
-}
-.dark-nav{
-    background-color: #e3b85c;
-    transition: 0.5s;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    color: black;
-    text-shadow: none;
-}
-.dark-nav ul li{
-    font-size: bold;
-    color: black;
-    text-shadow: none;
-}
-.dark-nav .logo{
-    width: 150px;
-}
-.logout-btn{
-    border-radius: 5px;
-    background-color: orange;
-    border: none;
-    padding: 5px;
-    width: 70px;
-    color: rgb(0, 0, 0);
-    height: 30px;
-    margin-right: 20px;
-    font-size: 13px;
-    font-weight: bold;
-
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #ffa500;
+  transition: width 0.3s ease;
 }
 
-  
-  .cart-container {
-    position: relative;
-    display: inline-block;
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+.container {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.signin-btn, .signup-btn {
+  background-color: #ffa500;
+  border: none;
+  padding: 8px 16px;
+  height: auto;
+  min-width: 90px;
+  color: #000;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.signin-btn:hover, .signup-btn:hover {
+  background-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.logout-btn {
+  background-color: #ff6b6b;
+  border: none;
+  padding: 8px 16px;
+  height: auto;
+  min-width: 90px;
+  color: #fff;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+}
+
+.logout-btn:hover {
+  background-color: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.dark-nav {
+  background-color: rgba(227, 184, 92, 0.95);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dark-nav ul li {
+  color: #2a2a2a;
+}
+
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background-color: white;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  z-index: 1000;
+  padding: 0.8rem 0;
+  min-width: 180px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  .cart-container img {
-    display: block;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .cart-numbers {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background-color: red;
-    color: white;
-    font-size: 12px;
-    padding: 2px 6px;
-    border-radius: 50%;
-    font-weight: bold;
-  }
-  
+}
+
+.dropdown-menu button {
+  width: 100%;
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #2a2a2a;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f8f8f8;
+  color: #ffa500;
+}
+
+.cart-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cart-container:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.cart-container img {
+  display: block;
+}
+
+.cart-numbers {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ff4444;
+  color: white;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
