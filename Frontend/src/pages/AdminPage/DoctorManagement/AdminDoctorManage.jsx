@@ -8,6 +8,7 @@ import "./AdminDoctorManage.css";
 import { FaEye, FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { TfiViewListAlt } from "react-icons/tfi";
 import { IoMdPersonAdd } from "react-icons/io";
+import logo from "../../../../public/website_logo.png"; // Add this import
 
 const AdminDoctorManage = () => {
   const [doctors, setDoctors] = useState([]);
@@ -262,28 +263,51 @@ const AdminDoctorManage = () => {
           <div className="modal-overlay-viewDoctorADOM">
             <div className="modal-content-viewDoctorADOM">
               <div className="modal-header-viewDoctorADOM">
-                <h2>Doctor Details</h2>
+                <div className="header-with-logo-viewDoctorADOM">
+                  <img src={logo} alt="HealthOptics Logo" className="logo-viewDoctorADOM" />
+                  <h2>Dr. {viewDoctor.firstName} {viewDoctor.lastName}'s Profile</h2>
+                </div>
               </div>
               <div className="modal-body-viewDoctorADOM">
-                {viewDoctor.photo ? (
-                  <div className="doctor-photo-viewDoctorADOM">
+                <div className="doctor-photo-container-viewDoctorADOM">
+                  {viewDoctor.photo ? (
                     <img
                       src={`http://localhost:3000/uploads/${viewDoctor.photo}`}
-                      alt={`${viewDoctor.firstName} ${viewDoctor.lastName}`}
+                      alt={`Dr. ${viewDoctor.firstName} ${viewDoctor.lastName}`}
+                      className="doctor-photo-viewDoctorADOM"
                     />
+                  ) : (
+                    <div className="no-photo-viewDoctorADOM">
+                      <span>No Photo Available</span>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="doctor-info-sections-viewDoctorADOM">
+                  <div className="info-section-viewDoctorADOM">
+                    <h3>Professional Details</h3>
+                    <p><strong>Specialty:</strong> {viewDoctor.specialty}</p>
+                    <p><strong>Gender:</strong> {viewDoctor.gender}</p>
                   </div>
-                ) : (
-                  <div className="no-photo-viewDoctorADOM">No Photo Available</div>
-                )}
-                <p><strong>Name:</strong> {`${viewDoctor.firstName} ${viewDoctor.lastName}`}</p>
-                <p><strong>Specialty:</strong> {viewDoctor.specialty}</p>
-                <p><strong>Email:</strong> {viewDoctor.email}</p>
-                <p><strong>Phone:</strong> {viewDoctor.phone}</p>
-                <p><strong>Gender:</strong> {viewDoctor.gender}</p>
-                <p><strong>City:</strong> {viewDoctor.city}</p>
-                <p><strong>State:</strong> {viewDoctor.state}</p>
-                <p><strong>Address:</strong> {viewDoctor.address}</p>
-                <p><strong>Date of Birth:</strong> {viewDoctor.dob}</p>
+
+                  <div className="info-section-viewDoctorADOM">
+                    <h3>Contact Information</h3>
+                    <p><strong>Email:</strong> {viewDoctor.email}</p>
+                    <p><strong>Phone:</strong> {viewDoctor.phone}</p>
+                  </div>
+
+                  <div className="info-section-viewDoctorADOM">
+                    <h3>Location</h3>
+                    <p><strong>Address:</strong> {viewDoctor.address}</p>
+                    <p><strong>City:</strong> {viewDoctor.city}</p>
+                    <p><strong>State:</strong> {viewDoctor.state}</p>
+                  </div>
+
+                  <div className="info-section-viewDoctorADOM">
+                    <h3>Personal Details</h3>
+                    <p><strong>Date of Birth:</strong> {new Date(viewDoctor.dob).toLocaleDateString()}</p>
+                  </div>
+                </div>
               </div>
               <div className="modal-actions-viewDoctorADOM">
                 <button onClick={() => setShowViewModal(false)} className="close-btn-viewDoctorADOM">

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./AllAppointment.css";
-import NavBar from "../../../components/NavBar/NavBar.jsx";
-import Footer from "../../../components/Footer/footer.jsx";
+
+
+import DashboardLayout from "../../../components/DashboardLayout/DashboardLayout";
 
 function AllAppointmentScreen() {
   const [appointments, setAppointments] = useState([]);
@@ -46,10 +47,10 @@ function AllAppointmentScreen() {
   if (error) return <div className="error">{error}</div>;
 
   return (
-    <div>
-      <NavBar />
-      <br /><br /><br />
+    <DashboardLayout title="All Appointments">
       <div className="appotable">
+        
+        <br /><br /><br />
         <div className="search-section">
           <input
             type="text"
@@ -107,9 +108,10 @@ function AllAppointmentScreen() {
             </div>
           ))}
         </div>
-      </div><br /><br /><br /><br />
-      <Footer />
-    </div>
+        <br /><br /><br /><br />
+        
+      </div>
+    </DashboardLayout>
   );
 }
 

@@ -11,7 +11,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 function NavBar() {
   const [sticky, setSticky] = useState(false);
-  const { id, logout, name, role } = useContext(AuthContext); // assuming you have a role
+  const { id, logout, name, role } = useContext(AuthContext);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
   const dispatch = useDispatch();
@@ -45,16 +45,17 @@ function NavBar() {
 
   const handleadminlogin = () => {
     if (role === 'admin') {
-      window.location.href = "/admin/dashboard"; // Use navigate if you're using react-router-dom v6
+      window.location.href = "/admin/dashboard";
     } else {
       toast.error("You are not authorized to access this page.");
     }
   };
-  
 
   return (
     <nav className={`container ${sticky ? 'dark-nav' : ''}`}>
-      <img src={logo} alt="Website Logo" className={`logo ${sticky ? 'logo-after' : ''}`} />
+      <Link to="/">
+        <img src={logo} alt="HealthOptics" className={`logo ${sticky ? 'logo-after' : ''}`} />
+      </Link>
       <ToastContainer />
       <ul>
         <li><Link to="/">Home</Link></li>
@@ -63,7 +64,7 @@ function NavBar() {
         <li><Link to="/Feedback">Feedbacks</Link></li>
 
         {!id ? (
-          <>
+          <div className="auth-buttons">
             <li>
               <Link to="/loginpage">
                 <button className="signin-btn">Sign In</button>
@@ -74,7 +75,7 @@ function NavBar() {
                 <button className="signup-btn">Sign Up</button>
               </Link>
             </li>
-          </>
+          </div>
         ) : (
           <li className="dropdown-wrapper">
             <button className="logout-btn" onClick={toggleDropdown}>
@@ -83,24 +84,21 @@ function NavBar() {
 
             {showDropdown && (
               <div className="dropdown-menu">
-               
-             
-                  <button onClick={handleadminlogin}>Admin Dashboard </button>
-               
+                <button onClick={handleadminlogin}>Admin Dashboard</button>
                 <button onClick={handleLogout}>Confirm Logout</button>
               </div>
             )}
-           
 
             <div className="cart-container" onClick={handleOpenTabCart}>
-              <img src={cartImage} width={20} height={20} alt="cart" />
-              <span className="cart-numbers">{totalQuantity}</span>
+              <img src={cartImage} width={24} height={24} alt="Shopping Cart" />
+              {totalQuantity > 0 && (
+                <span className="cart-numbers">{totalQuantity}</span>
+              )}
             </div>
           </li>
         )}
       </ul>
     </nav>
-    
   );
 }
 

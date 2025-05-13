@@ -35,8 +35,49 @@ function AddDoctorAppointmentDetails() {
     doctor: `${doctor.firstName} ${doctor.lastName}`,
     consent: false,
   });
+  const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+
+  const validateForm = () => {
+    const errors = {};
+    const phoneRegex = /^[0-9]{10}$/;
+    const nameRegex = /^[a-zA-Z\s]{2,30}$/;
+    const today = new Date().toISOString().split('T')[0];
+
+    if (!nameRegex.test(formData.firstname)) {
+      errors.firstname = "First name should be 2-30 characters long and contain only letters";
+    }
+    if (!nameRegex.test(formData.lastname)) {
+      errors.lastname = "Last name should be 2-30 characters long and contain only letters";
+    }
+    if (!formData.gender) {
+      errors.gender = "Please select your gender";
+    }
+    if (!formData.age || formData.age < 1 || formData.age >= 100) {
+      errors.age = "Age must be between 1 and 99";  
+    }
+    if (!phoneRegex.test(formData.contact)) {
+      errors.contact = "Please enter a valid 10-digit phone number";
+    }
+    if (!formData.address || formData.address.length < 5) {
+      errors.address = "Address must be at least 5 characters long";
+    }
+    if (!formData.date) {
+      errors.date = "Please select an appointment date";
+    } else if (formData.date < today) {
+      errors.date = "Appointment date cannot be in the past";
+    }
+    if (!formData.timeSlot) {
+      errors.timeSlot = "Please select an appointment time";
+    }
+    if (!formData.consent) {
+      errors.consent = "You must agree to the privacy policy";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -49,6 +90,11 @@ function AddDoctorAppointmentDetails() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+
+    if (!validateForm()) {
+      setSubmitting(false);
+      return;
+    }
     
     try {
       const response = await axios.post(
@@ -140,6 +186,7 @@ function AddDoctorAppointmentDetails() {
                 placeholder="Enter first name"
                 required
               />
+              {formErrors.firstname && <span className="error-message">{formErrors.firstname}</span>}
             </div>
             <div className="form-group">
               <label>Last Name</label>
@@ -151,6 +198,7 @@ function AddDoctorAppointmentDetails() {
                 placeholder="Enter last name"
                 required
               />
+              {formErrors.lastname && <span className="error-message">{formErrors.lastname}</span>}
             </div>
           </div>
 
@@ -180,6 +228,7 @@ function AddDoctorAppointmentDetails() {
                 Female
               </label>
             </div>
+            {formErrors.gender && <span className="error-message">{formErrors.gender}</span>}
           </div>
 
           <div className="form-row">
@@ -193,6 +242,7 @@ function AddDoctorAppointmentDetails() {
                 placeholder="Enter age"
                 required
               />
+              {formErrors.age && <span className="error-message">{formErrors.age}</span>}
             </div>
             <div className="form-group">
               <label>Contact Number</label>
@@ -205,6 +255,7 @@ function AddDoctorAppointmentDetails() {
                 placeholder="Enter 10-digit number"
                 required
               />
+              {formErrors.contact && <span className="error-message">{formErrors.contact}</span>}
             </div>
           </div>
 
@@ -229,6 +280,7 @@ function AddDoctorAppointmentDetails() {
               placeholder="Enter address"
               required
             />
+            {formErrors.address && <span className="error-message">{formErrors.address}</span>}
           </div>
 
           <div className="form-group">
@@ -241,6 +293,7 @@ function AddDoctorAppointmentDetails() {
               min={new Date().toISOString().split("T")[0]} // Disable past dates
               required
             />
+            {formErrors.date && <span className="error-message">{formErrors.date}</span>}
           </div>
 
           <div className="form-group">
@@ -256,6 +309,7 @@ function AddDoctorAppointmentDetails() {
               <option value="09:00 AM - 10:00 AM">09:00 AM - 10:00 AM</option>
               <option value="04:00 PM - 06:00 PM">04:00 PM - 06:00 PM</option>
             </select>
+            {formErrors.timeSlot && <span className="error-message">{formErrors.timeSlot}</span>}
           </div>
 
           <div className="consent-group">
@@ -267,6 +321,7 @@ function AddDoctorAppointmentDetails() {
               required
             />
             <label>I agree to the processing of my data per the Privacy Policy.</label>
+            {formErrors.consent && <span className="error-message">{formErrors.consent}</span>}
           </div>
 
           <button type="submit" disabled={isSubmitting}>
