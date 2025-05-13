@@ -121,7 +121,59 @@ const AdminDoctorManage = () => {
         </div>
 
         {showAllDoctors && (
-          <></>
+          <div className="all-doctors-table-containerADOM">
+            <table className="all-doctors-tableADOM">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Name</th>
+                  <th>Specialty</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Gender</th>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Address</th>
+                  <th>Date of Birth</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredDoctors.length > 0 ? (
+                  filteredDoctors.map((doctor) => (
+                    <tr key={doctor._id}>
+                      <td>
+                        {doctor.photo ? (
+                          <img
+                            src={`http://localhost:3000/uploads/${doctor.photo}`}
+                            alt={`${doctor.firstName} ${doctor.lastName}`}
+                            className="doctor-photo-tableADOM"
+                          />
+                        ) : (
+                          <span className="no-photo-tableADOM">No Photo</span>
+                        )}
+                      </td>
+                      <td>{`${doctor.firstName} ${doctor.lastName}`}</td>
+                      <td>{doctor.specialty}</td>
+                      <td>{doctor.email}</td>
+                      <td>{doctor.phone}</td>
+                      <td>{doctor.gender}</td>
+                      <td>{doctor.city}</td>
+                      <td>{doctor.state}</td>
+                      <td>{doctor.address}</td>
+                      <td>{doctor.dob}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="10" className="no-dataADOM">
+                      No doctors found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
         )}
 
         <div className="doctors-gridADOM">

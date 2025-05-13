@@ -32,7 +32,10 @@ const SpectacleTryOn = ({ spectacle, onClose }) => {
     ...(spectacle.imageurlcolor3?.[0]
       ? [{ color: "Other", url: spectacle.imageurlcolor3[0] }]
       : []),
-  ].filter((item) => item.url && item.url !== ""); // Filter out empty URLs
+  ].filter((item) => item.url && item.url !== ""); 
+  //Filter out empty URLs
+
+
 
   // Handle image click
   const handleImageClick = (imageUrl) => {

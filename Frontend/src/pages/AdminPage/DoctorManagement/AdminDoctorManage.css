@@ -40,11 +40,14 @@
 }
 
 .add-doctor-btnADOM {
-  background-color: #f46207; /* Professional green */
+  background-color: #03870a; /* Professional green */
 }
+
+
 
 .add-doctor-btnADOM:hover {
   background-color: #e18307;
+
   transform: translateY(-2px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }

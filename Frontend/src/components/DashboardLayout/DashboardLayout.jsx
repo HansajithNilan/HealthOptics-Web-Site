@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import SideBar from "../../components/SideBar/SideBar.jsx";
 import "./DashboardLayout.css";
+
 import { AuthContext } from "../Context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 const DashboardLayout = ({ title, children }) => {
@@ -26,6 +27,12 @@ const DashboardLayout = ({ title, children }) => {
     logout(); // your context logout function
     navigate("/loginpage");
   };
+
+
+
+
+
+
 
 
   return (
