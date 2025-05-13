@@ -5,10 +5,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../../stores/cart.jsx";
+import Footer from "../../../components/Footer/footer.jsx";
 
 import cartImage from "../../../assets/cartImage.png";
 import Cartab from "../../CartTab/cartab.jsx";
-
 import SpectacleTryOn from "./SpectaclesTryOn.jsx";
 
 const Spectacles = () => {
@@ -199,6 +199,7 @@ const Spectacles = () => {
           spectacle={selectedSpectacle}
           onClose={handleCloseTryOn}
         />
+        <Footer />
     </div>
   );
 };
