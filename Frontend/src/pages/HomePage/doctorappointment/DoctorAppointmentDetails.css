@@ -297,3 +297,23 @@
   color: #e53e3e;
   font-size: 1.25rem;
 }
+
+.error-message {
+  color: #dc2626;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.form-group input.error,
+.form-group textarea.error,
+.form-group select.error {
+  border-color: #dc2626;
+}
+
+.form-group input:focus.error,
+.form-group textarea:focus.error,
+.form-group select:focus.error {
+  border-color: #dc2626;
+  box-shadow: 0 0 5px rgba(220, 38, 38, 0.2);
+}
