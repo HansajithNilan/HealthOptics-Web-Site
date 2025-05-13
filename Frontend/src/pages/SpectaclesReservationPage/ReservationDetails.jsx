@@ -12,6 +12,7 @@ import autoTable from 'jspdf-autotable';
 import Swal from 'sweetalert2';
 import SideBar from '../../components/SideBar/SideBar';
 import DashboardLayout from '../../components/DashboardLayout/DashboardLayout.jsx';
+import logo from '../../../public/website_logo.png'
 
 
 function ReservationDetails() {
@@ -58,15 +59,32 @@ function ReservationDetails() {
   
   
 
+
+
   const generatePDF = () => {
     const doc = new jsPDF();
-    doc.text('Reservation Report', 14, 15);
-
+  
+    // Add your logo image
+    const imgWidth = 30;
+    const imgHeight = 30;
+  
+    // Convert image to base64 if needed, or directly use external/base64 URL
+    const logoBase64 = '../../../public/website_logo.png'; // If using base64 manually
+  
+    doc.addImage(logoBase64, 'PNG', 14, 10, imgWidth, imgHeight); // logo at top-left
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text('HealthOptics', 165, 20);
+    doc.text('(PVT) Ltd', 165, 25);
+    doc.text('071-3275308', 165, 30);
+    doc.text('Rervation Report', 80, 40);
+    
+   
     const tableColumn = [
       "Name", "Phone", "Address", "Email", "Gender",
       "Frame Type", "Brand", "Material", "Size", "Qty", "Total"
     ];
-
+  
     const tableRows = reservations.map(reserve => [
       reserve.name,
       reserve.phonenumber,
@@ -80,18 +98,29 @@ function ReservationDetails() {
       reserve.quantity,
       reserve.price
     ]);
-
+  
     autoTable(doc, {
       head: [tableColumn],
       body: tableRows,
-      startY: 20,
+      startY: 50, // leave space for the logo + title
       theme: 'striped',
-      styles: { fontSize: 9 },
-      headStyles: { fillColor: [41, 128, 185] }
+      styles: {
+        fontSize: 9,
+        cellPadding: 2,
+      },
+      headStyles: {
+        fillColor: [255, 102, 0],
+        textColor: [255, 255, 255],
+        fontStyle: 'bold',
+      },
+      alternateRowStyles: {
+        fillColor: [245, 245, 245],
+      },
     });
-
-    doc.save('Reservation_Report.pdf');
+  
+    doc.save('Reservations_Report.pdf');
   };
+  
 
   // Filter logic
   const filteredReservations = reservations.filter((reserve) =>
