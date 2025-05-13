@@ -39,50 +39,55 @@ const CustomReport = () => {
 
     setIsGenerating(true);
     try {
-      const doc = new jsPDF('landscape');
-      const pageWidth = doc.internal.pageSize.getWidth();
-      const pageHeight = doc.internal.pageSize.getHeight();
+      // Initialize PDF with A4 size
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+      
+      const pageWidth = 210; // A4 width in mm
+      const pageHeight = 297; // A4 height in mm
 
       // Header with blue color
-      doc.setFillColor(25, 118, 210); // Changed to blue
-      doc.rect(0, 0, pageWidth, 45, 'F');
+      doc.setFillColor(25, 118, 210); // Primary blue
+      doc.rect(0, 0, pageWidth, 35, 'F');
       
-      // Left side - Logo and company name
-      doc.addImage(logo, 'PNG', 10, 5, 35, 35);
+      // Adjust logo and text positions for A4
+      doc.addImage(logo, 'PNG', 10, 5, 25, 25);
       doc.setTextColor(255, 255, 255);
-      doc.setFontSize(22);
+      doc.setFontSize(18);
       doc.setFont("helvetica", "bold");
-      doc.text("HealthOptics (Pvt) Ltd", 50, 20);
+      doc.text("HealthOptics (Pvt) Ltd", 40, 15);
       
-      // Right side - Contact info
-      doc.setFontSize(10);
-      doc.setFont("helvetica", "normal");
+      // Adjust contact info position
+      doc.setFontSize(8);
       doc.text([
         "68 Erie St, Jersey City, NJ 07302",
         "Tel: +(94)41 224-8651",
         "Email: info@healthoptics.com",
         "www.healthoptics.com"
-      ], pageWidth - 15, 15, { align: 'right' });
+      ], pageWidth - 10, 12, { align: 'right' });
 
-      // Report title and metadata box with blue border
-      doc.setTextColor(0, 0, 0);
-      doc.setDrawColor(25, 118, 210); // Changed to blue
+      // Report title and metadata box with blue theme
+      doc.setTextColor(25, 118, 210); // Blue text
+      doc.setDrawColor(25, 118, 210); // Blue border
       doc.setFillColor(240, 247, 255); // Light blue background
-      doc.roundedRect(10, 55, pageWidth - 20, 25, 3, 3, 'FD');
+      doc.roundedRect(10, 45, pageWidth - 20, 25, 3, 3, 'FD');
       
-      doc.setFontSize(16);
+      doc.setFontSize(14);
       doc.setFont("helvetica", "bold");
-      doc.text("DOCTORS MANAGEMENT REPORT", pageWidth/2, 65, { align: 'center' });
+      doc.text("DOCTORS MANAGEMENT REPORT", pageWidth/2, 55, { align: 'center' });
 
-      doc.setFontSize(10);
+      doc.setFontSize(8);
       doc.setFont("helvetica", "normal");
       doc.text([
         `Report Generated: ${new Date().toLocaleString()}`,
         `Total Doctors: ${doctorsData.length}`,
         
-      ], 15, 72);
+      ], 15, 62);
 
-      // Table starting position moved down
+      // Adjust table configuration for A4 portrait
       autoTable(doc, {
         head: [["No", "Name", "Specialty", "Email", "Phone", "Gender", "Location"]],
         body: doctorsData.map((doctor, index) => [
@@ -94,10 +99,10 @@ const CustomReport = () => {
           doctor.gender || 'N/A',
           `${doctor.city}, ${doctor.state}`
         ]),
-        startY: 90,
+        startY: 70,
         theme: 'grid',
         headStyles: {
-          fillColor: [25, 118, 210], // Changed to blue
+          fillColor: [25, 118, 210], // Blue header
           textColor: 255,
           fontSize: 9,
           fontStyle: 'bold',
@@ -106,16 +111,17 @@ const CustomReport = () => {
         },
         bodyStyles: {
           fontSize: 8,
-          cellPadding: 3
+          cellPadding: 3,
+          textColor: [44, 62, 80] // Dark blue text
         },
         columnStyles: {
-          0: { halign: 'center', cellWidth: 20 },
-          1: { cellWidth: 45 },
-          2: { cellWidth: 35 },
-          3: { cellWidth: 60 },
-          4: { cellWidth: 35 },
-          5: { cellWidth: 25 },
-          6: { cellWidth: 50 }
+          0: { halign: 'center', cellWidth: 15 },
+          1: { cellWidth: 35 },
+          2: { cellWidth: 30 },
+          3: { cellWidth: 45 },
+          4: { cellWidth: 25 },
+          5: { cellWidth: 20 },
+          6: { cellWidth: 30 }
         },
         alternateRowStyles: {
           fillColor: [240, 247, 255] // Light blue background
@@ -124,7 +130,7 @@ const CustomReport = () => {
         didDrawPage: (data) => {
           // Simple footer
           doc.setFontSize(8);
-          doc.setTextColor(25, 118, 210); // Changed to blue
+          doc.setTextColor(25, 118, 210); // Blue footer
           doc.text(
             'HealthOptics (Pvt) Ltd - Confidential',
             pageWidth/2,
