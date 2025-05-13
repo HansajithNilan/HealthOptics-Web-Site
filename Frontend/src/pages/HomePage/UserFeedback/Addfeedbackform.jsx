@@ -183,7 +183,7 @@ const Addfeedbackform = () => {
 
         <div className="FeedbackForm-content">
           <form onSubmit={handleSubmit} className="FeedbackForm-form">
-            <h2 className="FeedbackForm-title">{isEditing ? 'Edit Your Feedback' : 'Submit Feedback'}</h2>
+            <h2 className="FeedbackForm-title">{isEditing ? 'Edit Your Feedback' : 'Customer Feedback Form'}</h2>
 
             <div className="FeedbackForm-group">
               <label className="FeedbackForm-label">Name</label>

@@ -40,7 +40,7 @@
 }
 
 .FeedbackForm-hero-overlay h1 {
-  font-size: 2.8rem;
+  font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 10px;
 }
@@ -71,7 +71,7 @@
 }
 
 .FeedbackForm-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #1a1a1a;
   text-align: center;
@@ -221,7 +221,7 @@
 }
 
 .FeedbackForm-view-btn {
-  background: #007bff;
+  background: #038a17;
   color: #fff;
 }
 
@@ -340,7 +340,7 @@
 }
 
 .FeedbackForm-delete-btn {
-  background: #dc3545;
+  background: #e51328;
 }
 
 .FeedbackForm-delete-btn:hover {
