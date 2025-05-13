@@ -171,7 +171,8 @@ const Spectacles = () => {
                 <span>{spectacle.type}</span> 
                 <span>{spectacle.gender}</span> 
                 </p>
-                <p className="spectacle-price">LKR {spectacle.price}</p>
+                {/* <p className="spectacle-price">LKR {spectacle.price}</p> */}
+                <p className="spectacle-price">LKR {spectacle.price.toLocaleString()}</p>
                 {/* <div className="spectacle-rating">
                   {renderStars(spectacle.rating)}
                 </div> */}
